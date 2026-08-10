@@ -1,0 +1,10 @@
+{
+  "name": "quychien-landing",
+  "version": "1.0.0",
+  "description": "LogisQuest Board Game Landing Page",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y serve . -l 3000",
+    "start": "npx -y serve . -l 3000"
+  }
+}

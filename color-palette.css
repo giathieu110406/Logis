@@ -1,0 +1,43 @@
+﻿/**
+ * ================================================================
+ *  LOGISQUEST COLOR PALETTE
+ *  Trich xuat tu: assets/anh-bia-2.jpg (Anh bia 2)
+ *  Phong cach: Maritime Adventure - Bright, Playful, Premium
+ * ================================================================
+ *
+ *  MAU BAT BUOC (theo yeu cau user):
+ *  ----------------------------------
+ *  Trang (Cloud White)   : #FFFFFF  | hsl(0, 0%, 100%)
+ *  Xanh  (Ocean Blue)    : #1A7FB5  | hsl(204, 73%, 40%)
+ *  Vang  (Quest Gold)    : #F5C52A  | hsl(46, 91%, 56%)
+ *
+ *  MAU TRICH XUAT TU ANH BIA 2:
+ *  ------------------------------
+ *  Sky Blue  (Nen troi)  : #4CBDE8  | hsl(199, 78%, 60%)
+ *  Ocean Blue (Mat bien) : #1A7FB5  | hsl(204, 73%, 40%)
+ *  Deep Navy  (Vien logo): #0D2E54  | hsl(212, 74%, 19%)
+ *  Dark Navy  (Nen toi)  : #071A30  | hsl(212, 75%, 11%)
+ *  Quest Gold (Logo chu) : #F5C52A  | hsl(46, 91%, 56%)
+ *  Crane Tan  (Can cau)  : #C8A44A  | hsl(39, 51%, 54%)
+ *  Gold Light (Hover)    : #FFD95A  | hsl(46, 100%, 67%)
+ *  Cloud White           : #FFFFFF  | hsl(0, 0%, 100%)
+ *  Alice Blue (Text)     : #F0F8FF  | hsl(208, 100%, 97%)
+ *  Sky Muted  (Phu de)   : #8BB8D4  | hsl(205, 42%, 69%)
+ *  Ocean Muted (Holder)  : #4E7EA0  | hsl(205, 34%, 47%)
+ *  Border Blue           : #1E5C8A  | hsl(208, 64%, 33%)
+ *
+ *  SEMANTIC USAGE:
+ *  ---------------
+ *  --bg-primary      #071A30  (Dark Navy)   - Nen chinh toan trang
+ *  --bg-secondary    #0D2E54  (Navy)        - Nen section xen ke
+ *  --bg-tertiary     #153D6B  (Navy Mid)    - Cards, interactive areas
+ *  --border-color    #1E5C8A  (Border Blue) - Vien chuan
+ *  --accent          #F5C52A  (Quest Gold)  - Accent chinh (buttons, icons)
+ *  --accent-hover    #FFD95A  (Gold Light)  - Hover state cua accent
+ *  --sky             #4CBDE8  (Sky Blue)    - Link, badge, nav hover
+ *  --text-primary    #F0F8FF  (Alice Blue)  - Van ban chinh
+ *  --text-secondary  #8BB8D4  (Sky Muted)   - Van ban phu
+ *  --text-muted      #4E7EA0  (Ocean Muted) - Placeholder, ghi chu
+ *  --white           #FFFFFF  (Cloud White) - Mau trang thuan
+ * ================================================================
+ */
