@@ -521,17 +521,58 @@ let searchQuery = '';
 document.addEventListener('DOMContentLoaded', () => {
   renderCards();
   initEvents();
+  initGSAPAnimations();
 });
 
 // EVENT LISTENERS INITIALIZATION
 function initEvents() {
   // Mobile navigation toggle
   mobileToggle.addEventListener('click', () => {
-    mobileToggle.classList.toggle('active');
-    mobileNav.classList.toggle('active');
-    // Prevent scrolling when mobile menu is open
-    document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+    if (mobileNav.classList.contains('active')) {
+      closeMobileNav();
+    } else {
+      openMobileNav();
+    }
   });
+
+  // CRITICAL REQUIREMENT: Strictly lock page scroll when sidebar is open or closing
+  let isClosingNav = false;
+
+  function closeSidebarFirst(e) {
+    if (mobileNav.classList.contains('active') || isClosingNav) {
+      if (e && e.cancelable) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      if (!isClosingNav) {
+        isClosingNav = true;
+        closeMobileNav(() => {
+          isClosingNav = false;
+        });
+      }
+      return true;
+    }
+    return false;
+  }
+
+  // Intercept Wheel & Touch events to force Sidebar exit BEFORE any page scroll
+  window.addEventListener('wheel', (e) => {
+    // If sidebar is active, ANY scroll wheel action (especially UP) closes sidebar first and prevents page scroll
+    if (mobileNav.classList.contains('active') || isClosingNav) {
+      closeSidebarFirst(e);
+    }
+  }, { passive: false });
+
+  let touchStartY = 0;
+  window.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (mobileNav.classList.contains('active') || isClosingNav) {
+      closeSidebarFirst(e);
+    }
+  }, { passive: false });
 
   // Handle Virtual View Transitions
   const navElements = document.querySelectorAll('[data-nav]');
@@ -606,6 +647,385 @@ function initEvents() {
       closeCardModal();
     }
   });
+}
+
+// SMOOTH OPEN / CLOSE MOBILE NAV WITH GSAP
+let savedScrollY = 0;
+
+function openMobileNav() {
+  if (mobileNav.classList.contains('active')) return;
+  
+  savedScrollY = window.pageYOffset || document.documentElement.scrollTop;
+  mobileToggle.classList.add('active');
+  mobileNav.classList.add('active');
+  
+  // Strictly pin the page in place using fixed positioning
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${savedScrollY}px`;
+  document.body.style.width = '100%';
+  document.body.style.overflow = 'hidden';
+
+  if (typeof gsap !== 'undefined') {
+    gsap.killTweensOf(mobileNav);
+    gsap.killTweensOf('.mobile-link');
+    
+    gsap.fromTo(mobileNav, 
+      { xPercent: -100, opacity: 0 },
+      { xPercent: 0, opacity: 1, duration: 0.45, ease: 'power3.out' }
+    );
+    gsap.fromTo('.mobile-link', 
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.35, stagger: 0.05, ease: 'power2.out', delay: 0.1 }
+    );
+  }
+}
+
+function closeMobileNav(onCompleteCallback) {
+  mobileToggle.classList.remove('active');
+
+  const restoreBodyScroll = () => {
+    mobileNav.classList.remove('active');
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    document.body.style.overflow = '';
+    window.scrollTo(0, savedScrollY);
+    if (onCompleteCallback) onCompleteCallback();
+  };
+
+  if (typeof gsap !== 'undefined') {
+    gsap.killTweensOf(mobileNav);
+    gsap.to(mobileNav, {
+      xPercent: -100,
+      opacity: 0,
+      duration: 0.4,
+      ease: 'power3.inOut',
+      onComplete: restoreBodyScroll
+    });
+  } else {
+    restoreBodyScroll();
+  }
+}
+
+// GSAP 3D & SCROLLANIMATIONS ENGINE (SLOWER & EXTRA SMOOTH)
+function initGSAPAnimations() {
+  if (typeof gsap === 'undefined') return;
+
+  // Register ScrollTrigger plugin if available
+  if (typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+  }
+
+  // 1. Hero Title & Subtitle Entrance (Slower & Elegant)
+  gsap.from('.home-banner-title', {
+    y: 60,
+    opacity: 0,
+    duration: 1.8,
+    ease: 'power3.out',
+    delay: 0.3
+  });
+
+  gsap.from('.home-banner-sub', {
+    y: 40,
+    opacity: 0,
+    duration: 1.6,
+    ease: 'power3.out',
+    delay: 0.7
+  });
+
+  // 2. Hero Scroll Curtain & Product Zoom Reveal Animation Timeline
+  const heroSection = document.getElementById('hero');
+  const heroCurtain = document.getElementById('heroCurtain');
+  const heroProductReveal = document.getElementById('heroProductReveal');
+  const heroProductCaption = document.getElementById('heroProductCaption');
+  const firstContentSec = document.querySelector('.home-quychien-section');
+
+  if (heroSection && heroCurtain && typeof ScrollTrigger !== 'undefined') {
+    // Pin hero section during curtain animation & product reveal transition
+    const heroTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: heroSection,
+        start: 'top top',
+        end: '+=250%', // Scroll distance for card stretch -> card expand -> product zoom -> text reveal -> content reveal
+        pin: true,
+        scrub: 1, // Smooth scrub sync with wheel scroll
+        anticipatePin: 1
+      }
+    });
+
+    // Stage 1: Stretch vertical rectangular card image in center from 0% height to 100% height
+    heroTl.to(heroCurtain, {
+      height: '100%',
+      duration: 1,
+      ease: 'power2.inOut'
+    });
+
+    // Stage 2: Expand card image horizontally to cover whole screen (width from 4px to 100%)
+    heroTl.to(heroCurtain, {
+      width: '100%',
+      duration: 1,
+      ease: 'power2.inOut'
+    });
+
+    // Stage 3: Zoom product image from center, leaving margins on 4 edges (scale 0.1 -> 1)
+    if (heroProductReveal) {
+      heroTl.to(heroProductReveal, {
+        opacity: 1,
+        scale: 1,
+        duration: 1.2,
+        ease: 'power2.out'
+      }, '-=0.5'); // Overlap slightly with horizontal expansion
+    }
+
+    // Stage 3.5: Reveal white title "Nhập cuộc ngay hôm nay" over zoomed product image
+    if (heroProductCaption) {
+      heroTl.fromTo(heroProductCaption, 
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1, ease: 'power2.out' },
+        '-=0.4'
+      );
+    }
+
+    // Stage 4: After product image & caption reveal, smoothly fade in & slide up game introduction section
+    if (firstContentSec) {
+      heroTl.from(firstContentSec, {
+        opacity: 0,
+        y: 60,
+        duration: 1,
+        ease: 'power2.out'
+      });
+    }
+  }
+
+  // 3. GSAP ScrollTrigger Animations for Home Sections (Slowed down for high visibility)
+  const sections = document.querySelectorAll('.home-quychien-section');
+  sections.forEach((sec, idx) => {
+    // Skip first section if handled by hero timeline reveal
+    if (idx === 0 && heroSection && heroCurtain) return;
+
+    const textCol = sec.querySelector('.home-quychien-text-col');
+    const imgFrame = sec.querySelector('.quychien-img-frame');
+
+    if (textCol && typeof ScrollTrigger !== 'undefined') {
+      gsap.from(textCol, {
+        scrollTrigger: {
+          trigger: sec,
+          start: 'top 80%',
+          end: 'top 30%',
+          scrub: 1.2, // Smooth scrub tracking with scroll
+        },
+        y: 80,
+        opacity: 0,
+        ease: 'power2.out'
+      });
+    }
+
+    if (imgFrame && typeof ScrollTrigger !== 'undefined') {
+      gsap.from(imgFrame, {
+        scrollTrigger: {
+          trigger: sec,
+          start: 'top 80%',
+          end: 'top 30%',
+          scrub: 1.2,
+        },
+        scale: 0.88,
+        y: 50,
+        opacity: 0,
+        ease: 'power2.out'
+      });
+    }
+  });
+
+  // 3. GSAP 3D Tilt Effect on Pillar Cards & Intro Slideshow Frame
+  const tiltElements = document.querySelectorAll('.home-pillar-card, .intro-slideshow-frame');
+  tiltElements.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -14; // Max 14 deg
+      const rotateY = ((x - centerX) / centerX) * 14;
+
+      gsap.to(card, {
+        rotateX: rotateX,
+        rotateY: rotateY,
+        transformPerspective: 1000,
+        duration: 0.4,
+        ease: 'power1.out'
+      });
+    });
+
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, {
+        rotateX: 0,
+        rotateY: 0,
+        duration: 0.8, // Smooth return
+        ease: 'power2.out'
+      });
+    });
+  });
+
+  // 4. Intro Section Automatic Slideshow (Rotates every 4s: 1 -> 2 -> 3)
+  initIntroSlideshow();
+}
+
+// INTRO SLIDESHOW ROTATION WITH GSAP 3D ANIMATION (AUTOMATIC 4s + MANUAL DOTS & SWIPE)
+function initIntroSlideshow() {
+  const container = document.getElementById('introSlideshow');
+  const slides = document.querySelectorAll('.intro-slide');
+  const dots = document.querySelectorAll('.intro-dot');
+
+  if (!slides || slides.length === 0) return;
+
+  let currentIndex = 0;
+  let isAnimating = false;
+  let autoTimer = null;
+
+  function showSlide(nextIndex) {
+    if (isAnimating) return;
+    if (nextIndex < 0) nextIndex = slides.length - 1;
+    if (nextIndex >= slides.length) nextIndex = 0;
+    if (nextIndex === currentIndex) return;
+
+    isAnimating = true;
+    const currentSlide = slides[currentIndex];
+    const nextSlide = slides[nextIndex];
+
+    const isNext = nextIndex > currentIndex || (currentIndex === slides.length - 1 && nextIndex === 0);
+    const enterRotateY = isNext ? 35 : -35;
+    const exitRotateY = isNext ? -35 : 35;
+
+    // Use GSAP 3D animation if GSAP is available
+    if (typeof gsap !== 'undefined') {
+      // Outgoing slide GSAP 3D animation (Rotate Y + Scale down + Fade out)
+      gsap.to(currentSlide, {
+        rotationY: exitRotateY,
+        scale: 0.88,
+        opacity: 0,
+        z: -100,
+        duration: 0.8,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          currentSlide.classList.remove('active');
+          gsap.set(currentSlide, { visibility: 'hidden', rotationY: 0, scale: 1, z: 0 });
+        }
+      });
+
+      // Incoming slide GSAP 3D animation (Rotate Y from angle + Scale up + Fade in)
+      gsap.set(nextSlide, {
+        visibility: 'visible',
+        opacity: 0,
+        rotationY: enterRotateY,
+        scale: 0.88,
+        z: -100
+      });
+      nextSlide.classList.add('active');
+
+      gsap.to(nextSlide, {
+        rotationY: 0,
+        scale: 1,
+        opacity: 1,
+        z: 0,
+        duration: 0.8,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          currentIndex = nextIndex;
+          isAnimating = false;
+        }
+      });
+    } else {
+      // Fallback transition
+      currentSlide.classList.remove('active');
+      nextSlide.classList.add('active');
+      currentIndex = nextIndex;
+      isAnimating = false;
+    }
+
+    // Update dots state
+    dots.forEach((dot, idx) => {
+      if (idx === nextIndex) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  function startAutoPlay() {
+    stopAutoPlay();
+    autoTimer = setInterval(() => {
+      showSlide(currentIndex + 1);
+    }, 4000);
+  }
+
+  function stopAutoPlay() {
+    if (autoTimer) clearInterval(autoTimer);
+  }
+
+  // Dots click handlers
+  dots.forEach((dot) => {
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const slideIdx = parseInt(dot.getAttribute('data-slide'), 10);
+      showSlide(slideIdx);
+      startAutoPlay();
+    });
+  });
+
+  // Touch & Mouse Swipe / Drag Support for manual swipe
+  if (container) {
+    let startX = 0;
+    let isDragging = false;
+
+    // Touch events for mobile
+    container.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    container.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diffX = endX - startX;
+      if (Math.abs(diffX) > 40) { // Threshold 40px
+        if (diffX < 0) {
+          showSlide(currentIndex + 1); // Swipe left -> Next
+        } else {
+          showSlide(currentIndex - 1); // Swipe right -> Prev
+        }
+        startAutoPlay();
+      }
+    }, { passive: true });
+
+    // Mouse drag events for desktop
+    container.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+    });
+
+    container.addEventListener('mouseup', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      const endX = e.clientX;
+      const diffX = endX - startX;
+      if (Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          showSlide(currentIndex + 1);
+        } else {
+          showSlide(currentIndex - 1);
+        }
+        startAutoPlay();
+      }
+    });
+
+    container.addEventListener('mouseleave', () => {
+      isDragging = false;
+    });
+  }
+
+  // Start automatic playback
+  startAutoPlay();
 }
 
 // SWITCH VIRTUAL VIEWS
