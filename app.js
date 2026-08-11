@@ -596,13 +596,21 @@ function initEvents() {
     });
   });
 
-  // Tab Filtering
+  // Tab Filtering (Cards page)
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       tabButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       activeCategory = btn.getAttribute('data-tab');
       renderCards();
+    });
+  });
+
+  // Gameplay Page Tab Navigation (.gp-tab)
+  document.querySelectorAll('.gp-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.gp-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
     });
   });
 

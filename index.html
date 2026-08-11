@@ -412,115 +412,295 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- 3. GAMEPLAY VIEW (HƯỚNG DẪN CÁCH CHƠI V6) -->
+    <!-- 3. GAMEPLAY VIEW (HƯỚNG DẪN CÁCH CHƠI - REDESIGNED) -->
     <!-- ========================================== -->
     <div id="gameplayView" class="view-section">
-      <section class="gameplay-section" id="gameplay">
-        <div class="section-container">
-          <div class="section-header text-center">
-            <span class="section-subtitle">HƯỚNG DẪN LUẬT CHƠI</span>
-            <h2 class="section-title">Luật Chơi LogisQuest</h2>
-            <p class="section-description">Trò chơi diễn ra qua 6 vòng đấu. Mỗi người chơi điều hành chi nhánh công ty logistics, cạnh tranh điểm uy tín thông qua bốc dỡ hàng tại 5 cảng Incoterms.</p>
-            <div class="section-divider"></div>
+      <section class="gp-page" id="gameplay">
+
+        <!-- ── HERO HEADER ── -->
+        <div class="gp-hero">
+          <h1 class="gp-hero-title">Cách Chơi LogisQuest</h1>
+          <div class="gp-hero-divider"></div>
+          <p class="gp-hero-sub">Trở thành nhà quản lý logistics tài ba, vận chuyển hàng hóa qua các cảng<br>Incoterms và tích lũy uy tín để giành chiến thắng!</p>
+
+          <!-- Tab Navigation -->
+          <div class="gp-tabs">
+            <button class="gp-tab" data-gptab="overview">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13,2 13,9 20,9"/></svg>
+              Tổng Quan
+            </button>
+            <button class="gp-tab active" data-gptab="guide">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Hướng Dẫn Chi Tiết
+            </button>
+            <button class="gp-tab" data-gptab="components">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/></svg>
+              Thành Phần
+            </button>
+            <button class="gp-tab" data-gptab="glossary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Thuật Ngữ
+            </button>
           </div>
+        </div>
 
-          <div class="rules-block">
-            <div class="rules-summary">
-              <h3 class="rules-subtitle">3 Hành Động Trong Lượt Của Bạn</h3>
-              <p class="rules-desc-intro">Đến lượt mình, bạn bắt buộc phải thực hiện <strong>đúng 1</strong> trong 3 hành động chính dưới đây:</p>
-              <div class="steps-grid">
-                <div class="step-card">
-                  <div class="step-num">01</div>
-                  <h3>Nạp Container</h3>
-                  <p>Lấy 3 container màu của mình từ nguồn chung đặt vào kho cá nhân. Kho cá nhân chứa tối đa 5 container (nếu kho chỉ còn trống 1-2 chỗ, chỉ được nhận số lượng tương ứng).</p>
-                </div>
-                <div class="step-card">
-                  <div class="step-num">02</div>
-                  <h3>Xếp Hàng Lên Tàu</h3>
-                  <p>Lấy 1 container từ kho cá nhân đặt lên vị trí trống của 1 trong 4 tàu biển chờ xuất phát. Bạn tự do lựa chọn vị trí xếp hàng trên tàu.</p>
-                </div>
-                <div class="step-card">
-                  <div class="step-num">03</div>
-                  <h3>Điều Tàu Cập Cảng</h3>
-                  <p>Di chuyển tàu chở container đến một cảng Incoterm đang mở. <strong>Điều kiện di chuyển:</strong> Số container trên tàu phải bằng hoặc chỉ thiếu 1 container so với sức chứa tối đa của tàu đó.</p>
-                </div>
-              </div>
+        <!-- ── QUICK STATS ── -->
+        <div class="gp-stats-bar">
+          <div class="gp-stat">
+            <svg class="gp-stat-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <div class="gp-stat-text">
+              <strong>2 – 4</strong>
+              <span>Người chơi</span>
             </div>
-
-            <div class="rules-flow">
-              <h3 class="rules-subtitle">Quy Trình Cập Cảng & Xử Lý Biến Cố</h3>
-              <p class="rules-desc-intro">Khi tàu cập cảng, thực hiện bốc dỡ hàng theo đúng trình tự 4 bước sau:</p>
-              <div class="flow-container">
-                <div class="flow-step">
-                  <span class="flow-num">Step 1</span>
-                  <h4>Tính điểm cơ bản</h4>
-                  <p>Tính điểm ngay cho mỗi container theo quy tắc riêng của cảng Incoterm đó (hoặc tính cuối ván như cảng FOB).</p>
-                </div>
-                <div class="flow-step">
-                  <span class="flow-num">Step 2</span>
-                  <h4>Rút thẻ Sự Kiện</h4>
-                  <p>Người điều tàu rút 1 thẻ Sự Kiện (Event) từ chồng bài úp chung (ngoại trừ cảng EXW).</p>
-                </div>
-                <div class="flow-step">
-                  <span class="flow-num">Step 3</span>
-                  <h4>Áp dụng Sự Kiện</h4>
-                  <p>Áp dụng cộng/trừ điểm lên tất cả container nằm tại cảng chịu ảnh hưởng ghi trên thẻ. Rủi ro chia sẻ cho cả bạn và đối thủ.</p>
-                </div>
-                <div class="flow-step">
-                  <span class="flow-num">Step 4</span>
-                  <h4>Giao hàng & Khóa cảng</h4>
-                  <p>Đặt container vào vị trí tương ứng tại cảng. Tàu nằm lại tại cảng đến hết vòng chơi (mỗi cảng chỉ đón tối đa 1 tàu mỗi vòng).</p>
-                </div>
-              </div>
+          </div>
+          <div class="gp-stat">
+            <svg class="gp-stat-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+            <div class="gp-stat-text">
+              <strong>45 – 60 phút</strong>
+              <span>Thời lượng / ván</span>
             </div>
-
-            <div class="rules-incoterms">
-              <h3 class="rules-subtitle">Cơ Chế Tính Điểm Tại 11 Cảng Incoterms</h3>
-              <p class="rules-desc-intro">Mỗi ván đấu chỉ sử dụng 5 cảng: cảng EXW (cố định) cùng 4 cảng bốc ngẫu nhiên từ nhóm F, C và D.</p>
-              
-              <div class="incoterms-grid">
-                <div class="incoterm-group-card group-e">
-                  <h4>Nhóm E — Giao Tại Xưởng (EXW)</h4>
-                  <p class="group-intro">Đại diện cho điều khoản đơn giản nhất, rủi ro chuyển giao ngay tại kho người bán.</p>
-                  <ul class="group-list">
-                    <li><strong>EXW (Ex Works):</strong> Không rút thẻ Sự Kiện. Nhận thẻ EXW đặc biệt từ dòng bài nháp mang lại các lợi thế hành động khẩn cấp (FCL khẩn cấp, Tăng ca bốc dỡ, Tàu chạy rỗng) hoặc điểm thưởng cuối game (Chứng chỉ FIATA, Kiểm định nội bộ).</li>
-                  </ul>
-                </div>
-                
-                <div class="incoterm-group-card group-f">
-                  <h4>Nhóm F — Giao Tại Nước Xuất (FCA, FAS, FOB)</h4>
-                  <p class="group-intro">Trách nhiệm và rủi ro chuyển giao sớm tại nước xuất khẩu. Nơi cạnh tranh vị trí khốc liệt.</p>
-                  <ul class="group-list">
-                    <li><strong>FCA (Free Carrier):</strong> Nhận 3 điểm/container. Nhận thêm +1 điểm bonus nếu tàu đầy 100% container khi cập cảng.</li>
-                    <li><strong>FAS (Free Alongside Ship):</strong> Tính điểm theo vị trí xếp container trên tàu: từ đầu tàu đến đuôi tàu tương ứng nhận 2, 3, 4, 5 điểm.</li>
-                    <li><strong>FOB (Free On Board):</strong> Không tính điểm ngay. Cuối ván đấu, so tổng số container tích lũy tại FOB để nhận điểm: Nhất = 20đ, Nhì = 10đ, Ba = 5đ, còn lại = 1đ.</li>
-                  </ul>
-                </div>
-                
-                <div class="incoterm-group-card group-c">
-                  <h4>Nhóm C — Trả Cước Vận Tải (CFR, CIF, CPT, CIP)</h4>
-                  <p class="group-intro">Người bán trả cước phí vận chuyển qua biển nhưng rủi ro vẫn chuyển giao sớm tại nước xuất.</p>
-                  <ul class="group-list">
-                    <li><strong>CFR (Cost and Freight):</strong> Nhận 3 điểm/container cố định. Không bị ảnh hưởng bởi các thẻ Sự Kiện xảy ra trên biển.</li>
-                    <li><strong>CIF (Cost, Insurance & Freight):</strong> Nhận 3 điểm/container. Được cộng điểm bonus khi gặp Sự Kiện xấu trên biển nhờ có Bảo hiểm.</li>
-                    <li><strong>CPT (Carriage Paid To):</strong> Thưởng số lượng giao cùng chuyến: container thứ 1 nhận 3đ, thứ 2 nhận 4đ, thứ 3 nhận 5đ, thứ 4 nhận 6đ.</li>
-                    <li><strong>CIP (Carriage & Insurance Paid To):</strong> Thưởng số lượng chậm hơn CPT (3đ, 3đ, 4đ, 5đ) nhưng được cộng bonus cao hơn khi gặp Sự Kiện trên biển nhờ Bảo hiểm rộng.</li>
-                  </ul>
-                </div>
-                
-                <div class="incoterm-group-card group-d">
-                  <h4>Nhóm D — Giao Tại Đích (DAP, DPU, DDP)</h4>
-                  <p class="group-intro">Người bán chịu mọi chi phí và rủi ro trên suốt hải trình đến nước nhập khẩu. Điểm cao, rủi ro lớn.</p>
-                  <ul class="group-list">
-                    <li><strong>DAP (Delivered At Place):</strong> Nhận 3 điểm/container. Nhận thêm +1 điểm bonus nếu trên tàu có hàng của từ 2 đối thủ trở lên (thưởng chia sẻ tải).</li>
-                    <li><strong>DPU (Delivered at Place Unloaded):</strong> Thưởng đi riêng lẻ: 1 container duy nhất nhận 6đ; 2 container nhận 4đ/mỗi cái; 3 container nhận 3đ/mỗi cái; 4 container nhận 2đ/mỗi cái.</li>
-                    <li><strong>DDP (Delivered Duty Paid):</strong> Nhận 3 điểm nhân với số loại cảng Incoterms khác nhau mà bạn đã từng bốc dỡ hàng thành công trong suốt ván đấu.</li>
-                  </ul>
-                </div>
-              </div>
+          </div>
+          <div class="gp-stat">
+            <svg class="gp-stat-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <div class="gp-stat-text">
+              <strong>12+</strong>
+              <span>Độ tuổi</span>
+            </div>
+          </div>
+          <div class="gp-stat gp-stat-goal">
+            <svg class="gp-stat-icon gp-goal-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+            <div class="gp-stat-text">
+              <strong>Mục tiêu</strong>
+              <span>Tích lũy nhiều điểm uy tín nhất sau 6 vòng chơi.</span>
             </div>
           </div>
         </div>
+
+        <!-- ── MAIN CONTENT ── -->
+        <div class="gp-content">
+
+          <!-- SECTION 1: BA HÀNH ĐỘNG -->
+          <div class="gp-section-block">
+            <div class="gp-section-heading">
+              <div class="gp-section-num">1</div>
+              <div>
+                <h2 class="gp-section-title">BA HÀNH ĐỘNG TRONG LƯỢT CỦA BẠN</h2>
+                <p class="gp-section-intro">Đến lượt mình, bạn bắt buộc phải thực hiện <strong>đúng 1</strong> trong 3 hành động chính dưới đây.</p>
+              </div>
+            </div>
+
+            <div class="gp-actions-grid">
+              <!-- Action 01 -->
+              <div class="gp-action-card">
+                <div class="gp-action-header">
+                  <span class="gp-action-num">01</span>
+                  <h3 class="gp-action-name">Nạp Container</h3>
+                </div>
+                <div class="gp-action-icon-wrap">
+                  <svg width="80" height="60" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="20" width="36" height="24" rx="3" fill="#E0F2FE" stroke="#0EA5E9" stroke-width="1.5"/>
+                    <rect x="4" y="48" width="36" height="24" rx="3" fill="#BAE6FD" stroke="#0EA5E9" stroke-width="1.5"/>
+                    <path d="M44 40 L60 40" stroke="#0EA5E9" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#arr)"/>
+                    <rect x="64" y="10" width="20" height="14" rx="2" fill="#F59E0B" stroke="#D97706" stroke-width="1.5"/>
+                    <rect x="88" y="10" width="20" height="14" rx="2" fill="#F59E0B" stroke="#D97706" stroke-width="1.5"/>
+                    <rect x="64" y="28" width="20" height="14" rx="2" fill="#0EA5E9" stroke="#0284C7" stroke-width="1.5"/>
+                    <rect x="88" y="28" width="20" height="14" rx="2" fill="#E0F2FE" stroke="#0EA5E9" stroke-width="1.5"/>
+                    <rect x="64" y="46" width="20" height="14" rx="2" fill="#E0F2FE" stroke="#BAE6FD" stroke-width="1"/>
+                    <rect x="88" y="46" width="20" height="14" rx="2" fill="#E0F2FE" stroke="#BAE6FD" stroke-width="1"/>
+                    <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0EA5E9"/></marker></defs>
+                  </svg>
+                </div>
+                <p class="gp-action-desc">Lấy 3 container màu của mình từ nguồn chung đặt vào kho cá nhân. Kho cá nhân chứa tối đa 5 container (nếu kho chỉ còn trống 1-2 chỗ, chỉ được nạp số lượng tương ứng).</p>
+              </div>
+
+              <!-- Action 02 -->
+              <div class="gp-action-card">
+                <div class="gp-action-header">
+                  <span class="gp-action-num">02</span>
+                  <h3 class="gp-action-name">Xếp Hàng Lên Tàu</h3>
+                </div>
+                <div class="gp-action-icon-wrap">
+                  <svg width="80" height="60" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 58 L110 58 L100 70 L20 70 Z" fill="#BAE6FD" stroke="#0EA5E9" stroke-width="1.5"/>
+                    <rect x="30" y="36" width="60" height="22" rx="2" fill="#E0F2FE" stroke="#0EA5E9" stroke-width="1.5"/>
+                    <rect x="35" y="40" width="14" height="10" rx="1.5" fill="#F59E0B" stroke="#D97706" stroke-width="1"/>
+                    <rect x="53" y="40" width="14" height="10" rx="1.5" fill="#0EA5E9" stroke="#0284C7" stroke-width="1"/>
+                    <rect x="71" y="40" width="14" height="10" rx="1.5" fill="#E0F2FE" stroke="#0EA5E9" stroke-width="1" stroke-dasharray="3 2"/>
+                    <path d="M55 10 L55 35" stroke="#0EA5E9" stroke-width="2" stroke-dasharray="3 2"/>
+                    <rect x="45" y="2" width="20" height="12" rx="2" fill="#F59E0B" stroke="#D97706" stroke-width="1.5"/>
+                    <path d="M25 36 L25 18 L32 18" stroke="#475569" stroke-width="1.5"/>
+                  </svg>
+                </div>
+                <p class="gp-action-desc">Lấy 1 container từ kho cá nhân đặt lên vị trí trống của 1 trong 4 tàu biển chờ xuất phát. Bạn tự do lựa chọn vị trí xếp hàng trên tàu.</p>
+              </div>
+
+              <!-- Action 03 -->
+              <div class="gp-action-card">
+                <div class="gp-action-header">
+                  <span class="gp-action-num">03</span>
+                  <h3 class="gp-action-name">Điều Tàu Cập Cảng</h3>
+                </div>
+                <div class="gp-action-icon-wrap">
+                  <svg width="80" height="60" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 52 L72 52 L62 65 L18 65 Z" fill="#BAE6FD" stroke="#0EA5E9" stroke-width="1.5"/>
+                    <rect x="20" y="34" width="50" height="18" rx="2" fill="#E0F2FE" stroke="#0EA5E9" stroke-width="1.5"/>
+                    <rect x="26" y="38" width="10" height="8" rx="1" fill="#F59E0B" stroke="#D97706" stroke-width="1"/>
+                    <rect x="40" y="38" width="10" height="8" rx="1" fill="#0EA5E9" stroke="#0284C7" stroke-width="1"/>
+                    <rect x="54" y="38" width="10" height="8" rx="1" fill="#F59E0B" stroke="#D97706" stroke-width="1"/>
+                    <path d="M80 30 L115 30" stroke="#0EA5E9" stroke-width="1.5" stroke-dasharray="4 2"/>
+                    <rect x="92" y="14" width="26" height="38" rx="3" fill="#F0F9FF" stroke="#0EA5E9" stroke-width="1.5"/>
+                    <rect x="96" y="20" width="8" height="8" rx="1" fill="#BAE6FD"/>
+                    <rect x="108" y="20" width="8" height="8" rx="1" fill="#BAE6FD"/>
+                    <rect x="96" y="32" width="8" height="8" rx="1" fill="#BAE6FD"/>
+                    <rect x="108" y="32" width="8" height="8" rx="1" fill="#BAE6FD"/>
+                  </svg>
+                </div>
+                <p class="gp-action-desc">Di chuyển tàu chở container đến một cảng Incoterms đang mở. <strong>Điều kiện di chuyển:</strong> Số container trên tàu phải bằng hoặc chỉ thiếu 1 container so với sức chứa tối đa của tàu đó.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: QUY TRÌNH CẬP CẢNG -->
+          <div class="gp-section-block">
+            <div class="gp-section-heading">
+              <div class="gp-section-num">2</div>
+              <div>
+                <h2 class="gp-section-title">QUY TRÌNH CẬP CẢNG &amp; XỬ LÝ BIẾN CỐ</h2>
+                <p class="gp-section-intro">Khi tàu cập cảng, thực hiện bốc dỡ hàng theo đúng trình tự 4 bước sau:</p>
+              </div>
+            </div>
+
+            <div class="gp-flow-grid">
+              <div class="gp-flow-card">
+                <div class="gp-flow-badge">STEP 1</div>
+                <div class="gp-flow-icon">
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="28" height="34" rx="3" fill="#E0F2FE" stroke="#0EA5E9" stroke-width="1.5"/><line x1="12" y1="18" x2="28" y2="18" stroke="#0EA5E9" stroke-width="1.5"/><line x1="12" y1="24" x2="28" y2="24" stroke="#0EA5E9" stroke-width="1.5"/><line x1="12" y1="30" x2="22" y2="30" stroke="#0EA5E9" stroke-width="1.5"/><circle cx="36" cy="34" r="10" fill="#F59E0B"/><path d="M31 34 l3 3 l6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h4 class="gp-flow-name">Tính điểm cơ bản</h4>
+                <p class="gp-flow-desc">Tính điểm ngay cho mỗi container theo quy tắc riêng của cảng Incoterm đó (hoặc tính cuối ván như cảng FOB).</p>
+              </div>
+
+              <div class="gp-flow-arrow">›</div>
+
+              <div class="gp-flow-card">
+                <div class="gp-flow-badge">STEP 2</div>
+                <div class="gp-flow-icon">
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="4" fill="#E0F2FE" stroke="#0EA5E9" stroke-width="1.5"/><path d="M24 16 L24 24 L28 28" stroke="#0284C7" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="16" r="2" fill="#F59E0B"/><text x="24" y="28" text-anchor="middle" font-size="16" fill="#0369A1">?</text></svg>
+                </div>
+                <h4 class="gp-flow-name">Rút thẻ Sự Kiện</h4>
+                <p class="gp-flow-desc">Người điều tàu rút 1 thẻ Sự Kiện (Event) từ chồng bài úp chung (ngoại trừ cảng EXW).</p>
+              </div>
+
+              <div class="gp-flow-arrow">›</div>
+
+              <div class="gp-flow-card">
+                <div class="gp-flow-badge">STEP 3</div>
+                <div class="gp-flow-icon">
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" fill="#E0F2FE" stroke="#0EA5E9" stroke-width="1.5"/><circle cx="24" cy="24" r="8" fill="#BAE6FD" stroke="#0EA5E9" stroke-width="1"/><path d="M16 24 L22 30 L32 18" stroke="#0369A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h4 class="gp-flow-name">Áp dụng Sự Kiện</h4>
+                <p class="gp-flow-desc">Áp dụng cộng/trừ điểm lên tất cả container nằm tại cảng chịu ảnh hưởng ghi trên thẻ. Rủi ro chia sẻ cho cả bạn và đối thủ.</p>
+              </div>
+
+              <div class="gp-flow-arrow">›</div>
+
+              <div class="gp-flow-card">
+                <div class="gp-flow-badge">STEP 4</div>
+                <div class="gp-flow-icon">
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="6" y="28" width="36" height="14" rx="2" fill="#E0F2FE" stroke="#0EA5E9" stroke-width="1.5"/><rect x="12" y="32" width="8" height="6" rx="1" fill="#F59E0B"/><rect x="24" y="32" width="8" height="6" rx="1" fill="#0EA5E9"/><path d="M24 8 L24 26" stroke="#0EA5E9" stroke-width="2"/><path d="M30 6 L24 10 L18 6" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h4 class="gp-flow-name">Giao hàng &amp; Khóa cảng</h4>
+                <p class="gp-flow-desc">Đặt container vào vị trí tương ứng tại cảng. Tàu nằm lại tại cảng đến hết vòng chơi (mỗi cảng chỉ đón tối đa 1 tàu mỗi vòng).</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 3: CƠ CHẾ TÍNH ĐIỂM INCOTERMS -->
+          <div class="gp-section-block">
+            <div class="gp-section-heading">
+              <div class="gp-section-num">3</div>
+              <div>
+                <h2 class="gp-section-title">CƠ CHẾ TÍNH ĐIỂM TẠI 11 CẢNG INCOTERMS</h2>
+                <p class="gp-section-intro">Mỗi ván đấu chỉ sử dụng 5 cảng: cảng EXW (cố định) cùng 4 cảng bốc ngẫu nhiên từ nhóm F, C và D.</p>
+              </div>
+            </div>
+
+            <div class="gp-incoterm-grid">
+              <!-- Nhóm E -->
+              <div class="gp-inc-card gp-inc-e">
+                <div class="gp-inc-header">
+                  <svg class="gp-inc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13,2 13,9 20,9"/></svg>
+                  <div>
+                    <span class="gp-inc-group-label">Nhóm E — Giao Tại Xưởng (EXW)</span>
+                  </div>
+                </div>
+                <p class="gp-inc-intro">Đại diện cho điều khoản đơn giản nhất, giao ngay tại kho người bán.</p>
+                <ul class="gp-inc-list">
+                  <li><strong>EXW (Ex Works):</strong> Không rút thẻ Sự Kiện. Nhận thẻ EXW đặc biệt đặc biệt (dùng trong lượt) mà khi thành công khai thác cảng EXW. Tăng cảng EXW luôn có mặt. Kiếm điểm nội bộ.</li>
+                </ul>
+              </div>
+
+              <!-- Nhóm F -->
+              <div class="gp-inc-card gp-inc-f">
+                <div class="gp-inc-header">
+                  <svg class="gp-inc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                  <div>
+                    <span class="gp-inc-group-label">Nhóm F — Giao Tại Nước Xuất (FCA, FAS, FOB)</span>
+                  </div>
+                </div>
+                <p class="gp-inc-intro">Trách nhiệm của người bán giảm dần, rủi ro chuyển dần khi hàng qua sào hoặc nạp lên tàu.</p>
+                <ul class="gp-inc-list">
+                  <li><strong>FCA (Free Carrier):</strong> Nhận 3 điểm/container. Nhận thêm +1 điểm bonus nếu tàu đầy 100% container khi cập cảng.</li>
+                  <li><strong>FAS (Free Alongside Ship):</strong> Tính điểm theo vị trí xếp container trên tàu từ đầu tàu đến đuôi tàu tương ứng: 2, 3, 4, 5 điểm.</li>
+                  <li><strong>FOB (Free On Board):</strong> Không tính điểm ngay. Cuối ván đấu, so tổng số container tích lũy tại FOB để nhận điểm: Nhất = 20đ, Nhì = 10đ, Ba = 5đ, Còn lại = 1đ.</li>
+                </ul>
+              </div>
+
+              <!-- Nhóm C -->
+              <div class="gp-inc-card gp-inc-c">
+                <div class="gp-inc-header">
+                  <svg class="gp-inc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                  <div>
+                    <span class="gp-inc-group-label">Nhóm C — Trả Cước Vận Tải (CFR, CIF, CPT, CIP)</span>
+                  </div>
+                </div>
+                <p class="gp-inc-intro">Người bán trả cước phí vận chuyển qua biển nhưng rủi ro vẫn chuyển giao sớm tại nước xuất.</p>
+                <ul class="gp-inc-list">
+                  <li><strong>CFR (Cost and Freight):</strong> Nhận 3 điểm/container cố định. Không bị ảnh hưởng bởi các thẻ Sự Kiện xảy ra trên biển.</li>
+                  <li><strong>CIF (Cost, Insurance &amp; Freight):</strong> Nhận 3 điểm/container. Được cộng điểm bonus khi gặp Sự Kiện xấu trên biển nhờ có Bảo hiểm.</li>
+                  <li><strong>CPT (Carriage Paid To):</strong> Thưởng số lượng giao cùng chuyến: container thứ 1 nhận 3đ, thứ 2 nhận 4đ, thứ 3 nhận 5đ, thứ 4 nhận 6đ, và +1 điểm.</li>
+                  <li><strong>CIP (Carriage &amp; Insurance Paid To):</strong> Thưởng số lượng chậm hơn CPT (3đ, 3đ, 4đ, 5đ) nhưng được cộng bonus cao hơn khi gặp Sự Kiện trên biển nhờ Bảo hiểm rộng.</li>
+                </ul>
+              </div>
+
+              <!-- Nhóm D -->
+              <div class="gp-inc-card gp-inc-d">
+                <div class="gp-inc-header">
+                  <svg class="gp-inc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                  <div>
+                    <span class="gp-inc-group-label">Nhóm D — Giao Tại Đích (DAP, DPU, DDP)</span>
+                  </div>
+                </div>
+                <p class="gp-inc-intro">Người bán chịu mọi chi phí và rủi ro trên suốt hải trình đến nước nhập khẩu. Điểm cao, rủi ro lớn.</p>
+                <ul class="gp-inc-list">
+                  <li><strong>DAP (Delivered At Place):</strong> Nhận 3 điểm/container. Nhận thêm +1 điểm bonus nếu trên tàu có hàng của từ 2 đối thủ trở lên (thưởng chia sẻ tải tàu).</li>
+                  <li><strong>DPU (Delivered at Place Unloaded):</strong> Thưởng đi riêng lẻ: 1 container duy nhất nhận 6đ; 2 container nhận 4đ/mỗi cái; 3 container nhận 3đ/mỗi cái; 4 container nhận 2đ/mỗi cái.</li>
+                  <li><strong>DDP (Delivered Duty Paid):</strong> Nhận 3 điểm nhưng với 5 loại cảng Incoterms khác nhau mà bạn đã từng bốc dỡ hàng thành công trong suốt ván đấu.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Lưu ý quan trọng -->
+            <div class="gp-note">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <div>
+                <strong>Lưu ý quan trọng</strong>
+                <p>Mỗi vòng chỉ có 4 tàu nhưng bạn luôn có 5 cảng mở, sẽ luôn có đúng 1 cảng không được ghé đến trong vòng đó. Đây là nguồn cạnh tranh hiểm kém cốt lõi của cả Imhotep và LogisQuest — không phải ai muốn giao hàng ở đâu cũng được!</p>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end gp-content -->
       </section>
     </div>
   </main>
