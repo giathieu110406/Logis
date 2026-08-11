@@ -2231,9 +2231,12 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   letter-spacing: 2px;
   line-height: 1.05;
-  color: #FFFFFF; /* Màu trắng rực rỡ */
+  color: #FACC15; /* Màu vàng rực rỡ */
   white-space: nowrap;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
+  text-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.95),
+    0 2px 8px rgba(0, 0, 0, 0.95),
+    0 0 35px rgba(0, 0, 0, 0.85);
 }
 
 /* Dòng chữ Hải Trình Đã Mở ở chính giữa, góc dưới hình bìa toàn màn hình */
@@ -2428,7 +2431,7 @@ h1, h2, h3, h4, h5, h6 {
   cursor: grabbing;
 }
 
-/* Ảnh intro với bo góc nhẹ, hiệu ứng bóng mờ sang trọng và hỗ trợ GSAP 3D */
+/* Ảnh intro với bo góc 16px, hiệu ứng nổi khối 3D nhiều tầng (3D card relief effect) */
 .intro-slide {
   position: absolute;
   top: 0;
@@ -2436,11 +2439,15 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: 100%;
   object-fit: contain !important;
-  border-radius: 12px; /* Bo góc nhẹ 12px */
-  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.15)); /* Bóng mờ tự nhiên ôm theo đường cắt của ảnh */
+  border-radius: 16px; /* Bo góc mềm mại 16px */
+  /* Hiệu ứng nổi khối 3D nổi bật: bóng nhiều tầng kết hợp viền mờ */
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.18),
+    0 20px 50px rgba(14, 165, 233, 0.15),
+    0 2px 6px rgba(255, 255, 255, 0.4) inset;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.12));
   opacity: 0;
   visibility: hidden;
-  transform-style: preserve-3d;
   will-change: transform, opacity;
   pointer-events: none;
 }
@@ -2451,33 +2458,9 @@ h1, h2, h3, h4, h5, h6 {
   pointer-events: auto;
 }
 
-/* Chấm chỉ số slide (Pagination Dots) tinh tế bên dưới */
+/* Ẩn các nút/chấm chuyển slide - Hoàn toàn sử dụng thao tác vuốt trái/phải hình ảnh */
 .intro-dots {
-  position: absolute;
-  bottom: -28px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 10;
-}
-
-.intro-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(14, 165, 233, 0.25);
-  border: 1px solid var(--color-sky-soft);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.intro-dot.active, .intro-dot:hover {
-  background: var(--color-sky);
-  width: 28px;
-  border-radius: 6px;
-  border-color: var(--color-sky-dark);
-  box-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
+  display: none !important;
 }
 
 .quychien-img {

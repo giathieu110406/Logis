@@ -844,8 +844,8 @@ function initGSAPAnimations() {
     }
   });
 
-  // 3. GSAP 3D Tilt Effect on Pillar Cards & Intro Slideshow Frame
-  const tiltElements = document.querySelectorAll('.home-pillar-card, .intro-slideshow-frame');
+  // 3. GSAP 3D Tilt Effect on Pillar Cards
+  const tiltElements = document.querySelectorAll('.home-pillar-card');
   tiltElements.forEach((card) => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
