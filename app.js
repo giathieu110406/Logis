@@ -906,38 +906,27 @@ function initIntroSlideshow() {
     const enterRotateY = isNext ? 35 : -35;
     const exitRotateY = isNext ? -35 : 35;
 
-    // Use GSAP 3D animation if GSAP is available
+    // Fade transition đơn giản mượt mà (loại bỏ hiệu ứng 3D)
     if (typeof gsap !== 'undefined') {
-      // Outgoing slide GSAP 3D animation (Rotate Y + Scale down + Fade out)
       gsap.to(currentSlide, {
-        rotationY: exitRotateY,
-        scale: 0.88,
         opacity: 0,
-        z: -100,
-        duration: 0.8,
+        duration: 0.6,
         ease: 'power2.inOut',
         onComplete: () => {
           currentSlide.classList.remove('active');
-          gsap.set(currentSlide, { visibility: 'hidden', rotationY: 0, scale: 1, z: 0 });
+          gsap.set(currentSlide, { visibility: 'hidden', opacity: 0 });
         }
       });
 
-      // Incoming slide GSAP 3D animation (Rotate Y from angle + Scale up + Fade in)
       gsap.set(nextSlide, {
         visibility: 'visible',
-        opacity: 0,
-        rotationY: enterRotateY,
-        scale: 0.88,
-        z: -100
+        opacity: 0
       });
       nextSlide.classList.add('active');
 
       gsap.to(nextSlide, {
-        rotationY: 0,
-        scale: 1,
         opacity: 1,
-        z: 0,
-        duration: 0.8,
+        duration: 0.6,
         ease: 'power2.inOut',
         onComplete: () => {
           currentIndex = nextIndex;
