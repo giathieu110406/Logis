@@ -2091,56 +2091,123 @@ h6 {
 /* CREATIVE TEAM SHOWCASE (MÔ HÌNH QUỶ CHIẾN) */
 /* ========================================== */
 #teamView {
-  background: url('assets/bg-gioi-thieu.png') no-repeat center top / cover fixed, #EBF3FA;
+  background: #0E0D0D;
   min-height: 100vh;
 }
 
 .team-showcase-section {
-  padding-bottom: 90px;
+  padding-bottom: 0;
 }
 
 /* 1. Full Hero Banner */
 .team-full-hero-banner {
   position: relative;
   width: 100%;
-  max-height: 520px;
-  height: 55vh;
-  min-height: 380px;
+  height: 100vh;
+  min-height: 500px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .team-banner-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 25%;
-  filter: brightness(0.85) contrast(1.05);
+  object-position: center center;
+  filter: brightness(0.88) contrast(1.05);
+}
+
+/* Overlay chỉ phủ phía dưới - trượt vào từ dưới */
+@keyframes overlaySlideIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes titleFadeUp {
+  from {
+    transform: translateY(28px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes subFadeUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .team-banner-overlay {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(4, 25, 52, 0.35) 0%, rgba(3, 105, 161, 0.75) 100%);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 52%;
+  background: linear-gradient(
+    to top,
+    rgba(4, 20, 48, 0.88) 0%,
+    rgba(4, 20, 48, 0.65) 45%,
+    rgba(4, 20, 48, 0.0) 100%
+  );
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  padding: 0 30px 52px;
   text-align: center;
-  padding: 30px;
   color: #FFFFFF;
+  /* Default: ẩn sẵn ở dưới */
+  transform: translateY(100%);
+  opacity: 0;
 }
 
-.team-banner-badge {
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 3px;
-  background: rgba(255, 138, 0, 0.9);
-  color: #FFFFFF;
-  padding: 5px 16px;
-  border-radius: 20px;
-  margin-bottom: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+/* Ẩn mặc định khi không active */
+#teamView:not(.active) .team-banner-overlay {
+  animation: none;
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+#teamView.active .team-banner-overlay {
+  animation: overlaySlideIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.team-banner-text-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#teamView:not(.active) .team-banner-title,
+#teamView:not(.active) .team-banner-sub {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+#teamView.active .team-banner-title {
+  animation: titleFadeUp 0.6s ease forwards;
+  animation-delay: 0.55s;
+  opacity: 0;
+}
+
+#teamView.active .team-banner-sub {
+  animation: subFadeUp 0.6s ease forwards;
+  animation-delay: 0.85s;
+  opacity: 0;
 }
 
 .team-banner-title {
@@ -2150,7 +2217,7 @@ h6 {
   letter-spacing: 2px;
   text-transform: uppercase;
   text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
-  margin-bottom: 10px;
+  margin: 0;
 }
 
 .team-banner-sub {
@@ -2159,7 +2226,9 @@ h6 {
   max-width: 680px;
   opacity: 0.95;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  margin: 0;
 }
+
 
 /* Main Content Container */
 .team-content-container {
@@ -2172,7 +2241,7 @@ h6 {
   font-family: var(--font-display);
   font-size: 2.1rem;
   font-weight: 800;
-  color: #0F2851;
+  color: #FFFFFF;
   letter-spacing: 1px;
   margin-bottom: 24px;
   position: relative;
@@ -2271,53 +2340,143 @@ h6 {
   color: #475569;
 }
 
-/* 3. Split Member List (Half Photo / Half Info) */
+/* 3. Fullscreen Editorial Split Curtain Reveal (Tách Đôi Màn Hình Sang 2 Bên) */
 .team-members-split-section {
-  margin-top: 20px;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  margin-top: 0;
+  margin-bottom: 0;
+  background: #0E0D0D;
+  overflow: hidden;
 }
 
 .split-members-list {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  margin-top: 40px;
-}
-
-.split-member-card {
-  display: flex;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(16px);
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.09);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-.split-member-card.reverse-row {
-  flex-direction: row-reverse;
-}
-
-.split-member-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 48px rgba(2, 132, 199, 0.18);
-}
-
-/* Photo Column (Nửa bên trái) */
-.member-photo-col {
-  flex: 0 0 45%;
-  min-height: 320px;
   position: relative;
-  overflow: hidden;
-}
-
-.photo-frame {
   width: 100%;
   height: 100%;
-  position: relative;
+  margin: 0;
+  padding: 0;
 }
 
-.member-photo {
+/* Thẻ thành viên Fullscreen 100vw x 100vh */
+.editorial-member-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background: #181717;
+  overflow: hidden;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Card active đang hiển thị */
+.editorial-member-card.active {
+  z-index: 10;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Nửa bên trái & Nửa bên phải: có hiệu ứng trượt tách đôi (Curtain Reveal) */
+.editorial-left-col,
+.editorial-right-col {
+  height: 100%;
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform, opacity;
+}
+
+.editorial-left-col {
+  flex: 0 0 50%;
+  width: 50%;
+  position: relative;
+  overflow: hidden;
+  background: #111;
+  transform: translateX(0);
+}
+
+.editorial-right-col {
+  flex: 0 0 50%;
+  width: 50%;
+  background: #1C1B1B;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 50px;
+  text-align: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  transform: translateX(0);
+}
+
+/* KHI TÁCH ĐÔI SANG 2 BÊN (SPLITTING STATE) */
+.editorial-member-card.splitting .editorial-left-col {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.editorial-member-card.splitting .editorial-right-col {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.editorial-bw-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: grayscale(100%) contrast(1.1) brightness(0.85);
+  transition: transform 0.8s ease;
+}
+
+.editorial-member-card:hover .editorial-bw-img {
+  transform: scale(1.04);
+}
+
+.editorial-name-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15, 15, 15, 0.88) 0%,
+    rgba(15, 15, 15, 0.45) 40%,
+    rgba(15, 15, 15, 0) 75%
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 60px 40px;
+}
+
+.editorial-display-name {
+  font-family: 'Syne', 'Montserrat', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.8);
+  margin: 0;
+  line-height: 1.15;
+}
+
+.editorial-color-frame {
+  width: 250px;
+  height: 310px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  background: #2A2929;
+}
+
+.editorial-color-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -2325,118 +2484,131 @@ h6 {
   transition: transform 0.5s ease;
 }
 
-.split-member-card:hover .member-photo {
+.editorial-member-card:hover .editorial-color-img {
   transform: scale(1.05);
 }
 
-/* Text Overlay trên hình ảnh nghệ thuật */
-.photo-overlay-name {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
+.editorial-info-content {
+  max-width: 420px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.editorial-role-title {
+  font-family: 'Syne', 'Montserrat', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
   color: #FFFFFF;
-  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.editorial-bio-text {
+  font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
+  font-size: 0.96rem;
+  line-height: 1.8;
+  color: #C0C0C0;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+}
+
+/* Controls & Indicator Overlay */
+.editorial-slider-controls {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
   pointer-events: none;
 }
 
-.member-big-firstname {
-  font-family: var(--font-display);
-  font-size: 2.2rem;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: 2px;
-}
-
-.member-big-lastname {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: 1px;
-  opacity: 0.9;
-}
-
-/* Info Column (Nửa bên phải) */
-.member-info-col {
-  flex: 1;
-  padding: 38px 40px;
+.slider-progress-dots {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  gap: 10px;
+  pointer-events: auto;
 }
 
-.member-role-badge {
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  color: #FFFFFF;
-  background: linear-gradient(135deg, #FF8A00 0%, #D97706 100%);
-  padding: 5px 14px;
-  border-radius: 20px;
-  align-self: flex-start;
-  margin-bottom: 12px;
-  box-shadow: 0 3px 10px rgba(255, 138, 0, 0.35);
+.slider-progress-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.member-role-badge.badge-teal {
-  background: linear-gradient(135deg, #0F766E 0%, #0D9488 100%);
-  box-shadow: 0 3px 10px rgba(15, 118, 110, 0.35);
+.slider-progress-dots .dot.active {
+  background: #FF8A00;
+  width: 28px;
+  border-radius: 10px;
 }
 
-.member-role-badge.badge-purple {
-  background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
-  box-shadow: 0 3px 10px rgba(124, 58, 237, 0.35);
-}
-
-.member-role-badge.badge-rose {
-  background: linear-gradient(135deg, #E11D48 0%, #BE123C 100%);
-  box-shadow: 0 3px 10px rgba(225, 29, 72, 0.35);
-}
-
-.member-role-badge.badge-amber {
-  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
-  box-shadow: 0 3px 10px rgba(217, 119, 6, 0.35);
-}
-
-.member-full-name {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: #0F172A;
-  margin-bottom: 8px;
-}
-
-.member-divider {
-  width: 40px;
-  height: 3px;
-  background: #FFC400;
-  border-radius: 2px;
-  margin-bottom: 14px;
-}
-
-.member-bio {
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: #475569;
-  margin-bottom: 20px;
-}
-
-.member-highlights {
+.slider-hint {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
-}
-
-.hl-tag {
+  color: rgba(255, 255, 255, 0.6);
   font-size: 0.75rem;
   font-weight: 700;
-  color: #0369A1;
-  background: #F0F9FF;
-  border: 1px solid #BAE6FD;
-  padding: 5px 12px;
-  border-radius: 8px;
+  letter-spacing: 2px;
+  animation: pulseHint 2s infinite;
+}
+
+.hint-arrow {
+  font-size: 1rem;
+}
+
+@keyframes pulseHint {
+  0%, 100% { opacity: 0.4; transform: translateY(0); }
+  50% { opacity: 0.9; transform: translateY(4px); }
+}
+
+/* Responsive cho Mobile */
+@media (max-width: 991px) {
+  .editorial-member-card {
+    flex-direction: column;
+  }
+
+  .editorial-left-col,
+  .editorial-right-col {
+    flex: 0 0 50%;
+    width: 100%;
+    height: 50%;
+  }
+
+  .editorial-member-card.splitting .editorial-left-col {
+    transform: translateY(-100%);
+  }
+
+  .editorial-member-card.splitting .editorial-right-col {
+    transform: translateY(100%);
+  }
+
+  .editorial-display-name {
+    font-size: 2rem;
+  }
+
+  .editorial-color-frame {
+    width: 160px;
+    height: 190px;
+    margin-bottom: 16px;
+  }
+
+  .editorial-role-title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .editorial-bio-text {
+    font-size: 0.85rem;
+  }
 }
 
 /* Responsive adjustments */

@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600&family=Montserrat:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 
   <!-- GSAP & ScrollTrigger Animation Engine -->
@@ -370,9 +370,10 @@
         <div class="team-full-hero-banner">
           <img src="assets/team-full-banner.png" alt="Tập thể Đội ngũ sáng tạo LogisQuest" class="team-banner-img">
           <div class="team-banner-overlay">
-            <span class="team-banner-badge">CREATIVE TEAM</span>
-            <h1 class="team-banner-title">ĐỘI NGŨ SÁNG TẠO LOGISQUEST</h1>
-            <p class="team-banner-sub">Hành trình nhiệt huyết kết nối tri thức logistics và trải nghiệm boardgame đỉnh cao</p>
+            <div class="team-banner-text-wrap">
+              <h1 class="team-banner-title">ĐỘI NGŨ SÁNG TẠO LOGISQUEST</h1>
+              <p class="team-banner-sub">Hành trình nhiệt huyết kết nối tri thức logistics và trải nghiệm boardgame đỉnh cao</p>
+            </div>
           </div>
         </div>
 
@@ -412,138 +413,127 @@
             </div>
           </div>
 
-          <!-- 3. DANH SÁCH THÀNH VIÊN (TRÁI HÌNH - PHẢI NỘI DUNG) -->
-          <div class="team-members-split-section">
-            <h2 class="team-section-heading text-center">ĐỘI NGŨ SÁNG TẠO</h2>
+          <!-- 3. DANH SÁCH THÀNH VIÊN - FULLSCREEN SPLIT CURTAIN REVEAL -->
+          <div class="team-members-split-section" id="editorialTeamSlider">
+            
+            <!-- Controls Overlay (Indicators & Hints) -->
+            <div class="editorial-slider-controls">
+              <div class="slider-progress-dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+                <span class="dot" data-index="3"></span>
+                <span class="dot" data-index="4"></span>
+              </div>
+              <div class="slider-hint">
+                <span class="hint-text">CLICK BẤM BẤT KỲ HOẶC CUỘN ĐỂ XEM THÀNH VIÊN TIẾP THEO</span>
+                <span class="hint-arrow">↓</span>
+              </div>
+            </div>
 
             <div class="split-members-list">
               
               <!-- Member 1: Nguyễn Khánh Thành -->
-              <div class="split-member-card">
-                <div class="member-photo-col">
-                  <div class="photo-frame">
-                    <img src="assets/team-member-1.png" alt="Nguyễn Khánh Thành" class="member-photo">
-                    <div class="photo-overlay-name">
-                      <span class="member-big-firstname">KHÁNH</span>
-                      <span class="member-big-lastname">THÀNH</span>
-                    </div>
+              <div class="editorial-member-card active" data-index="0">
+                <div class="editorial-left-col">
+                  <img src="assets/team-member-1.png" alt="Nguyễn Khánh Thành" class="editorial-bw-img">
+                  <div class="editorial-name-overlay">
+                    <h3 class="editorial-display-name">NGUYỄN KHÁNH THÀNH</h3>
                   </div>
                 </div>
-                <div class="member-info-col">
-                  <div class="member-role-badge">FOUNDER & LEAD GAME DESIGNER</div>
-                  <h3 class="member-full-name">NGUYỄN KHÁNH THÀNH</h3>
-                  <div class="member-divider"></div>
-                  <p class="member-bio">
-                    Là người thuyền trưởng dẫn dắt ý tưởng dự án LogisQuest với hơn 10 năm kinh nghiệm trong lĩnh vực đào tạo chuỗi cung ứng & xuất nhập khẩu. Anh là tác giả trực tiếp xây dựng hệ thống quy tắc cốt lõi, chuyển hóa 11 điều khoản Incoterms 2020 thành cơ chế thi đấu chiến thuật đầy lôi cuốn.
-                  </p>
-                  <div class="member-highlights">
-                    <span class="hl-tag">⚓ Chuyên gia Incoterms 2020</span>
-                    <span class="hl-tag">🎲 Thiết kế cơ chế Game</span>
-                    <span class="hl-tag">💡 Định hướng chiến lược</span>
+                <div class="editorial-right-col">
+                  <div class="editorial-color-frame">
+                    <img src="assets/team-member-1.png" alt="Nguyễn Khánh Thành" class="editorial-color-img">
+                  </div>
+                  <div class="editorial-info-content">
+                    <h4 class="editorial-role-title">FOUNDER – LEAD GAME DESIGNER</h4>
+                    <p class="editorial-bio-text">
+                      Người thuyền trưởng dẫn dắt ý tưởng dự án LogisQuest với hơn 10 năm kinh nghiệm trong lĩnh vực đào tạo chuỗi cung ứng & xuất nhập khẩu. Trực tiếp xây dựng hệ thống quy tắc cốt lõi, chuyển hóa 11 điều khoản Incoterms 2020 thành cơ chế thi đấu chiến thuật lôi cuốn.
+                    </p>
                   </div>
                 </div>
               </div>
 
               <!-- Member 2: Lại Huy Nguyễn -->
-              <div class="split-member-card reverse-row">
-                <div class="member-photo-col">
-                  <div class="photo-frame">
-                    <img src="assets/team-member-2.png" alt="Lại Huy Nguyễn" class="member-photo">
-                    <div class="photo-overlay-name">
-                      <span class="member-big-firstname">HUY</span>
-                      <span class="member-big-lastname">NGUYỄN</span>
-                    </div>
+              <div class="editorial-member-card" data-index="1">
+                <div class="editorial-left-col">
+                  <img src="assets/team-member-2.png" alt="Lại Huy Nguyễn" class="editorial-bw-img">
+                  <div class="editorial-name-overlay">
+                    <h3 class="editorial-display-name">LẠI HUY NGUYỄN</h3>
                   </div>
                 </div>
-                <div class="member-info-col">
-                  <div class="member-role-badge badge-teal">CO-FOUNDER & GAME CO-DESIGNER</div>
-                  <h3 class="member-full-name">LẠI HUY NGUYỄN</h3>
-                  <div class="member-divider"></div>
-                  <p class="member-bio">
-                    Đồng sáng lập kiêm phát triển cân bằng trò chơi. Anh phụ trách tối ưu hóa trải nghiệm tương tác giữa các người chơi, tính toán xác suất rủi ro trên hệ thống thẻ Sự Kiện và xây dựng bản đồ cảng biển mượt mà, công bằng nhất cho mỗi ván đấu.
-                  </p>
-                  <div class="member-highlights">
-                    <span class="hl-tag">🚢 Cân bằng chiến thuật</span>
-                    <span class="hl-tag">📊 Tối ưu toán học Game</span>
-                    <span class="hl-tag">⚙️ System Architecture</span>
+                <div class="editorial-right-col">
+                  <div class="editorial-color-frame">
+                    <img src="assets/team-member-2.png" alt="Lại Huy Nguyễn" class="editorial-color-img">
+                  </div>
+                  <div class="editorial-info-content">
+                    <h4 class="editorial-role-title">CO-FOUNDER – GAME CO-DESIGNER</h4>
+                    <p class="editorial-bio-text">
+                      Đồng sáng lập kiêm phát triển cân bằng trò chơi. Phụ trách tối ưu hóa trải nghiệm tương tác giữa các người chơi, tính toán xác suất rủi ro trên hệ thống thẻ Sự Kiện và xây dựng bản đồ cảng biển mượt mà, công bằng nhất cho mỗi ván đấu.
+                    </p>
                   </div>
                 </div>
               </div>
 
               <!-- Member 3: Trần Gia Bảo -->
-              <div class="split-member-card">
-                <div class="member-photo-col">
-                  <div class="photo-frame">
-                    <img src="assets/team-member-3.png" alt="Trần Gia Bảo" class="member-photo">
-                    <div class="photo-overlay-name">
-                      <span class="member-big-firstname">GIA</span>
-                      <span class="member-big-lastname">BẢO</span>
-                    </div>
+              <div class="editorial-member-card" data-index="2">
+                <div class="editorial-left-col">
+                  <img src="assets/team-member-3.png" alt="Trần Gia Bảo" class="editorial-bw-img">
+                  <div class="editorial-name-overlay">
+                    <h3 class="editorial-display-name">TRẦN GIA BẢO</h3>
                   </div>
                 </div>
-                <div class="member-info-col">
-                  <div class="member-role-badge badge-purple">ART DIRECTOR & GRAPHIC LEAD</div>
-                  <h3 class="member-full-name">TRẦN GIA BẢO</h3>
-                  <div class="member-divider"></div>
-                  <p class="member-bio">
-                    Giám đốc nghệ thuật đứng sau toàn bộ linh hồn visual của LogisQuest. Anh trực tiếp thổi hồn từ thiết kế nhận diện thương hiệu, đồ họa bao bì 3D nổi bật đến mỹ thuật chi tiết trên từng lá bài Incoterm, thẻ Chợ và thẻ Phương tiện.
-                  </p>
-                  <div class="member-highlights">
-                    <span class="hl-tag">🎨 Art Direction</span>
-                    <span class="hl-tag">📦 3D Packaging Design</span>
-                    <span class="hl-tag">🖼️ Visual Storytelling</span>
+                <div class="editorial-right-col">
+                  <div class="editorial-color-frame">
+                    <img src="assets/team-member-3.png" alt="Trần Gia Bảo" class="editorial-color-img">
+                  </div>
+                  <div class="editorial-info-content">
+                    <h4 class="editorial-role-title">ART DIRECTOR – GRAPHIC LEAD</h4>
+                    <p class="editorial-bio-text">
+                      Giám đốc nghệ thuật đứng sau toàn bộ linh hồn visual của LogisQuest. Trực tiếp thổi hồn từ thiết kế nhận diện thương hiệu, đồ họa bao bì 3D nổi bật đến mỹ thuật chi tiết trên từng lá bài Incoterm, thẻ Chợ và thẻ Phương tiện.
+                    </p>
                   </div>
                 </div>
               </div>
 
               <!-- Member 4: Phạm Thùy Linh -->
-              <div class="split-member-card reverse-row">
-                <div class="member-photo-col">
-                  <div class="photo-frame">
-                    <img src="assets/team-member-4.png" alt="Phạm Thùy Linh" class="member-photo">
-                    <div class="photo-overlay-name">
-                      <span class="member-big-firstname">THÙY</span>
-                      <span class="member-big-lastname">LINH</span>
-                    </div>
+              <div class="editorial-member-card" data-index="3">
+                <div class="editorial-left-col">
+                  <img src="assets/team-member-4.png" alt="Phạm Thùy Linh" class="editorial-bw-img">
+                  <div class="editorial-name-overlay">
+                    <h3 class="editorial-display-name">PHẠM THÙY LINH</h3>
                   </div>
                 </div>
-                <div class="member-info-col">
-                  <div class="member-role-badge badge-rose">CONTENT LEAD & ACADEMIC SPECIALIST</div>
-                  <h3 class="member-full-name">PHẠM THÙY LINH</h3>
-                  <div class="member-divider"></div>
-                  <p class="member-bio">
-                    Chuyên gia biên soạn nội dung và tư liệu học thuật. Cô chịu trách nhiệm nghiên cứu ngân hàng câu hỏi logistics chuyên sâu, biên soạn bộ tình huống biến cố thực tế, đảm bảo mỗi ván chơi đều là một bài học thực hành xuất nhập khẩu sinh động.
-                  </p>
-                  <div class="member-highlights">
-                    <span class="hl-tag">📝 Học thuật Logistics</span>
-                    <span class="hl-tag">📚 Kịch bản biến cố</span>
-                    <span class="hl-tag">🎓 Đào tạo trực quan</span>
+                <div class="editorial-right-col">
+                  <div class="editorial-color-frame">
+                    <img src="assets/team-member-4.png" alt="Phạm Thùy Linh" class="editorial-color-img">
+                  </div>
+                  <div class="editorial-info-content">
+                    <h4 class="editorial-role-title">CONTENT LEAD – ACADEMIC SPECIALIST</h4>
+                    <p class="editorial-bio-text">
+                      Chuyên gia biên soạn nội dung và tư liệu học thuật. Chịu trách nhiệm nghiên cứu ngân hàng câu hỏi logistics chuyên sâu, biên soạn bộ tình huống biến cố thực tế, đảm bảo mỗi ván chơi đều là một bài học thực hành xuất nhập khẩu sinh động.
+                    </p>
                   </div>
                 </div>
               </div>
 
               <!-- Member 5: Hoàng Anh Đức -->
-              <div class="split-member-card">
-                <div class="member-photo-col">
-                  <div class="photo-frame">
-                    <img src="assets/team-member-5.png" alt="Hoàng Anh Đức" class="member-photo">
-                    <div class="photo-overlay-name">
-                      <span class="member-big-firstname">ANH</span>
-                      <span class="member-big-lastname">ĐỨC</span>
-                    </div>
+              <div class="editorial-member-card" data-index="4">
+                <div class="editorial-left-col">
+                  <img src="assets/team-member-5.png" alt="Hoàng Anh Đức" class="editorial-bw-img">
+                  <div class="editorial-name-overlay">
+                    <h3 class="editorial-display-name">HOÀNG ANH ĐỨC</h3>
                   </div>
                 </div>
-                <div class="member-info-col">
-                  <div class="member-role-badge badge-amber">OPERATIONS & COMMUNITY DIRECTOR</div>
-                  <h3 class="member-full-name">HOÀNG ANH ĐỨC</h3>
-                  <div class="member-divider"></div>
-                  <p class="member-bio">
-                    Giám đốc vận hành và phát triển cộng đồng. Anh trực tiếp điều hành quy trình sản xuất vật lý linh kiện chất lượng cao, tổ chức các buổi trải nghiệm Workshop Boardgame tại các trường đại học và kết nối đối tác doanh nghiệp chuỗi cung ứng.
-                  </p>
-                  <div class="member-highlights">
-                    <span class="hl-tag">🤝 Phát triển Cộng đồng</span>
-                    <span class="hl-tag">🏭 Quản lý Sản xuất</span>
-                    <span class="hl-tag">🎤 Workshop Events</span>
+                <div class="editorial-right-col">
+                  <div class="editorial-color-frame">
+                    <img src="assets/team-member-5.png" alt="Hoàng Anh Đức" class="editorial-color-img">
+                  </div>
+                  <div class="editorial-info-content">
+                    <h4 class="editorial-role-title">OPERATIONS – COMMUNITY DIRECTOR</h4>
+                    <p class="editorial-bio-text">
+                      Giám đốc vận hành và phát triển cộng đồng. Trực tiếp điều hành quy trình sản xuất vật lý linh kiện chất lượng cao, tổ chức các buổi trải nghiệm Workshop Boardgame tại các trường đại học và kết nối đối tác doanh nghiệp chuỗi cung ứng.
+                    </p>
                   </div>
                 </div>
               </div>

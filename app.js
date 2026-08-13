@@ -1057,6 +1057,28 @@ function switchView(viewName) {
     }
   }
 
+  // Reset + replay team banner animation when switching to team view
+  if (viewName === 'team') {
+    const overlay = document.querySelector('#teamView .team-banner-overlay');
+    const title   = document.querySelector('#teamView .team-banner-title');
+    const sub     = document.querySelector('#teamView .team-banner-sub');
+    [overlay, title, sub].forEach(el => {
+      if (!el) return;
+      el.style.animation = 'none';
+      // Force reflow để reset animation
+      void el.offsetWidth;
+      el.style.animation = '';
+    });
+    
+    // Reset slider thành viên về index 0 khi vào team view
+    if (typeof resetEditorialSlider === 'function') {
+      resetEditorialSlider();
+    }
+
+    // Cuộn trang lên đầu banner của teamView
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   // Ensure header is revealed when switching views
   const headerEl = document.getElementById('header');
   if (headerEl) {
@@ -1137,3 +1159,137 @@ function closeCardModal() {
     document.body.style.overflow = 'auto';
   }
 }
+
+// ==========================================
+// EDITORIAL FULLSCREEN SPLIT CURTAIN REVEAL SLIDER
+// ==========================================
+let currentEditorialIndex = 0;
+let isEditorialAnimating = false;
+
+function initEditorialSlider() {
+  const container = document.getElementById('editorialTeamSlider');
+  if (!container) return;
+
+  const cards = container.querySelectorAll('.editorial-member-card');
+  const dots = container.querySelectorAll('.slider-progress-dots .dot');
+  const totalCards = cards.length;
+
+  function updateDots(index) {
+    dots.forEach((dot, idx) => {
+      if (idx === index) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  function goToCard(targetIndex) {
+    if (isEditorialAnimating || targetIndex === currentEditorialIndex) return;
+    if (targetIndex < 0 || targetIndex >= totalCards) return;
+
+    isEditorialAnimating = true;
+    const currentCard = cards[currentEditorialIndex];
+    const nextCard = cards[targetIndex];
+
+    // Thêm class splitting để trigger hiệu ứng tách đôi sang 2 bên
+    currentCard.classList.add('splitting');
+
+    // Hiện card tiếp theo đằng sau
+    nextCard.classList.add('active');
+
+    setTimeout(() => {
+      // Sau khi kết thúc animation tách đôi (850ms)
+      currentCard.classList.remove('active', 'splitting');
+      currentEditorialIndex = targetIndex;
+      updateDots(currentEditorialIndex);
+      isEditorialAnimating = false;
+    }, 850);
+  }
+
+  // Click vào bất kỳ điểm nào trên container để chuyển tới card tiếp theo
+  container.addEventListener('click', (e) => {
+    // Nếu click vào dot pagination thì chuyển tới đúng dot đó
+    const clickedDot = e.target.closest('.dot');
+    if (clickedDot) {
+      const dotIndex = parseInt(clickedDot.getAttribute('data-index'), 10);
+      if (!isNaN(dotIndex)) {
+        goToCard(dotIndex);
+        return;
+      }
+    }
+
+    // Mặc định click bất kỳ -> next card (vòng lặp)
+    const nextIndex = (currentEditorialIndex + 1) % totalCards;
+    goToCard(nextIndex);
+  });
+
+  // Xử lý sự kiện cuộn chuột (Wheel Scroll)
+  let scrollThresholdTimer = null;
+  container.addEventListener('wheel', (e) => {
+    // Đảm bảo section được snap vừa khít màn hình khi người dùng cuộn vào
+    const rect = container.getBoundingClientRect();
+    const isCentered = Math.abs(rect.top) < 30;
+
+    // Nếu chưa vừa khít màn hình, snap chính xác vào giữa màn hình
+    if (!isCentered) {
+      container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    e.preventDefault(); // Khóa cuộn trang khi tương tác với slider
+    if (isEditorialAnimating) return;
+
+    if (scrollThresholdTimer) return;
+    scrollThresholdTimer = setTimeout(() => { scrollThresholdTimer = null; }, 600);
+
+    if (e.deltaY > 20) {
+      // Cuộn xuống -> Next card
+      const nextIndex = (currentEditorialIndex + 1) % totalCards;
+      goToCard(nextIndex);
+    } else if (e.deltaY < -20) {
+      // Cuộn lên -> Prev card
+      const prevIndex = (currentEditorialIndex - 1 + totalCards) % totalCards;
+      goToCard(prevIndex);
+    }
+  }, { passive: false });
+
+  // Touch Swipe cho Thiết bị di động
+  let touchStartY = 0;
+  container.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  container.addEventListener('touchend', (e) => {
+    const touchEndY = e.changedTouches[0].clientY;
+    const diff = touchStartY - touchEndY;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        const nextIndex = (currentEditorialIndex + 1) % totalCards;
+        goToCard(nextIndex);
+      } else {
+        const prevIndex = (currentEditorialIndex - 1 + totalCards) % totalCards;
+        goToCard(prevIndex);
+      }
+    }
+  }, { passive: true });
+
+  // Reset slider về vị trí ban đầu
+  window.resetEditorialSlider = function() {
+    currentEditorialIndex = 0;
+    isEditorialAnimating = false;
+    cards.forEach((card, idx) => {
+      card.classList.remove('splitting');
+      if (idx === 0) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
+    });
+    updateDots(0);
+  };
+}
+
+// Khởi tạo slider khi DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+  initEditorialSlider();
+});
