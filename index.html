@@ -59,7 +59,7 @@
 
       <div class="header-actions">
         <!-- ADD TO CART COMPONENT (HEADER BUTTON) -->
-        <button class="cart-button nav-cart-btn" data-cart-button type="button" aria-label="Add item to cart">
+        <button class="cart-button nav-cart-btn" data-cart-button type="button" aria-label="Add item to cart" onclick="setTimeout(function(){ window.location.href='buy.html'; }, 1000);">
           <span class="cart-button__stage" aria-hidden="true">
             <span class="cart-button__label">Mua ngay</span>
             <svg class="cart-button__cart" viewBox="0 0 32 32">
@@ -96,7 +96,7 @@
 
     <!-- ADD TO CART COMPONENT (SIDEBAR / MOBILE MENU BUTTON) -->
     <button class="cart-button nav-cart-btn" data-cart-button type="button" aria-label="Add item to cart"
-      style="margin-top: 10px;">
+      style="margin-top: 10px;" onclick="setTimeout(function(){ window.location.href='buy.html'; }, 1000);">
       <span class="cart-button__stage" aria-hidden="true">
         <span class="cart-button__label">Mua ngay</span>
         <svg class="cart-button__cart" viewBox="0 0 32 32">
@@ -1311,6 +1311,7 @@
 
   <!-- JavaScript Link -->
   <script src="app.js"></script>
+  <script src="buy.js"></script>
 </body>
 
 </html>
