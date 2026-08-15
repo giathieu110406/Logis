@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+import os, sys
+
+html = """<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
@@ -438,4 +440,8 @@
 
   <script src="buy.js"></script>
 </body>
-</html>
+</html>"""
+
+with open('buy.html', 'w', encoding='utf-8') as f:
+    f.write(html)
+print("Done writing buy.html - lines:", html.count("\\n") + 1)

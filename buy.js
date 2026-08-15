@@ -15,7 +15,7 @@ function initBuyPage() {
 
   // ── 2. PRODUCT GALLERY THUMBNAIL SWITCHER ──
   const mainProductImg = document.getElementById('mainProductImg');
-  const thumbBtns = document.querySelectorAll('.thumb-btn');
+  const thumbBtns = document.querySelectorAll('.buy-thumb-btn, .thumb-btn');
 
   thumbBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -85,7 +85,7 @@ function initBuyPage() {
   }
 
   // ── 4. ACCORDIONS (PRODUCT INFO & FAQS) ──
-  const accordionHeaders = document.querySelectorAll('.accordion-header, .faq-header');
+  const accordionHeaders = document.querySelectorAll('.accordion-header, .faq-header, .buy-acc-header, .buy-faq-header');
 
   accordionHeaders.forEach(header => {
     header.addEventListener('click', (e) => {
@@ -94,42 +94,38 @@ function initBuyPage() {
       const targetId = header.getAttribute('data-target');
       const targetContent = document.getElementById(targetId);
 
-      const isOpen = header.classList.contains('active');
+      // Toggle using 'open' class (matched by CSS max-height)
+      const isOpen = header.classList.contains('open');
 
       if (isOpen) {
-        header.classList.remove('active');
-        if (targetContent) targetContent.classList.remove('active');
+        header.classList.remove('open');
+        if (targetContent) targetContent.classList.remove('open');
       } else {
-        header.classList.add('active');
-        if (targetContent) targetContent.classList.add('active');
+        header.classList.add('open');
+        if (targetContent) targetContent.classList.add('open');
       }
     });
   });
 
   // Open first FAQ by default
-  const firstFaqHeader = document.querySelector('.faq-header');
+  const firstFaqHeader = document.querySelector('.buy-faq-header, .faq-header');
   if (firstFaqHeader) {
-    firstFaqHeader.classList.add('active');
+    firstFaqHeader.classList.add('open');
     const firstFaqContent = document.getElementById('faq1');
-    if (firstFaqContent) firstFaqContent.classList.add('active');
+    if (firstFaqContent) firstFaqContent.classList.add('open');
   }
 
   // ── 5. ADD TO CART BUTTON ANIMATION (NAVBAR / SIDEBAR) ──
+  // Note: buttons on buy.html use inline onclick to scroll+click btnBuyNow
+  // This handler only runs cart animation without extra navigation
   const cartButtons = document.querySelectorAll('.nav-cart-btn[data-cart-button]');
   cartButtons.forEach(btn => {
+    // Only add animation listener, don't add duplicate click (inline onclick already handles scroll)
     btn.addEventListener('click', (e) => {
-      e.preventDefault();
       if (btn.classList.contains('is-animating')) return;
-
       btn.classList.add('is-animating');
       setTimeout(() => {
         btn.classList.remove('is-animating');
-        if (window.location.pathname.includes('buy.html')) {
-          const heroSection = document.querySelector('.product-hero-section');
-          if (heroSection) heroSection.scrollIntoView({ behavior: 'smooth' });
-        } else {
-          window.location.href = 'buy.html';
-        }
       }, 1800);
     });
   });
