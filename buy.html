@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mua Bộ Bài Quỷ Chiến — LogisQuest Board Game</title>
+  <meta name="description"
+    content="Trang mua hàng chính thức Bộ Bài Quỷ Chiến — LogisQuest Board Game. Đặt mua ngay để nhận ưu đãi giảm 40k & Freeship toàn quốc.">
+
+  <!-- Preconnect & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Favicon & Stylesheet -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="shortcut icon" type="image/png" href="assets/logo.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="buy-page-body">
+
+  <!-- ── 1. HEADER NAVIGATION ── -->
+  <header class="main-header buy-header" id="header">
+    <div class="header-container">
+      <a href="index.html" class="logo-area">
+        <img src="assets/logo.png" alt="Quỷ Chiến Logo" class="site-logo">
+        <span class="logo-text">QUỶ CHIẾN<span class="sub-logo">LOGISQUEST</span></span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html#home" class="nav-link">Trang chủ</a>
+
+        <div class="nav-dropdown">
+          <a href="index.html#about" class="nav-link dropdown-toggle">
+            Giới thiệu <span class="dropdown-caret">▾</span>
+          </a>
+          <div class="dropdown-menu">
+            <a href="index.html#about" class="dropdown-item">
+              <span class="dropdown-icon">📘</span> Về LogisQuest
+            </a>
+            <a href="index.html#team" class="dropdown-item">
+              <span class="dropdown-icon">👥</span> Đội Ngũ Sáng Tạo
+            </a>
+          </div>
+        </div>
+
+        <a href="index.html#gameplay" class="nav-link">Hướng dẫn cách chơi</a>
+        <a href="index.html#cards" class="nav-link">Wiki Quỷ</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="lang-switch-btn" title="Chuyển đổi ngôn ngữ">
+          <span class="lang-icon">文A</span>
+        </button>
+
+        <!-- ADD TO CART COMPONENT (HEADER BUTTON) -->
+        <button class="cart-button nav-cart-btn" data-cart-button type="button" aria-label="Add item to cart">
+          <span class="cart-button__stage" aria-hidden="true">
+            <span class="cart-button__label">Mua ngay</span>
+            <svg class="cart-button__cart" viewBox="0 0 32 32">
+              <path class="cart-button__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z" />
+              <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1" />
+              <path d="M13.1 26.2h.1M23.4 26.2h.1" />
+              <path class="cart-button__check" d="m14.1 15.7 2.1 2.1 4.3-4.6" />
+            </svg>
+          </span>
+          <svg class="cart-button__shirt" aria-hidden="true" viewBox="0 0 32 32">
+            <path
+              d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z" />
+          </svg>
+        </button>
+
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html#home" class="mobile-link">Trang chủ</a>
+    <div class="mobile-dropdown-group">
+      <span class="mobile-group-title">Giới Thiệu</span>
+      <a href="index.html#about" class="mobile-link mobile-sub-link">— Về LogisQuest</a>
+      <a href="index.html#team" class="mobile-link mobile-sub-link">— Đội Ngũ Sáng Tạo</a>
+    </div>
+    <a href="index.html#gameplay" class="mobile-link">Hướng dẫn cách chơi</a>
+    <a href="index.html#cards" class="mobile-link">Wiki Quỷ</a>
+
+    <!-- ADD TO CART COMPONENT (SIDEBAR / MOBILE MENU BUTTON) -->
+    <button class="cart-button nav-cart-btn" data-cart-button type="button" aria-label="Add item to cart"
+      style="margin-top: 10px;">
+      <span class="cart-button__stage" aria-hidden="true">
+        <span class="cart-button__label">Mua ngay</span>
+        <svg class="cart-button__cart" viewBox="0 0 32 32">
+          <path class="cart-button__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z" />
+          <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1" />
+          <path d="M13.1 26.2h.1M23.4 26.2h.1" />
+          <path class="cart-button__check" d="m14.1 15.7 2.1 2.1 4.3-4.6" />
+        </svg>
+      </span>
+      <svg class="cart-button__shirt" aria-hidden="true" viewBox="0 0 32 32">
+        <path
+          d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z" />
+      </svg>
+    </button>
+  </div>
+
+
+  <!-- ── MAIN PRODUCT PAGE CONTENT ── -->
+  <main class="buy-main-content">
+    <div class="buy-container">
+
+      <!-- ========================================== -->
+      <!-- SECTION 1: PRODUCT HERO SHOWCASE (2 COLUMNS) -->
+      <!-- ========================================== -->
+      <section class="product-hero-section">
+        <div class="product-hero-grid">
+
+          <!-- ── CỘT TRÁI: GALLERY ẢNH SẢN PHẨM ── -->
+          <div class="product-gallery-col">
+            <div class="main-image-frame">
+              <span class="product-badge-tag">FREESHIP & GIẢM 40K</span>
+              <img src="assets/product-box-3d.png" alt="Bộ Bài Quỷ Chiến Full Set" id="mainProductImg"
+                class="product-featured-img">
+            </div>
+
+            <!-- Thumbnail Carousel Row -->
+            <div class="thumbnail-row" id="thumbnailRow">
+              <button class="thumb-btn active" data-img="assets/product-box-3d.png">
+                <img src="assets/product-box-3d.png" alt="Hộp Game 3D">
+              </button>
+              <button class="thumb-btn" data-img="assets/hero-card.png">
+                <img src="assets/hero-card.png" alt="Bộ Thẻ Bài">
+              </button>
+              <button class="thumb-btn" data-img="assets/product-workshop.png">
+                <img src="assets/product-workshop.png" alt="HDSD và Xúc Xắc">
+              </button>
+              <button class="thumb-btn" data-img="assets/bg-gameplay.png">
+                <img src="assets/bg-gameplay.png" alt="Bàn Chơi Mẫu">
+              </button>
+              <button class="thumb-btn" data-img="assets/product-box.png">
+                <img src="assets/product-box.png" alt="Mặt Sau Hộp Game">
+              </button>
+            </div>
+          </div>
+
+
+          <!-- ── CỘT PHẢI: THÔNG TIN CHI TIẾT & MUA HÀNG ── -->
+          <div class="product-info-col">
+            <h1 class="product-title-oriental">BỘ BÀI QUỶ CHIẾN</h1>
+
+            <!-- Pricing Area -->
+            <div class="product-price-row">
+              <span class="price-current">340.000 ₫</span>
+              <span class="price-original">400.000 ₫</span>
+              <span class="price-discount-tag">GIẢM 40K</span>
+            </div>
+
+            <!-- Promo Voucher Banner -->
+            <div class="voucher-promo-box">
+              <div class="promo-header">
+                <span class="promo-fire-icon">🔥</span>
+                <strong>Freeship toàn quốc & Giảm giá mùa hè 2026</strong>
+              </div>
+              <p class="promo-desc">
+                Giá sản phẩm đã tự động giảm 40k cho sale mùa hè. Tất cả đơn hàng sẽ được Freeship khi áp dụng voucher
+                <code class="voucher-code">SHIP15</code>.
+              </p>
+            </div>
+
+            <!-- Product Backstory / Description -->
+            <div class="product-description-block">
+              <h3 class="desc-heading">MÔ TẢ SẢN PHẨM</h3>
+              <div class="desc-text-body">
+                <p>
+                  Vực Thẳm Âm Hồn mở ra cảnh cổng giữa người và quỷ, nơi truyền thuyết dân gian Việt Nam sống lại trong
+                  hình hài mới đầy hiện đại và âm ảnh. Mỗi nhân vật là một mảnh linh hồn cổ xưa được tái sinh, mang theo
+                  sức mạnh và bí ẩn vượt ngoài hiểu biết của con người.
+                </p>
+                <p>
+                  Tương truyền ngàn năm trước, Thiên Sư Tổ đã phong ấn Âm Giới Thư, cuốn sách chứa hàng trăm yêu tà cùng
+                  những hình thức huyết tế bị nguyên rủa. Khi phong ấn tan rã, pháp sư khắp nơi đổ về, kẻ tìm quyền năng,
+                  người cầu bảo thủ, tất cả đều bị cuốn vào vòng xoáy của bóng tối.
+                </p>
+                <p>
+                  Mỗi lần Âm Giới Thư được mở ra, màu nhỏ xuống từng trang, bầu trời nứt toác, và quỷ dữ trỗi dậy. Cuộc
+                  chiến không còn là thiện hay ác, mà là sự va chạm giữa vô số ý chí và linh hồn đang mục ruổng.
+                </p>
+                <p class="desc-conclusion">
+                  Cuối cùng, chỉ một người có thể đứng giữa tro tàn, nắm trong tay quyền năng tuyệt đối. Nhưng khi có
+                  thể điều khiển cả nhân gian lẫn quỷ giới, liệu hắn còn là con người, hay đã trở thành một phần của vực
+                  thẳm?
+                </p>
+              </div>
+              <a href="index.html#gameplay" class="story-link-more">Chi tiết lối chơi xem tại đây ➔</a>
+            </div>
+
+            <!-- Accordion Details -->
+            <div class="product-accordions">
+              <div class="accordion-item">
+                <button class="accordion-header" data-target="accProductInfo">
+                  <span>Thông tin sản phẩm</span>
+                  <span class="acc-icon">▾</span>
+                </button>
+                <div class="accordion-content" id="accProductInfo">
+                  <ul>
+                    <li><strong>Kích thước hộp:</strong> 20 x 15 x 5 cm (Chống va đập)</li>
+                    <li><strong>Chất liệu lá bài:</strong> Giấy bồi 350gsm cao cấp cán màng mờ mượt tay, chống nước nhẹ</li>
+                    <li><strong>Số lượng thẻ:</strong> 106 Thẻ bài chiến thuật in màu sắc nét</li>
+                    <li><strong>Phụ kiện đi kèm:</strong> 1 Xúc xắc custom, 20 Token thể lực, 1 Sách HDSD in màu</li>
+                    <li><strong>Độ tuổi phù hợp:</strong> 12+ (Phù hợp 2 - 6 người chơi)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <button class="accordion-header" data-target="accComponents">
+                  <span>Thông tin thành phần</span>
+                  <span class="acc-icon">▾</span>
+                </button>
+                <div class="accordion-content" id="accComponents">
+                  <ul>
+                    <li>11 Thẻ Incoterm hải trình quốc tế</li>
+                    <li>35 Thẻ Phương Tiện vận tải (Tàu hàng, Xe container, Máy bay cargo)</li>
+                    <li>40 Thẻ Sự Kiện & Rủi ro cảng biển</li>
+                    <li>20 Thẻ Chợ thương mại</li>
+                    <li>1 Xúc Xắc 6 mặt huyền bí & 20 Token linh hồn</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quantity Controls -->
+            <div class="quantity-control-wrapper">
+              <label for="qtyInput" class="qty-label">Số lượng</label>
+              <div class="qty-picker">
+                <button type="button" class="qty-btn" id="btnMinus" aria-label="Giảm số lượng">-</button>
+                <input type="number" id="qtyInput" class="qty-input" value="1" min="1" max="99" readonly>
+                <button type="button" class="qty-btn" id="btnPlus" aria-label="Tăng số lượng">+</button>
+              </div>
+            </div>
+
+            <!-- Stock Status Box -->
+            <div class="stock-status-box info-available">
+              <span class="status-icon">📦</span>
+              <span>Sản phẩm hiện đang có sẵn trong kho, đóng gói và sẵn sàng giao hàng trong 24h.</span>
+            </div>
+
+            <!-- Buy Action Buttons -->
+            <div class="buy-action-group">
+              <!-- DELIVERY BUTTON COMPONENT (PRODUCT HERO CTA) -->
+              <button class="order-button product-delivery-btn" id="btnBuyNow" type="button"
+                aria-label="MUA NGAY (340.000 ₫)">
+                <span class="button-label button-label--default" id="btnBuyNowText">MUA NGAY (340.000 ₫)</span>
+                <span class="button-label button-label--success">
+                  ĐÃ ĐẶT HÀNG!
+                  <span class="checkmark" aria-hidden="true"></span>
+                </span>
+
+                <span class="package" aria-hidden="true"></span>
+
+                <span class="truck" aria-hidden="true">
+                  <span class="truck__cargo"></span>
+                  <span class="truck__cab">
+                    <span class="truck__window"></span>
+                  </span>
+                  <span class="truck__light truck__light--top"></span>
+                  <span class="truck__light truck__light--bottom"></span>
+                </span>
+
+                <span class="road" aria-hidden="true"></span>
+              </button>
+
+              <button class="btn btn-secondary btn-preorder-fb" id="btnContactFB">
+                Nhắn tin qua Facebook Preorder
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================== -->
+      <!-- SECTION 2: PRODUCT REVIEWS -->
+      <!-- ========================================== -->
+      <section class="product-reviews-section">
+        <div class="reviews-container">
+
+          <div class="reviews-header-block">
+            <h2 class="reviews-title-oriental">ĐÁNH GIÁ SẢN PHẨM</h2>
+            <p class="reviews-sub-title">Cung cấp phản hồi của bạn về sản phẩm</p>
+          </div>
+
+          <!-- Overall Rating Summary Grid -->
+          <div class="rating-summary-card">
+            <div class="score-large-box">
+              <div class="big-score-num">4.8</div>
+              <div class="star-rating-display">
+                <span class="stars-gold">★★★★★</span>
+              </div>
+              <div class="review-count-text">4.8 • 11 Đánh giá</div>
+            </div>
+
+            <div class="rating-bars-box">
+              <div class="bar-row">
+                <span class="star-label">5.0 ★</span>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill" style="width: 85%;"></div>
+                </div>
+              </div>
+              <div class="bar-row">
+                <span class="star-label">4.0 ★</span>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill" style="width: 10%;"></div>
+                </div>
+              </div>
+              <div class="bar-row">
+                <span class="star-label">3.0 ★</span>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill" style="width: 5%;"></div>
+                </div>
+              </div>
+              <div class="bar-row">
+                <span class="star-label">2.0 ★</span>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+              </div>
+              <div class="bar-row">
+                <span class="star-label">1.0 ★</span>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- User Review Items List -->
+          <div class="review-list">
+
+            <!-- Review Item 1 -->
+            <div class="review-card-item">
+              <div class="reviewer-info-row">
+                <div class="reviewer-meta">
+                  <strong class="reviewer-name">Hà Phương</strong>
+                  <div class="stars-gold">★★★★★</div>
+                </div>
+                <span class="review-time">8 tháng trước</span>
+              </div>
+              <p class="review-comment-text">
+                Art siêu đẹp iiiii, sản phẩm mới nên mình mua thử mà ngoài kì vọng. Thẻ bài sờ chắc tay, mình mới tập tành
+                chơi boardgame mà thấy cuốn, luật khá nhanh. Mình ở HN nên gửi đơn nhanh, 2 ngày đã nhận được hàng.
+              </p>
+            </div>
+
+            <!-- Review Item 2 -->
+            <div class="review-card-item">
+              <div class="reviewer-info-row">
+                <div class="reviewer-meta">
+                  <strong class="reviewer-name">Trung Nam</strong>
+                  <div class="stars-gold">★★★★★</div>
+                </div>
+                <span class="review-time">8 tháng trước</span>
+              </div>
+              <div class="review-comment-text">
+                <p><strong>Feedback chân thực về Quỷ Chiến:</strong></p>
+                <p><strong>ĐIỂM CỘNG:</strong><br>
+                  - Art rất đẹp, cái này miễn chê vì đầu tư thật sự đỉnh nhìn cầm bộ bài trên tay rất sướng và đã.<br>
+                  - Gameplay: dễ chơi, newbie cũng chơi hiểu được, hiệu ứng – nhân vật sát truyền thuyết.<br>
+                  - Đóng gói: cẩn thận chỉnh chu, bọc 2 lớp bubble wrap nhưng maybe do dvvc nên mình hiểu nó quăng quật thành ra sẽ có df rất nhẹ, xốp rất nice đã support mình cái này.<br>
+                  - CSKH: Trước khi mua mình hỏi xốp rất nhiều và xốp cũng rep mình đầy đủ ncl ổn áp lắm.
+                </p>
+                <p><strong>ĐIỂM TRỪ:</strong><br>
+                  - Gameplay dễ nên bản mình mê boardgame thấy chưa đủ wow =]]] nó muốn gameplay update lên nữa (Shop có nói sẽ update lên thêm nên khá mong chờ).<br>
+                  - Game này nếu sợ bị bully 1 đứa thì =]] ừ sẽ có nhé, ai thích thì vui còn ko thì hơi kén.<br>
+                  - Thời gian chơi (tuỳ theo kỹ năng skill chiến thuật mn) nhưng mình chơi 5 đứa có lâu vch chắc do mình mới chơi nên mất bố hơn tiếng.
+                </p>
+              </div>
+              <div class="review-attached-photos">
+                <img src="assets/product-box-3d.png" alt="Ảnh chụp thực tế Quỷ Chiến">
+              </div>
+            </div>
+
+            <!-- Review Item 3 -->
+            <div class="review-card-item">
+              <div class="reviewer-info-row">
+                <div class="reviewer-meta">
+                  <strong class="reviewer-name">Huy Nguyễn</strong>
+                  <div class="stars-gold">★★★★★</div>
+                </div>
+                <span class="review-time">8 tháng trước</span>
+              </div>
+              <p class="review-comment-text">
+                Giao hàng tốc độ vch, bảo xốp đóng hàng tặng tháng bạn mà ón áp lắm nhé. Feedback lấy voucher :))))))) ớm mình k có ảnh nền để tạm ảnh màn hình tn
+              </p>
+              <div class="review-attached-photos">
+                <img src="assets/hero-card.png" alt="Ảnh thực tế đơn hàng">
+              </div>
+            </div>
+
+            <!-- Review Item 4 -->
+            <div class="review-card-item">
+              <div class="reviewer-info-row">
+                <div class="reviewer-meta">
+                  <strong class="reviewer-name">Hữu Tài</strong>
+                  <div class="stars-gold">★★★★★</div>
+                </div>
+                <span class="review-time">8 tháng trước</span>
+              </div>
+              <p class="review-comment-text">
+                Ảnh thẻ bài đẹp vch ý, nhìn đã muốn chơi. Mới mua chưa hiểu luật nhưng shop tư vấn khá kỹ. Nhưng mong shop sẽ ra thêm bản mở rộng vì muốn có thêm nhiều hiệu ứng hơn.
+              </p>
+            </div>
+
+            <!-- Review Item 5 -->
+            <div class="review-card-item">
+              <div class="reviewer-info-row">
+                <div class="reviewer-meta">
+                  <strong class="reviewer-name">Tuấn Minh</strong>
+                  <div class="stars-gold">★★★★★</div>
+                </div>
+                <span class="review-time">8 tháng trước</span>
+              </div>
+              <p class="review-comment-text">
+                Sản phẩm mới nhưng shop tư vấn khá nhiệt tình, sản phẩm thiết kế đẹp và bắt mắt. Cán đóng gói sản phẩm kỹ hơn, khi nào chơi nhiều sẽ đánh giá thêm.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Reviews Pagination Bar -->
+          <div class="review-pagination">
+            <button class="page-nav-btn" disabled>&lt;</button>
+            <button class="page-num-btn active">1</button>
+            <button class="page-num-btn">2</button>
+            <button class="page-num-btn">3</button>
+            <button class="page-nav-btn">&gt;</button>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ========================================== -->
+      <!-- SECTION 3: FAQ -->
+      <!-- ========================================== -->
+      <section class="product-faq-section">
+        <div class="faq-container">
+          <h2 class="faq-title-oriental">CÂU HỎI THƯỜNG GẶP</h2>
+
+          <div class="faq-accordion-list">
+
+            <div class="faq-item">
+              <button class="faq-header" data-target="faq1">
+                <span>Sản phẩm có đảm bảo chất lượng không?</span>
+                <span class="acc-icon">▾</span>
+              </button>
+              <div class="faq-content" id="faq1">
+                <p>Tất cả sản phẩm Quỷ Chiến đều được in ấn trên chất liệu giấy C350 cao cấp, cán màng mờ chống ẩm mốc và nước nhẹ. Hộp game bọc màng co và bọc bong bóng chống va đập 100% trước khi xuất kho.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-header" data-target="faq2">
+                <span>Thời gian giao hàng là bao lâu?</span>
+                <span class="acc-icon">▾</span>
+              </button>
+              <div class="faq-content" id="faq2">
+                <p>Đơn hàng giao trong nội thành Hà Nội & TP.HCM nhận hàng trong 1-2 ngày. Các tỉnh thành khác trên toàn quốc nhận hàng từ 3-5 ngày làm việc.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-header" data-target="faq3">
+                <span>Có hỗ trợ đổi trả không?</span>
+                <span class="acc-icon">▾</span>
+              </button>
+              <div class="faq-content" id="faq3">
+                <p>Chúng tôi hỗ trợ 1 đổi 1 hoàn toàn miễn phí trong vòng 7 ngày nếu sản phẩm gặp lỗi từ nhà sản xuất (thiếu quân, thiếu thẻ) hoặc hư hỏng do vận chuyển.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-header" data-target="faq4">
+                <span>Sản phẩm có kèm hướng dẫn sử dụng không?</span>
+                <span class="acc-icon">▾</span>
+              </button>
+              <div class="faq-content" id="faq4">
+                <p>Có! Bộ bài đi kèm Sách hướng dẫn luật chơi in màu minh họa cực kỳ dễ hiểu, cùng mã QR link video hướng dẫn chơi chi tiết chỉ trong 5 phút.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================== -->
+      <!-- SECTION 4: POLICIES -->
+      <!-- ========================================== -->
+      <section class="product-policies-section">
+        <div class="policies-grid">
+
+          <div class="policy-card">
+            <div class="policy-icon">🚚</div>
+            <h3 class="policy-title">Giao hàng nhanh</h3>
+            <p class="policy-desc">Giao hàng toàn quốc trong 3-7 ngày</p>
+          </div>
+
+          <div class="policy-card">
+            <div class="policy-icon">🛡️</div>
+            <h3 class="policy-title">Đảm bảo chất lượng</h3>
+            <p class="policy-desc">Cam kết chất lượng 100% sản phẩm</p>
+          </div>
+
+          <div class="policy-card">
+            <div class="policy-icon">📦</div>
+            <h3 class="policy-title">Đóng gói cẩn thận</h3>
+            <p class="policy-desc">Đóng gói an toàn, bảo vệ sản phẩm tốt nhất</p>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+
+  <!-- ── FOOTER (CẬP NHẬT ANIMATED SOCIAL MEDIA BUTTONS) ── -->
+  <footer class="buy-footer">
+    <div class="footer-center-logo">
+      <img src="assets/logo.png" alt="Quỷ Chiến Logo Badge" class="footer-stamp-logo">
+    </div>
+
+    <div class="footer-columns-grid">
+      <div class="footer-col">
+        <h4 class="footer-heading">Thông tin chung</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#home">Trang chủ</a></li>
+          <li><a href="index.html#about">Về Quỷ Chiến</a></li>
+          <li><a href="index.html#team">Đội ngũ sáng tạo</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Hỗ trợ</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#gameplay">Hướng dẫn cách chơi</a></li>
+          <li><a href="index.html#cards">Wiki Quỷ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Theo dõi chúng tôi</h4>
+        <!-- SOCIAL MEDIA BUTTONS COMPONENT -->
+        <nav class="social-links" aria-label="Social media">
+          <a class="social-link social-link--facebook" href="https://www.facebook.com/" aria-label="Facebook"
+            data-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <svg class="social-link__logo social-link__logo--facebook" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M13.86 22v-8.45h2.84l.43-3.3h-3.27V8.14c0-.96.27-1.61 1.64-1.61h1.75V3.58a23.4 23.4 0 0 0-2.55-.13c-2.52 0-4.25 1.54-4.25 4.36v2.44H7.6v3.3h2.85V22h3.41Z" />
+            </svg>
+          </a>
+
+          <a class="social-link social-link--twitter" href="https://x.com/" aria-label="Twitter" data-label="Twitter"
+            target="_blank" rel="noopener noreferrer">
+            <svg class="social-link__logo social-link__logo--twitter" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M18.24 2H21l-6.03 6.89L22.06 22H16.5l-4.35-5.69L7.17 22H4.4l6.45-7.37L4.06 2h5.7l3.93 5.2L18.24 2Zm-.97 17.69h1.53L8.92 4.19H7.28l9.99 15.5Z" />
+            </svg>
+          </a>
+
+          <a class="social-link social-link--instagram" href="https://www.instagram.com/" aria-label="Instagram"
+            data-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <svg class="social-link__logo social-link__logo--instagram" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M7.45 2h9.1A5.46 5.46 0 0 1 22 7.45v9.1A5.46 5.46 0 0 1 16.55 22h-9.1A5.46 5.46 0 0 1 2 16.55v-9.1A5.46 5.46 0 0 1 7.45 2Zm0 1.82a3.64 3.64 0 0 0-3.63 3.63v9.1a3.64 3.64 0 0 0 3.63 3.63h9.1a3.64 3.64 0 0 0 3.63-3.63v-9.1a3.64 3.64 0 0 0-3.63-3.63h-9.1Zm9.55 1.36a1.36 1.36 0 1 1 0 2.73 1.36 1.36 0 0 1 0-2.73ZM12 6.86A5.14 5.14 0 1 1 12 17.14 5.14 5.14 0 0 1 12 6.86Zm0 1.82A3.32 3.32 0 1 0 12 15.32 3.32 3.32 0 0 0 12 8.68Z" />
+            </svg>
+          </a>
+
+          <a class="social-link social-link--github" href="https://github.com/" aria-label="Github"
+            data-label="Github" target="_blank" rel="noopener noreferrer">
+            <svg class="social-link__logo social-link__logo--github" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.36 6.84 9.72.5.1.68-.22.68-.49l-.01-1.92c-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.86.09-.67.35-1.12.64-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05A9.39 9.39 0 0 1 12 6.93a9.3 9.3 0 0 1 2.5.35c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.04.36.32.68.94.68 1.89l-.01 2.82c0 .27.18.59.69.49A10.24 10.24 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z" />
+            </svg>
+          </a>
+
+          <a class="social-link social-link--youtube" href="https://www.youtube.com/" aria-label="Youtube"
+            data-label="Youtube" target="_blank" rel="noopener noreferrer">
+            <svg class="social-link__logo social-link__logo--youtube" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M21.58 7.19a2.83 2.83 0 0 0-1.99-2C17.84 4.72 12 4.72 12 4.72s-5.84 0-7.59.47a2.83 2.83 0 0 0-1.99 2A29.52 29.52 0 0 0 1.95 12c0 1.63.16 3.25.47 4.81a2.83 2.83 0 0 0 1.99 2c1.75.47 7.59.47 7.59.47s5.84 0 7.59-.47a2.83 2.83 0 0 0 1.99-2c.31-1.56.47-3.18.47-4.81 0-1.63-.16-3.25-.47-4.81ZM10 15.12V8.88L15.2 12 10 15.12Z" />
+            </svg>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="footer-bottom-strip">
+      <p>&copy; 2026 Quỷ Chiến. Mọi quyền được bảo lưu.</p>
+    </div>
+  </footer>
+
+
+  <!-- ── CHECKOUT MODAL POPUP ── -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-content checkout-modal-card">
+      <button class="modal-close" id="checkoutClose" aria-label="Đóng">&times;</button>
+
+      <div class="checkout-modal-header">
+        <h2 class="modal-title-red">XÁC NHẬN ĐẶT HÀNG</h2>
+        <p class="modal-sub-text">Nhập thông tin giao hàng để hoàn tất đơn hàng Bộ Bài Quỷ Chiến</p>
+      </div>
+
+      <form id="checkoutForm" class="checkout-form">
+        <div class="form-group">
+          <label for="custName">Họ và tên *</label>
+          <input type="text" id="custName" required placeholder="Ví dụ: Nguyễn Văn A">
+        </div>
+
+        <div class="form-group">
+          <label for="custPhone">Số điện thoại *</label>
+          <input type="tel" id="custPhone" required placeholder="Ví dụ: 0987654321">
+        </div>
+
+        <div class="form-group">
+          <label for="custAddress">Địa chỉ nhận hàng *</label>
+          <textarea id="custAddress" required rows="2" placeholder="Số nhà, Tên đường, Phường/Xã, Quận/Huyện, Tỉnh/TP"></textarea>
+        </div>
+
+        <div class="form-row-grid">
+          <div class="form-group">
+            <label for="custPayment">Phương thức thanh toán</label>
+            <select id="custPayment">
+              <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+              <option value="bank">Chuyển khoản Ngân hàng (QR Code)</option>
+              <option value="momo">Ví MoMo</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="voucherCode">Mã giảm giá</label>
+            <input type="text" id="voucherCode" value="SHIP15" placeholder="Nhập mã voucher">
+          </div>
+        </div>
+
+        <!-- Order Summary Box -->
+        <div class="checkout-summary-box">
+          <div class="summary-line">
+            <span>Sản phẩm:</span>
+            <span>Bộ Bài Quỷ Chiến x <strong id="summaryQty">1</strong></span>
+          </div>
+          <div class="summary-line">
+            <span>Tạm tính:</span>
+            <span id="summarySubtotal">340.000 ₫</span>
+          </div>
+          <div class="summary-line text-green">
+            <span>Phí vận chuyển:</span>
+            <span id="summaryShipping">Miễn phí (Freeship SHIP15)</span>
+          </div>
+          <div class="summary-line total-line">
+            <span>TỔNG THÀNH TIỀN:</span>
+            <strong class="total-price-red" id="summaryTotal">340.000 ₫</strong>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-submit-order">
+          HOÀN TẤT ĐẶT HÀNG
+        </button>
+      </form>
+
+      <div class="checkout-success-msg" id="checkoutSuccessMsg" style="display: none;">
+        <div class="success-icon">🎉</div>
+        <h3>ĐẶT HÀNG THÀNH CÔNG!</h3>
+        <p>Cảm ơn bạn đã ủng hộ <strong>Bộ Bài Quỷ Chiến</strong>. Nhân viên chăm sóc khách hàng sẽ gọi điện xác nhận đơn hàng tới bạn trong thời gian sớm nhất!</p>
+        <button class="btn btn-secondary" id="btnCloseSuccess">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JavaScript Link -->
+  <script src="buy.js"></script>
+</body>
+
+</html>
