@@ -3385,45 +3385,360 @@ h6 {
   color: var(--accent);
 }
 
-/* ---- CTA SECTION ---- */
+/* ============================================================
+   CTA SECTION: TRẬN GIAO THƯƠNG ĐÃ MỞ (FULL-WIDTH & FULL-SCREEN 100VH)
+   ============================================================ */
 .home-cta-section {
-  padding: 120px 24px;
-  text-align: center;
-  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-  border-top: 1px solid var(--border-color);
+  padding: 0 !important;
+  margin: 0 !important;
+  background: #0056b3;
+  width: 100vw;
+  max-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  border-top: none;
+  border-bottom: none;
+  overflow: hidden;
 }
 
-.home-cta-inner {
-  max-width: 680px;
+.home-cta-banner-full {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 650px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background-color: #005bb7;
+}
+
+/* Background image layer & responsive gradient */
+.home-cta-bg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  background-color: #0066cc;
+}
+
+.home-cta-bg-img {
+  position: absolute;
+  top: 0;
+  right: -4%;
+  width: 106%;
+  height: 106%;
+  object-fit: cover;
+  object-position: right 65%;
+  display: block;
+  transform: translate(3%, 4%) scale(1.1);
+  transform-origin: right center;
+}
+
+.home-cta-overlay-gradient {
+  display: none;
+}
+
+/* Content Container */
+.home-cta-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1440px;
   margin: 0 auto;
+  padding: 56px 40px 64px 48px;
+  display: flex;
+  align-items: center;
+}
+
+.home-cta-content-left {
+  width: 100%;
+  max-width: 660px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+}
+
+/* 1. Badge "SẴN SÀNG CHINH PHỤC?" (Không có icon sao) */
+.home-cta-badge {
+  display: inline-flex;
   align-items: center;
-  gap: 24px;
+  gap: 8px;
+  background: linear-gradient(135deg, #FFB800 0%, #FF9100 100%);
+  color: #78350F;
+  font-family: 'Outfit', 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 9px 22px;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(255, 145, 0, 0.45);
+  text-transform: uppercase;
 }
 
-.home-cta-heading {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 700;
-  line-height: 1.1;
-  color: var(--text-primary);
+/* 2. Main Title - New Gaming Typography (Outfit / Montserrat) */
+.home-cta-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 2px 0 4px;
 }
 
-.home-cta-desc {
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
-  color: var(--text-secondary);
-  line-height: 1.8;
-  max-width: 500px;
+.home-cta-title-line1 {
+  font-family: 'Outfit', 'Montserrat', sans-serif;
+  font-size: clamp(2.4rem, 4.4vw, 4.1rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.08;
+  letter-spacing: -0.5px;
+  text-shadow:
+    0 4px 18px rgba(0, 36, 120, 0.9),
+    0 2px 6px rgba(0, 0, 0, 0.6);
+  margin: 0;
 }
 
-.home-cta-buttons {
+.home-cta-title-line2 {
+  display: inline-flex;
+  align-items: center;
+}
+
+.home-cta-yellow-title {
+  font-family: 'Outfit', 'Montserrat', sans-serif;
+  font-size: clamp(3.2rem, 5.8vw, 5rem);
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 1.5px;
+  line-height: 1;
+  color: #FFCA28;
+  text-transform: uppercase;
+  -webkit-text-stroke: 2px #C57D00;
+  text-shadow:
+    0 4px 0 #9A5B00,
+    0 6px 0 #7A4500,
+    0 10px 24px rgba(0, 24, 80, 0.8);
+}
+
+/* 3. Description */
+.home-cta-description {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  text-shadow: 0 2px 8px rgba(0, 30, 90, 0.7);
+  margin: 0;
+  max-width: 560px;
+}
+
+/* 4. Action Buttons */
+.home-cta-action-btns {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 16px;
+  margin-top: 4px;
+}
+
+/* Nút Đặt Mua Ngay (Cam Gradient Nổi Bật) */
+.home-cta-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(180deg, #FF7B00 0%, #E85D04 100%);
+  color: #FFFFFF !important;
+  font-family: 'Outfit', 'Montserrat', sans-serif;
+  font-size: 0.96rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  padding: 14px 32px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 6px 22px rgba(232, 93, 4, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.home-cta-btn-primary:hover {
+  background: linear-gradient(180deg, #FF8800 0%, #D00000 100%);
+  box-shadow:
+    0 10px 30px rgba(232, 93, 4, 0.7),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Nút Xem Hướng Dẫn Chơi (Trắng Kính Chữ Xanh) */
+.home-cta-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFFFFF;
+  color: #0252CD !important;
+  font-family: 'Outfit', 'Montserrat', sans-serif;
+  font-size: 0.96rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  padding: 14px 28px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 6px 22px rgba(0, 36, 120, 0.22),
+    inset 0 1px 1px #FFFFFF;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.home-cta-btn-secondary:hover {
+  background: #F0F7FF;
+  color: #013CA7 !important;
+  box-shadow: 0 10px 26px rgba(0, 36, 120, 0.35);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.cta-btn-icon {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  margin-top: 8px;
+}
+
+.cta-play-icon {
+  color: #0252CD;
+}
+
+/* 5. Feature Badges Bar - Khung nền rộng phủ trọn vẹn 100% 3 mục cam kết */
+.home-cta-features-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  background: rgba(4, 38, 102, 0.68);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-radius: 18px;
+  padding: 14px 22px;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 640px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0, 20, 70, 0.35);
+}
+
+.cta-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.cta-feature-icon {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cta-feature-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cta-feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cta-feature-title {
+  font-family: 'Outfit', 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cta-feature-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.88);
+  white-space: nowrap;
+}
+
+.cta-feature-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+  .home-cta-container {
+    padding: 48px 24px;
+  }
+  .home-cta-content-left {
+    max-width: 540px;
+  }
+  .home-cta-features-bar {
+    max-width: 540px;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+  .cta-feature-title {
+    font-size: 0.74rem;
+  }
+  .cta-feature-sub {
+    font-size: 0.68rem;
+  }
+}
+
+@media (max-width: 820px) {
+  .home-cta-banner-full {
+    min-height: auto;
+  }
+  .home-cta-overlay-gradient {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(3, 45, 115, 0.92) 0%, rgba(3, 45, 115, 0.6) 50%, rgba(3, 45, 115, 0.95) 100%);
+    pointer-events: none;
+  }
+  .home-cta-container {
+    padding: 50px 20px;
+    justify-content: center;
+  }
+  .home-cta-content-left {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+  .home-cta-action-btns {
+    justify-content: center;
+  }
+  .home-cta-features-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    width: 100%;
+    max-width: 360px;
+  }
+  .cta-feature-divider {
+    display: none;
+  }
 }
 
 /* ============================================================
@@ -5522,119 +5837,428 @@ media (max-width: 1100px) {
 
 /* ── 3. DELIVERY TRUCK BUTTON (PRODUCT PURCHASE CTA) ── */
 
-/* ── NAV DELIVERY BUTTON (Header / Sidebar variant) ── */
-.nav-delivery-btn {
-  --button: #b91c1c;
-  --cab: #fca5a5;
-  --cab-light: #fecaca;
-  --window: #7f1d1d;
-  --window-dark: #450a0a;
-  --cargo-end: #fca5a5;
-  --white: #ffffff;
-  --green: #4ade80;
-  --package: #fbbf24;
-  --headlight: #fde68a;
+/* ── EXACT DELIVERY BUTTON (FROM C:\Users\Tran Gia Thieu\Downloads\delivery-button) ── */
+.order-button {
+  --button:      #181c28;
+  --cab:         #fe493d;
+  --cab-light:   #fe7462;
+  --window:      #3f4656;
+  --window-dark: #343a47;
+  --cargo-end:   #cdd9ed;
+  --white:       #ffffff;
+  --green:       #16bf78;
+  --package:     #feb11a;
+  --headlight:   #f0dc5f;
+  --check:       #a74765;
+  --accent-focus:#7c5cff;
+  --cart-anim-duration: 2.45s;
+  --ease-motion: cubic-bezier(0.22, 0.7, 0.2, 1);
+  --ease-out:    cubic-bezier(0.2, 0.72, 0.2, 1);
+  --cart-start:  1.45rem;
+  --cart-travel: 1.8rem;
 
   appearance: none;
   position: relative;
-  width: 10rem;
-  height: 2.8rem;
+  width: 240px;
+  max-width: 100%;
+  height: 64px;
   padding: 0;
   overflow: hidden;
   border: 0;
-  border-radius: 99px;
+  border-radius: 999px;
   outline: none;
-  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+  background: var(--button);
   cursor: pointer;
   contain: paint;
   isolation: isolate;
+  font: inherit;
   -webkit-tap-highlight-color: transparent;
   transition: transform 300ms ease, box-shadow 180ms ease;
-  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4);
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 0.9rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
-.nav-delivery-btn > * { pointer-events: none; }
-
-.nav-delivery-btn:hover:not(.is-animating) {
-  transform: translateY(-0.1rem);
-  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.55);
+.order-button > * {
+  pointer-events: none;
 }
 
-.nav-delivery-btn:active:not(.is-animating) {
-  transform: scale(0.97);
+.order-button:active:not(.is-adding):not(.is-animating) {
+  transform: scale(0.96);
 }
 
-/* Override button-label sizing for nav variant */
-.nav-delivery-btn .button-label {
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.3px;
+.order-button:focus-visible {
+  box-shadow: 0 0 0 4px rgba(254, 73, 61, 0.35);
 }
 
-/* Scale down the truck internals to fit smaller button */
-.nav-delivery-btn .truck {
-  top: 6px;
-  width: 45px;
-  height: 31px;
+.order-button .button-label {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms ease, visibility 0s linear 250ms;
 }
 
-.nav-delivery-btn .truck__cab {
-  left: 45px;
+.order-button .button-label--default {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 250ms ease 300ms, visibility 0s linear 0s;
+}
+
+.order-button .button-label--adding,
+.order-button .button-label--success {
+  gap: 7px;
+}
+
+.order-button .checkmark {
+  width: 12px;
+  height: 7px;
+  margin-top: -3px;
+  border-bottom: 2px solid var(--green);
+  border-left: 2px solid var(--green);
+  border-radius: 1px;
+  opacity: 0;
+  transform: rotate(-45deg) scale(0.55);
+  transform-origin: 50% 70%;
+  transition: opacity 220ms ease, transform 300ms ease;
+}
+
+.order-button .cart-layer {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.order-button .cart-layer__cart {
+  position: absolute;
+  top: 50%;
+  left: var(--cart-start);
+  width: 1.55rem;
+  height: 1.55rem;
+  overflow: visible;
+  fill: none;
+  stroke: var(--white);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.05;
+  transform: translateY(-50%);
+  transform-origin: 50% 70%;
+  opacity: 0;
+}
+
+.order-button .cart-layer__basket-fill {
+  fill: var(--white);
+  stroke: none;
+  opacity: 0;
+}
+
+.order-button .cart-layer__check {
+  fill: none;
+  stroke: var(--check);
+  stroke-dasharray: 9;
+  stroke-dashoffset: 9;
+  stroke-width: 2.2;
+}
+
+.order-button .cart-layer__shirt {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+  width: 1.08rem;
+  height: 1.08rem;
+  overflow: visible;
+  fill: var(--white);
+  opacity: 0;
+  filter: drop-shadow(0 0.12rem 0.08rem rgba(0, 0, 0, 0.25));
+}
+
+.order-button .road {
+  position: absolute;
+  top: 30px;
+  left: 100%;
+  width: 6px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--white);
+  opacity: 0;
+  transform: scaleY(0.7);
+  box-shadow:
+     15px 0 0 var(--white),  30px 0 0 var(--white),
+     45px 0 0 var(--white),  60px 0 0 var(--white),
+     75px 0 0 var(--white),  90px 0 0 var(--white),
+    105px 0 0 var(--white), 120px 0 0 var(--white),
+    135px 0 0 var(--white), 150px 0 0 var(--white),
+    165px 0 0 var(--white), 180px 0 0 var(--white),
+    195px 0 0 var(--white), 210px 0 0 var(--white),
+    225px 0 0 var(--white), 240px 0 0 var(--white),
+    255px 0 0 var(--white), 270px 0 0 var(--white),
+    285px 0 0 var(--white), 300px 0 0 var(--white),
+    315px 0 0 var(--white), 330px 0 0 var(--white);
+}
+
+.order-button .package,
+.order-button .truck__cargo {
+  position: absolute;
+  border-radius: 2px;
+}
+
+.order-button .package {
+  top: 21px;
+  left: -21px;
+  z-index: 1;
+  width: 21px;
+  height: 21px;
+  background: var(--package);
+}
+
+.order-button .package::before,
+.order-button .package::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.order-button .package::before {
+  top: 9px;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.order-button .package::after {
+  top: 10px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.order-button .truck {
+  position: absolute;
+  z-index: 2;
+  top: 11px;
+  left: calc(100% + 24px);
+  width: 60px;
+  height: 41px;
+}
+
+.order-button .truck::before,
+.order-button .truck::after {
+  --rotation: -90deg;
+  content: "";
+  position: absolute;
+  right: 58px;
+  display: block;
   width: 20px;
-  height: 31px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--white);
+  transform: rotate(var(--rotation));
+  transform-origin: 100% 50%;
+  opacity: 0;
+  visibility: hidden;
 }
 
-.nav-delivery-btn .truck__window {
-  width: 17px;
-  height: 31px;
+.order-button .truck::before { top: 4px; }
+.order-button .truck::after  { --rotation: 90deg; bottom: 4px; }
+
+.order-button .truck__cargo {
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(var(--white), var(--cargo-end));
 }
 
-.nav-delivery-btn .truck__light {
-  left: 63px;
+.order-button .truck__cab {
+  position: absolute;
+  left: 60px;
+  width: 26px;
+  height: 41px;
+  overflow: hidden;
+  border-radius: 2px 9px 9px 2px;
+}
+
+.order-button .truck__cab::before,
+.order-button .truck__cab::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+.order-button .truck__cab::before {
+  z-index: 1;
+  top: 14px;
+  left: 0;
   width: 2px;
-  height: 6px;
+  height: 13px;
+  background: linear-gradient(var(--window), var(--window-dark));
 }
 
-.nav-delivery-btn .package {
-  top: 16px;
-  left: -16px;
-  width: 16px;
-  height: 16px;
+.order-button .truck__cab::after {
+  inset: 0 0 0 2px;
+  border-radius: 2px 9px 9px 2px;
+  background: var(--cab);
 }
 
-.nav-delivery-btn .road {
-  top: 22px;
+.order-button .truck__window {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 2px;
+  width: 22px;
+  height: 41px;
+  overflow: hidden;
+  border-radius: 2px 8px 8px 2px;
+  background: var(--cab-light);
+  transform: perspective(4px) rotateY(3deg);
+  transform-origin: 0 50%;
 }
 
-/* Animation states — reuse product-delivery-btn keyframes */
-.nav-delivery-btn.is-animating .button-label--default { --opacity: 0; transition-delay: 0ms; }
-.nav-delivery-btn.is-animating .button-label--success,
-.nav-delivery-btn.is-complete  .button-label--success  { --opacity: 1; transition-delay: 1.6s; }
-.nav-delivery-btn.is-animating .checkmark,
-.nav-delivery-btn.is-complete  .checkmark              { opacity: 1; transform: rotate(-45deg) scale(1); transition-delay: 1.84s; }
-.nav-delivery-btn.is-animating .truck       { animation: truck-drive 3s ease forwards; }
-.nav-delivery-btn.is-animating .truck::before { animation: door-top 0.96s ease forwards 120ms; }
-.nav-delivery-btn.is-animating .truck::after  { animation: door-bottom 0.96s ease forwards 240ms; }
-.nav-delivery-btn.is-animating .truck__light::before { animation: headlights 3s ease forwards; }
-.nav-delivery-btn.is-animating .package     { animation: load-package-nav 3s ease forwards; }
-.nav-delivery-btn.is-animating .road        { animation: road-move-nav 3s ease forwards; }
-
-@keyframes load-package-nav {
-  0%, 7%  { left: -16px; opacity: 0; visibility: hidden; }
-  8%, 10% { left: 10px;  opacity: 1; visibility: visible; }
-  25%     { left: 65px;  opacity: 1; visibility: visible; }
-  26%     { left: 65px;  opacity: 0; visibility: hidden; }
-  27%, 100% { left: -16px; opacity: 0; visibility: hidden; }
+.order-button .truck__window::before,
+.order-button .truck__window::after {
+  content: "";
+  position: absolute;
+  right: 0;
 }
 
-@keyframes road-move-nav {
-  0%, 30%  { opacity: 0; left: 100%; }
-  35%, 65% { opacity: 1; }
-  70%      { opacity: 0; }
-  100%     { left: calc(100% - 300px); }
+.order-button .truck__window::before {
+  top: 0;
+  bottom: 0;
+  width: 14px;
+  background: var(--button);
+}
+
+.order-button .truck__window::after {
+  top: 7px;
+  width: 14px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 7px 0 rgba(255, 255, 255, 0.14);
+  transform: skewY(14deg);
+}
+
+.order-button .truck__light {
+  position: absolute;
+  left: 83px;
+  width: 3px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--headlight);
+  transform: scaleX(0.8);
+  transform-origin: 100% 50%;
+}
+
+.order-button .truck__light::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 7px;
+  height: 4px;
+  margin-top: -2px;
+  background: linear-gradient(
+    90deg,
+    var(--headlight),
+    rgba(240, 220, 95, 0.7),
+    rgba(240, 220, 95, 0)
+  );
+  opacity: 0;
+  transform: perspective(2px) rotateY(-15deg) scaleX(0.94);
+  transform-origin: 0 50%;
+}
+
+.order-button .truck__light--top    { top: 4px; }
+.order-button .truck__light--bottom { bottom: 4px; }
+
+/* ── IS-ADDING STATE (Phase 1) ── */
+.order-button.is-adding .button-label--default {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease, visibility 0s linear 200ms;
+}
+
+.order-button.is-adding .button-label--adding {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 200ms ease 100ms, visibility 0s linear 100ms;
+}
+
+.order-button.is-adding .cart-layer__cart {
+  animation: cart-cycle var(--cart-anim-duration) cubic-bezier(0.22, 0.72, 0.2, 1) both;
+}
+
+.order-button.is-adding .cart-layer__basket-fill {
+  animation: basket-fill var(--cart-anim-duration) ease-in-out both;
+}
+
+.order-button.is-adding .cart-layer__check {
+  animation: check-draw var(--cart-anim-duration) ease-in-out both;
+}
+
+.order-button.is-adding .cart-layer__shirt {
+  animation: shirt-cycle var(--cart-anim-duration) var(--ease-motion) both;
+}
+
+/* ── IS-ANIMATING STATE (Phase 2) ── */
+.order-button.is-animating .button-label--adding {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease, visibility 0s linear 200ms;
+}
+
+.order-button.is-animating .button-label--default {
+  opacity: 0;
+  visibility: hidden;
+  transition: none;
+}
+
+.order-button.is-animating .truck {
+  animation: truck-drive 8s ease forwards;
+}
+
+.order-button.is-animating .truck::before {
+  animation: door-top 1.92s ease forwards 240ms;
+}
+
+.order-button.is-animating .truck::after {
+  animation: door-bottom 1.92s ease forwards 480ms;
+}
+
+.order-button.is-animating .truck__light::before {
+  animation: headlights 8s ease forwards;
+}
+
+.order-button.is-animating .package {
+  animation: load-package 8s ease forwards;
+}
+
+.order-button.is-animating .road {
+  animation: road-move 8s ease forwards;
+}
+
+.order-button.is-animating .button-label--success,
+.order-button.is-complete  .button-label--success {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 300ms ease 5.6s, visibility 0s linear 5.6s;
+}
+
+.order-button.is-animating .checkmark,
+.order-button.is-complete  .checkmark {
+  opacity: 1;
+  transform: rotate(-45deg) scale(1);
+  transition-delay: 5.84s;
 }
 
 .product-delivery-btn {
@@ -5899,7 +6523,8 @@ media (max-width: 1100px) {
 .product-delivery-btn.is-animating .package { animation: load-package 8s ease forwards; }
 .product-delivery-btn.is-animating .road { animation: road-move 8s ease forwards; }
 
-/* ── PHASE 1: Cart-layer overlay trên product-delivery-btn ── */
+/* ── PHASE 1: Cart-layer overlay trên order-button / product-delivery-btn ── */
+.order-button .cart-layer,
 .product-delivery-btn .cart-layer {
   position: absolute;
   z-index: 5;
@@ -5913,6 +6538,7 @@ media (max-width: 1100px) {
 }
 
 /* Cart SVG icon (ẩn mặc định, hiện khi is-adding) */
+.order-button .cart-layer__cart,
 .product-delivery-btn .cart-layer__cart {
   position: absolute;
   top: 50%;
@@ -5930,12 +6556,14 @@ media (max-width: 1100px) {
   opacity: 0;
 }
 
+.order-button .cart-layer__basket-fill,
 .product-delivery-btn .cart-layer__basket-fill {
   fill: #fff;
   stroke: none;
   opacity: 0;
 }
 
+.order-button .cart-layer__check,
 .product-delivery-btn .cart-layer__check {
   fill: none;
   stroke: #4ade80;
@@ -5945,6 +6573,7 @@ media (max-width: 1100px) {
 }
 
 /* Shirt SVG */
+.order-button .cart-layer__shirt,
 .product-delivery-btn .cart-layer__shirt {
   position: absolute;
   z-index: 6;
@@ -5959,20 +6588,28 @@ media (max-width: 1100px) {
 }
 
 /* is-adding: Phase 1 animations */
+.order-button.is-adding .button-label--default,
 .product-delivery-btn.is-adding .button-label--default { --opacity: 0; transition-delay: 0ms; }
 
+.order-button.is-adding .button-label--adding,
+.product-delivery-btn.is-adding .button-label--adding { --opacity: 1; transition-delay: 100ms; }
+
+.order-button.is-adding .cart-layer__cart,
 .product-delivery-btn.is-adding .cart-layer__cart {
   animation: cart-cycle 2.45s cubic-bezier(0.22, 0.72, 0.2, 1) both;
 }
 
+.order-button.is-adding .cart-layer__basket-fill,
 .product-delivery-btn.is-adding .cart-layer__basket-fill {
   animation: basket-fill 2.45s ease-in-out both;
 }
 
+.order-button.is-adding .cart-layer__check,
 .product-delivery-btn.is-adding .cart-layer__check {
   animation: check-draw 2.45s ease-in-out both;
 }
 
+.order-button.is-adding .cart-layer__shirt,
 .product-delivery-btn.is-adding .cart-layer__shirt {
   animation: shirt-cycle 2.45s cubic-bezier(0.22, 0.7, 0.2, 1) both;
 }

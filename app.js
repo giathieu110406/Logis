@@ -1294,34 +1294,49 @@ document.addEventListener('DOMContentLoaded', () => {
   initEditorialSlider();
 
   // ── NAV DELIVERY BUTTON HANDLER (Header / Sidebar) ──
-  // Khi click: chạy animation xe tải, sau đó navigate sang buy.html
+  // Phase 1 (click): add-to-cart (is-adding) ~ 2.45s
+  // Phase 2 (auto): delivery (is-animating) ~ truck drives
   const navDeliveryBtns = document.querySelectorAll('[data-nav-delivery-btn]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   navDeliveryBtns.forEach(btn => {
-    // Remove inline onclick (vẫn giữ as fallback nhưng JS xử lý chính)
     btn.removeAttribute('onclick');
 
     btn.addEventListener('click', () => {
-      if (btn.classList.contains('is-animating') || btn.classList.contains('is-complete')) return;
+      if (
+        btn.classList.contains('is-adding') ||
+        btn.classList.contains('is-animating') ||
+        btn.classList.contains('is-complete')
+      ) return;
+
+      btn.setAttribute('aria-disabled', 'true');
 
       // Reduced motion: navigate ngay
       if (reduceMotion.matches) {
+        btn.classList.add('is-complete');
         window.location.href = 'buy.html';
         return;
       }
 
-      btn.classList.add('is-animating');
+      // Phase 1: Thêm vào giỏ hàng
+      btn.classList.add('is-adding');
 
-      // Sau khi animation xe tải xong (~3s), navigate
+      // Phase 2: Bắt đầu giao hàng xe tải sau 2.45s
       setTimeout(() => {
-        window.location.href = 'buy.html';
-      }, 2000);
+        btn.classList.remove('is-adding');
+        btn.classList.add('is-animating');
 
-      // Reset nếu navigation bị chặn
-      setTimeout(() => {
-        btn.classList.remove('is-animating', 'is-complete');
-      }, 3500);
+        // Chuyển sang trang đặt mua sau khi xe chạy
+        setTimeout(() => {
+          window.location.href = 'buy.html';
+        }, 2500);
+
+        // Reset an toàn
+        setTimeout(() => {
+          btn.classList.remove('is-adding', 'is-animating', 'is-complete');
+          btn.removeAttribute('aria-disabled');
+        }, 6000);
+      }, 2450);
     });
   });
 });
