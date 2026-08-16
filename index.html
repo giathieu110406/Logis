@@ -58,21 +58,21 @@
       </nav>
 
       <div class="header-actions">
-        <!-- ADD TO CART COMPONENT (HEADER BUTTON) -->
-        <button class="cart-button nav-cart-btn" data-cart-button type="button" aria-label="Add item to cart" onclick="setTimeout(function(){ window.location.href='buy.html'; }, 1000);">
-          <span class="cart-button__stage" aria-hidden="true">
-            <span class="cart-button__label">Mua ngay</span>
-            <svg class="cart-button__cart" viewBox="0 0 32 32">
-              <path class="cart-button__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z" />
-              <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1" />
-              <path d="M13.1 26.2h.1M23.4 26.2h.1" />
-              <path class="cart-button__check" d="m14.1 15.7 2.1 2.1 4.3-4.6" />
-            </svg>
+        <!-- DELIVERY BUTTON (HEADER) -->
+        <button class="order-button nav-delivery-btn" type="button" aria-label="Mua ngay" data-nav-delivery-btn
+          onclick="setTimeout(function(){ window.location.href='buy.html'; }, 2000);">
+          <span class="button-label button-label--default">Mua Ngay</span>
+          <span class="button-label button-label--success">
+            Đang Xử Lý <span class="checkmark" aria-hidden="true"></span>
           </span>
-          <svg class="cart-button__shirt" aria-hidden="true" viewBox="0 0 32 32">
-            <path
-              d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z" />
-          </svg>
+          <span class="package" aria-hidden="true"></span>
+          <span class="truck" aria-hidden="true">
+            <span class="truck__cargo"></span>
+            <span class="truck__cab"><span class="truck__window"></span></span>
+            <span class="truck__light truck__light--top"></span>
+            <span class="truck__light truck__light--bottom"></span>
+          </span>
+          <span class="road" aria-hidden="true"></span>
         </button>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
           <span></span>
@@ -94,22 +94,21 @@
     <a href="#gameplay" class="mobile-link" data-nav="gameplay">Cách Chơi</a>
     <a href="#cards" class="mobile-link" data-nav="cards">Thẻ Bài</a>
 
-    <!-- ADD TO CART COMPONENT (SIDEBAR / MOBILE MENU BUTTON) -->
-    <button class="cart-button nav-cart-btn" data-cart-button type="button" aria-label="Add item to cart"
-      style="margin-top: 10px;" onclick="setTimeout(function(){ window.location.href='buy.html'; }, 1000);">
-      <span class="cart-button__stage" aria-hidden="true">
-        <span class="cart-button__label">Mua ngay</span>
-        <svg class="cart-button__cart" viewBox="0 0 32 32">
-          <path class="cart-button__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z" />
-          <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1" />
-          <path d="M13.1 26.2h.1M23.4 26.2h.1" />
-          <path class="cart-button__check" d="m14.1 15.7 2.1 2.1 4.3-4.6" />
-        </svg>
+    <!-- DELIVERY BUTTON (SIDEBAR / MOBILE MENU) -->
+    <button class="order-button nav-delivery-btn" type="button" aria-label="Mua ngay" data-nav-delivery-btn
+      style="margin-top: 10px;" onclick="setTimeout(function(){ window.location.href='buy.html'; }, 2000);">
+      <span class="button-label button-label--default">Mua Ngay</span>
+      <span class="button-label button-label--success">
+        Đang Xử Lý <span class="checkmark" aria-hidden="true"></span>
       </span>
-      <svg class="cart-button__shirt" aria-hidden="true" viewBox="0 0 32 32">
-        <path
-          d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z" />
-      </svg>
+      <span class="package" aria-hidden="true"></span>
+      <span class="truck" aria-hidden="true">
+        <span class="truck__cargo"></span>
+        <span class="truck__cab"><span class="truck__window"></span></span>
+        <span class="truck__light truck__light--top"></span>
+        <span class="truck__light truck__light--bottom"></span>
+      </span>
+      <span class="road" aria-hidden="true"></span>
     </button>
   </div>
 

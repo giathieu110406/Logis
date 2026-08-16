@@ -1292,4 +1292,37 @@ function initEditorialSlider() {
 // Khởi tạo slider khi DOM ready
 document.addEventListener('DOMContentLoaded', () => {
   initEditorialSlider();
+
+  // ── NAV DELIVERY BUTTON HANDLER (Header / Sidebar) ──
+  // Khi click: chạy animation xe tải, sau đó navigate sang buy.html
+  const navDeliveryBtns = document.querySelectorAll('[data-nav-delivery-btn]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  navDeliveryBtns.forEach(btn => {
+    // Remove inline onclick (vẫn giữ as fallback nhưng JS xử lý chính)
+    btn.removeAttribute('onclick');
+
+    btn.addEventListener('click', () => {
+      if (btn.classList.contains('is-animating') || btn.classList.contains('is-complete')) return;
+
+      // Reduced motion: navigate ngay
+      if (reduceMotion.matches) {
+        window.location.href = 'buy.html';
+        return;
+      }
+
+      btn.classList.add('is-animating');
+
+      // Sau khi animation xe tải xong (~3s), navigate
+      setTimeout(() => {
+        window.location.href = 'buy.html';
+      }, 2000);
+
+      // Reset nếu navigation bị chặn
+      setTimeout(() => {
+        btn.classList.remove('is-animating', 'is-complete');
+      }, 3500);
+    });
+  });
 });
+

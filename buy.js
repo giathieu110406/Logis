@@ -139,24 +139,54 @@ function initBuyPage() {
   const btnCloseSuccess = document.getElementById('btnCloseSuccess');
 
   if (btnBuyNow) {
+    // Inject add-to-cart layer (cart icon + shirt) vào nút delivery nếu chưa có
+    if (!btnBuyNow.querySelector('.cart-layer')) {
+      const cartLayer = document.createElement('span');
+      cartLayer.className = 'cart-layer';
+      cartLayer.setAttribute('aria-hidden', 'true');
+      cartLayer.innerHTML = `
+        <svg class="cart-layer__cart" viewBox="0 0 32 32">
+          <path class="cart-layer__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z"/>
+          <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1"/>
+          <path d="M13.1 26.2h.1M23.4 26.2h.1"/>
+          <path class="cart-layer__check" d="m14.1 15.7 2.1 2.1 4.3-4.6"/>
+        </svg>
+        <svg class="cart-layer__shirt" aria-hidden="true" viewBox="0 0 32 32">
+          <path d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z"/>
+        </svg>`;
+      // Chèn cart-layer trước các span khác (z-index cao hơn)
+      btnBuyNow.insertBefore(cartLayer, btnBuyNow.firstChild);
+    }
+
+    const CART_ANIM_DURATION = 2450; // ms — khớp với --anim-duration trong CSS
+
     btnBuyNow.addEventListener('click', (e) => {
       e.preventDefault();
-      if (btnBuyNow.classList.contains('is-animating')) return;
+      // Nếu đang animating (bất kỳ phase nào) thì bỏ qua
+      if (btnBuyNow.classList.contains('is-adding') ||
+          btnBuyNow.classList.contains('is-animating')) return;
 
-      // Play Truck Delivery animation
-      btnBuyNow.classList.add('is-animating');
+      // === PHASE 1: Add-to-cart animation ===
+      btnBuyNow.classList.add('is-adding');
 
-      // Open Modal after truck sequence
+      // === PHASE 2: Sau khi add-to-cart xong, chạy delivery ===
       setTimeout(() => {
-        if (checkoutModal) checkoutModal.classList.add('active');
-      }, 3500);
+        btnBuyNow.classList.remove('is-adding');
+        btnBuyNow.classList.add('is-animating');
 
-      // Reset button state after full animation cycle
-      setTimeout(() => {
-        btnBuyNow.classList.remove('is-animating');
-      }, 8000);
+        // Mở Modal sau khi xe tải chạy được 3.5s
+        setTimeout(() => {
+          if (checkoutModal) checkoutModal.classList.add('active');
+        }, 3500);
+
+        // Reset nút sau toàn bộ sequence
+        setTimeout(() => {
+          btnBuyNow.classList.remove('is-animating');
+        }, 8000);
+      }, CART_ANIM_DURATION);
     });
   }
+
 
   if (btnContactFB) {
     btnContactFB.addEventListener('click', (e) => {
