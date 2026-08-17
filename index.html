@@ -18,6 +18,7 @@
   <!-- GSAP & ScrollTrigger Animation Engine -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 
   <!-- CSS Link -->
   <link rel="icon" type="image/png" href="assets/logo.png">
@@ -45,10 +46,10 @@
           </a>
           <div class="dropdown-menu">
             <a href="#about" class="dropdown-item" data-nav="about">
-              <span class="dropdown-icon">📘</span> Về LogisQuest
+              Về LogisQuest
             </a>
             <a href="#team" class="dropdown-item" data-nav="team">
-              <span class="dropdown-icon">👥</span> Đội Ngũ Sáng Tạo
+              Đội Ngũ Sáng Tạo
             </a>
           </div>
         </div>
@@ -101,14 +102,15 @@
       <span class="cart-layer" aria-hidden="true">
         <!-- Cart icon -->
         <svg class="cart-layer__cart" viewBox="0 0 32 32">
-          <path class="cart-layer__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z"/>
-          <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1"/>
-          <path d="M13.1 26.2h.1M23.4 26.2h.1"/>
-          <path class="cart-layer__check" d="m14.1 15.7 2.1 2.1 4.3-4.6"/>
+          <path class="cart-layer__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z" />
+          <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1" />
+          <path d="M13.1 26.2h.1M23.4 26.2h.1" />
+          <path class="cart-layer__check" d="m14.1 15.7 2.1 2.1 4.3-4.6" />
         </svg>
         <!-- Shirt that drops into cart -->
         <svg class="cart-layer__shirt" viewBox="0 0 32 32">
-          <path d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z"/>
+          <path
+            d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z" />
         </svg>
       </span>
 
@@ -167,39 +169,110 @@
         </div>
       </section>
 
-      <!-- ===== 1. GIỚI THIỆU NHANH VỀ LOGISQUEST ===== -->
-      <section class="home-quychien-section">
-        <div class="home-quychien-top-header text-center">
-          <h2 class="quychien-top-title">LOGISQUEST</h2>
-          <p class="quychien-top-subtitle">Hải Trình Thương Mại Thu Nhỏ</p>
+      <!-- ===== 1. GIỚI THIỆU NHANH VỀ LOGISQUEST (BLOCK 1 REDESIGN) ===== -->
+      <section class="home-showcase-section" id="block1-showcase">
+        <div class="home-showcase-bg-layer">
+          <img src="assets/khoi-1-bg.png" alt="LogisQuest Maritime Ocean" class="home-showcase-bg-img" loading="eager">
+          <!-- Plane decoration overlay on left sky -->
+          <div class="showcase-plane-deco" aria-hidden="true">
+            <svg viewBox="0 0 120 70" fill="none" class="plane-svg">
+              <path d="M10 40 L45 35 L70 20 L85 20 L68 33 L105 30 L115 35 L105 40 L65 42 L45 58 L35 58 L48 43 L10 40 Z"
+                fill="white" opacity="0.95" />
+              <path d="M10 40 L0 42 L5 44 L15 42 Z" fill="#E2E8F0" />
+              <!-- Contrail / smoke line -->
+              <line x1="5" y1="41" x2="-80" y2="46" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"
+                stroke-linecap="round" stroke-dasharray="120" stroke-dashoffset="0" />
+              <line x1="12" y1="42" x2="-60" y2="48" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"
+                stroke-linecap="round" />
+            </svg>
+          </div>
         </div>
-        <div class="home-quychien-inner">
-          <div class="home-quychien-img-col">
-            <div class="quychien-img-frame intro-slideshow-frame" id="introSlideshow">
-              <!-- Đã đổi chỗ hình 3 (vỏ hộp & bài trên tay) lên vị trí thứ nhất -->
-              <img src="assets/intro-3.jpg" alt="LogisQuest Overview 1" class="quychien-img intro-slide active">
-              <img src="assets/intro-2.jpg" alt="LogisQuest Overview 2" class="quychien-img intro-slide">
-              <img src="assets/intro-1.jpg" alt="LogisQuest Overview 3" class="quychien-img intro-slide">
 
-              <!-- Pagination Dots -->
-              <div class="intro-dots" id="introDots">
-                <span class="intro-dot active" data-slide="0"></span>
-                <span class="intro-dot" data-slide="1"></span>
-                <span class="intro-dot" data-slide="2"></span>
+        <div class="home-showcase-container">
+          <!-- TOP HEADER TIER -->
+          <div class="showcase-top-tier text-center">
+            <div class="showcase-brand-logo-wrap">
+              <img src="assets/logo.png" alt="LogisQuest 3D Logo" class="showcase-brand-logo">
+            </div>
+            <h1 class="showcase-main-headline">LOGISQUEST</h1>
+            <p class="showcase-sub-headline">Hải Trình Thương Mại Thu Nhỏ</p>
+          </div>
+
+          <!-- MAIN CONTENT 50/50 TIER -->
+          <div class="showcase-main-tier">
+            <!-- LEFT 50%: BENTO COLLAGE GALLERY -->
+            <div class="showcase-gallery-col">
+              <div class="showcase-glass-card">
+                <div class="showcase-bento-grid">
+                  <!-- Col 1: Standee -->
+                  <div class="bento-cell bento-standee">
+                    <img src="assets/intro-3.jpg" alt="Standee LogisQuest" class="bento-img bento-standee-img">
+                  </div>
+
+                  <!-- Col 2: Board & Boxes -->
+                  <div class="bento-col-group">
+                    <div class="bento-cell bento-board">
+                      <img src="assets/intro-1.jpg" alt="Toàn cảnh bàn cờ LogisQuest" class="bento-img">
+                    </div>
+                    <div class="bento-cell bento-containers">
+                      <img src="assets/ảnh cont 3d xếp chồng.png" alt="Mô hình 4 màu Container" class="bento-img">
+                    </div>
+                  </div>
+
+                  <!-- Col 3: Cards & Ships -->
+                  <div class="bento-col-group">
+                    <div class="bento-cell bento-cards">
+                      <img src="assets/intro-2.jpg" alt="Chi tiết thẻ bài và hải trình" class="bento-img">
+                    </div>
+                    <div class="bento-bottom-split">
+                      <div class="bento-cell bento-box">
+                        <img src="assets/product-box-3d.png" alt="Vỏ hộp LogisQuest" class="bento-img">
+                      </div>
+                      <div class="bento-cell bento-ships">
+                        <img src="assets/ảnh tàu 3d phía trước.png" alt="Mô hình tàu trắng" class="bento-img">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pagination navigation dots underneath -->
+                <div class="showcase-pagination-bar">
+                  <span class="showcase-dot"></span>
+                  <span class="showcase-pill active"></span>
+                  <span class="showcase-dot"></span>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="home-quychien-text-col">
-            <p class="quychien-body-text"><b>LOGISQUEST</b> ra đời từ khát vọng biến 11 điều khoản thương mại quốc tế
-              Incoterms 2020 vốn khô khan trở thành trải nghiệm chơi bài chiến thuật sống động, nơi mỗi quyết định vận
-              tải đều mang sức nặng của thực tế thị trường.</p>
-            <p class="quychien-body-text">Với chúng mình, <b>LOGISQUEST</b> không chỉ là một trò chơi. Đó là sự hòa
-              quyện giữa đam mê sáng tạo và tinh thần học hỏi ngành Logistics Việt, để những bài học kinh doanh vốn trên
-              trang sách nay sống lại qua từng lá bài, từng hành trình giao thương.</p>
-            <p class="quychien-body-text">Mỗi ván chơi là một hành trình trở về miền đại dương thương mại, nơi bạn vừa
-              đấu trí cùng đối thủ, vừa chạm đến tri thức thực tiễn.</p>
-            <div class="quychien-btn-wrap">
-              <a href="#about" class="quychien-btn-full" data-nav="about">Xem chi tiết về sản phẩm</a>
+
+            <!-- RIGHT 50%: DESCRIPTION & CTA -->
+            <div class="showcase-desc-col">
+              <div class="showcase-text-wrap">
+                <p class="showcase-body-p">
+                  <b>LOGISQUEST</b> ra đời từ khát vọng biến 11 điều khoản thương mại quốc tế <b>Incoterms 2020</b> vốn
+                  khô khan trở thành trải nghiệm chiến bài chiến thuật sống động, nơi mỗi quyết định vận tải đều mang
+                  sức nặng của thực tế thị trường.
+                </p>
+                <p class="showcase-body-p">
+                  Với chúng mình, <b>LOGISQUEST</b> không chỉ là một trò chơi. Đó là sự hòa quyện giữa đam mê sáng tạo
+                  và tinh thần học hỏi không ngừng của người Việt, để những bài học kinh doanh vươn trên trang sách nay
+                  sống lại qua từng lá bài, từng hành trình giao thương.
+                </p>
+                <p class="showcase-body-p">
+                  Mỗi ván chơi là một hành trình trở về miền đại dương thương mại, nơi bạn vừa đấu trí cùng đối thủ, vừa
+                  chạm đến tri thức thực tiễn.
+                </p>
+              </div>
+
+              <!-- CTA BUTTON -->
+              <div class="showcase-cta-wrap">
+                <a href="#about" class="showcase-cta-btn" data-nav="about">
+                  <span>XEM CHI TIẾT VỀ SẢN PHẨM</span>
+                  <svg class="showcase-cta-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -249,7 +322,6 @@
               CHIẾN TRƯỜNG 5 NGƯỜI<br>
               HỖN LOẠN & ĐẦY BẤT NGỜ
             </h2>
-            <div class="quychien-headline-divider"></div>
             <p class="quychien-body-text"><b>Đội hình 2 người:</b> Cuộc đấu trí đối đầu trực diện, căng thẳng và tính
               toán chi ly từng nước đi để chặn đường đối thủ.</p>
             <p class="quychien-body-text"><b>Đội hình 4-5 người:</b> Đại dương bùng nổ! Thị trường giao thương trở nên
@@ -264,50 +336,105 @@
         </div>
       </section>
 
-      <!-- ===== 4. 3 TRỤ CỘT CHIẾN THUẬT ===== -->
-      <section class="home-pillars-section alt-bg">
+      <!-- ===== 4. 4 TRỤ CỘT CHIẾN THUẬT TỐI THƯỢNG (FAN DECK 3D) ===== -->
+      <section class="home-pillars-section alt-bg" id="block4-pillars">
         <div class="home-pillars-container">
-          <div class="text-center" style="margin-bottom: 50px;">
-            <h2 class="quychien-headline-bold" style="font-size: clamp(2rem, 4vw, 3.2rem);">3 TRỤ CỘT CHIẾN THUẬT TỐI
-              THƯỢNG</h2>
+          <div class="text-center" style="margin-bottom: 40px;">
+            <h2 class="quychien-headline-bold" style="font-size: clamp(2rem, 4.2vw, 3.4rem);">4 TRỤ CỘT CHIẾN THUẬT TỐI THƯỢNG</h2>
             <div class="quychien-headline-divider" style="margin: 16px auto;"></div>
-            <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto;">Ba loại thẻ bài cốt lõi tạo nên
-              sức hút và độ sâu chiến thuật cho từng trận giao thương LogisQuest.</p>
+            <p style="color: var(--text-secondary); max-width: 680px; margin: 0 auto; font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.7;">
+              Bốn nhóm thẻ bài cốt lõi tạo nên chiều sâu chiến thuật và sự kịch tính của từng ván cờ. 
+              <b style="color: var(--color-sky);">Nhấp vào từng thẻ để lật mở bí mật chiến thuật & chi tiết linh kiện!</b>
+            </p>
           </div>
 
-          <div class="home-pillars-grid">
-            <!-- Trụ cột 1: Thẻ Incoterms -->
-            <div class="home-pillar-card">
-              <div class="home-pillar-img-wrap">
-                <img src="assets/The Incoterm/CIF.png" alt="Thẻ Incoterms CIF" class="home-pillar-img">
+          <!-- Fan Deck Showcase Container (Tương tự Footer với 4 Thẻ Bài 3D) -->
+          <div class="pillars-fandeck-wrapper">
+            <div class="pillars-fandeck-area" id="pillarsFanDeck">
+
+              <!-- Thẻ Bài 1: Thẻ Phương Tiện (Xanh lá) -->
+              <div class="pillar-fandeck-card card-green-style" data-category="phuong-tien" title="Khám phá Thẻ Phương Tiện">
+                <img src="assets/card-back-phuongtien.png" alt="Thẻ Phương Tiện" class="fandeck-card-img">
+                <div class="fandeck-card-glare"></div>
+                <div class="fandeck-card-pill">
+                  <span>PHƯƠNG TIỆN</span>
+                </div>
               </div>
-              <h3 class="home-pillar-title">1. Thẻ Incoterms</h3>
-              <span class="home-pillar-subtitle">Cốt Lõi Thương Mại</span>
-              <p class="home-pillar-desc">Quyết định quyền hạn, chi phí và rủi ro giữa Bên Bán và Bên Mua. Lựa chọn điều
-                khoản thông minh (EXW, FOB, CIF, DDP...) chính là chìa khóa tối ưu lợi nhuận cho mỗi chuyến hàng.</p>
+
+              <!-- Thẻ Bài 2: Thẻ Sự Kiện (Đỏ) -->
+              <div class="pillar-fandeck-card card-red-style" data-category="su-kien" title="Khám phá Thẻ Sự Kiện">
+                <img src="assets/card-back-sukien.png" alt="Thẻ Sự Kiện" class="fandeck-card-img">
+                <div class="fandeck-card-glare"></div>
+                <div class="fandeck-card-pill">
+                  <span>SỰ KIỆN</span>
+                </div>
+              </div>
+
+              <!-- Thẻ Bài 3: Thẻ Chợ (Xanh dương) -->
+              <div class="pillar-fandeck-card card-blue-style" data-category="cho" title="Khám phá Thẻ Chợ">
+                <img src="assets/card-back-cho.png" alt="Thẻ Chợ" class="fandeck-card-img">
+                <div class="fandeck-card-glare"></div>
+                <div class="fandeck-card-pill">
+                  <span>THẺ CHỢ</span>
+                </div>
+              </div>
+
+              <!-- Thẻ Bài 4: Thẻ Incoterm (Vàng) -->
+              <div class="pillar-fandeck-card card-yellow-style" data-category="incoterm" title="Khám phá Thẻ Incoterms">
+                <img src="assets/card-back-incoterm.png" alt="Thẻ Incoterms" class="fandeck-card-img">
+                <div class="fandeck-card-glare"></div>
+                <div class="fandeck-card-pill">
+                  <span>INCOTERMS</span>
+                </div>
+              </div>
+
+              <!-- 3D Decorative Assets Scattered Around (6 Icons) -->
+              <!-- 1. Cần cẩu cảng biển (Góc dưới trái) -->
+              <div class="pillar-decor-3d decor-crane-bottom-left float-anim-1">
+                <img src="assets/ảnh cont 3d và cần cẩu.png" alt="Cần cẩu cảng biển 3D" class="pillar-3d-img">
+              </div>
+
+              <!-- 2. Container 3D xếp chồng (Góc dưới phải) -->
+              <div class="pillar-decor-3d decor-cont-bottom-right float-anim-2">
+                <img src="assets/ảnh cont 3d xếp chồng.png" alt="Container 3D xếp chồng" class="pillar-3d-img">
+              </div>
+
+              <!-- 3. Tàu chở hàng 3D lớn (Góc dưới trung tâm) -->
+              <div class="pillar-decor-3d decor-boat-bottom-center float-anim-3">
+                <img src="assets/ảnh tàu 3d_góc 3 phần 4.png" alt="Tàu chở hàng 3D LogisQuest" class="pillar-3d-img">
+              </div>
+
+              <!-- 4. Container 3D đơn lẻ (Góc trên bên trái) -->
+              <div class="pillar-decor-3d decor-cont-top-left float-anim-4">
+                <img src="assets/ảnh cont 3d riêng lẻ.png" alt="Container 3D đơn lẻ" class="pillar-3d-img">
+              </div>
+
+              <!-- 5. Tàu 3D góc nhìn từ trên cao (Góc trên bên phải) -->
+              <div class="pillar-decor-3d decor-boat-top-right float-anim-5">
+                <img src="assets/ảnh tàu 3d từ trên cao.png" alt="Tàu 3D từ trên cao" class="pillar-3d-img">
+              </div>
+
+              <!-- 6. Tàu 3D phía trước nhỏ (Góc sườn phải) -->
+              <div class="pillar-decor-3d decor-boat-side-right float-anim-6">
+                <img src="assets/ảnh tàu 3d phía trước.png" alt="Tàu 3D góc trước" class="pillar-3d-img">
+              </div>
+
             </div>
 
-            <!-- Trụ cột 2: Thẻ Phương Tiện -->
-            <div class="home-pillar-card">
-              <div class="home-pillar-img-wrap">
-                <img src="assets/The Phuong Tien/0.MẶT TRƯỚC.png" alt="Thẻ Phương Tiện Vận Tải" class="home-pillar-img">
-              </div>
-              <h3 class="home-pillar-title">2. Thẻ Phương Tiện</h3>
-              <span class="home-pillar-subtitle">Động Lực Vận Tải</span>
-              <p class="home-pillar-desc">Linh hoạt kết hợp đường biển, đường hàng không, đường bộ hay đường sắt. Mỗi
-                phương tiện mang tốc độ, sức chứa và mức chi phí riêng đòi hỏi sự tính toán hợp lý.</p>
-            </div>
-
-            <!-- Trụ cột 3: Thẻ Sự Kiện & Chợ -->
-            <div class="home-pillar-card">
-              <div class="home-pillar-img-wrap">
-                <img src="assets/The Su Kien/BÃO NHIỆT ĐỚI.png" alt="Thẻ Bão Nhiệt Đới" class="home-pillar-img">
-              </div>
-              <h3 class="home-pillar-title">3. Thẻ Sự Kiện & Chợ</h3>
-              <span class="home-pillar-subtitle">Yếu Tố Bất Ngờ</span>
-              <p class="home-pillar-desc">Bão biển, tắc nghẽn cảng, biến động giá nhiên liệu hay những lá bài "gài bẫy"
-                đối thủ. Đây là nơi xoay chuyển tình thế, biến những ván bài tưởng chừng đã an bài trở nên kịch tính.
-              </p>
+            <!-- Quick Pill Selector Row below deck -->
+            <div class="pillars-selector-row">
+              <button class="pillar-select-btn btn-green" data-category="phuong-tien">
+                <span class="dot-indicator"></span> 10 Thẻ Phương Tiện
+              </button>
+              <button class="pillar-select-btn btn-red" data-category="su-kien">
+                <span class="dot-indicator"></span> 24 Thẻ Sự Kiện
+              </button>
+              <button class="pillar-select-btn btn-blue" data-category="cho">
+                <span class="dot-indicator"></span> 34 Thẻ Chợ
+              </button>
+              <button class="pillar-select-btn btn-yellow" data-category="incoterm">
+                <span class="dot-indicator"></span> 11 Thẻ Incoterms
+              </button>
             </div>
           </div>
         </div>
@@ -346,7 +473,8 @@
         <div class="home-cta-banner-full">
           <!-- Background image layer -->
           <div class="home-cta-bg-layer">
-            <img src="assets/anh-nen-giao-thuong.png" alt="LogisQuest Trận Giao Thương Đã Mở" class="home-cta-bg-img" loading="lazy">
+            <img src="assets/anh-nen-giao-thuong.png" alt="LogisQuest Trận Giao Thương Đã Mở" class="home-cta-bg-img"
+              loading="lazy">
             <div class="home-cta-overlay-gradient"></div>
           </div>
 
@@ -368,7 +496,8 @@
 
               <!-- 3. Description -->
               <p class="home-cta-description">
-                Sở hữu ngay bộ board game chiến thuật LogisQuest phiên bản giới hạn để cùng gia đình, bạn bè và đồng nghiệp chinh phục đại dương thương mại quốc tế.
+                Sở hữu ngay bộ board game chiến thuật LogisQuest phiên bản giới hạn để cùng gia đình, bạn bè và đồng
+                nghiệp chinh phục đại dương thương mại quốc tế.
               </p>
 
               <!-- 4. Action Buttons -->
@@ -376,7 +505,8 @@
                 <!-- Nút Đặt Mua Ngay -->
                 <a href="buy.html" class="home-cta-btn-primary">
                   <span class="cta-btn-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                      stroke-linecap="round" stroke-linejoin="round">
                       <circle cx="9" cy="21" r="1"></circle>
                       <circle cx="20" cy="21" r="1"></circle>
                       <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -400,7 +530,8 @@
               <div class="home-cta-features-bar">
                 <div class="cta-feature-item">
                   <div class="cta-feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                      stroke-linejoin="round">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                       <polyline points="9 12 11 14 15 10"></polyline>
                     </svg>
@@ -415,7 +546,8 @@
 
                 <div class="cta-feature-item">
                   <div class="cta-feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                      stroke-linejoin="round">
                       <polyline points="20 12 20 22 4 22 4 12"></polyline>
                       <rect x="2" y="7" width="20" height="5"></rect>
                       <line x1="12" y1="22" x2="12" y2="7"></line>
@@ -433,9 +565,12 @@
 
                 <div class="cta-feature-item">
                   <div class="cta-feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                      stroke-linejoin="round">
                       <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
-                      <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                      <path
+                        d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z">
+                      </path>
                     </svg>
                   </div>
                   <div class="cta-feature-text">
@@ -515,14 +650,15 @@
     <!-- ========================================== -->
     <div id="teamView" class="view-section">
       <section class="team-showcase-section">
-        
+
         <!-- 1. HÌNH ẢNH CẢ NHÓM FULL KHUNG HÌNH BANNER -->
         <div class="team-full-hero-banner">
           <img src="assets/team-full-banner.png" alt="Tập thể Đội ngũ sáng tạo LogisQuest" class="team-banner-img">
           <div class="team-banner-overlay">
             <div class="team-banner-text-wrap">
               <h1 class="team-banner-title">ĐỘI NGŨ SÁNG TẠO LOGISQUEST</h1>
-              <p class="team-banner-sub">Hành trình nhiệt huyết kết nối tri thức logistics và trải nghiệm boardgame đỉnh cao</p>
+              <p class="team-banner-sub">Hành trình nhiệt huyết kết nối tri thức logistics và trải nghiệm boardgame đỉnh
+                cao</p>
             </div>
           </div>
         </div>
@@ -534,10 +670,14 @@
             <h2 class="team-section-heading">CHÚNG MÌNH LÀ TEAM LOGISQUEST!</h2>
             <p class="team-intro-lead">Xin chào mọi người!</p>
             <p class="team-intro-text">
-              Chúng mình là nhóm sáng tạo nên <strong>LOGISQUEST</strong> – trò chơi boardgame lấy cảm hứng từ ngành vận tải quốc tế và chuỗi cung ứng thương mại. Với mong muốn biến những điều khoản Incoterms 2020 khô khan thành trải nghiệm nhập vai chiến thuật kịch tính, chúng mình đã dốc hết tâm huyết để mang đến một sản phẩm giáo dục - giải trí thuần Việt chuẩn quốc tế.
+              Chúng mình là nhóm sáng tạo nên <strong>LOGISQUEST</strong> – trò chơi boardgame lấy cảm hứng từ ngành vận
+              tải quốc tế và chuỗi cung ứng thương mại. Với mong muốn biến những điều khoản Incoterms 2020 khô khan
+              thành trải nghiệm nhập vai chiến thuật kịch tính, chúng mình đã dốc hết tâm huyết để mang đến một sản phẩm
+              giáo dục - giải trí thuần Việt chuẩn quốc tế.
             </p>
             <p class="team-intro-highlight">
-              Mỗi thành viên là một mảnh ghép độc đáo, nơi sự am hiểu về logistics hòa quyện cùng tư duy mỹ thuật hiện đại và tình yêu boardgame cháy bỏng!
+              Mỗi thành viên là một mảnh ghép độc đáo, nơi sự am hiểu về logistics hòa quyện cùng tư duy mỹ thuật hiện
+              đại và tình yêu boardgame cháy bỏng!
             </p>
           </div>
 
@@ -549,7 +689,10 @@
                 <div class="vm-icon">👁️</div>
                 <h3 class="vm-title">TẦM NHÌN</h3>
                 <p class="vm-desc">
-                  Chúng mình hướng đến việc xây dựng <strong>LOGISQUEST</strong> trở thành thương hiệu boardgame chiến thuật đào tạo logistics hàng đầu Việt Nam và khu vực. Tạo dựng môi trường học tập trực quan sinh động thông qua boardgame chiến thuật, nơi tri thức chuyên ngành được hấp thụ một cách tự nhiên và đầy cảm hứng.
+                  Chúng mình hướng đến việc xây dựng <strong>LOGISQUEST</strong> trở thành thương hiệu boardgame chiến
+                  thuật đào tạo logistics hàng đầu Việt Nam và khu vực. Tạo dựng môi trường học tập trực quan sinh động
+                  thông qua boardgame chiến thuật, nơi tri thức chuyên ngành được hấp thụ một cách tự nhiên và đầy cảm
+                  hứng.
                 </p>
               </div>
 
@@ -557,7 +700,9 @@
                 <div class="vm-icon">🎯</div>
                 <h3 class="vm-title">SỨ MỆNH</h3>
                 <p class="vm-desc">
-                  Sứ mệnh của chúng mình là cô đọng những kiến thức Incoterms phức tạp thành luật chơi hấp dẫn, giúp người chơi dễ dàng tiếp cận và vận dụng thực tế. Đưa sản phẩm Việt Nam vươn tầm quốc tế, kết nối cộng đồng doanh nghiệp và sinh viên logistics qua những giờ phút thi đấu hào hứng.
+                  Sứ mệnh của chúng mình là cô đọng những kiến thức Incoterms phức tạp thành luật chơi hấp dẫn, giúp
+                  người chơi dễ dàng tiếp cận và vận dụng thực tế. Đưa sản phẩm Việt Nam vươn tầm quốc tế, kết nối cộng
+                  đồng doanh nghiệp và sinh viên logistics qua những giờ phút thi đấu hào hứng.
                 </p>
               </div>
             </div>
@@ -565,7 +710,7 @@
 
           <!-- 3. DANH SÁCH THÀNH VIÊN - FULLSCREEN SPLIT CURTAIN REVEAL -->
           <div class="team-members-split-section" id="editorialTeamSlider">
-            
+
             <!-- Controls Overlay (Indicators & Hints) -->
             <div class="editorial-slider-controls">
               <div class="slider-progress-dots">
@@ -582,7 +727,7 @@
             </div>
 
             <div class="split-members-list">
-              
+
               <!-- Member 1: Nguyễn Khánh Thành -->
               <div class="editorial-member-card active" data-index="0">
                 <div class="editorial-left-col">
@@ -598,7 +743,9 @@
                   <div class="editorial-info-content">
                     <h4 class="editorial-role-title">FOUNDER – LEAD GAME DESIGNER</h4>
                     <p class="editorial-bio-text">
-                      Người thuyền trưởng dẫn dắt ý tưởng dự án LogisQuest với hơn 10 năm kinh nghiệm trong lĩnh vực đào tạo chuỗi cung ứng & xuất nhập khẩu. Trực tiếp xây dựng hệ thống quy tắc cốt lõi, chuyển hóa 11 điều khoản Incoterms 2020 thành cơ chế thi đấu chiến thuật lôi cuốn.
+                      Người thuyền trưởng dẫn dắt ý tưởng dự án LogisQuest với hơn 10 năm kinh nghiệm trong lĩnh vực đào
+                      tạo chuỗi cung ứng & xuất nhập khẩu. Trực tiếp xây dựng hệ thống quy tắc cốt lõi, chuyển hóa 11
+                      điều khoản Incoterms 2020 thành cơ chế thi đấu chiến thuật lôi cuốn.
                     </p>
                   </div>
                 </div>
@@ -619,7 +766,9 @@
                   <div class="editorial-info-content">
                     <h4 class="editorial-role-title">CO-FOUNDER – GAME CO-DESIGNER</h4>
                     <p class="editorial-bio-text">
-                      Đồng sáng lập kiêm phát triển cân bằng trò chơi. Phụ trách tối ưu hóa trải nghiệm tương tác giữa các người chơi, tính toán xác suất rủi ro trên hệ thống thẻ Sự Kiện và xây dựng bản đồ cảng biển mượt mà, công bằng nhất cho mỗi ván đấu.
+                      Đồng sáng lập kiêm phát triển cân bằng trò chơi. Phụ trách tối ưu hóa trải nghiệm tương tác giữa
+                      các người chơi, tính toán xác suất rủi ro trên hệ thống thẻ Sự Kiện và xây dựng bản đồ cảng biển
+                      mượt mà, công bằng nhất cho mỗi ván đấu.
                     </p>
                   </div>
                 </div>
@@ -640,7 +789,9 @@
                   <div class="editorial-info-content">
                     <h4 class="editorial-role-title">ART DIRECTOR – GRAPHIC LEAD</h4>
                     <p class="editorial-bio-text">
-                      Giám đốc nghệ thuật đứng sau toàn bộ linh hồn visual của LogisQuest. Trực tiếp thổi hồn từ thiết kế nhận diện thương hiệu, đồ họa bao bì 3D nổi bật đến mỹ thuật chi tiết trên từng lá bài Incoterm, thẻ Chợ và thẻ Phương tiện.
+                      Giám đốc nghệ thuật đứng sau toàn bộ linh hồn visual của LogisQuest. Trực tiếp thổi hồn từ thiết
+                      kế nhận diện thương hiệu, đồ họa bao bì 3D nổi bật đến mỹ thuật chi tiết trên từng lá bài
+                      Incoterm, thẻ Chợ và thẻ Phương tiện.
                     </p>
                   </div>
                 </div>
@@ -661,7 +812,9 @@
                   <div class="editorial-info-content">
                     <h4 class="editorial-role-title">CONTENT LEAD – ACADEMIC SPECIALIST</h4>
                     <p class="editorial-bio-text">
-                      Chuyên gia biên soạn nội dung và tư liệu học thuật. Chịu trách nhiệm nghiên cứu ngân hàng câu hỏi logistics chuyên sâu, biên soạn bộ tình huống biến cố thực tế, đảm bảo mỗi ván chơi đều là một bài học thực hành xuất nhập khẩu sinh động.
+                      Chuyên gia biên soạn nội dung và tư liệu học thuật. Chịu trách nhiệm nghiên cứu ngân hàng câu hỏi
+                      logistics chuyên sâu, biên soạn bộ tình huống biến cố thực tế, đảm bảo mỗi ván chơi đều là một bài
+                      học thực hành xuất nhập khẩu sinh động.
                     </p>
                   </div>
                 </div>
@@ -682,7 +835,9 @@
                   <div class="editorial-info-content">
                     <h4 class="editorial-role-title">OPERATIONS – COMMUNITY DIRECTOR</h4>
                     <p class="editorial-bio-text">
-                      Giám đốc vận hành và phát triển cộng đồng. Trực tiếp điều hành quy trình sản xuất vật lý linh kiện chất lượng cao, tổ chức các buổi trải nghiệm Workshop Boardgame tại các trường đại học và kết nối đối tác doanh nghiệp chuỗi cung ứng.
+                      Giám đốc vận hành và phát triển cộng đồng. Trực tiếp điều hành quy trình sản xuất vật lý linh kiện
+                      chất lượng cao, tổ chức các buổi trải nghiệm Workshop Boardgame tại các trường đại học và kết nối
+                      đối tác doanh nghiệp chuỗi cung ứng.
                     </p>
                   </div>
                 </div>
@@ -1189,20 +1344,25 @@
           </div>
         </div>
 
-        <!-- Cột phải: 3 Thẻ Bài Thực Tế (Thẻ Sự Kiện, Thẻ Chợ, Thẻ Incoterm) -->
+        <!-- Cột phải: 4 Thẻ Bài Thực Tế (Thẻ Phương Tiện, Thẻ Sự Kiện, Thẻ Chợ, Thẻ Incoterm) -->
         <div class="bg-footer-hero-cards-area">
 
-          <!-- Thẻ Bài 1: Đỏ (Sự Kiện) -->
+          <!-- Thẻ Bài 1: Xanh lá (Phương Tiện) -->
+          <div class="bg-illus-card card-green-style">
+            <img src="assets/card-back-phuongtien.png" alt="Thẻ Phương Tiện" class="bg-card-img-art">
+          </div>
+
+          <!-- Thẻ Bài 2: Đỏ (Sự Kiện) -->
           <div class="bg-illus-card card-red-style">
             <img src="assets/card-sukien-back.png" alt="Thẻ Sự Kiện" class="bg-card-img-art">
           </div>
 
-          <!-- Thẻ Bài 2: Xanh (Thẻ Chợ) -->
+          <!-- Thẻ Bài 3: Xanh (Thẻ Chợ) -->
           <div class="bg-illus-card card-blue-style">
             <img src="assets/card-cho-back.png" alt="Thẻ Chợ" class="bg-card-img-art">
           </div>
 
-          <!-- Thẻ Bài 3: Vàng (Thẻ Incoterm) -->
+          <!-- Thẻ Bài 4: Vàng (Thẻ Incoterm) -->
           <div class="bg-illus-card card-yellow-style">
             <img src="assets/card-incoterm-back.png" alt="Thẻ Incoterms" class="bg-card-img-art">
           </div>
@@ -1335,8 +1495,8 @@
                 </svg>
               </a>
 
-              <a class="social-link social-link--twitter" href="https://x.com/" aria-label="Twitter" data-label="Twitter"
-                target="_blank" rel="noopener noreferrer">
+              <a class="social-link social-link--twitter" href="https://x.com/" aria-label="Twitter"
+                data-label="Twitter" target="_blank" rel="noopener noreferrer">
                 <svg class="social-link__logo social-link__logo--twitter" viewBox="0 0 24 24" aria-hidden="true">
                   <path
                     d="M18.24 2H21l-6.03 6.89L22.06 22H16.5l-4.35-5.69L7.17 22H4.4l6.45-7.37L4.06 2h5.7l3.93 5.2L18.24 2Zm-.97 17.69h1.53L8.92 4.19H7.28l9.99 15.5Z" />
@@ -1403,26 +1563,62 @@
 
   </footer>
 
-  <!-- Card Modal Overlay -->
+  <!-- Card Modal Overlay: 3D FLIP CARD SHOWCASE -->
   <div class="modal-overlay" id="cardModal">
-    <div class="modal-content">
+    <div class="modal-content modal-3d-card-content">
       <button class="modal-close" id="modalClose" aria-label="Close Modal">&times;</button>
-      <div class="modal-body">
+      <div class="modal-body modal-3d-body">
+        
+        <!-- Left: 3D Flip Card Interactive Box -->
         <div class="modal-card-view">
-          <div class="modal-card-frame">
-            <img src="" alt="Card Zoom" id="modalCardImg" class="modal-card-img">
+          <div class="modal-flip-container" id="modalFlipWrapper" title="Nhấp vào thẻ để lật mặt trước / sau">
+            <div class="modal-flip-inner" id="modalFlipCard">
+              <!-- Mặt sau: Container 3D -->
+              <div class="modal-flip-face modal-flip-back">
+                <img src="assets/card-back-incoterm.png" alt="Mặt sau Container 3D" id="modalCardBackImg" class="modal-card-img">
+                <div class="modal-card-hint">
+                  <span>🔄 Nhấp để lật mặt thẻ</span>
+                </div>
+              </div>
+              <!-- Mặt trước: Thẻ chức năng thực tế -->
+              <div class="modal-flip-face modal-flip-front">
+                <img src="assets/The Incoterm/CIF.png" alt="Mặt trước Thẻ bài" id="modalCardFrontImg" class="modal-card-img">
+                <div class="modal-card-hint">
+                  <span>🔄 Nhấp để lật về Container</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
+        <!-- Right: Chi tiết thông tin & Thẻ con Gallery -->
         <div class="modal-card-details">
-          <span class="modal-card-type" id="modalCardType">Thẻ Chợ</span>
-          <h2 class="modal-card-title" id="modalCardTitle">Tên Thẻ Bài</h2>
-          <p class="modal-card-effect" id="modalCardEffect">Hiệu ứng thẻ bài...</p>
+          <div class="modal-type-badge-wrap">
+            <span class="modal-card-type" id="modalCardType">Thẻ Incoterms</span>
+            <span class="modal-card-count" id="modalCardCount">11 Thẻ</span>
+          </div>
+
+          <h2 class="modal-card-title" id="modalCardTitle">11 THẺ CẢNG INCOTERMS 2020</h2>
+          
+          <div class="modal-card-desc-box">
+            <h4 class="modal-box-subtitle">Quy tắc cốt lõi:</h4>
+            <p class="modal-card-effect" id="modalCardEffect">Mỗi cảng là một điều khoản Incoterms 2020 với quy tắc phân chia cước phí và rủi ro riêng biệt giữa Bên Bán và Bên Mua.</p>
+          </div>
+
           <div class="modal-card-strategy">
-            <h3>Mẹo chiến thuật:</h3>
-            <p id="modalCardStrategy">Gợi ý cách chơi quân bài này một cách hiệu quả nhất trong trận đấu để xoay chuyển
-              tình thế.</p>
+            <h4 class="modal-box-subtitle">Chiến thuật đỉnh cao:</h4>
+            <p id="modalCardStrategy">Nắm bắt quyền điều động tàu đến các cảng phù hợp với hợp đồng của bạn để tối đa hóa điểm chiến thắng và đẩy rủi ro sang đối thủ.</p>
+          </div>
+
+          <!-- Mini Gallery: Danh sách các thẻ con để xem mặt trước tương ứng -->
+          <div class="modal-subcards-section">
+            <h4 class="modal-box-subtitle">Khám phá các lá bài tiêu biểu:</h4>
+            <div class="modal-subcards-gallery" id="modalSubcardsGallery">
+              <!-- Render dynamic thumbnails via JS -->
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>

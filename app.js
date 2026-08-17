@@ -580,7 +580,7 @@ function initEvents() {
     el.addEventListener('click', (e) => {
       e.preventDefault();
       const targetView = el.getAttribute('data-nav');
-      
+
       if (targetView === 'buy') {
         switchView('home');
         setTimeout(() => {
@@ -626,20 +626,20 @@ function initEvents() {
 
   window.addEventListener('scroll', () => {
     const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
+
     // Always show header at the very top of the page
     if (currentScrollTop <= 20) {
       headerEl.classList.remove('header-hidden');
-    } 
+    }
     // Scrolling DOWN (past 80px): hide header smoothly
     else if (currentScrollTop > lastScrollTop && currentScrollTop > 80) {
       headerEl.classList.add('header-hidden');
-    } 
+    }
     // Scrolling UP: reveal header smoothly
     else if (currentScrollTop < lastScrollTop) {
       headerEl.classList.remove('header-hidden');
     }
-    
+
     lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
   }, { passive: true });
 
@@ -648,7 +648,7 @@ function initEvents() {
   cardModal.addEventListener('click', (e) => {
     if (e.target === cardModal) closeCardModal();
   });
-  
+
   // ESC key to close modal
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && cardModal.classList.contains('active')) {
@@ -662,11 +662,11 @@ let savedScrollY = 0;
 
 function openMobileNav() {
   if (mobileNav.classList.contains('active')) return;
-  
+
   savedScrollY = window.pageYOffset || document.documentElement.scrollTop;
   mobileToggle.classList.add('active');
   mobileNav.classList.add('active');
-  
+
   // Strictly pin the page in place using fixed positioning
   document.body.style.position = 'fixed';
   document.body.style.top = `-${savedScrollY}px`;
@@ -676,12 +676,12 @@ function openMobileNav() {
   if (typeof gsap !== 'undefined') {
     gsap.killTweensOf(mobileNav);
     gsap.killTweensOf('.mobile-link');
-    
-    gsap.fromTo(mobileNav, 
+
+    gsap.fromTo(mobileNav,
       { xPercent: -100, opacity: 0 },
       { xPercent: 0, opacity: 1, duration: 0.45, ease: 'power3.out' }
     );
-    gsap.fromTo('.mobile-link', 
+    gsap.fromTo('.mobile-link',
       { y: 20, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.35, stagger: 0.05, ease: 'power2.out', delay: 0.1 }
     );
@@ -719,9 +719,13 @@ function closeMobileNav(onCompleteCallback) {
 function initGSAPAnimations() {
   if (typeof gsap === 'undefined') return;
 
-  // Register ScrollTrigger plugin if available
+  // Register ScrollTrigger & ScrollToPlugin if available
   if (typeof ScrollTrigger !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
+    if (typeof ScrollToPlugin !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+    } else {
+      gsap.registerPlugin(ScrollTrigger);
+    }
   }
 
   // 1. Hero Title & Subtitle Entrance (Slower & Elegant)
@@ -746,7 +750,7 @@ function initGSAPAnimations() {
   const heroCurtain = document.getElementById('heroCurtain');
   const heroProductReveal = document.getElementById('heroProductReveal');
   const heroProductCaption = document.getElementById('heroProductCaption');
-  const firstContentSec = document.querySelector('.home-quychien-section');
+  const firstContentSec = document.getElementById('block1-showcase') || document.querySelector('.home-quychien-section');
 
   if (heroSection && heroCurtain && typeof ScrollTrigger !== 'undefined') {
     // Pin hero section during curtain animation & product reveal transition
@@ -754,55 +758,85 @@ function initGSAPAnimations() {
       scrollTrigger: {
         trigger: heroSection,
         start: 'top top',
-        end: '+=250%', // Scroll distance for card stretch -> card expand -> product zoom -> text reveal -> content reveal
+        end: '+=300%',
         pin: true,
-        scrub: 1, // Smooth scrub sync with wheel scroll
+        scrub: 1.0,
         anticipatePin: 1
       }
     });
 
-    // Stage 1: Stretch vertical rectangular card image in center from 0% height to 100% height
+    // Stage 1: Kéo dãn thanh chữ nhật thẻ bài theo chiều dọc (0% -> 100%)
     heroTl.to(heroCurtain, {
       height: '100%',
       duration: 1,
-      ease: 'power2.inOut'
+      ease: 'power1.inOut'
     });
 
-    // Stage 2: Expand card image horizontally to cover whole screen (width from 4px to 100%)
+    // Stage 2: Mở rộng thanh thẻ bài sang 2 bên màn hình (4px -> 100%)
     heroTl.to(heroCurtain, {
       width: '100%',
-      duration: 1,
-      ease: 'power2.inOut'
+      duration: 1.2,
+      ease: 'power1.inOut'
     });
 
-    // Stage 3: Zoom product image from center, leaving margins on 4 edges (scale 0.1 -> 1)
+    // Stage 3: Phóng to bộ sản phẩm từ từ, liên tục và mượt mà
     if (heroProductReveal) {
-      heroTl.to(heroProductReveal, {
-        opacity: 1,
-        scale: 1,
-        duration: 1.2,
-        ease: 'power2.out'
-      }, '-=0.5'); // Overlap slightly with horizontal expansion
-    }
-
-    // Stage 3.5: Reveal white title "Nhập cuộc ngay hôm nay" over zoomed product image
-    if (heroProductCaption) {
-      heroTl.fromTo(heroProductCaption, 
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1, ease: 'power2.out' },
-        '-=0.4'
+      heroTl.fromTo(heroProductReveal,
+        { opacity: 0, scale: 0.15 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1.8,
+          ease: 'power1.out'
+        }
       );
     }
 
-    // Stage 4: After product image & caption reveal, smoothly fade in & slide up game introduction section
+    // Stage 3.5: Xuất hiện dòng chữ "Nhập cuộc ngay hôm nay" đồng nhịp với phóng to
+    if (heroProductCaption) {
+      heroTl.fromTo(heroProductCaption,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1.0, ease: 'power1.out' },
+        '-=1.0'
+      );
+    }
+
+    // Stage 4: Trượt chuyển cảnh mượt mà dẫn vào trước Khối 1
     if (firstContentSec) {
       heroTl.from(firstContentSec, {
         opacity: 0,
-        y: 60,
-        duration: 1,
-        ease: 'power2.out'
+        y: 50,
+        duration: 1.2,
+        ease: 'power1.out'
       });
     }
+
+    // Auto-smooth scroll on left click on Hero Banner (cuộn liên tục không ngừng 4 giây, dừng ngay trước Khối 1)
+    let isAutoScrolling = false;
+    heroSection.style.cursor = 'pointer';
+
+    heroSection.addEventListener('click', (e) => {
+      // Chỉ kích hoạt khi click chuột trái (button === 0) và không click vào link/nút
+      if (e.button !== 0 || isAutoScrolling) return;
+      if (e.target.closest('a, button')) return;
+
+      const st = heroTl.scrollTrigger;
+      if (!st) return;
+
+      if (st.progress >= 0.95) return;
+
+      isAutoScrolling = true;
+      const targetScroll = st.end;
+
+      gsap.to(window, {
+        scrollTo: targetScroll,
+        duration: 4.0, // Cuộn liên tục không ngừng trong 4 giây
+        ease: 'power1.inOut',
+        onComplete: () => {
+          isAutoScrolling = false;
+        }
+      });
+    });
   }
 
   // 3. GSAP ScrollTrigger Animations for Home Sections (Slowed down for high visibility)
@@ -1031,13 +1065,13 @@ function switchView(viewName) {
   document.querySelectorAll('.view-section').forEach(view => {
     view.classList.remove('active');
   });
-  
+
   // Show target view
   const targetViewEl = document.getElementById(`${viewName}View`);
   if (targetViewEl) {
     targetViewEl.classList.add('active');
   }
-  
+
   // Update Navbar Active States
   const allNavLinks = document.querySelectorAll('[data-nav]');
   allNavLinks.forEach(link => {
@@ -1060,8 +1094,8 @@ function switchView(viewName) {
   // Reset + replay team banner animation when switching to team view
   if (viewName === 'team') {
     const overlay = document.querySelector('#teamView .team-banner-overlay');
-    const title   = document.querySelector('#teamView .team-banner-title');
-    const sub     = document.querySelector('#teamView .team-banner-sub');
+    const title = document.querySelector('#teamView .team-banner-title');
+    const sub = document.querySelector('#teamView .team-banner-sub');
     [overlay, title, sub].forEach(el => {
       if (!el) return;
       el.style.animation = 'none';
@@ -1069,7 +1103,7 @@ function switchView(viewName) {
       void el.offsetWidth;
       el.style.animation = '';
     });
-    
+
     // Reset slider thành viên về index 0 khi vào team view
     if (typeof resetEditorialSlider === 'function') {
       resetEditorialSlider();
@@ -1094,12 +1128,12 @@ function switchView(viewName) {
 // RENDER CARDS GRID
 function renderCards() {
   cardsGrid.innerHTML = '';
-  
+
   // Filter cards based on tab and search query
   const filteredCards = CARDS_DATA.filter(card => {
     const matchesTab = activeCategory === 'all' || card.category === activeCategory;
-    const matchesSearch = card.title.toLowerCase().includes(searchQuery) || 
-                          card.effect.toLowerCase().includes(searchQuery);
+    const matchesSearch = card.title.toLowerCase().includes(searchQuery) ||
+      card.effect.toLowerCase().includes(searchQuery);
     return matchesTab && matchesSearch;
   });
 
@@ -1126,39 +1160,225 @@ function renderCards() {
         <p class="card-desc">${card.effect}</p>
       </div>
     `;
-    
+
     // Add click event to open details modal
     cardEl.addEventListener('click', () => openCardModal(card));
-    
+
     cardsGrid.appendChild(cardEl);
   });
 }
 
-// MODAL INTERACTIONS
-function openCardModal(card) {
-  modalCardImg.src = card.image;
-  modalCardImg.alt = card.title;
-  modalCardType.textContent = card.categoryText;
-  
-  // Adjust badge color according to category
-  modalCardType.className = 'modal-card-type';
-  modalCardType.classList.add(`type-${card.category}`);
-  
-  modalCardTitle.textContent = card.title;
-  modalCardEffect.innerHTML = `<strong>Hiệu ứng:</strong> ${card.effect}`;
-  modalCardStrategy.textContent = card.strategy;
-  
+// 4 CATEGORIES MASTER DATA FOR BLOCK 4 PILLARS & 3D MODAL SHOWCASE
+const PILLAR_CATEGORIES_DATA = {
+  'phuong-tien': {
+    category: 'phuong-tien',
+    categoryText: 'Thẻ Phương Tiện',
+    countText: '10 Thẻ Vận Tải',
+    title: '10 THẺ PHƯƠNG TIỆN ĐA PHƯƠNG THỨC',
+    backImage: 'assets/card-back-phuongtien.png',
+    defaultFrontImage: 'assets/The Phuong Tien/0.MẶT TRƯỚC.png',
+    effect: 'Động lực chuyên chở cốt lõi của chuỗi cung ứng. Bao gồm 4 phương thức chính: Đường biển (Tàu container), Đường hàng không (Máy bay phản lực), Đường sắt (Tàu hỏa liên vận) và Đường bộ (Xe đầu kéo).',
+    strategy: 'Mỗi loại phương tiện mang tải trọng, chi phí cước và tốc độ di chuyển khác biệt. Kết hợp linh hoạt đa phương thức giúp giải phóng container kẹt cảng và đẩy nhanh tiến độ hoàn thành đơn hàng.',
+    subcards: [
+      { title: 'Tàu Container Biển', image: 'assets/The Phuong Tien/0.MẶT TRƯỚC.png' },
+      { title: 'Máy Bay Vận Tải', image: 'assets/The Phuong Tien/1 2 3 4.png' }
+    ]
+  },
+  'su-kien': {
+    category: 'su-kien',
+    categoryText: 'Thẻ Sự Kiện',
+    countText: '24 Thẻ Biến Cố',
+    title: '24 THẺ SỰ KIỆN & BIẾN CỐ ĐẠI DƯƠNG',
+    backImage: 'assets/card-back-sukien.png',
+    defaultFrontImage: 'assets/The Su Kien/BÃO NHIỆT ĐỚI.png',
+    effect: 'Tái hiện chân thực các rủi ro vận tải thực tế: Bão biển nhiệt đới, cướp biển vịnh Aden, tắc nghẽn kênh đào Suez, đình công cảng biển hay khủng hoảng biến động giá nhiên liệu toàn cầu.',
+    strategy: 'Yếu tố xoay chuyển tình thế bất ngờ! Sử dụng thẻ sự kiện đúng thời điểm để làm chậm bước tiến của đối thủ đang dẫn đầu hoặc tự bảo hiểm bảo vệ đội tàu của mình.',
+    subcards: [
+      { title: 'Bão Nhiệt Đới', image: 'assets/The Su Kien/BÃO NHIỆT ĐỚI.png' }
+    ]
+  },
+  'cho': {
+    category: 'cho',
+    categoryText: 'Thẻ Chợ',
+    countText: '34 Thẻ Dịch Vụ',
+    title: '34 THẺ CHỢ & HỢP ĐỒNG LOGISTICS',
+    backImage: 'assets/card-back-cho.png',
+    defaultFrontImage: 'assets/The Cho/Chứng chỉ FIATA.png',
+    effect: 'Cung cấp các công cụ kinh doanh và hợp đồng ủy thác: Chứng chỉ giao nhận FIATA, thuê tàu FCL/LCL, mua bảo hiểm hàng hóa All Risks, nâng cấp kho bãi và bốc dỡ tự động.',
+    strategy: 'Tích lũy tài nguyên và thẻ chứng chỉ để giảm thiểu chi phí phát sinh, mở rộng sức chứa kho bãi và nhận thêm tiền thưởng khi kết thúc hải trình.',
+    subcards: [
+      { title: 'Chứng chỉ FIATA', image: 'assets/The Cho/Chứng chỉ FIATA.png' }
+    ]
+  },
+  'incoterm': {
+    category: 'incoterm',
+    categoryText: 'Thẻ Incoterms',
+    countText: '11 Thẻ Cảng',
+    title: '11 THẺ CẢNG INCOTERMS 2020',
+    backImage: 'assets/card-back-incoterm.png',
+    defaultFrontImage: 'assets/The Incoterm/CIF.png',
+    effect: 'Mỗi cảng biển đại diện cho 1 điều khoản thương mại quốc tế Incoterms 2020 (EXW, FCA, FAS, FOB, CFR, CIF, CPT, CIP, DAP, DPU, DDP) với quy tắc phân chia cước phí và trách nhiệm rủi ro chính xác.',
+    strategy: 'Điều hướng tàu chở hàng cập đúng cảng khớp với hợp đồng bạn đang nắm giữ. Tránh giao hàng tại các cảng có rủi ro cao vượt quá khả năng tài chính của bạn.',
+    subcards: [
+      { title: 'CIF (Cost, Insurance, Freight)', image: 'assets/The Incoterm/CIF.png' },
+      { title: 'FOB (Free On Board)', image: 'assets/The Incoterm/FOB.png' },
+      { title: 'EXW (Ex Works)', image: 'assets/The Incoterm/EXW.png' },
+      { title: 'DDP (Delivered Duty Paid)', image: 'assets/The Incoterm/DDP.png' },
+      { title: 'DPU (Delivered Unloaded)', image: 'assets/The Incoterm/DPU.png' }
+    ]
+  }
+};
+
+// MODAL INTERACTIONS & 3D FLIP CARD LOGIC
+let isModalCardFlipped = false;
+
+function toggleModalCardFlip(forceState) {
+  const flipCard = document.getElementById('modalFlipCard');
+  if (!flipCard) return;
+
+  if (typeof forceState === 'boolean') {
+    isModalCardFlipped = forceState;
+  } else {
+    isModalCardFlipped = !isModalCardFlipped;
+  }
+
+  if (isModalCardFlipped) {
+    flipCard.classList.add('is-flipped');
+  } else {
+    flipCard.classList.remove('is-flipped');
+  }
+}
+
+function openPillarCategoryModal(categoryKey) {
+  const data = PILLAR_CATEGORIES_DATA[categoryKey] || PILLAR_CATEGORIES_DATA['incoterm'];
+  const cardBackImg = document.getElementById('modalCardBackImg');
+  const cardFrontImg = document.getElementById('modalCardFrontImg');
+  const cardType = document.getElementById('modalCardType');
+  const cardCount = document.getElementById('modalCardCount');
+  const cardTitle = document.getElementById('modalCardTitle');
+  const cardEffect = document.getElementById('modalCardEffect');
+  const cardStrategy = document.getElementById('modalCardStrategy');
+  const gallery = document.getElementById('modalSubcardsGallery');
+
+  if (cardBackImg) cardBackImg.src = data.backImage;
+  if (cardFrontImg) cardFrontImg.src = data.defaultFrontImage;
+  if (cardType) {
+    cardType.textContent = data.categoryText;
+    cardType.className = `modal-card-type type-${data.category}`;
+  }
+  if (cardCount) cardCount.textContent = data.countText;
+  if (cardTitle) cardTitle.textContent = data.title;
+  if (cardEffect) cardEffect.innerHTML = `<strong>Quy tắc cốt lõi:</strong> ${data.effect}`;
+  if (cardStrategy) cardStrategy.textContent = data.strategy;
+
+  // Render Subcards Thumbnails
+  if (gallery) {
+    gallery.innerHTML = '';
+    // Thêm các thẻ thực tế từ CARDS_DATA thuộc nhóm này
+    const matchingCards = CARDS_DATA.filter(c => c.category === data.category);
+    const displayList = matchingCards.length > 0 ? matchingCards : (data.subcards || []);
+
+    displayList.forEach((sub, idx) => {
+      const thumb = document.createElement('div');
+      thumb.className = `modal-subcard-thumb ${idx === 0 ? 'active' : ''}`;
+      thumb.title = sub.title;
+      thumb.innerHTML = `<img src="${sub.image}" alt="${sub.title}" loading="lazy">`;
+
+      thumb.addEventListener('click', () => {
+        gallery.querySelectorAll('.modal-subcard-thumb').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+        if (cardFrontImg) cardFrontImg.src = sub.image;
+        if (sub.title && cardTitle) cardTitle.textContent = `${data.title} — ${sub.title}`;
+        if (sub.effect && cardEffect) cardEffect.innerHTML = `<strong>Chi tiết:</strong> ${sub.effect}`;
+        if (sub.strategy && cardStrategy) cardStrategy.textContent = sub.strategy;
+
+        // Auto flip to front face if looking at back
+        toggleModalCardFlip(true);
+      });
+
+      gallery.appendChild(thumb);
+    });
+  }
+
+  // Reset flip to front/back: Mặc định hiển thị mặt sau Container 3D (Ngang) và nhấp để lật (Dọc)
+  toggleModalCardFlip(false);
+
   cardModal.classList.add('active');
-  document.body.style.overflow = 'hidden'; // Lock background scrolling
+  document.body.style.overflow = 'hidden';
+}
+
+function openCardModal(card) {
+  // Map regular card click (from database page) to 3D showcase
+  const cardBackImg = document.getElementById('modalCardBackImg');
+  const cardFrontImg = document.getElementById('modalCardFrontImg');
+  const cardType = document.getElementById('modalCardType');
+  const cardCount = document.getElementById('modalCardCount');
+  const cardTitle = document.getElementById('modalCardTitle');
+  const cardEffect = document.getElementById('modalCardEffect');
+  const cardStrategy = document.getElementById('modalCardStrategy');
+  const gallery = document.getElementById('modalSubcardsGallery');
+
+  const catData = PILLAR_CATEGORIES_DATA[card.category] || PILLAR_CATEGORIES_DATA['incoterm'];
+
+  if (cardBackImg) cardBackImg.src = catData.backImage;
+  if (cardFrontImg) cardFrontImg.src = card.image;
+  if (cardType) {
+    cardType.textContent = card.categoryText;
+    cardType.className = `modal-card-type type-${card.category}`;
+  }
+  if (cardCount) cardCount.textContent = catData.countText;
+  if (cardTitle) cardTitle.textContent = card.title;
+  if (cardEffect) cardEffect.innerHTML = `<strong>Hiệu ứng:</strong> ${card.effect}`;
+  if (cardStrategy) cardStrategy.textContent = card.strategy;
+
+  if (gallery) {
+    gallery.innerHTML = '';
+  }
+
+  // Directly show the front face for explicit single-card clicks
+  toggleModalCardFlip(true);
+
+  cardModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeCardModal() {
   cardModal.classList.remove('active');
-  // Only restore overflow scroll if mobile menu is not active
   if (!mobileNav.classList.contains('active')) {
     document.body.style.overflow = 'auto';
   }
 }
+
+// BIND BLOCK 4 FAN DECK & 3D MODAL EVENTS
+function initBlock4PillarsEvents() {
+  // 1. Click on Fan Deck cards
+  const fandeckCards = document.querySelectorAll('.pillar-fandeck-card');
+  fandeckCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const cat = card.getAttribute('data-category');
+      if (cat) openPillarCategoryModal(cat);
+    });
+  });
+
+  // 2. Click on Pill Selector Buttons below Fan Deck
+  const selectBtns = document.querySelectorAll('.pillar-select-btn');
+  selectBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.getAttribute('data-category');
+      if (cat) openPillarCategoryModal(cat);
+    });
+  });
+
+  // 3. 3D Card Flip interaction directly on card click
+  const flipWrapper = document.getElementById('modalFlipWrapper');
+  if (flipWrapper) {
+    flipWrapper.addEventListener('click', () => toggleModalCardFlip());
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initBlock4PillarsEvents();
+});
 
 // ==========================================
 // EDITORIAL FULLSCREEN SPLIT CURTAIN REVEAL SLIDER
@@ -1274,7 +1494,7 @@ function initEditorialSlider() {
   }, { passive: true });
 
   // Reset slider về vị trí ban đầu
-  window.resetEditorialSlider = function() {
+  window.resetEditorialSlider = function () {
     currentEditorialIndex = 0;
     isEditorialAnimating = false;
     cards.forEach((card, idx) => {

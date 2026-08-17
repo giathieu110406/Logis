@@ -188,6 +188,23 @@ function initBuyPage() {
   }
 
 
+  // ── Voucher Copy Click ──
+  const voucherCopyBtn = document.getElementById('voucherCopyBtn');
+  if (voucherCopyBtn) {
+    voucherCopyBtn.addEventListener('click', () => {
+      const code = voucherCopyBtn.textContent.trim();
+      navigator.clipboard.writeText(code).then(() => {
+        const originalText = voucherCopyBtn.textContent;
+        voucherCopyBtn.textContent = 'ĐÃ COPY!';
+        voucherCopyBtn.style.color = '#10B981';
+        setTimeout(() => {
+          voucherCopyBtn.textContent = originalText;
+          voucherCopyBtn.style.color = '';
+        }, 1500);
+      }).catch(() => {});
+    });
+  }
+
   if (btnContactFB) {
     btnContactFB.addEventListener('click', (e) => {
       e.preventDefault();
