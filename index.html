@@ -200,46 +200,39 @@
 
           <!-- MAIN CONTENT 50/50 TIER -->
           <div class="showcase-main-tier">
-            <!-- LEFT 50%: BENTO COLLAGE GALLERY -->
+            <!-- LEFT 50%: SHOWCASE ORIGINAL ASPECT RATIO CAROUSEL -->
             <div class="showcase-gallery-col">
               <div class="showcase-glass-card">
-                <div class="showcase-bento-grid">
-                  <!-- Col 1: Standee -->
-                  <div class="bento-cell bento-standee">
-                    <img src="assets/intro-3.jpg" alt="Standee LogisQuest" class="bento-img bento-standee-img">
-                  </div>
-
-                  <!-- Col 2: Board & Boxes -->
-                  <div class="bento-col-group">
-                    <div class="bento-cell bento-board">
-                      <img src="assets/intro-1.jpg" alt="Toàn cảnh bàn cờ LogisQuest" class="bento-img">
+                <div class="showcase-carousel-wrap" id="block1ShowcaseCarousel">
+                  <div class="showcase-carousel-track" id="block1CarouselTrack">
+                    <!-- Slide 1 (cũ 3): Standee nhân vật -->
+                    <div class="showcase-slide">
+                      <img src="assets/intro-3.jpg" alt="Standee nhân vật LogisQuest" class="showcase-slide-img"
+                        loading="eager">
                     </div>
-                    <div class="bento-cell bento-containers">
-                      <img src="assets/ảnh cont 3d xếp chồng.png" alt="Mô hình 4 màu Container" class="bento-img">
+                    <!-- Slide 2 (cũ 4): Vỏ hộp Boardgame 3D -->
+                    <div class="showcase-slide">
+                      <img src="assets/product-box-3d.png" alt="Vỏ hộp LogisQuest" class="showcase-slide-img"
+                        loading="lazy">
                     </div>
-                  </div>
-
-                  <!-- Col 3: Cards & Ships -->
-                  <div class="bento-col-group">
-                    <div class="bento-cell bento-cards">
-                      <img src="assets/intro-2.jpg" alt="Chi tiết thẻ bài và hải trình" class="bento-img">
+                    <!-- Slide 3 (cũ 1): Toàn cảnh bàn cờ -->
+                    <div class="showcase-slide">
+                      <img src="assets/intro-1.jpg" alt="Bàn cờ LogisQuest" class="showcase-slide-img" loading="lazy">
                     </div>
-                    <div class="bento-bottom-split">
-                      <div class="bento-cell bento-box">
-                        <img src="assets/product-box-3d.png" alt="Vỏ hộp LogisQuest" class="bento-img">
-                      </div>
-                      <div class="bento-cell bento-ships">
-                        <img src="assets/ảnh tàu 3d phía trước.png" alt="Mô hình tàu trắng" class="bento-img">
-                      </div>
+                    <!-- Slide 4 (cũ 2): Chi tiết thẻ bài & hải trình -->
+                    <div class="showcase-slide">
+                      <img src="assets/intro-2.jpg" alt="Chi tiết thẻ bài và hải trình" class="showcase-slide-img"
+                        loading="lazy">
                     </div>
                   </div>
                 </div>
 
-                <!-- Pagination navigation dots underneath -->
-                <div class="showcase-pagination-bar">
-                  <span class="showcase-dot"></span>
-                  <span class="showcase-pill active"></span>
-                  <span class="showcase-dot"></span>
+                <!-- Pagination Navigation Dots (4 ảnh) -->
+                <div class="showcase-pagination-bar" id="block1PaginationBar">
+                  <span class="showcase-dot active" data-index="0"></span>
+                  <span class="showcase-dot" data-index="1"></span>
+                  <span class="showcase-dot" data-index="2"></span>
+                  <span class="showcase-dot" data-index="3"></span>
                 </div>
               </div>
             </div>
@@ -278,59 +271,152 @@
         </div>
       </section>
 
-      <!-- ===== 2. LỐI CHƠI ĐẤU TRÍ / NGUỒN CẢM HỨNG (QUỶ CHIẾN STYLE 1) ===== -->
-      <section class="home-quychien-section alt-bg">
+      <!-- ===== 2. LỐI CHƠI ĐẤU TRÍ / NGUỒN CẢM HỨNG (EDITORIAL DECK) ===== -->
+      <section class="home-quychien-section" id="block2-gameplay">
         <div class="home-quychien-inner reverse">
+          <!-- Cột trái: Khung Bản Đồ Hải Trình Cổ Điển -->
           <div class="home-quychien-img-col">
-            <div class="quychien-img-frame placeholder-frame">
-              <!-- Placeholder cho hình ảnh thứ 2 (ví dụ: ảnh bài trên tay) -->
-              <div class="placeholder-content">
-                <span class="placeholder-icon">📸</span>
-                <span class="placeholder-text">Hình ảnh minh họa lối chơi bài trên tay</span>
+            <div class="quychien-map-frame">
+              <div class="compass-corner corner-tl">🧭</div>
+              <div class="compass-corner corner-tr">⚓</div>
+              <div class="compass-corner corner-bl">⚓</div>
+              <div class="compass-corner corner-br">🧭</div>
+              <div class="map-inner-canvas">
+                <div class="map-art-placeholder">
+                  <div class="map-art-badge">
+                    <span>HẢI ĐỒ CHIẾN THUẬT</span>
+                  </div>
+                  <div class="map-art-icon">🗺️</div>
+                  <h4 class="map-art-title">Sàn Đấu Incoterms 2020</h4>
+                  <p class="map-art-hint">Khu vực dành cho hình ảnh minh họa thực tế lối chơi & quân bài trên tay</p>
+                </div>
               </div>
             </div>
           </div>
+
+          <!-- Cột phải: Editorial Content & 2 Thẻ Tiêu Điểm -->
           <div class="home-quychien-text-col">
+            <div class="quychien-badge-pill">
+              <span>HẢI TRÌNH ĐẤU TRÍ</span>
+            </div>
             <h2 class="quychien-headline-bold">
               LỐI CHƠI ĐẤU TRÍ KHỐC LIỆT<br>
-              TỐI ƯU CẢNG BIỂN ĐỂ THỐNG TRỊ
+              <span class="quychien-highlight-text">TỐI ƯU CẢNG BIỂN ĐỂ THỐNG TRỊ</span>
             </h2>
             <div class="quychien-headline-divider"></div>
-            <p class="quychien-body-text">Sở hữu cơ chế độc đáo mô phỏng 11 điều khoản Incoterms. Người chơi phải tính
-              toán cẩn thận từng chi phí vận tải, lựa chọn phương tiện phù hợp và sẵn sàng hy sinh cước phí nhỏ để giành
-              quyền kiểm soát những lô hàng giá trị cao, tạo ra những đòn xoay chuyển cục diện đầy kịch tính.</p>
-            <p class="quychien-body-text">Đối mặt với các biến cố bất ngờ — từ bão biển nhiệt đới đến hải quan giữ hàng
-              — bản lĩnh quản trị chuỗi cung ứng của bạn sẽ được thử thách tới hạn.</p>
+
+            <div class="quychien-focus-cards">
+              <!-- Thẻ 1: Mô phỏng Incoterms -->
+              <div class="quychien-focus-card">
+                <div class="focus-card-icon-wrap">
+                  <span class="focus-card-num">01</span>
+                </div>
+                <div class="focus-card-body">
+                  <h3 class="focus-card-title">Mô Phỏng 11 Điều Khoản Incoterms 2020</h3>
+                  <p class="focus-card-desc">
+                    Tính toán cẩn thận từng chi phí vận tải, lựa chọn phương tiện phù hợp và sẵn sàng hy sinh cước phí nhỏ để giành quyền kiểm soát những lô hàng giá trị cao, tạo ra những đòn xoay chuyển cục diện đầy kịch tính.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Thẻ 2: Ứng phó Biến cố -->
+              <div class="quychien-focus-card">
+                <div class="focus-card-icon-wrap">
+                  <span class="focus-card-num">02</span>
+                </div>
+                <div class="focus-card-body">
+                  <h3 class="focus-card-title">Ứng Phó Biến Cố Bất Ngờ</h3>
+                  <p class="focus-card-desc">
+                    Đối mặt với các sự kiện thực tế: từ bão biển nhiệt đới, tắc nghẽn kênh đào đến rủi ro hải quan giữ hàng — bản lĩnh quản trị chuỗi cung ứng của bạn sẽ được thử thách tới hạn.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- ===== 3. QUY MÔ CHIẾN TRƯỜNG (2 - 5 NGƯỜI CHƠI) ===== -->
-      <section class="home-quychien-section">
+      <section class="home-quychien-section" id="block3-scale">
         <div class="home-quychien-inner">
+          <!-- Cột trái: Khung Bản Đồ Hải Trình Cổ Điển -->
           <div class="home-quychien-img-col">
-            <div class="quychien-img-frame placeholder-frame">
-              <!-- Placeholder cho hình ảnh nhóm người chơi -->
-              <div class="placeholder-content">
-                <span class="placeholder-icon">👥</span>
-                <span class="placeholder-text">Hình ảnh nhóm bạn chơi game thực tế</span>
+            <div class="quychien-map-frame">
+              <div class="compass-corner corner-tl">🧭</div>
+              <div class="compass-corner corner-tr">👥</div>
+              <div class="compass-corner corner-bl">👥</div>
+              <div class="compass-corner corner-br">🧭</div>
+              <div class="map-inner-canvas">
+                <div class="map-art-placeholder">
+                  <div class="map-art-badge">
+                    <span>CHIẾN TRƯỜNG ĐA CHIỀU</span>
+                  </div>
+                  <div class="map-art-icon">⚔️</div>
+                  <h4 class="map-art-title">Quy Mô Bàn Cờ 2 - 5 Người</h4>
+                  <p class="map-art-hint">Khu vực dành cho hình ảnh nhóm bạn chơi game & không khí thi đấu thực tế</p>
+                </div>
               </div>
             </div>
           </div>
+
+          <!-- Cột phải: So sánh 2 Chế độ chơi & 3 Huy hiệu thông số -->
           <div class="home-quychien-text-col">
+            <div class="quychien-badge-pill">
+              <span>ĐỘ LINH HOẠT CHIẾN THUẬT</span>
+            </div>
             <h2 class="quychien-headline-bold">
-              CHIẾN TRƯỜNG 5 NGƯỜI<br>
-              HỖN LOẠN & ĐẦY BẤT NGỜ
+              CHIẾN TRƯỜNG 2 - 5 NGƯỜI<br>
+              <span class="quychien-highlight-text">HỖN LOẠN & ĐẦY BẤT NGỜ</span>
             </h2>
-            <p class="quychien-body-text"><b>Đội hình 2 người:</b> Cuộc đấu trí đối đầu trực diện, căng thẳng và tính
-              toán chi ly từng nước đi để chặn đường đối thủ.</p>
-            <p class="quychien-body-text"><b>Đội hình 4-5 người:</b> Đại dương bùng nổ! Thị trường giao thương trở nên
-              chật chội, cạnh tranh khốc liệt, đàm phán sôi nổi và vô số pha "gài bẫy" bất ngờ xoay chuyển tình thế phút
-              cuối.</p>
+            <div class="quychien-headline-divider"></div>
+
+            <div class="quychien-mode-grid">
+              <!-- Chế độ 1v1 -->
+              <div class="quychien-mode-card">
+                <div class="mode-card-header">
+                  <span class="mode-card-tag">DUEL 1V1</span>
+                  <h3 class="mode-card-title">Đội Hình 2 Người</h3>
+                </div>
+                <p class="mode-card-desc">
+                  Cuộc đấu trí tay đôi đối đầu trực diện, căng thẳng và tính toán chi ly từng nước đi để chặn đường, bóp nghẹt tuyến vận tải của đối thủ.
+                </p>
+              </div>
+
+              <!-- Chế độ 4-5 người -->
+              <div class="quychien-mode-card highlight">
+                <div class="mode-card-header">
+                  <span class="mode-card-tag gold">PARTY BATTLE</span>
+                  <h3 class="mode-card-title">Đội Hình 4 - 5 Người</h3>
+                </div>
+                <p class="mode-card-desc">
+                  Đại dương bùng nổ! Thị trường giao thương trở nên chật chội, cạnh tranh khốc liệt, đàm phán sôi nổi và vô số pha "gài bẫy" bất ngờ xoay chuyển tình thế phút cuối.
+                </p>
+              </div>
+            </div>
+
+            <!-- 3 Badges Thông Số -->
             <div class="quychien-stat-badges">
-              <span class="q-badge">👥 2-5 Người Chơi</span>
-              <span class="q-badge">⏱️ 30-45 Phút / Ván</span>
-              <span class="q-badge">🎂 12+ Độ Tuổi</span>
+              <div class="q-stat-item">
+                <span class="q-stat-icon">👥</span>
+                <div class="q-stat-text">
+                  <strong>2 - 5</strong>
+                  <span>Thuyền Trưởng</span>
+                </div>
+              </div>
+              <div class="q-stat-item">
+                <span class="q-stat-icon">⏱️</span>
+                <div class="q-stat-text">
+                  <strong>30 - 45'</strong>
+                  <span>Thời Gian / Ván</span>
+                </div>
+              </div>
+              <div class="q-stat-item">
+                <span class="q-stat-icon">🎂</span>
+                <div class="q-stat-text">
+                  <strong>12+</strong>
+                  <span>Độ Tuổi</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -339,12 +425,15 @@
       <!-- ===== 4. 4 TRỤ CỘT CHIẾN THUẬT TỐI THƯỢNG (FAN DECK 3D) ===== -->
       <section class="home-pillars-section alt-bg" id="block4-pillars">
         <div class="home-pillars-container">
-          <div class="text-center" style="margin-bottom: 40px;">
-            <h2 class="quychien-headline-bold" style="font-size: clamp(2rem, 4.2vw, 3.4rem);">4 TRỤ CỘT CHIẾN THUẬT TỐI THƯỢNG</h2>
-            <div class="quychien-headline-divider" style="margin: 16px auto;"></div>
-            <p style="color: var(--text-secondary); max-width: 680px; margin: 0 auto; font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.7;">
-              Bốn nhóm thẻ bài cốt lõi tạo nên chiều sâu chiến thuật và sự kịch tính của từng ván cờ. 
-              <b style="color: var(--color-sky);">Nhấp vào từng thẻ để lật mở bí mật chiến thuật & chi tiết linh kiện!</b>
+          <div class="text-center" style="margin-bottom: 24px;">
+            <h2 class="quychien-headline-bold" style="font-size: clamp(1.85rem, 3.6vw, 2.9rem);">4 TRỤ CỘT CHIẾN THUẬT
+              TỐI THƯỢNG</h2>
+            <div class="quychien-headline-divider" style="margin: 12px auto;"></div>
+            <p
+              style="color: var(--text-secondary); max-width: 680px; margin: 0 auto; font-size: clamp(0.92rem, 1.15vw, 1.02rem); line-height: 1.6;">
+              Bốn nhóm thẻ bài cốt lõi tạo nên chiều sâu chiến thuật và sự kịch tính của từng ván cờ.
+              <b style="color: var(--color-sky);">Nhấp vào từng thẻ để lật mở bí mật chiến thuật & chi tiết linh
+                kiện!</b>
             </p>
           </div>
 
@@ -353,39 +442,29 @@
             <div class="pillars-fandeck-area" id="pillarsFanDeck">
 
               <!-- Thẻ Bài 1: Thẻ Phương Tiện (Xanh lá) -->
-              <div class="pillar-fandeck-card card-green-style" data-category="phuong-tien" title="Khám phá Thẻ Phương Tiện">
+              <div class="pillar-fandeck-card card-green-style" data-category="phuong-tien"
+                title="Khám phá Thẻ Phương Tiện">
                 <img src="assets/card-back-phuongtien.png" alt="Thẻ Phương Tiện" class="fandeck-card-img">
                 <div class="fandeck-card-glare"></div>
-                <div class="fandeck-card-pill">
-                  <span>PHƯƠNG TIỆN</span>
-                </div>
               </div>
 
               <!-- Thẻ Bài 2: Thẻ Sự Kiện (Đỏ) -->
               <div class="pillar-fandeck-card card-red-style" data-category="su-kien" title="Khám phá Thẻ Sự Kiện">
                 <img src="assets/card-back-sukien.png" alt="Thẻ Sự Kiện" class="fandeck-card-img">
                 <div class="fandeck-card-glare"></div>
-                <div class="fandeck-card-pill">
-                  <span>SỰ KIỆN</span>
-                </div>
               </div>
 
               <!-- Thẻ Bài 3: Thẻ Chợ (Xanh dương) -->
               <div class="pillar-fandeck-card card-blue-style" data-category="cho" title="Khám phá Thẻ Chợ">
                 <img src="assets/card-back-cho.png" alt="Thẻ Chợ" class="fandeck-card-img">
                 <div class="fandeck-card-glare"></div>
-                <div class="fandeck-card-pill">
-                  <span>THẺ CHỢ</span>
-                </div>
               </div>
 
               <!-- Thẻ Bài 4: Thẻ Incoterm (Vàng) -->
-              <div class="pillar-fandeck-card card-yellow-style" data-category="incoterm" title="Khám phá Thẻ Incoterms">
+              <div class="pillar-fandeck-card card-yellow-style" data-category="incoterm"
+                title="Khám phá Thẻ Incoterms">
                 <img src="assets/card-back-incoterm.png" alt="Thẻ Incoterms" class="fandeck-card-img">
                 <div class="fandeck-card-glare"></div>
-                <div class="fandeck-card-pill">
-                  <span>INCOTERMS</span>
-                </div>
               </div>
 
               <!-- 3D Decorative Assets Scattered Around (6 Icons) -->
@@ -440,30 +519,62 @@
         </div>
       </section>
 
-      <!-- ===== 5. GIÁ TRỊ CẢM XÚC ===== -->
-      <section class="home-quychien-section">
-        <div class="home-quychien-inner">
-          <div class="home-quychien-img-col">
-            <div class="quychien-img-frame placeholder-frame">
-              <!-- Placeholder cho hình ảnh cảm xúc/chiến thắng -->
-              <div class="placeholder-content">
-                <span class="placeholder-icon">🏆</span>
-                <span class="placeholder-text">Hình ảnh niềm vui chiến thắng / Cảm xúc chơi</span>
-              </div>
+      <!-- ===== 5. GIÁ TRỊ CẢM XÚC (3-COLUMN VALUE CARDS) ===== -->
+      <section class="home-quychien-section" id="block5-values">
+        <div class="home-values-container">
+          <div class="text-center" style="margin-bottom: 36px;">
+            <div class="quychien-badge-pill" style="margin: 0 auto 12px;">
+              <span>TRẢI NGHIỆM ĐỌNG LẠI</span>
             </div>
-          </div>
-          <div class="home-quychien-text-col">
-            <h2 class="quychien-headline-bold">
-              GIÁ TRỊ CẢM XÚC<br>
-              & TRẢI NGHIỆM ĐỌNG LẠI
+            <h2 class="quychien-headline-bold" style="font-size: clamp(1.85rem, 3.6vw, 2.9rem);">
+              GIÁ TRỊ CẢM XÚC & CHIẾN TÍCH
             </h2>
-            <div class="quychien-headline-divider"></div>
-            <p class="quychien-body-text">🎭 <b>Kịch tính & Tiếng cười:</b> Sự hồi hộp khi chờ chuyến tàu cập cảng và
-              những khoảnh khắc vỡ òa khi hóa giải thành công rủi ro.</p>
-            <p class="quychien-body-text">💡 <b>Cảm giác bản lĩnh:</b> Trải nghiệm cảm giác của một Giám đốc Logistics
-              thực thụ khi điều phối thành công chuỗi cung ứng toàn cầu.</p>
-            <p class="quychien-body-text">📚 <b>Học mà chơi:</b> Nắm vững bản chất 11 điều khoản Incoterms một cách tự
-              nhiên và sâu sắc nhất mà không cần học thuộc lòng.</p>
+            <div class="quychien-headline-divider" style="margin: 12px auto;"></div>
+            <p style="color: var(--text-secondary); max-width: 680px; margin: 0 auto; font-size: clamp(0.92rem, 1.15vw, 1.02rem); line-height: 1.6;">
+              Không chỉ dừng lại ở một trò chơi giải trí, LogisQuest mở ra không gian kết nối cảm xúc, tư duy chiến lược và kiến thức thực tiễn.
+            </p>
+          </div>
+
+          <!-- Lưới 3 Cột Thẻ Giá Trị Trải Ngang -->
+          <div class="quychien-value-grid">
+            <!-- Thẻ I -->
+            <div class="quychien-value-card">
+              <div class="value-card-watermark">I</div>
+              <div class="value-card-icon-box icon-red">
+                <span>🎭</span>
+              </div>
+              <h3 class="value-card-title">Kịch Tính & Tiếng Cười</h3>
+              <div class="value-card-line"></div>
+              <p class="value-card-desc">
+                Sự hồi hộp nghẹt thở khi chờ chuyến tàu cập cảng an toàn và những khoảnh khắc vỡ òa phấn khích khi hóa giải thành công biến cố bất ngờ.
+              </p>
+            </div>
+
+            <!-- Thẻ II -->
+            <div class="quychien-value-card highlight">
+              <div class="value-card-watermark">II</div>
+              <div class="value-card-icon-box icon-yellow">
+                <span>💡</span>
+              </div>
+              <h3 class="value-card-title">Bản Lĩnh Giám Đốc Logistics</h3>
+              <div class="value-card-line"></div>
+              <p class="value-card-desc">
+                Trải nghiệm cảm giác của một nhà điều hành chuỗi cung ứng thực thụ: tự tay phân bổ tàu bè, ra quyết định cước phí và bảo vệ lợi nhuận biên toàn cục.
+              </p>
+            </div>
+
+            <!-- Thẻ III -->
+            <div class="quychien-value-card">
+              <div class="value-card-watermark">III</div>
+              <div class="value-card-icon-box icon-blue">
+                <span>📚</span>
+              </div>
+              <h3 class="value-card-title">Học Mà Chơi — Trực Quan</h3>
+              <div class="value-card-line"></div>
+              <p class="value-card-desc">
+                Nắm vững bản chất 11 điều khoản Incoterms 2020 một cách tự nhiên và sâu sắc nhất thông qua thực chiến mà không cần phải học thuộc lòng khô khan.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -1563,58 +1674,84 @@
 
   </footer>
 
-  <!-- Card Modal Overlay: 3D FLIP CARD SHOWCASE -->
+  <!-- Card Modal Overlay: 3D FLIP CARD SHOWCASE (BRIGHT MARITIME REDESIGN) -->
   <div class="modal-overlay" id="cardModal">
     <div class="modal-content modal-3d-card-content">
-      <button class="modal-close" id="modalClose" aria-label="Close Modal">&times;</button>
+      <button class="modal-close" id="modalClose" aria-label="Đóng bảng chi tiết">&times;</button>
       <div class="modal-body modal-3d-body">
-        
-        <!-- Left: 3D Flip Card Interactive Box -->
+
+        <!-- Left: 3D Flip Card Interactive Stage -->
         <div class="modal-card-view">
-          <div class="modal-flip-container" id="modalFlipWrapper" title="Nhấp vào thẻ để lật mặt trước / sau">
-            <div class="modal-flip-inner" id="modalFlipCard">
-              <!-- Mặt sau: Container 3D -->
-              <div class="modal-flip-face modal-flip-back">
-                <img src="assets/card-back-incoterm.png" alt="Mặt sau Container 3D" id="modalCardBackImg" class="modal-card-img">
-                <div class="modal-card-hint">
-                  <span>🔄 Nhấp để lật mặt thẻ</span>
+          <div class="modal-stage-wrapper">
+            <div class="modal-flip-container" id="modalFlipWrapper" title="Nhấp vào thẻ để lật mặt trước / sau">
+              <div class="modal-flip-inner" id="modalFlipCard">
+                <!-- Mặt sau: Container 3D (Ngang) -->
+                <div class="modal-flip-face modal-flip-back">
+                  <img src="assets/card-back-sukien.png" alt="Mặt sau Container 3D" id="modalCardBackImg"
+                    class="modal-card-img">
+                </div>
+                <!-- Mặt trước: Thẻ bài chức năng thực tế (Dọc) -->
+                <div class="modal-flip-face modal-flip-front">
+                  <img src="assets/The Su Kien/BÃO NHIỆT ĐỚI.png" alt="Mặt trước Thẻ bài" id="modalCardFrontImg"
+                    class="modal-card-img">
                 </div>
               </div>
-              <!-- Mặt trước: Thẻ chức năng thực tế -->
-              <div class="modal-flip-face modal-flip-front">
-                <img src="assets/The Incoterm/CIF.png" alt="Mặt trước Thẻ bài" id="modalCardFrontImg" class="modal-card-img">
-                <div class="modal-card-hint">
-                  <span>🔄 Nhấp để lật về Container</span>
-                </div>
-              </div>
+            </div>
+
+            <!-- Podium Base & Flip Action Button -->
+            <div class="modal-card-podium">
+              <div class="podium-glow"></div>
+              <button class="modal-flip-trigger-btn" id="modalFlipActionBtn" type="button">Xoay lật 3D</button>
             </div>
           </div>
         </div>
 
-        <!-- Right: Chi tiết thông tin & Thẻ con Gallery -->
+        <!-- Right: Chi tiết thông tin & Thẻ con Gallery Cuộn Ngang -->
         <div class="modal-card-details">
-          <div class="modal-type-badge-wrap">
-            <span class="modal-card-type" id="modalCardType">Thẻ Incoterms</span>
-            <span class="modal-card-count" id="modalCardCount">11 Thẻ</span>
+          <!-- Header Area -->
+          <div class="modal-details-header">
+            <div class="modal-type-badge-wrap">
+              <span class="modal-card-type" id="modalCardType">Thẻ Sự Kiện</span>
+            </div>
+            <h2 class="modal-card-title" id="modalCardTitle">Bão Nhiệt Đới</h2>
           </div>
 
-          <h2 class="modal-card-title" id="modalCardTitle">11 THẺ CẢNG INCOTERMS 2020</h2>
-          
-          <div class="modal-card-desc-box">
-            <h4 class="modal-box-subtitle">Quy tắc cốt lõi:</h4>
-            <p class="modal-card-effect" id="modalCardEffect">Mỗi cảng là một điều khoản Incoterms 2020 với quy tắc phân chia cước phí và rủi ro riêng biệt giữa Bên Bán và Bên Mua.</p>
+          <!-- Structured Info Boxes -->
+          <div class="modal-info-grid">
+            <div class="modal-card-desc-box">
+              <div class="modal-box-header">
+                <h4 class="modal-box-subtitle">Quy tắc cốt lõi</h4>
+              </div>
+              <p class="modal-card-effect" id="modalCardEffect">Tái hiện chân thực các rủi ro vận tải thực tế: Bão biển
+                nhiệt đới, cướp biển vịnh Aden, tắc nghẽn kênh đào Suez hay khủng hoảng giá cước toàn cầu.</p>
+            </div>
+
+            <div class="modal-card-strategy">
+              <div class="modal-box-header">
+                <h4 class="modal-box-subtitle">Chiến thuật đỉnh cao</h4>
+              </div>
+              <p id="modalCardStrategy">Yếu tố xoay chuyển tình thế bất ngờ! Sử dụng thẻ sự kiện đúng thời điểm để làm
+                chậm bước tiến của đối thủ đang dẫn đầu hoặc bảo vệ đội tàu của mình.</p>
+            </div>
           </div>
 
-          <div class="modal-card-strategy">
-            <h4 class="modal-box-subtitle">Chiến thuật đỉnh cao:</h4>
-            <p id="modalCardStrategy">Nắm bắt quyền điều động tàu đến các cảng phù hợp với hợp đồng của bạn để tối đa hóa điểm chiến thắng và đẩy rủi ro sang đối thủ.</p>
-          </div>
-
-          <!-- Mini Gallery: Danh sách các thẻ con để xem mặt trước tương ứng -->
+          <!-- Mini Gallery: Dải thẻ cuộn ngang với Scroll Snap & Wheel Step Control -->
           <div class="modal-subcards-section">
-            <h4 class="modal-box-subtitle">Khám phá các lá bài tiêu biểu:</h4>
-            <div class="modal-subcards-gallery" id="modalSubcardsGallery">
-              <!-- Render dynamic thumbnails via JS -->
+            <div class="modal-subcards-header">
+              <div class="modal-subcards-title-wrap">
+                <h4 class="modal-box-subtitle">Bộ sưu tập lá bài</h4>
+                <span class="modal-carousel-indicator" id="modalCarouselIndicator">Thẻ 1 / 24</span>
+              </div>
+            </div>
+
+            <div class="modal-subcards-track-wrap">
+              <div class="modal-subcards-gallery" id="modalSubcardsGallery" tabindex="0" role="region"
+                aria-label="Dải thẻ cuộn ngang">
+                <!-- Render dynamic thumbnails via JS -->
+              </div>
+            </div>
+            <div class="modal-carousel-hint-text">
+              <span>Cuộn chuột để chuyển lần lượt từng lá bài</span>
             </div>
           </div>
         </div>

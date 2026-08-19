@@ -1231,6 +1231,10 @@ const PILLAR_CATEGORIES_DATA = {
 
 // MODAL INTERACTIONS & 3D FLIP CARD LOGIC
 let isModalCardFlipped = false;
+let currentModalCategory = 'su-kien';
+let currentModalSubcardsList = [];
+let currentModalCardIndex = 0;
+let isGalleryDragging = false;
 
 function toggleModalCardFlip(forceState) {
   const flipCard = document.getElementById('modalFlipCard');
@@ -1249,12 +1253,80 @@ function toggleModalCardFlip(forceState) {
   }
 }
 
+function updateModalIndicator(index, total) {
+  const indicator = document.getElementById('modalCarouselIndicator');
+  if (indicator) {
+    indicator.textContent = `Thẻ ${index + 1} / ${total}`;
+  }
+}
+
+function selectModalSubcard(index) {
+  if (!currentModalSubcardsList || currentModalSubcardsList.length === 0) return;
+  if (index < 0) index = 0;
+  if (index >= currentModalSubcardsList.length) index = currentModalSubcardsList.length - 1;
+
+  const prevIndex = currentModalCardIndex;
+  const isForward = index >= prevIndex;
+  currentModalCardIndex = index;
+  const sub = currentModalSubcardsList[index];
+  const catData = PILLAR_CATEGORIES_DATA[currentModalCategory] || PILLAR_CATEGORIES_DATA['su-kien'];
+
+  const cardFrontImg = document.getElementById('modalCardFrontImg');
+  const cardTitle = document.getElementById('modalCardTitle');
+  const cardEffect = document.getElementById('modalCardEffect');
+  const cardStrategy = document.getElementById('modalCardStrategy');
+  const gallery = document.getElementById('modalSubcardsGallery');
+
+  if (cardFrontImg) cardFrontImg.src = sub.image;
+  if (cardTitle) cardTitle.textContent = sub.title;
+  if (cardEffect) {
+    cardEffect.innerHTML = sub.effect ? sub.effect : `<strong>Quy tắc:</strong> ${catData.effect}`;
+  }
+  if (cardStrategy) {
+    cardStrategy.textContent = sub.strategy || catData.strategy;
+  }
+
+  // Trigger Elastic 3D Card Deck Slide animation
+  const cardFrontFace = document.querySelector('.modal-flip-front');
+  if (cardFrontFace) {
+    cardFrontFace.classList.remove('slide-next', 'slide-prev', 'card-swap-anim');
+    void cardFrontFace.offsetWidth; // Reflow to restart animation
+    cardFrontFace.classList.add(isForward ? 'slide-next' : 'slide-prev');
+  }
+
+  [cardTitle, cardEffect, cardStrategy].forEach(el => {
+    if (el) {
+      el.classList.remove('modal-text-fade-in');
+      void el.offsetWidth; // Reflow to restart animation
+      el.classList.add('modal-text-fade-in');
+    }
+  });
+
+  // Update Active Thumbnail & Scroll into view
+  if (gallery) {
+    const thumbs = gallery.querySelectorAll('.modal-subcard-thumb');
+    thumbs.forEach((t, idx) => {
+      if (idx === index) {
+        t.classList.add('active');
+        t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      } else {
+        t.classList.remove('active');
+      }
+    });
+  }
+
+  updateModalIndicator(index, currentModalSubcardsList.length);
+
+  // Auto flip to front face if user is inspecting specific card
+  toggleModalCardFlip(true);
+}
+
 function openPillarCategoryModal(categoryKey) {
-  const data = PILLAR_CATEGORIES_DATA[categoryKey] || PILLAR_CATEGORIES_DATA['incoterm'];
+  currentModalCategory = categoryKey;
+  const data = PILLAR_CATEGORIES_DATA[categoryKey] || PILLAR_CATEGORIES_DATA['su-kien'];
   const cardBackImg = document.getElementById('modalCardBackImg');
   const cardFrontImg = document.getElementById('modalCardFrontImg');
   const cardType = document.getElementById('modalCardType');
-  const cardCount = document.getElementById('modalCardCount');
   const cardTitle = document.getElementById('modalCardTitle');
   const cardEffect = document.getElementById('modalCardEffect');
   const cardStrategy = document.getElementById('modalCardStrategy');
@@ -1266,41 +1338,46 @@ function openPillarCategoryModal(categoryKey) {
     cardType.textContent = data.categoryText;
     cardType.className = `modal-card-type type-${data.category}`;
   }
-  if (cardCount) cardCount.textContent = data.countText;
-  if (cardTitle) cardTitle.textContent = data.title;
-  if (cardEffect) cardEffect.innerHTML = `<strong>Quy tắc cốt lõi:</strong> ${data.effect}`;
+  if (cardEffect) cardEffect.textContent = data.effect;
   if (cardStrategy) cardStrategy.textContent = data.strategy;
 
-  // Render Subcards Thumbnails
+  // Lọc danh sách thẻ thực tế từ CARDS_DATA thuộc nhóm này
+  const matchingCards = CARDS_DATA.filter(c => c.category === data.category);
+  currentModalSubcardsList = matchingCards.length > 0 ? matchingCards : (data.subcards || []);
+  currentModalCardIndex = 0;
+
+  // Render Subcards Thumbnails vào Băng chuyền cuộn ngang
   if (gallery) {
     gallery.innerHTML = '';
-    // Thêm các thẻ thực tế từ CARDS_DATA thuộc nhóm này
-    const matchingCards = CARDS_DATA.filter(c => c.category === data.category);
-    const displayList = matchingCards.length > 0 ? matchingCards : (data.subcards || []);
 
-    displayList.forEach((sub, idx) => {
+    currentModalSubcardsList.forEach((sub, idx) => {
       const thumb = document.createElement('div');
       thumb.className = `modal-subcard-thumb ${idx === 0 ? 'active' : ''}`;
       thumb.title = sub.title;
+      thumb.setAttribute('data-index', idx);
       thumb.innerHTML = `<img src="${sub.image}" alt="${sub.title}" loading="lazy">`;
 
       thumb.addEventListener('click', () => {
-        gallery.querySelectorAll('.modal-subcard-thumb').forEach(t => t.classList.remove('active'));
-        thumb.classList.add('active');
-        if (cardFrontImg) cardFrontImg.src = sub.image;
-        if (sub.title && cardTitle) cardTitle.textContent = `${data.title} — ${sub.title}`;
-        if (sub.effect && cardEffect) cardEffect.innerHTML = `<strong>Chi tiết:</strong> ${sub.effect}`;
-        if (sub.strategy && cardStrategy) cardStrategy.textContent = sub.strategy;
-
-        // Auto flip to front face if looking at back
-        toggleModalCardFlip(true);
+        if (isGalleryDragging) return;
+        selectModalSubcard(idx);
       });
 
       gallery.appendChild(thumb);
     });
+
+    // Reset cuộn gallery về đầu
+    gallery.scrollLeft = 0;
   }
 
-  // Reset flip to front/back: Mặc định hiển thị mặt sau Container 3D (Ngang) và nhấp để lật (Dọc)
+  // Mặc định chọn thẻ đầu tiên
+  if (currentModalSubcardsList.length > 0) {
+    selectModalSubcard(0);
+  } else {
+    if (cardTitle) cardTitle.textContent = data.title;
+    updateModalIndicator(0, 0);
+  }
+
+  // Mặc định hiển thị mặt sau Container 3D (Ngang) và nhấp để lật (Dọc)
   toggleModalCardFlip(false);
 
   cardModal.classList.add('active');
@@ -1309,16 +1386,16 @@ function openPillarCategoryModal(categoryKey) {
 
 function openCardModal(card) {
   // Map regular card click (from database page) to 3D showcase
+  currentModalCategory = card.category;
   const cardBackImg = document.getElementById('modalCardBackImg');
   const cardFrontImg = document.getElementById('modalCardFrontImg');
   const cardType = document.getElementById('modalCardType');
-  const cardCount = document.getElementById('modalCardCount');
   const cardTitle = document.getElementById('modalCardTitle');
   const cardEffect = document.getElementById('modalCardEffect');
   const cardStrategy = document.getElementById('modalCardStrategy');
   const gallery = document.getElementById('modalSubcardsGallery');
 
-  const catData = PILLAR_CATEGORIES_DATA[card.category] || PILLAR_CATEGORIES_DATA['incoterm'];
+  const catData = PILLAR_CATEGORIES_DATA[card.category] || PILLAR_CATEGORIES_DATA['su-kien'];
 
   if (cardBackImg) cardBackImg.src = catData.backImage;
   if (cardFrontImg) cardFrontImg.src = card.image;
@@ -1326,14 +1403,40 @@ function openCardModal(card) {
     cardType.textContent = card.categoryText;
     cardType.className = `modal-card-type type-${card.category}`;
   }
-  if (cardCount) cardCount.textContent = catData.countText;
   if (cardTitle) cardTitle.textContent = card.title;
-  if (cardEffect) cardEffect.innerHTML = `<strong>Hiệu ứng:</strong> ${card.effect}`;
+  if (cardEffect) cardEffect.textContent = card.effect;
   if (cardStrategy) cardStrategy.textContent = card.strategy;
+
+  const matchingCards = CARDS_DATA.filter(c => c.category === card.category);
+  currentModalSubcardsList = matchingCards.length > 0 ? matchingCards : (catData.subcards || []);
+
+  const cardIdx = currentModalSubcardsList.findIndex(c => c.title === card.title || c.image === card.image);
+  currentModalCardIndex = cardIdx >= 0 ? cardIdx : 0;
 
   if (gallery) {
     gallery.innerHTML = '';
+    currentModalSubcardsList.forEach((sub, idx) => {
+      const thumb = document.createElement('div');
+      thumb.className = `modal-subcard-thumb ${idx === currentModalCardIndex ? 'active' : ''}`;
+      thumb.title = sub.title;
+      thumb.setAttribute('data-index', idx);
+      thumb.innerHTML = `<img src="${sub.image}" alt="${sub.title}" loading="lazy">`;
+
+      thumb.addEventListener('click', () => {
+        if (isGalleryDragging) return;
+        selectModalSubcard(idx);
+      });
+
+      gallery.appendChild(thumb);
+    });
+
+    setTimeout(() => {
+      const activeThumb = gallery.querySelector('.modal-subcard-thumb.active');
+      if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }, 100);
   }
+
+  updateModalIndicator(currentModalCardIndex, currentModalSubcardsList.length);
 
   // Directly show the front face for explicit single-card clicks
   toggleModalCardFlip(true);
@@ -1344,7 +1447,7 @@ function openCardModal(card) {
 
 function closeCardModal() {
   cardModal.classList.remove('active');
-  if (!mobileNav.classList.contains('active')) {
+  if (!mobileNav || !mobileNav.classList.contains('active')) {
     document.body.style.overflow = 'auto';
   }
 }
@@ -1369,11 +1472,104 @@ function initBlock4PillarsEvents() {
     });
   });
 
-  // 3. 3D Card Flip interaction directly on card click
+  // 3. 3D Card Flip interaction directly on card click & Podium trigger
   const flipWrapper = document.getElementById('modalFlipWrapper');
   if (flipWrapper) {
     flipWrapper.addEventListener('click', () => toggleModalCardFlip());
   }
+
+  const flipActionBtn = document.getElementById('modalFlipActionBtn');
+  if (flipActionBtn) {
+    flipActionBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleModalCardFlip();
+    });
+  }
+
+  // 4. MOUSE WHEEL STEP-BY-STEP CARD NAVIGATOR (Lăn chuột để nhảy từng thẻ cho đến hết)
+  const subcardsSection = document.querySelector('.modal-subcards-section');
+  const gallery = document.getElementById('modalSubcardsGallery');
+
+  let lastWheelStepTime = 0;
+  const WHEEL_STEP_INTERVAL = 200; // ms threshold between card jumps (phù hợp với animation 0.42s)
+
+  if (gallery) {
+    const handleWheelStep = (e) => {
+      const delta = e.deltaY !== 0 ? e.deltaY : e.deltaX;
+      if (delta !== 0) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const now = Date.now();
+        if (now - lastWheelStepTime < WHEEL_STEP_INTERVAL) return;
+        lastWheelStepTime = now;
+
+        if (delta > 0) {
+          // Lăn chuột xuống -> Nhảy sang thẻ kế tiếp
+          if (currentModalCardIndex < currentModalSubcardsList.length - 1) {
+            selectModalSubcard(currentModalCardIndex + 1);
+          }
+        } else {
+          // Lăn chuột lên -> Quay lại thẻ trước
+          if (currentModalCardIndex > 0) {
+            selectModalSubcard(currentModalCardIndex - 1);
+          }
+        }
+      }
+    };
+
+    gallery.addEventListener('wheel', handleWheelStep, { passive: false });
+    if (subcardsSection) {
+      subcardsSection.addEventListener('wheel', handleWheelStep, { passive: false });
+    }
+
+    // Drag-to-scroll gesture for desktop mouse
+    let isDown = false;
+    let startX = 0;
+    let scrollStartLeft = 0;
+
+    gallery.addEventListener('mousedown', (e) => {
+      isDown = true;
+      isGalleryDragging = false;
+      startX = e.pageX - gallery.offsetLeft;
+      scrollStartLeft = gallery.scrollLeft;
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDown) {
+        isDown = false;
+        setTimeout(() => { isGalleryDragging = false; }, 60);
+      }
+    });
+
+    gallery.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      const x = e.pageX - gallery.offsetLeft;
+      const walk = (x - startX);
+      if (Math.abs(walk) > 4) {
+        isGalleryDragging = true;
+        e.preventDefault();
+        gallery.scrollLeft = scrollStartLeft - (walk * 1.4);
+      }
+    });
+  }
+
+  // 6. Keyboard navigation (Left / Right arrow & Escape)
+  document.addEventListener('keydown', (e) => {
+    if (!cardModal || !cardModal.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft') {
+      selectModalSubcard(currentModalCardIndex - 1);
+    } else if (e.key === 'ArrowRight') {
+      selectModalSubcard(currentModalCardIndex + 1);
+    } else if (e.key === 'Escape') {
+      closeCardModal();
+    } else if (e.key === ' ' || e.key === 'Enter') {
+      if (document.activeElement && document.activeElement.tagName !== 'BUTTON') {
+        e.preventDefault();
+        toggleModalCardFlip();
+      }
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1559,5 +1755,121 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 2450);
     });
   });
+
+  // Khởi tạo Băng chuyền ảnh Khối 1
+  initBlock1ShowcaseCarousel();
 });
+
+// ==========================================
+// BLOCK 1 SHOWCASE CAROUSEL (ORIGINAL ASPECT RATIO)
+// ==========================================
+function initBlock1ShowcaseCarousel() {
+  const carouselWrap = document.getElementById('block1ShowcaseCarousel');
+  const track = document.getElementById('block1CarouselTrack');
+  const paginationBar = document.getElementById('block1PaginationBar');
+  if (!track || !paginationBar) return;
+
+  const slides = track.querySelectorAll('.showcase-slide');
+  const dots = paginationBar.querySelectorAll('.showcase-dot');
+  const totalSlides = slides.length;
+  if (totalSlides === 0) return;
+
+  let currentIndex = 0;
+  let lastWheelTime = 0;
+  const WHEEL_DEBOUNCE = 180;
+
+  function updateActiveDot(index) {
+    currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
+    dots.forEach((dot, idx) => {
+      if (idx === currentIndex) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  function scrollToSlide(index) {
+    if (index < 0) index = 0;
+    if (index >= totalSlides) index = totalSlides - 1;
+    currentIndex = index;
+    const slideWidth = track.clientWidth;
+    track.scrollTo({
+      left: currentIndex * slideWidth,
+      behavior: 'smooth'
+    });
+    updateActiveDot(currentIndex);
+  }
+
+  // Wheel event for smooth step-by-step navigation
+  const handleWheel = (e) => {
+    const delta = e.deltaY !== 0 ? e.deltaY : e.deltaX;
+    if (delta !== 0) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const now = Date.now();
+      if (now - lastWheelTime < WHEEL_DEBOUNCE) return;
+      lastWheelTime = now;
+
+      if (delta > 0) {
+        scrollToSlide(currentIndex + 1);
+      } else {
+        scrollToSlide(currentIndex - 1);
+      }
+    }
+  };
+
+  if (carouselWrap) {
+    carouselWrap.addEventListener('wheel', handleWheel, { passive: false });
+  }
+
+  // Drag to scroll
+  let isDown = false;
+  let startX = 0;
+  let scrollStartLeft = 0;
+
+  track.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollStartLeft = track.scrollLeft;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (isDown) {
+      isDown = false;
+      const slideWidth = track.clientWidth;
+      const nearestIndex = Math.round(track.scrollLeft / slideWidth);
+      scrollToSlide(nearestIndex);
+    }
+  });
+
+  track.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX);
+    track.scrollLeft = scrollStartLeft - walk;
+  });
+
+  // Native scroll sync with pagination dots
+  let scrollTimeout = null;
+  track.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const slideWidth = track.clientWidth;
+      if (slideWidth > 0) {
+        const nearestIndex = Math.round(track.scrollLeft / slideWidth);
+        updateActiveDot(nearestIndex);
+      }
+    }, 50);
+  });
+
+  // Dots click
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      scrollToSlide(idx);
+    });
+  });
+}
 
