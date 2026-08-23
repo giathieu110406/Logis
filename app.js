@@ -502,7 +502,7 @@ const CARDS_DATA = [
 const navLinks = document.querySelectorAll('.nav-link, .mobile-link');
 const cardsGrid = document.getElementById('cardsGrid');
 const cardSearch = document.getElementById('cardSearch');
-const tabButtons = document.querySelectorAll('.tab-btn');
+const tabButtons = document.querySelectorAll('.tab-btn, .tactical-tab-btn, .game-btn-tab, .sx-tab-btn');
 
 // Modal Elements
 const cardModal = document.getElementById('cardModal');
@@ -533,6 +533,55 @@ function initEvents() {
     } else {
       openMobileNav();
     }
+  });
+
+  // ── NAV DELIVERY BUTTON HANDLER (Header / Sidebar) ──
+  const navDeliveryBtns = document.querySelectorAll('.nav-delivery-btn, [data-nav-delivery-btn], #headerDeliveryBtn, #sidebarDeliveryBtn');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  navDeliveryBtns.forEach(btn => {
+    btn.removeAttribute('onclick');
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      if (
+        btn.classList.contains('is-adding') ||
+        btn.classList.contains('is-animating') ||
+        btn.classList.contains('is-complete')
+      ) return;
+
+      btn.setAttribute('aria-disabled', 'true');
+
+      // Reduced motion: navigate ngay
+      if (reduceMotion.matches) {
+        btn.classList.add('is-complete');
+        window.location.href = 'buy.html';
+        return;
+      }
+
+      // Phase 1: Thêm vào giỏ hàng (2.45s)
+      btn.classList.add('is-adding');
+
+      // Phase 2: Bắt đầu giao hàng xe tải chạy qua (7.0s)
+      setTimeout(() => {
+        btn.classList.remove('is-adding');
+        btn.classList.add('is-animating');
+
+        // Thời gian xe tải hoàn thành chuyến chạy kéo dài tầm 7 giây
+        // Khi xe tải vừa chạy hết đoạn đường (~7.0s), lập tức chuyển hướng sang buy.html
+        setTimeout(() => {
+          btn.classList.add('is-complete');
+          window.location.href = 'buy.html';
+        }, 7000);
+
+        // Reset an toàn
+        setTimeout(() => {
+          btn.classList.remove('is-adding', 'is-animating', 'is-complete');
+          btn.removeAttribute('aria-disabled');
+        }, 9500);
+      }, 2450);
+    });
   });
 
   // CRITICAL REQUIREMENT: Strictly lock page scroll when sidebar is open or closing
@@ -606,11 +655,34 @@ function initEvents() {
     });
   });
 
-  // Gameplay Page Tab Navigation (.gp-tab)
+  // Gameplay Page Tab Navigation (.gp-tab) with Smooth Scroll & GSAP spring highlight
   document.querySelectorAll('.gp-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.gp-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
+
+      const targetTab = tab.getAttribute('data-gptab');
+      if (targetTab === 'overview') {
+        const stats = document.querySelector('.gp-stats-bar');
+        if (stats) {
+          stats.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      } else if (targetTab === 'guide') {
+        const sec = document.getElementById('gpActions');
+        if (sec) {
+          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } else if (targetTab === 'components') {
+        const sec = document.getElementById('gpFlow');
+        if (sec) {
+          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } else if (targetTab === 'glossary') {
+        const sec = document.getElementById('gpIncoterms');
+        if (sec) {
+          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
     });
   });
 
@@ -618,6 +690,18 @@ function initEvents() {
   cardSearch.addEventListener('input', (e) => {
     searchQuery = e.target.value.toLowerCase().trim();
     renderCards();
+  });
+
+  // Global Keyboard Shortcut: '/' to focus Card Search Input
+  window.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== cardSearch && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      const cardsView = document.getElementById('cardsView');
+      if (cardsView && cardsView.classList.contains('active')) {
+        e.preventDefault();
+        cardSearch.focus();
+        cardSearch.select();
+      }
+    }
   });
 
   // Smooth Auto-hide / Reveal Header on Scroll
@@ -655,7 +739,72 @@ function initEvents() {
       closeCardModal();
     }
   });
+
+  // ── DELIVERY BUTTON HANDLER (Phase 1 + Phase 2) ──
+  // All .order-button elements (both header and sidebar) get the full animation sequence
+  const CART_ANIM_DURATION = 2450;   // ms — Phase 1 shirt→cart
+  const DELIVERY_DURATION = 8000;   // ms — Phase 2 truck
+  const reduceMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const deliveryTimerMap = new WeakMap();
+
+  function resetDeliveryBtn(btn) {
+    const timers = deliveryTimerMap.get(btn) || [];
+    timers.forEach(clearTimeout);
+    deliveryTimerMap.delete(btn);
+    btn.classList.remove('is-adding', 'is-animating', 'is-complete');
+    btn.removeAttribute('aria-disabled');
+    btn.setAttribute('aria-label', 'Mua ngay');
+  }
+
+  function deliveryPhase2(btn) {
+    btn.classList.remove('is-adding');
+    btn.classList.add('is-animating');
+
+    // After truck sequence: show success label, then redirect to buy.html
+    const t1 = setTimeout(() => {
+      btn.setAttribute('aria-label', 'Đặt hàng thành công');
+    }, 5600);
+
+    const t2 = setTimeout(() => {
+      // Redirect to buy page after full animation
+      window.location.href = 'buy.html';
+    }, DELIVERY_DURATION);
+
+    deliveryTimerMap.set(btn, [t1, t2]);
+  }
+
+  function deliveryPhase1(btn) {
+    if (btn.classList.contains('is-adding') ||
+      btn.classList.contains('is-animating') ||
+      btn.classList.contains('is-complete')) return;
+
+    btn.setAttribute('aria-disabled', 'true');
+
+    // Reduced motion: skip animations, redirect immediately
+    if (reduceMotionMQ.matches) {
+      btn.classList.add('is-complete');
+      const t = setTimeout(() => { window.location.href = 'buy.html'; }, 600);
+      deliveryTimerMap.set(btn, [t]);
+      return;
+    }
+
+    btn.classList.add('is-adding');
+    const t = setTimeout(() => deliveryPhase2(btn), CART_ANIM_DURATION);
+    deliveryTimerMap.set(btn, [t]);
+  }
+
+  // Wire all .order-button elements on this page
+  document.querySelectorAll('.order-button').forEach(btn => {
+    // Remove inline onclick to avoid double firing — replace with JS
+    btn.removeAttribute('onclick');
+    btn.addEventListener('click', () => deliveryPhase1(btn));
+  });
+
+  reduceMotionMQ.addEventListener('change', () => {
+    document.querySelectorAll('.order-button').forEach(btn => resetDeliveryBtn(btn));
+  });
 }
+
 
 // SMOOTH OPEN / CLOSE MOBILE NAV WITH GSAP
 let savedScrollY = 0;
@@ -728,32 +877,44 @@ function initGSAPAnimations() {
     }
   }
 
-  // 1. Hero Title & Subtitle Entrance (Slower & Elegant)
+  // ── 0. TOP SCROLL PROGRESS BAR ──
+  const progressBar = document.getElementById('scrollProgressBar');
+  if (progressBar) {
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+      progressBar.style.transform = `scaleX(${Math.min(Math.max(progress, 0), 1)})`;
+    }, { passive: true });
+  }
+
+  // ── 1. HERO TITLE ENTRANCE ──
   gsap.from('.home-banner-title', {
-    y: 60,
+    y: 50,
     opacity: 0,
-    duration: 1.8,
+    duration: 1.6,
     ease: 'power3.out',
     delay: 0.3
   });
 
   gsap.from('.home-banner-sub', {
-    y: 40,
+    y: 35,
     opacity: 0,
-    duration: 1.6,
+    duration: 1.4,
     ease: 'power3.out',
-    delay: 0.7
+    delay: 0.6
   });
 
-  // 2. Hero Scroll Curtain & Product Zoom Reveal Animation Timeline
+  // Hero Background Image is kept completely static with no parallax movement
+
+  // ── 2. HERO SCROLL CURTAIN & PRODUCT ZOOM REVEAL ──
   const heroSection = document.getElementById('hero');
   const heroCurtain = document.getElementById('heroCurtain');
   const heroProductReveal = document.getElementById('heroProductReveal');
   const heroProductCaption = document.getElementById('heroProductCaption');
-  const firstContentSec = document.getElementById('block1-showcase') || document.querySelector('.home-quychien-section');
+  const firstContentSec = document.getElementById('block1-showcase');
 
   if (heroSection && heroCurtain && typeof ScrollTrigger !== 'undefined') {
-    // Pin hero section during curtain animation & product reveal transition
     const heroTl = gsap.timeline({
       scrollTrigger: {
         trigger: heroSection,
@@ -765,34 +926,29 @@ function initGSAPAnimations() {
       }
     });
 
-    // Stage 1: Kéo dãn thanh chữ nhật thẻ bài theo chiều dọc (0% -> 100%)
+    // Stage 1: Kéo dãn thanh chữ nhật thẻ bài theo chiều dọc
     heroTl.to(heroCurtain, {
       height: '100%',
       duration: 1,
       ease: 'power1.inOut'
     });
 
-    // Stage 2: Mở rộng thanh thẻ bài sang 2 bên màn hình (4px -> 100%)
+    // Stage 2: Mở rộng thanh thẻ bài sang 2 bên màn hình
     heroTl.to(heroCurtain, {
       width: '100%',
       duration: 1.2,
       ease: 'power1.inOut'
     });
 
-    // Stage 3: Phóng to bộ sản phẩm từ từ, liên tục và mượt mà
+    // Stage 3: Phóng to bộ sản phẩm từ từ, liên tục
     if (heroProductReveal) {
       heroTl.fromTo(heroProductReveal,
         { opacity: 0, scale: 0.15 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1.8,
-          ease: 'power1.out'
-        }
+        { opacity: 1, scale: 1, duration: 1.8, ease: 'power1.out' }
       );
     }
 
-    // Stage 3.5: Xuất hiện dòng chữ "Nhập cuộc ngay hôm nay" đồng nhịp với phóng to
+    // Stage 3.5: Xuất hiện dòng chữ "Nhập cuộc ngay hôm nay"
     if (heroProductCaption) {
       heroTl.fromTo(heroProductCaption,
         { opacity: 0, y: 30 },
@@ -805,113 +961,504 @@ function initGSAPAnimations() {
     if (firstContentSec) {
       heroTl.from(firstContentSec, {
         opacity: 0,
-        y: 50,
+        y: 40,
         duration: 1.2,
         ease: 'power1.out'
       });
     }
 
-    // Auto-smooth scroll on left click on Hero Banner (cuộn liên tục không ngừng 4 giây, dừng ngay trước Khối 1)
+    // Click on Hero to smoothly auto-scroll into Block 1
     let isAutoScrolling = false;
     heroSection.style.cursor = 'pointer';
 
     heroSection.addEventListener('click', (e) => {
-      // Chỉ kích hoạt khi click chuột trái (button === 0) và không click vào link/nút
       if (e.button !== 0 || isAutoScrolling) return;
       if (e.target.closest('a, button')) return;
 
       const st = heroTl.scrollTrigger;
-      if (!st) return;
-
-      if (st.progress >= 0.95) return;
+      if (!st || st.progress >= 0.95) return;
 
       isAutoScrolling = true;
-      const targetScroll = st.end;
-
       gsap.to(window, {
-        scrollTo: targetScroll,
-        duration: 4.0, // Cuộn liên tục không ngừng trong 4 giây
+        scrollTo: st.end,
+        duration: 3.5,
         ease: 'power1.inOut',
-        onComplete: () => {
-          isAutoScrolling = false;
-        }
+        onComplete: () => { isAutoScrolling = false; }
       });
     });
   }
 
-  // 3. GSAP ScrollTrigger Animations for Home Sections (Slowed down for high visibility)
-  const sections = document.querySelectorAll('.home-quychien-section');
-  sections.forEach((sec, idx) => {
-    // Skip first section if handled by hero timeline reveal
-    if (idx === 0 && heroSection && heroCurtain) return;
+  // ── 3. KHỐI 1 (GIỚI THIỆU NHANH LOGISQUEST - #block1-showcase) ──
+  if (typeof ScrollTrigger !== 'undefined') {
+    // Header tier (Logo, Headline, Subheadline)
+    gsap.from(['.showcase-brand-logo', '.showcase-main-headline', '.showcase-sub-headline'], {
+      scrollTrigger: {
+        trigger: '#block1-showcase',
+        start: 'top 78%'
+      },
+      y: 35,
+      opacity: 0,
+      stagger: 0.12,
+      duration: 0.85,
+      ease: 'power2.out'
+    });
 
-    const textCol = sec.querySelector('.home-quychien-text-col');
-    const imgFrame = sec.querySelector('.quychien-img-frame');
-
-    if (textCol && typeof ScrollTrigger !== 'undefined') {
-      gsap.from(textCol, {
+    // Airplane glide & contrail animation
+    gsap.fromTo('.showcase-plane-deco',
+      { x: -50, y: 25, opacity: 0 },
+      {
         scrollTrigger: {
-          trigger: sec,
-          start: 'top 80%',
-          end: 'top 30%',
-          scrub: 1.2, // Smooth scrub tracking with scroll
+          trigger: '#block1-showcase',
+          start: 'top 75%',
+          end: 'top 25%',
+          scrub: 1.2
         },
-        y: 80,
-        opacity: 0,
-        ease: 'power2.out'
-      });
-    }
-
-    if (imgFrame && typeof ScrollTrigger !== 'undefined') {
-      gsap.from(imgFrame, {
-        scrollTrigger: {
-          trigger: sec,
-          start: 'top 80%',
-          end: 'top 30%',
-          scrub: 1.2,
-        },
-        scale: 0.88,
-        y: 50,
-        opacity: 0,
-        ease: 'power2.out'
-      });
-    }
-  });
-
-  // 3. GSAP 3D Tilt Effect on Pillar Cards
-  const tiltElements = document.querySelectorAll('.home-pillar-card');
-  tiltElements.forEach((card) => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * -14; // Max 14 deg
-      const rotateY = ((x - centerX) / centerX) * 14;
-
-      gsap.to(card, {
-        rotateX: rotateX,
-        rotateY: rotateY,
-        transformPerspective: 1000,
-        duration: 0.4,
+        x: 0,
+        y: 0,
+        opacity: 1,
         ease: 'power1.out'
-      });
+      }
+    );
+
+    // Left 50% Glass Card Carousel
+    gsap.from('.showcase-glass-card', {
+      scrollTrigger: {
+        trigger: '#block1-showcase',
+        start: 'top 65%'
+      },
+      y: 45,
+      scale: 0.95,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'power2.out'
     });
 
-    card.addEventListener('mouseleave', () => {
-      gsap.to(card, {
-        rotateX: 0,
-        rotateY: 0,
-        duration: 0.8, // Smooth return
-        ease: 'power2.out'
-      });
+    // Right 50% Text & CTA
+    gsap.from(['.showcase-text-wrap', '.showcase-cta-wrap'], {
+      scrollTrigger: {
+        trigger: '#block1-showcase',
+        start: 'top 65%'
+      },
+      x: 40,
+      opacity: 0,
+      stagger: 0.15,
+      duration: 0.9,
+      ease: 'power2.out'
     });
+  }
+
+  // ── 4. KHỐI 2 (LỐI CHƠI ĐẤU TRÍ - #block2-gameplay) ──
+  if (typeof ScrollTrigger !== 'undefined') {
+    // Left Hải đồ map 3D unfold
+    gsap.from('#block2-gameplay .quychien-map-frame', {
+      scrollTrigger: {
+        trigger: '#block2-gameplay',
+        start: 'top 75%'
+      },
+      rotateY: -10,
+      scale: 0.93,
+      opacity: 0,
+      duration: 1.0,
+      ease: 'power2.out'
+    });
+
+    // 4 Corner Compass icons rotate in
+    gsap.from('#block2-gameplay .compass-corner', {
+      scrollTrigger: {
+        trigger: '#block2-gameplay',
+        start: 'top 75%'
+      },
+      rotate: -90,
+      scale: 0.5,
+      opacity: 0,
+      stagger: 0.08,
+      duration: 0.8,
+      ease: 'back.out(1.6)'
+    });
+
+    // Right Column Badge & Headline
+    gsap.from(['#block2-gameplay .quychien-badge-pill', '#block2-gameplay .quychien-headline-bold', '#block2-gameplay .quychien-headline-divider'], {
+      scrollTrigger: {
+        trigger: '#block2-gameplay',
+        start: 'top 75%'
+      },
+      x: 35,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
+
+    // Staggered Focus Cards 01 & 02
+    gsap.from('#block2-gameplay .quychien-focus-card', {
+      scrollTrigger: {
+        trigger: '#block2-gameplay .quychien-focus-cards',
+        start: 'top 80%'
+      },
+      y: 40,
+      opacity: 0,
+      stagger: 0.18,
+      duration: 0.85,
+      ease: 'power2.out'
+    });
+  }
+
+  // ── 5. KHỐI 3 (QUY MÔ CHIẾN TRƯỜNG 2-5 NGƯỜI - #block3-scale) ──
+  if (typeof ScrollTrigger !== 'undefined') {
+    // Left Map Frame
+    gsap.from('#block3-scale .quychien-map-frame', {
+      scrollTrigger: {
+        trigger: '#block3-scale',
+        start: 'top 75%'
+      },
+      rotateY: 10,
+      scale: 0.93,
+      opacity: 0,
+      duration: 1.0,
+      ease: 'power2.out'
+    });
+
+    // Right Column Headline
+    gsap.from(['#block3-scale .quychien-badge-pill', '#block3-scale .quychien-headline-bold', '#block3-scale .quychien-headline-divider'], {
+      scrollTrigger: {
+        trigger: '#block3-scale',
+        start: 'top 75%'
+      },
+      x: 35,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
+
+    // Mode Cards (1v1 & 4-5P Party)
+    gsap.from('#block3-scale .quychien-mode-card', {
+      scrollTrigger: {
+        trigger: '#block3-scale .quychien-mode-grid',
+        start: 'top 80%'
+      },
+      y: 35,
+      scale: 0.95,
+      opacity: 0,
+      stagger: 0.16,
+      duration: 0.85,
+      ease: 'power2.out'
+    });
+
+    // 3 Stat Badges Pop-in with Spring
+    gsap.from('#block3-scale .q-stat-item', {
+      scrollTrigger: {
+        trigger: '#block3-scale .quychien-stat-badges',
+        start: 'top 85%'
+      },
+      scale: 0.6,
+      opacity: 0,
+      stagger: 0.12,
+      duration: 0.7,
+      ease: 'back.out(1.7)'
+    });
+  }
+
+  // ── 6. KHỐI 4 (4 TRỤ CỘT CHIẾN THUẬT - #block4-pillars) ──
+  if (typeof ScrollTrigger !== 'undefined') {
+    // Background Diorama Parallax
+    gsap.to('.pillars-diorama-img', {
+      scrollTrigger: {
+        trigger: '#block4-pillars',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.2
+      },
+      yPercent: -12,
+      ease: 'none'
+    });
+
+    // Headline
+    gsap.from('#block4-pillars .pillars-headline-modern', {
+      scrollTrigger: {
+        trigger: '#block4-pillars',
+        start: 'top 78%'
+      },
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
+
+    // Fan Deck Cards Staggered Opening Spread
+    gsap.from('.pillar-fandeck-card', {
+      scrollTrigger: {
+        trigger: '#pillarsFanDeck',
+        start: 'top 75%'
+      },
+      y: 60,
+      scale: 0.8,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 0.9,
+      ease: 'back.out(1.3)'
+    });
+
+    // 3D Decor Icons Parallax Response on Scroll
+    gsap.to('.decor-crane-bottom-left', {
+      scrollTrigger: { trigger: '#block4-pillars', start: 'top bottom', end: 'bottom top', scrub: 1 },
+      y: -35,
+      ease: 'none'
+    });
+    gsap.to('.decor-cont-bottom-right', {
+      scrollTrigger: { trigger: '#block4-pillars', start: 'top bottom', end: 'bottom top', scrub: 1 },
+      y: -50,
+      ease: 'none'
+    });
+    gsap.to('.decor-boat-bottom-center', {
+      scrollTrigger: { trigger: '#block4-pillars', start: 'top bottom', end: 'bottom top', scrub: 1 },
+      y: -25,
+      ease: 'none'
+    });
+
+    // Pill Selector Row Buttons
+    gsap.from('.pillars-selector-row .pillar-select-btn', {
+      scrollTrigger: {
+        trigger: '.pillars-selector-row',
+        start: 'top 88%'
+      },
+      y: 25,
+      opacity: 0,
+      stagger: 0.08,
+      duration: 0.6,
+      ease: 'power2.out'
+    });
+  }
+
+  // ── 7. KHỐI 5 (SỨ MỆNH GIÁO DỤC 16:9 CINEMA CARD - #block5-values) ──
+  if (typeof ScrollTrigger !== 'undefined') {
+    // Cinema 16:9 Card Entrance
+    gsap.from('.edu-cinema-169-card', {
+      scrollTrigger: {
+        trigger: '#block5-values',
+        start: 'top 75%'
+      },
+      scale: 0.94,
+      opacity: 0,
+      duration: 0.95,
+      ease: 'power2.out'
+    });
+
+    // Hotspot Pins Pop-up with Bounce
+    gsap.from('.edu-hotspot', {
+      scrollTrigger: {
+        trigger: '.edu-cinema-visual',
+        start: 'top 70%'
+      },
+      scale: 0,
+      opacity: 0,
+      stagger: 0.18,
+      duration: 0.7,
+      ease: 'back.out(2.0)'
+    });
+
+    // Right Column 3 Glass Mission Rows Slide-in
+    gsap.from('.edu-pillar-glass-row', {
+      scrollTrigger: {
+        trigger: '.edu-cinema-pillars-list',
+        start: 'top 75%'
+      },
+      x: 50,
+      opacity: 0,
+      stagger: 0.15,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
+  }
+
+  // ── 8. CTA MUA HÀNG & FOOTER LEAD-IN (#buy) ──
+  if (typeof ScrollTrigger !== 'undefined') {
+    // Background Parallax
+    gsap.to('.home-cta-bg-img', {
+      scrollTrigger: {
+        trigger: '#buy',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.2
+      },
+      yPercent: -10,
+      ease: 'none'
+    });
+
+    // Content Left Stack
+    gsap.from(['.home-cta-badge', '.home-cta-title-wrap', '.home-cta-description', '.home-cta-action-btns'], {
+      scrollTrigger: {
+        trigger: '#buy',
+        start: 'top 75%'
+      },
+      y: 35,
+      opacity: 0,
+      stagger: 0.12,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
+
+    // 3 Feature items bar
+    gsap.from('.cta-feature-item', {
+      scrollTrigger: {
+        trigger: '.home-cta-features-bar',
+        start: 'top 85%'
+      },
+      y: 25,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 0.65,
+      ease: 'back.out(1.4)'
+    });
+  }
+
+  // ── 9. CARDS VIEW ANIMATIONS ──
+  initCardsAnimations();
+
+  // ── 10. GAMEPLAY VIEW ANIMATIONS ──
+  initGameplayAnimations();
+
+  // ── 11. INTRO SLIDESHOW INITIALIZATION ──
+  initIntroSlideshow();
+}
+
+// CARDS VIEW (BỘ SƯU TẬP THẺ BÀI) GSAP SCROLL & REVEAL ANIMATIONS
+function initCardsAnimations() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  // 1. StyleX Header & Lead Cascade
+  gsap.from(['.sx-status-chip', '.sx-cards-title', '.sx-title-divider', '.sx-cards-lead'], {
+    scrollTrigger: {
+      trigger: '#cardsView',
+      start: 'top 85%'
+    },
+    y: 30,
+    opacity: 0,
+    stagger: 0.1,
+    duration: 0.8,
+    ease: 'power2.out'
   });
 
-  // 4. Intro Section Automatic Slideshow (Rotates every 4s: 1 -> 2 -> 3)
-  initIntroSlideshow();
+  // 2. Command Dock (Search & Filter Tabs)
+  gsap.from('.sx-command-dock', {
+    scrollTrigger: {
+      trigger: '#cardsView',
+      start: 'top 80%'
+    },
+    y: 35,
+    opacity: 0,
+    duration: 0.85,
+    ease: 'power2.out',
+    delay: 0.15
+  });
+}
+
+// GAMEPLAY VIEW (CÁCH CHƠI) GSAP SCROLL & REVEAL ANIMATIONS
+function initGameplayAnimations() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  // 1. Hero Header & Tabs
+  gsap.from(['.gp-hero-title', '.gp-hero-divider', '.gp-hero-sub'], {
+    scrollTrigger: {
+      trigger: '#gameplay',
+      start: 'top 85%'
+    },
+    y: 35,
+    opacity: 0,
+    stagger: 0.12,
+    duration: 0.85,
+    ease: 'power2.out'
+  });
+
+  gsap.from('.gp-tab', {
+    scrollTrigger: {
+      trigger: '.gp-tabs',
+      start: 'top 88%'
+    },
+    y: 20,
+    opacity: 0,
+    stagger: 0.08,
+    duration: 0.6,
+    ease: 'back.out(1.5)'
+  });
+
+  // 2. Quick Stats Bar (2-4 Players, 45-60 min, 12+, Goal)
+  gsap.from('.gp-stat', {
+    scrollTrigger: {
+      trigger: '.gp-stats-bar',
+      start: 'top 85%'
+    },
+    y: 30,
+    scale: 0.92,
+    opacity: 0,
+    stagger: 0.1,
+    duration: 0.7,
+    ease: 'back.out(1.5)'
+  });
+
+  // 3. Section 1: Ba Hành Động (01 Nạp Container, 02 Xếp Hàng, 03 Điều Tàu)
+  gsap.from('.gp-actions-grid .gp-action-card', {
+    scrollTrigger: {
+      trigger: '.gp-actions-grid',
+      start: 'top 80%'
+    },
+    y: 45,
+    opacity: 0,
+    stagger: 0.16,
+    duration: 0.85,
+    ease: 'power2.out'
+  });
+
+  // 4. Section 2: Quy Trình Cập Cảng (Flow cards Step 1-4 & Arrows)
+  gsap.from('.gp-flow-card', {
+    scrollTrigger: {
+      trigger: '.gp-flow-grid',
+      start: 'top 80%'
+    },
+    x: -30,
+    opacity: 0,
+    stagger: 0.14,
+    duration: 0.8,
+    ease: 'power2.out'
+  });
+
+  gsap.from('.gp-flow-arrow', {
+    scrollTrigger: {
+      trigger: '.gp-flow-grid',
+      start: 'top 80%'
+    },
+    scale: 0,
+    opacity: 0,
+    stagger: 0.14,
+    duration: 0.6,
+    ease: 'back.out(2.0)',
+    delay: 0.15
+  });
+
+  // 5. Section 3: Cơ chế tính điểm 11 Cảng Incoterms (Nhóm E, F, C, D)
+  gsap.from('.gp-inc-card', {
+    scrollTrigger: {
+      trigger: '.gp-incoterm-grid',
+      start: 'top 80%'
+    },
+    y: 35,
+    opacity: 0,
+    stagger: 0.14,
+    duration: 0.85,
+    ease: 'power2.out'
+  });
+
+  // 6. Lưu ý quan trọng Box
+  gsap.from('.gp-note', {
+    scrollTrigger: {
+      trigger: '.gp-note',
+      start: 'top 88%'
+    },
+    y: 25,
+    opacity: 0,
+    duration: 0.7,
+    ease: 'power2.out'
+  });
 }
 
 // INTRO SLIDESHOW ROTATION WITH GSAP 3D ANIMATION (AUTOMATIC 4s + MANUAL DOTS & SWIPE)
@@ -1070,6 +1617,24 @@ function switchView(viewName) {
   const targetViewEl = document.getElementById(`${viewName}View`);
   if (targetViewEl) {
     targetViewEl.classList.add('active');
+
+    // Smooth GSAP View Entrance Transition
+    if (typeof gsap !== 'undefined') {
+      gsap.fromTo(targetViewEl,
+        { opacity: 0, y: 15 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: 'power2.out',
+          onComplete: () => {
+            if (typeof ScrollTrigger !== 'undefined') {
+              ScrollTrigger.refresh();
+            }
+          }
+        }
+      );
+    }
   }
 
   // Update Navbar Active States
@@ -1113,6 +1678,23 @@ function switchView(viewName) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  // Handle cards view switch
+  if (viewName === 'cards') {
+    renderCards();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    }, 100);
+  }
+
+  // Handle gameplay view switch
+  if (viewName === 'gameplay') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    }, 100);
+  }
+
   // Ensure header is revealed when switching views
   const headerEl = document.getElementById('header');
   if (headerEl) {
@@ -1125,7 +1707,7 @@ function switchView(viewName) {
   document.body.style.overflow = 'auto';
 }
 
-// RENDER CARDS GRID
+// RENDER CARDS GRID WITH GSAP STAGGER & 3D TILT
 function renderCards() {
   cardsGrid.innerHTML = '';
 
@@ -1161,11 +1743,56 @@ function renderCards() {
       </div>
     `;
 
+    // 3D Card Hover Tilt Interaction
+    if (typeof gsap !== 'undefined') {
+      cardEl.addEventListener('mousemove', (e) => {
+        const rect = cardEl.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -10;
+        const rotateY = ((x - centerX) / centerX) * 10;
+        gsap.to(cardEl, {
+          rotateX,
+          rotateY,
+          transformPerspective: 800,
+          duration: 0.25,
+          ease: 'power1.out'
+        });
+      });
+
+      cardEl.addEventListener('mouseleave', () => {
+        gsap.to(cardEl, {
+          rotateX: 0,
+          rotateY: 0,
+          duration: 0.5,
+          ease: 'power2.out'
+        });
+      });
+    }
+
     // Add click event to open details modal
     cardEl.addEventListener('click', () => openCardModal(card));
 
     cardsGrid.appendChild(cardEl);
   });
+
+  // Staggered Cascade Entrance for Cards
+  if (typeof gsap !== 'undefined') {
+    gsap.fromTo('.card-item',
+      { opacity: 0, y: 24, scale: 0.95 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.4,
+        stagger: 0.025,
+        ease: 'power2.out',
+        clearProps: 'opacity,transform'
+      }
+    );
+  }
 }
 
 // 4 CATEGORIES MASTER DATA FOR BLOCK 4 PILLARS & 3D MODAL SHOWCASE
@@ -1705,58 +2332,9 @@ function initEditorialSlider() {
   };
 }
 
-// Khởi tạo slider khi DOM ready
+// Khởi tạo slider & Băng chuyền ảnh Khối 1 khi DOM ready
 document.addEventListener('DOMContentLoaded', () => {
   initEditorialSlider();
-
-  // ── NAV DELIVERY BUTTON HANDLER (Header / Sidebar) ──
-  // Phase 1 (click): add-to-cart (is-adding) ~ 2.45s
-  // Phase 2 (auto): delivery (is-animating) ~ truck drives
-  const navDeliveryBtns = document.querySelectorAll('[data-nav-delivery-btn]');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  navDeliveryBtns.forEach(btn => {
-    btn.removeAttribute('onclick');
-
-    btn.addEventListener('click', () => {
-      if (
-        btn.classList.contains('is-adding') ||
-        btn.classList.contains('is-animating') ||
-        btn.classList.contains('is-complete')
-      ) return;
-
-      btn.setAttribute('aria-disabled', 'true');
-
-      // Reduced motion: navigate ngay
-      if (reduceMotion.matches) {
-        btn.classList.add('is-complete');
-        window.location.href = 'buy.html';
-        return;
-      }
-
-      // Phase 1: Thêm vào giỏ hàng
-      btn.classList.add('is-adding');
-
-      // Phase 2: Bắt đầu giao hàng xe tải sau 2.45s
-      setTimeout(() => {
-        btn.classList.remove('is-adding');
-        btn.classList.add('is-animating');
-
-        // Chuyển sang trang đặt mua sau khi xe chạy
-        setTimeout(() => {
-          window.location.href = 'buy.html';
-        }, 2500);
-
-        // Reset an toàn
-        setTimeout(() => {
-          btn.classList.remove('is-adding', 'is-animating', 'is-complete');
-          btn.removeAttribute('aria-disabled');
-        }, 6000);
-      }, 2450);
-    });
-  });
-
-  // Khởi tạo Băng chuyền ảnh Khối 1
   initBlock1ShowcaseCarousel();
 });
 

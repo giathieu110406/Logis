@@ -27,6 +27,8 @@
 </head>
 
 <body>
+  <!-- Scroll Progress Indicator Bar -->
+  <div class="scroll-progress-bar" id="scrollProgressBar" aria-hidden="true"></div>
 
   <!-- Header Navigation -->
   <header class="main-header" id="header">
@@ -59,13 +61,31 @@
       </nav>
 
       <div class="header-actions">
-        <!-- DELIVERY BUTTON (HEADER) -->
-        <button class="order-button nav-delivery-btn" type="button" aria-label="Mua ngay" data-nav-delivery-btn
-          onclick="setTimeout(function(){ window.location.href='buy.html'; }, 2000);">
-          <span class="button-label button-label--default">Mua Ngay</span>
-          <span class="button-label button-label--success">
-            Đang Xử Lý <span class="checkmark" aria-hidden="true"></span>
+        <!-- DELIVERY BUTTON (HEADER) — Full Phase 1+2 from delivery-button library -->
+        <button class="order-button nav-delivery-btn" type="button" aria-label="Mua ngay" id="headerDeliveryBtn">
+
+          <!-- Phase 1: add-to-cart layer -->
+          <span class="cart-layer" aria-hidden="true">
+            <svg class="cart-layer__cart" viewBox="0 0 32 32">
+              <path class="cart-layer__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z" />
+              <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1" />
+              <path d="M13.1 26.2h.1M23.4 26.2h.1" />
+              <path class="cart-layer__check" d="m14.1 15.7 2.1 2.1 4.3-4.6" />
+            </svg>
+            <svg class="cart-layer__shirt" viewBox="0 0 32 32">
+              <path
+                d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z" />
+            </svg>
           </span>
+
+          <!-- Labels -->
+          <span class="button-label button-label--default">Mua Ngay</span>
+          <span class="button-label button-label--adding">Đang thêm…</span>
+          <span class="button-label button-label--success">
+            Đặt Hàng Thành Công <span class="checkmark" aria-hidden="true"></span>
+          </span>
+
+          <!-- Phase 2: truck delivery layer -->
           <span class="package" aria-hidden="true"></span>
           <span class="truck" aria-hidden="true">
             <span class="truck__cargo"></span>
@@ -95,45 +115,35 @@
     <a href="#gameplay" class="mobile-link" data-nav="gameplay">Cách Chơi</a>
     <a href="#cards" class="mobile-link" data-nav="cards">Thẻ Bài</a>
 
-    <!-- DELIVERY BUTTON (SIDEBAR / MOBILE MENU) -->
-    <button class="order-button nav-delivery-btn" type="button" aria-label="Mua ngay" data-nav-delivery-btn>
+    <!-- DELIVERY BUTTON (SIDEBAR / MOBILE MENU) — Full Phase 1+2 from delivery-button library -->
+    <button class="order-button nav-delivery-btn" type="button" aria-label="Mua ngay" id="sidebarDeliveryBtn">
 
-      <!-- ── Phase-1 add-to-cart layer ── -->
+      <!-- Phase 1: add-to-cart layer -->
       <span class="cart-layer" aria-hidden="true">
-        <!-- Cart icon -->
         <svg class="cart-layer__cart" viewBox="0 0 32 32">
           <path class="cart-layer__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z" />
           <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1" />
           <path d="M13.1 26.2h.1M23.4 26.2h.1" />
           <path class="cart-layer__check" d="m14.1 15.7 2.1 2.1 4.3-4.6" />
         </svg>
-        <!-- Shirt that drops into cart -->
         <svg class="cart-layer__shirt" viewBox="0 0 32 32">
           <path
             d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z" />
         </svg>
       </span>
 
-      <!-- ── Labels ── -->
+      <!-- Labels -->
       <span class="button-label button-label--default">Mua Ngay</span>
       <span class="button-label button-label--adding">Đang thêm…</span>
-      <span class="button-label button-label--success">
-        Đặt Hàng Thành Công
-        <span class="checkmark" aria-hidden="true"></span>
-      </span>
 
-      <!-- ── Phase-2 delivery layer (truck) ── -->
+      <!-- Phase 2: truck delivery layer -->
       <span class="package" aria-hidden="true"></span>
-
       <span class="truck" aria-hidden="true">
         <span class="truck__cargo"></span>
-        <span class="truck__cab">
-          <span class="truck__window"></span>
-        </span>
+        <span class="truck__cab"><span class="truck__window"></span></span>
         <span class="truck__light truck__light--top"></span>
         <span class="truck__light truck__light--bottom"></span>
       </span>
-
       <span class="road" aria-hidden="true"></span>
     </button>
   </div>
@@ -150,8 +160,66 @@
           <img src="assets/anh-bia-chinh-thuc.png" alt="LogisQuest — Hải Trình Vạn Dặm" class="home-banner-img"
             fetchpriority="high">
           <div class="home-banner-caption">
-            <h1 class="home-banner-title">Hải Trình Đã Mở</h1>
-            <p class="home-banner-sub">Bạn có dám nhập cuộc giao thương?</p>
+            <h1 class="home-banner-title-svg-wrapper" aria-label="HẢI TRÌNH ĐÃ MỞ">
+              <svg class="game-title-svg" viewBox="0 0 950 160" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <!-- 3. Mặt chữ: Gradient Trắng sáng -> Trắng xanh -> Xanh rất nhạt (#FFFFFF -> #EAF4FF -> #CFE6FF) -->
+                  <linearGradient id="adventureFaceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#FFFFFF" />
+                    <stop offset="30%" stop-color="#FFFFFF" />
+                    <stop offset="65%" stop-color="#EAF4FF" />
+                    <stop offset="100%" stop-color="#CFE6FF" />
+                  </linearGradient>
+
+                  <!-- 4. Highlight: Vệt sáng ở cạnh trên của chữ -->
+                  <linearGradient id="topHighlightGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1" />
+                    <stop offset="40%" stop-color="#FFFFFF" stop-opacity="0.6" />
+                    <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+                  </linearGradient>
+
+                  <!-- 8. Blue Glow nhẹ sát mép chữ tạo cảm giác công nghệ & năng lượng -->
+                  <filter id="softBlueGlow" x="-15%" y="-15%" width="130%" height="135%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#00B4D8" flood-opacity="0.5" />
+                  </filter>
+
+                  <!-- 7. Drop Shadow: Bóng đổ mềm lệch xuống dưới, tách chữ khỏi background -->
+                  <filter id="softDropShadow" x="-15%" y="-15%" width="130%" height="140%">
+                    <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#031533" flood-opacity="0.85" />
+                  </filter>
+                </defs>
+
+                <!-- 2. Độ nghiêng 9° (tăng thêm 3° từ 6°): skewX(-9) tăng cảm giác tốc độ, lướt sóng -->
+                <g transform="skewX(-9) translate(40, 18)">
+                  <!-- 7. Lớp Drop Shadow sâu nhất ra sau và chếch xuống (#07265C) -->
+                  <text x="440" y="101" text-anchor="middle" class="svg-text-shadow" filter="url(#softDropShadow)">HẢI
+                    TRÌNH ĐÃ MỞ</text>
+
+                  <!-- 6. Khối 3D Extrude (Navy #0D3B8E đùn vừa vặn ~6-8px, gọn gàng và hiện đại) -->
+                  <text x="440" y="99" text-anchor="middle" class="svg-text-extrude">HẢI TRÌNH ĐÃ MỞ</text>
+                  <text x="440" y="97" text-anchor="middle" class="svg-text-extrude">HẢI TRÌNH ĐÃ MỞ</text>
+
+                  <!-- 5. Lớp Viền Xanh Đậm (Outer Dark Blue Stroke #0B337A) -->
+                  <text x="440" y="94" text-anchor="middle" class="svg-text-stroke-dark">HẢI TRÌNH ĐÃ MỞ</text>
+
+                  <!-- 5. Lớp Viền Xanh Sáng (Cyan / Light Blue Inset Stroke #0096C7) -->
+                  <text x="440" y="94" text-anchor="middle" class="svg-text-stroke-light"
+                    filter="url(#softBlueGlow)">HẢI TRÌNH ĐÃ MỞ</text>
+
+                  <!-- 3. Mặt chữ trắng sáng (Gradient Face) -->
+                  <text x="440" y="94" text-anchor="middle" class="svg-text-main-face">HẢI TRÌNH ĐÃ MỞ</text>
+
+                  <!-- 4. Highlight cạnh trên (Top Specular Highlight) -->
+                  <text x="440" y="93" text-anchor="middle" class="svg-text-top-highlight">HẢI TRÌNH ĐÃ MỞ</text>
+                </g>
+              </svg>
+            </h1>
+
+            <div class="home-banner-sub-capsule">
+              <span class="sub-capsule-arrow">&gt;&gt;</span>
+              <p class="home-banner-sub">Bạn có dám nhập cuộc giao thương?</p>
+              <span class="sub-capsule-arrow">&lt;&lt;</span>
+            </div>
           </div>
         </div>
 
@@ -164,7 +232,30 @@
         <div class="hero-product-reveal" id="heroProductReveal">
           <img src="assets/hero-product.jpg" alt="LogisQuest Boardgame Product Set" class="hero-product-img">
           <div class="hero-product-caption" id="heroProductCaption">
-            <h2 class="hero-product-title">Nhập cuộc ngay hôm nay</h2>
+            <h2 class="hero-product-title-svg-wrapper" aria-label="NHẬP CUỘC NGAY HÔM NAY">
+              <svg class="game-title-svg" viewBox="0 0 950 160" xmlns="http://www.w3.org/2000/svg">
+                <g transform="skewX(-9) translate(40, 18)">
+                  <!-- 7. Lớp Drop Shadow sâu nhất (#07265C) -->
+                  <text x="440" y="101" text-anchor="middle" class="svg-text-shadow" filter="url(#softDropShadow)">NHẬP CUỘC NGAY HÔM NAY</text>
+
+                  <!-- 6. Khối 3D Extrude (Navy #0D3B8E) -->
+                  <text x="440" y="99" text-anchor="middle" class="svg-text-extrude">NHẬP CUỘC NGAY HÔM NAY</text>
+                  <text x="440" y="97" text-anchor="middle" class="svg-text-extrude">NHẬP CUỘC NGAY HÔM NAY</text>
+
+                  <!-- 5. Lớp Viền Xanh Đậm -->
+                  <text x="440" y="94" text-anchor="middle" class="svg-text-stroke-dark">NHẬP CUỘC NGAY HÔM NAY</text>
+
+                  <!-- 5. Lớp Viền Xanh Sáng -->
+                  <text x="440" y="94" text-anchor="middle" class="svg-text-stroke-light" filter="url(#softBlueGlow)">NHẬP CUỘC NGAY HÔM NAY</text>
+
+                  <!-- 3. Mặt chữ trắng sáng (Gradient Face) -->
+                  <text x="440" y="94" text-anchor="middle" class="svg-text-main-face">NHẬP CUỘC NGAY HÔM NAY</text>
+
+                  <!-- 4. Highlight cạnh trên -->
+                  <text x="440" y="93" text-anchor="middle" class="svg-text-top-highlight">NHẬP CUỘC NGAY HÔM NAY</text>
+                </g>
+              </svg>
+            </h2>
           </div>
         </div>
       </section>
@@ -241,18 +332,9 @@
             <div class="showcase-desc-col">
               <div class="showcase-text-wrap">
                 <p class="showcase-body-p">
-                  <b>LOGISQUEST</b> ra đời từ khát vọng biến 11 điều khoản thương mại quốc tế <b>Incoterms 2020</b> vốn
-                  khô khan trở thành trải nghiệm chiến bài chiến thuật sống động, nơi mỗi quyết định vận tải đều mang
-                  sức nặng của thực tế thị trường.
-                </p>
-                <p class="showcase-body-p">
-                  Với chúng mình, <b>LOGISQUEST</b> không chỉ là một trò chơi. Đó là sự hòa quyện giữa đam mê sáng tạo
-                  và tinh thần học hỏi không ngừng của người Việt, để những bài học kinh doanh vươn trên trang sách nay
-                  sống lại qua từng lá bài, từng hành trình giao thương.
-                </p>
-                <p class="showcase-body-p">
-                  Mỗi ván chơi là một hành trình trở về miền đại dương thương mại, nơi bạn vừa đấu trí cùng đối thủ, vừa
-                  chạm đến tri thức thực tiễn.
+                  <b>LOGISQUEST</b> biến thế giới Logistics thành một cuộc chơi chiến lược — nơi vận tải, thương mại
+                  quốc tế, Incoterms và chuỗi cung ứng được tái hiện qua những quyết định, cơ hội và thử thách trên bàn
+                  chơi.
                 </p>
               </div>
 
@@ -306,28 +388,31 @@
             <div class="quychien-headline-divider"></div>
 
             <div class="quychien-focus-cards">
-              <!-- Thẻ 1: Mô phỏng Incoterms -->
+              <!-- Thẻ 1: Điều phối & Kết hợp thẻ -->
               <div class="quychien-focus-card">
                 <div class="focus-card-icon-wrap">
                   <span class="focus-card-num">01</span>
                 </div>
                 <div class="focus-card-body">
-                  <h3 class="focus-card-title">Mô Phỏng 11 Điều Khoản Incoterms 2020</h3>
+                  <h3 class="focus-card-title">Điều Phối Tuyến Đi & Kết Hợp Thẻ Bài</h3>
                   <p class="focus-card-desc">
-                    Tính toán cẩn thận từng chi phí vận tải, lựa chọn phương tiện phù hợp và sẵn sàng hy sinh cước phí nhỏ để giành quyền kiểm soát những lô hàng giá trị cao, tạo ra những đòn xoay chuyển cục diện đầy kịch tính.
+                    Điều phối tàu thủy, vận chuyển container và lựa chọn tuyến đi để tối ưu hành trình. Kết hợp <b>Thẻ
+                      Phương Tiện</b>, <b>Thẻ Chợ</b>, <b>Thẻ Incoterm</b> và <b>Thẻ Sự Kiện</b>, mỗi quyết định đều có
+                    thể tạo ra lợi thế hoặc thay đổi cục diện.
                   </p>
                 </div>
               </div>
 
-              <!-- Thẻ 2: Ứng phó Biến cố -->
+              <!-- Thẻ 2: Ứng phó Biến cố & Về đích -->
               <div class="quychien-focus-card">
                 <div class="focus-card-icon-wrap">
                   <span class="focus-card-num">02</span>
                 </div>
                 <div class="focus-card-body">
-                  <h3 class="focus-card-title">Ứng Phó Biến Cố Bất Ngờ</h3>
+                  <h3 class="focus-card-title">Ứng Biến Thị Trường & Đưa Container Cập Cảng</h3>
                   <p class="focus-card-desc">
-                    Đối mặt với các sự kiện thực tế: từ bão biển nhiệt đới, tắc nghẽn kênh đào đến rủi ro hải quan giữ hàng — bản lĩnh quản trị chuỗi cung ứng của bạn sẽ được thử thách tới hạn.
+                    Đối mặt với những biến cố bất ngờ, nắm bắt cơ hội từ thị trường và vận dụng kiến thức Logistics để
+                    đưa container cập cảng đúng chiến lược — từ đó tích lũy lợi thế và giành chiến thắng.
                   </p>
                 </div>
               </div>
@@ -378,7 +463,8 @@
                   <h3 class="mode-card-title">Đội Hình 2 Người</h3>
                 </div>
                 <p class="mode-card-desc">
-                  Cuộc đấu trí tay đôi đối đầu trực diện, căng thẳng và tính toán chi ly từng nước đi để chặn đường, bóp nghẹt tuyến vận tải của đối thủ.
+                  Cuộc đấu trí tay đôi đối đầu trực diện, căng thẳng và tính toán chi ly từng nước đi để chặn đường, bóp
+                  nghẹt tuyến vận tải của đối thủ.
                 </p>
               </div>
 
@@ -389,7 +475,8 @@
                   <h3 class="mode-card-title">Đội Hình 4 - 5 Người</h3>
                 </div>
                 <p class="mode-card-desc">
-                  Đại dương bùng nổ! Thị trường giao thương trở nên chật chội, cạnh tranh khốc liệt, đàm phán sôi nổi và vô số pha "gài bẫy" bất ngờ xoay chuyển tình thế phút cuối.
+                  Đại dương bùng nổ! Thị trường giao thương trở nên chật chội, cạnh tranh khốc liệt, đàm phán sôi nổi và
+                  vô số pha "gài bẫy" bất ngờ xoay chuyển tình thế phút cuối.
                 </p>
               </div>
             </div>
@@ -424,9 +511,17 @@
 
       <!-- ===== 4. 4 TRỤ CỘT CHIẾN THUẬT TỐI THƯỢNG (FAN DECK 3D) ===== -->
       <section class="home-pillars-section alt-bg" id="block4-pillars">
+        <!-- Hậu cảnh Sa Bàn Chiến Lược Cảng Biển 3D (Tactical Harbor Diorama Artwork) -->
+        <div class="pillars-diorama-bg-layer" aria-hidden="true">
+          <img src="assets/tactical-harbor-diorama.jpg" alt="Tactical Harbor Seaport Diorama"
+            class="pillars-diorama-img">
+          <div class="pillars-diorama-overlay"></div>
+        </div>
+
         <div class="home-pillars-container">
           <div class="text-center" style="margin-bottom: 24px;">
-            <h2 class="quychien-headline-bold" style="font-size: clamp(1.85rem, 3.6vw, 2.9rem);">4 TRỤ CỘT CHIẾN THUẬT
+            <h2 class="quychien-headline-bold pillars-headline-modern"
+              style="font-size: clamp(1.85rem, 3.6vw, 2.9rem);">4 TRỤ CỘT CHIẾN THUẬT
               TỐI THƯỢNG</h2>
             <div class="quychien-headline-divider" style="margin: 12px auto;"></div>
             <p
@@ -519,62 +614,98 @@
         </div>
       </section>
 
-      <!-- ===== 5. GIÁ TRỊ CẢM XÚC (3-COLUMN VALUE CARDS) ===== -->
-      <section class="home-quychien-section" id="block5-values">
+      <!-- ===== 5. SỨ MỆNH GIÁO DỤC VÀ KẾT NỐI CỘNG ĐỒNG (CINEMA 16:9 SPLIT CANVAS) ===== -->
+      <section class="home-quychien-section edu-cinema-section" id="block5-values">
         <div class="home-values-container">
-          <div class="text-center" style="margin-bottom: 36px;">
-            <div class="quychien-badge-pill" style="margin: 0 auto 12px;">
-              <span>TRẢI NGHIỆM ĐỌNG LẠI</span>
-            </div>
-            <h2 class="quychien-headline-bold" style="font-size: clamp(1.85rem, 3.6vw, 2.9rem);">
-              GIÁ TRỊ CẢM XÚC & CHIẾN TÍCH
-            </h2>
-            <div class="quychien-headline-divider" style="margin: 12px auto;"></div>
-            <p style="color: var(--text-secondary); max-width: 680px; margin: 0 auto; font-size: clamp(0.92rem, 1.15vw, 1.02rem); line-height: 1.6;">
-              Không chỉ dừng lại ở một trò chơi giải trí, LogisQuest mở ra không gian kết nối cảm xúc, tư duy chiến lược và kiến thức thực tiễn.
-            </p>
-          </div>
 
-          <!-- Lưới 3 Cột Thẻ Giá Trị Trải Ngang -->
-          <div class="quychien-value-grid">
-            <!-- Thẻ I -->
-            <div class="quychien-value-card">
-              <div class="value-card-watermark">I</div>
-              <div class="value-card-icon-box icon-red">
-                <span>🎭</span>
-              </div>
-              <h3 class="value-card-title">Kịch Tính & Tiếng Cười</h3>
-              <div class="value-card-line"></div>
-              <p class="value-card-desc">
-                Sự hồi hộp nghẹt thở khi chờ chuyến tàu cập cảng an toàn và những khoảnh khắc vỡ òa phấn khích khi hóa giải thành công biến cố bất ngờ.
-              </p>
-            </div>
+          <!-- KHUNG TOÀN CẢNH CHUẨN TỶ LỆ 16:9 (CINEMA 16:9 SPLIT CANVAS) -->
+          <div class="edu-cinema-169-card">
 
-            <!-- Thẻ II -->
-            <div class="quychien-value-card highlight">
-              <div class="value-card-watermark">II</div>
-              <div class="value-card-icon-box icon-yellow">
-                <span>💡</span>
+            <!-- NỬA TRÁI (52%): ẢNH THỰC TẾ BÀN CỜ 16:9 TRÀN KHUNG & HOTSPOT TƯƠNG TÁC -->
+            <div class="edu-cinema-visual">
+              <img src="assets/education-community-board.png"
+                alt="LogisQuest — Bàn cờ chiến thuật thực tế và hệ thống linh kiện" class="edu-cinema-img"
+                loading="lazy">
+              <div class="edu-cinema-img-overlay"></div>
+
+              <!-- Hotspot Pins tương tác trên bàn cờ -->
+              <div class="edu-hotspot hs-ports" style="top: 36%; left: 66%;">
+                <span class="hs-pulse"></span>
+                <span class="hs-badge">⚓ 5 Cảng Biển Chiến Lược</span>
               </div>
-              <h3 class="value-card-title">Bản Lĩnh Giám Đốc Logistics</h3>
-              <div class="value-card-line"></div>
-              <p class="value-card-desc">
-                Trải nghiệm cảm giác của một nhà điều hành chuỗi cung ứng thực thụ: tự tay phân bổ tàu bè, ra quyết định cước phí và bảo vệ lợi nhuận biên toàn cục.
-              </p>
+              <div class="edu-hotspot hs-cards" style="top: 52%; left: 45%;">
+                <span class="hs-pulse"></span>
+                <span class="hs-badge">🃏 4 Nhóm Thẻ Bài Tác Chiến</span>
+              </div>
+              <div class="edu-hotspot hs-fleet" style="top: 72%; left: 32%;">
+                <span class="hs-pulse"></span>
+                <span class="hs-badge">🚢 Đội Tàu & Container 3D</span>
+              </div>
+
+              <!-- Quick Specs Floating Tag ở góc dưới ảnh -->
+              <div class="edu-cinema-floating-specs">
+                <span class="spec-tag">🎓 11 Incoterms 2020</span>
+                <span class="spec-tag">👥 3-4 Người chơi</span>
+                <span class="spec-tag">⏱️ 30-60 Phút</span>
+              </div>
             </div>
 
-            <!-- Thẻ III -->
-            <div class="quychien-value-card">
-              <div class="value-card-watermark">III</div>
-              <div class="value-card-icon-box icon-blue">
-                <span>📚</span>
+            <!-- NỬA PHẢI (48%): TIÊU ĐỀ & 3 THẺ SỨ MỆNH GLASSMORPHISM DỌC -->
+            <div class="edu-cinema-content">
+              <div class="edu-cinema-header">
+                <div class="quychien-badge-pill">
+                  <span>GIÁ TRỊ CỐT LÕI & TÁC ĐỘNG</span>
+                </div>
+                <h2 class="quychien-headline-bold edu-cinema-title">
+                  SỨ MỆNH GIÁO DỤC VÀ KẾT NỐI CỘNG ĐỒNG
+                </h2>
+                <div class="quychien-headline-divider" style="margin: 10px 0 12px 0;"></div>
+                <p class="edu-cinema-lead">
+                  Cầu nối tri thức sống động — biến quy tắc thương mại quốc tế thành trải nghiệm gắn kết thế hệ đam mê
+                  Logistics.
+                </p>
               </div>
-              <h3 class="value-card-title">Học Mà Chơi — Trực Quan</h3>
-              <div class="value-card-line"></div>
-              <p class="value-card-desc">
-                Nắm vững bản chất 11 điều khoản Incoterms 2020 một cách tự nhiên và sâu sắc nhất thông qua thực chiến mà không cần phải học thuộc lòng khô khan.
-              </p>
+
+              <!-- 3 Thẻ Trụ Cột Sứ Mệnh Kính Mờ Xếp Dọc -->
+              <div class="edu-cinema-pillars-list">
+                <!-- Thẻ 01 -->
+                <div class="edu-pillar-glass-row">
+                  <div class="edu-pillar-icon-wrap icon-blue">
+                    <span>📚</span>
+                  </div>
+                  <div class="edu-pillar-text">
+                    <h4>Gamified Learning — Học Qua Trải Nghiệm</h4>
+                    <p>Xóa bỏ rào cản lý thuyết, trực tiếp điều phối tàu và thực chiến 11 điều khoản Incoterms trong
+                      từng quyết định thương mại.</p>
+                  </div>
+                </div>
+
+                <!-- Thẻ 02 -->
+                <div class="edu-pillar-glass-row highlight">
+                  <div class="edu-pillar-icon-wrap icon-yellow">
+                    <span>🧠</span>
+                  </div>
+                  <div class="edu-pillar-text">
+                    <h4>Rèn Luyện Tư Duy Chiến Lược</h4>
+                    <p>Quản trị rủi ro chuỗi cung ứng, phân bổ dòng vốn linh hoạt và nâng cao năng lực ứng biến trước
+                      biến cố thị trường.</p>
+                  </div>
+                </div>
+
+                <!-- Thẻ 03 -->
+                <div class="edu-pillar-glass-row">
+                  <div class="edu-pillar-icon-wrap icon-red">
+                    <span>🤝</span>
+                  </div>
+                  <div class="edu-pillar-text">
+                    <h4>Gắn Kết Cộng Đồng & Thế Hệ</h4>
+                    <p>Sân chơi trí tuệ lành mạnh, kết nối sinh viên, giảng viên và chuyên gia logistics qua những ván
+                      cờ tranh tài kịch tính.</p>
+                  </div>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -967,27 +1098,76 @@
     <div id="cardsView" class="view-section">
       <section class="cards-section">
         <div class="section-container">
-          <div class="section-header text-center">
-            <span class="section-subtitle">BỘ SƯU TẬP THẺ BÀI</span>
-            <h2 class="section-title">Hệ Thống Thẻ Bài Đa Dạng</h2>
-            <p class="section-description">Tra cứu chi tiết các nhóm thẻ bài cốt lõi trong LogisQuest để xây dựng chiến
-              thuật giao thương hiệu quả nhất.</p>
-            <div class="section-divider"></div>
-          </div>
-
-          <!-- Search and Filters -->
-          <div class="gallery-controls">
-            <div class="search-box">
-              <input type="text" id="cardSearch" placeholder="Tìm kiếm tên thẻ bài...">
-              <span class="search-icon">🔍</span>
+          <!-- ========================================================
+               STYLEX CARDS INTELLIGENCE HUB & FILTER STATION
+               ======================================================== -->
+          <div class="sx-cards-hero text-center">
+            <!-- StyleX Status Badge -->
+            <div class="sx-status-chip">
+              <span class="sx-status-dot"></span>
+              <span class="sx-chip-text">LOGISQUEST INTEL HUB</span>
+              <span class="sx-chip-sep">/</span>
+              <span class="sx-chip-counter">36 THẺ TÁC CHIẾN</span>
             </div>
 
-            <div class="filter-tabs">
-              <button class="tab-btn active" data-tab="all">Tất Cả</button>
-              <button class="tab-btn" data-tab="incoterm">Thẻ Incoterm</button>
-              <button class="tab-btn" data-tab="cho">Thẻ Chợ</button>
-              <button class="tab-btn" data-tab="phuong-tien">Thẻ Phương Tiện</button>
-              <button class="tab-btn" data-tab="su-kien">Thẻ Sự Kiện</button>
+            <!-- Main Title with Clean Geometric Hierarchy -->
+            <h2 class="sx-cards-title">
+              HỆ THỐNG THẺ BÀI ĐA DẠNG
+            </h2>
+
+            <!-- Modern Accent Divider -->
+            <div class="sx-title-divider">
+              <span class="sx-divider-line"></span>
+              <span class="sx-divider-node"></span>
+              <span class="sx-divider-line"></span>
+            </div>
+
+            <p class="sx-cards-lead">
+              Tra cứu toàn bộ cơ chế, chỉ số và hiệu ứng chiến lược của 4 nhóm thẻ bài cốt lõi trong <b>LogisQuest</b>
+              để hoạch định hải trình giao thương bất khả chiến bại.
+            </p>
+          </div>
+
+          <!-- StyleX Floating Tactical Command Bar (Search & Filter Dock) -->
+          <div class="sx-command-dock">
+            <!-- Search Console -->
+            <div class="sx-search-wrapper">
+              <svg class="sx-search-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <input type="text" id="cardSearch" class="sx-search-input"
+                placeholder="Tìm nhanh thẻ bài: DAP, Bão biển, FIATA..." autocomplete="off">
+              <span class="sx-kbd-shortcut" title="Phím tắt tìm kiếm"><kbd>/</kbd></span>
+            </div>
+
+            <!-- Segmented Category Filters -->
+            <div class="sx-filter-group" role="tablist" aria-label="Bộ lọc nhóm thẻ bài">
+              <button class="sx-tab-btn tab-all active" data-tab="all" role="tab" aria-selected="true">
+                <span class="sx-tab-dot sx-dot-all"></span>
+                <span class="sx-tab-label">Tất Cả</span>
+                <span class="sx-tab-count">36</span>
+              </button>
+              <button class="sx-tab-btn tab-incoterm" data-tab="incoterm" role="tab" aria-selected="false">
+                <span class="sx-tab-dot sx-dot-incoterm"></span>
+                <span class="sx-tab-label">Incoterms</span>
+                <span class="sx-tab-count">11</span>
+              </button>
+              <button class="sx-tab-btn tab-cho" data-tab="cho" role="tab" aria-selected="false">
+                <span class="sx-tab-dot sx-dot-cho"></span>
+                <span class="sx-tab-label">Thẻ Chợ</span>
+                <span class="sx-tab-count">9</span>
+              </button>
+              <button class="sx-tab-btn tab-phuong-tien" data-tab="phuong-tien" role="tab" aria-selected="false">
+                <span class="sx-tab-dot sx-dot-phuong-tien"></span>
+                <span class="sx-tab-label">Phương Tiện</span>
+                <span class="sx-tab-count">6</span>
+              </button>
+              <button class="sx-tab-btn tab-su-kien" data-tab="su-kien" role="tab" aria-selected="false">
+                <span class="sx-tab-dot sx-dot-su-kien"></span>
+                <span class="sx-tab-label">Sự Kiện</span>
+                <span class="sx-tab-count">10</span>
+              </button>
             </div>
           </div>
 
@@ -1106,7 +1286,7 @@
         <div class="gp-content">
 
           <!-- SECTION 1: BA HÀNH ĐỘNG -->
-          <div class="gp-section-block">
+          <div class="gp-section-block" id="gpActions">
             <div class="gp-section-heading">
               <div class="gp-section-num">1</div>
               <div>
@@ -1212,7 +1392,7 @@
           </div>
 
           <!-- SECTION 2: QUY TRÌNH CẬP CẢNG -->
-          <div class="gp-section-block">
+          <div class="gp-section-block" id="gpFlow">
             <div class="gp-section-heading">
               <div class="gp-section-num">2</div>
               <div>
@@ -1299,7 +1479,7 @@
           </div>
 
           <!-- SECTION 3: CƠ CHẾ TÍNH ĐIỂM INCOTERMS -->
-          <div class="gp-section-block">
+          <div class="gp-section-block" id="gpIncoterms">
             <div class="gp-section-heading">
               <div class="gp-section-num">3</div>
               <div>
@@ -1762,7 +1942,6 @@
 
   <!-- JavaScript Link -->
   <script src="app.js"></script>
-  <script src="buy.js"></script>
 </body>
 
 </html>

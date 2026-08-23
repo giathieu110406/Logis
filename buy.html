@@ -5,148 +5,249 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mua Board Game LogisQuest - Chiến Thuật Vận Tải Quốc Tế & Incoterms</title>
   <meta name="description" content="Trang mua hàng chính thức Board Game LogisQuest — Khám phá hải trình thương mại quốc tế & 11 điều khoản Incoterms. Đặt mua ngay hôm nay để nhận ưu đãi giảm 60k và Freeship toàn quốc.">
+  
+  <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600&family=Montserrat:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600&family=Montserrat:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- GSAP Animation Engine -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="shortcut icon" type="image/png" href="assets/logo.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="buy-page-body">
 
-  <!-- HEADER -->
+  <!-- Top Scroll Progress Indicator Bar -->
+  <div class="scroll-progress-bar" id="scrollProgressBar" aria-hidden="true"></div>
+
+  <!-- HEADER NAVIGATION (SYNCHRONIZED WITH HOMEPAGE) -->
   <header class="main-header" id="header">
     <div class="header-container">
-      <a href="index.html" class="logo-area">
+      <a href="index.html#home" class="logo-area">
         <img src="assets/logo.png" alt="LogisQuest Logo" class="site-logo">
         <span class="logo-text">LOGISQUEST<span class="sub-logo">BOARD GAME</span></span>
       </a>
+
       <nav class="nav-menu" id="navMenu">
         <a href="index.html#home" class="nav-link">Trang Chủ</a>
+
+        <!-- Dropdown menu Giới Thiệu -->
         <div class="nav-dropdown">
-          <a href="index.html#about" class="nav-link dropdown-toggle">Giới Thiệu <span class="dropdown-caret">&#9662;</span></a>
+          <a href="index.html#about" class="nav-link dropdown-toggle">
+            Giới Thiệu <span class="dropdown-caret">▾</span>
+          </a>
           <div class="dropdown-menu">
             <a href="index.html#about" class="dropdown-item">Về LogisQuest</a>
             <a href="index.html#team" class="dropdown-item">Đội Ngũ Sáng Tạo</a>
           </div>
         </div>
+
         <a href="index.html#gameplay" class="nav-link">Cách Chơi</a>
         <a href="index.html#cards" class="nav-link">Thẻ Bài</a>
       </nav>
+
       <div class="header-actions">
-        <button class="cart-button nav-cart-btn" data-cart-button type="button" aria-label="Mua ngay" onclick="document.getElementById('btnBuyNow').scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>document.getElementById('btnBuyNow').click(),400);">
-          <span class="cart-button__stage" aria-hidden="true">
-            <span class="cart-button__label">Mua ngay</span>
-            <svg class="cart-button__cart" viewBox="0 0 32 32"><path class="cart-button__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z"/><path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1"/><path d="M13.1 26.2h.1M23.4 26.2h.1"/><path class="cart-button__check" d="m14.1 15.7 2.1 2.1 4.3-4.6"/></svg>
+        <!-- DELIVERY BUTTON (BUY PAGE HEADER) — Full Phase 1+2 from delivery-button library -->
+        <button class="order-button nav-delivery-btn" type="button" aria-label="Mua ngay" id="navBuyBtn">
+
+          <!-- Phase 1: add-to-cart layer -->
+          <span class="cart-layer" aria-hidden="true">
+            <svg class="cart-layer__cart" viewBox="0 0 32 32">
+              <path class="cart-layer__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z"/>
+              <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1"/>
+              <path d="M13.1 26.2h.1M23.4 26.2h.1"/>
+              <path class="cart-layer__check" d="m14.1 15.7 2.1 2.1 4.3-4.6"/>
+            </svg>
+            <svg class="cart-layer__shirt" viewBox="0 0 32 32">
+              <path d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z"/>
+            </svg>
           </span>
-          <svg class="cart-button__shirt" aria-hidden="true" viewBox="0 0 32 32"><path d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z"/></svg>
+
+          <!-- Labels -->
+          <span class="button-label button-label--default">Mua Ngay</span>
+          <span class="button-label button-label--adding">Đang thêm…</span>
+          <span class="button-label button-label--success">
+            Đặt Hàng Thành Công <span class="checkmark" aria-hidden="true"></span>
+          </span>
+
+          <!-- Phase 2: truck delivery layer -->
+          <span class="package" aria-hidden="true"></span>
+          <span class="truck" aria-hidden="true">
+            <span class="truck__cargo"></span>
+            <span class="truck__cab"><span class="truck__window"></span></span>
+            <span class="truck__light truck__light--top"></span>
+            <span class="truck__light truck__light--bottom"></span>
+          </span>
+          <span class="road" aria-hidden="true"></span>
         </button>
-        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu"><span></span><span></span><span></span></button>
+
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- MOBILE NAV -->
+  <!-- MOBILE NAVIGATION DRAWER (SYNCHRONIZED WITH HOMEPAGE) -->
   <div class="mobile-nav" id="mobileNav">
     <a href="index.html#home" class="mobile-link">Trang Chủ</a>
     <div class="mobile-dropdown-group">
       <span class="mobile-group-title">Giới Thiệu</span>
-      <a href="index.html#about" class="mobile-link mobile-sub-link">&#8212; Về LogisQuest</a>
-      <a href="index.html#team" class="mobile-link mobile-sub-link">&#8212; Đội Ngũ Sáng Tạo</a>
+      <a href="index.html#about" class="mobile-link mobile-sub-link">— Về LogisQuest</a>
+      <a href="index.html#team" class="mobile-link mobile-sub-link">— Đội Ngũ Sáng Tạo</a>
     </div>
     <a href="index.html#gameplay" class="mobile-link">Cách Chơi</a>
     <a href="index.html#cards" class="mobile-link">Thẻ Bài</a>
-    <button class="cart-button nav-cart-btn" data-cart-button type="button" aria-label="Mua ngay" style="margin-top:10px;" onclick="document.getElementById('btnBuyNow').scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>document.getElementById('btnBuyNow').click(),400);">
-      <span class="cart-button__stage" aria-hidden="true">
-        <span class="cart-button__label">Mua ngay</span>
-        <svg class="cart-button__cart" viewBox="0 0 32 32"><path class="cart-button__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z"/><path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1"/><path d="M13.1 26.2h.1M23.4 26.2h.1"/><path class="cart-button__check" d="m14.1 15.7 2.1 2.1 4.3-4.6"/></svg>
+
+    <!-- DELIVERY BUTTON (BUY PAGE SIDEBAR) — Full Phase 1+2 from delivery-button library -->
+    <button class="order-button nav-delivery-btn" type="button" aria-label="Mua ngay" id="sidebarBuyBtn" style="margin-top:12px; width:100%;">
+
+      <!-- Phase 1: add-to-cart layer -->
+      <span class="cart-layer" aria-hidden="true">
+        <svg class="cart-layer__cart" viewBox="0 0 32 32">
+          <path class="cart-layer__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z"/>
+          <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1"/>
+          <path d="M13.1 26.2h.1M23.4 26.2h.1"/>
+          <path class="cart-layer__check" d="m14.1 15.7 2.1 2.1 4.3-4.6"/>
+        </svg>
+        <svg class="cart-layer__shirt" viewBox="0 0 32 32">
+          <path d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z"/>
+        </svg>
       </span>
-      <svg class="cart-button__shirt" aria-hidden="true" viewBox="0 0 32 32"><path d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z"/></svg>
+
+      <!-- Labels -->
+      <span class="button-label button-label--default">Mua Ngay</span>
+      <span class="button-label button-label--adding">Đang thêm…</span>
+      <span class="button-label button-label--success">
+        Đặt Hàng Thành Công <span class="checkmark" aria-hidden="true"></span>
+      </span>
+
+      <!-- Phase 2: truck delivery layer -->
+      <span class="package" aria-hidden="true"></span>
+      <span class="truck" aria-hidden="true">
+        <span class="truck__cargo"></span>
+        <span class="truck__cab"><span class="truck__window"></span></span>
+        <span class="truck__light truck__light--top"></span>
+        <span class="truck__light truck__light--bottom"></span>
+      </span>
+      <span class="road" aria-hidden="true"></span>
     </button>
   </div>
 
   <!-- BREADCRUMB -->
   <nav class="buy-breadcrumb" aria-label="Breadcrumb">
     <div class="breadcrumb-container">
-      <a href="index.html" class="bc-link">Trang chủ</a>
-      <span class="bc-sep">&#8250;</span>
+      <a href="index.html#home" class="bc-link">Trang chủ</a>
+      <span class="bc-sep">›</span>
       <a href="index.html#cards" class="bc-link">Sản phẩm</a>
-      <span class="bc-sep">&#8250;</span>
+      <span class="bc-sep">›</span>
       <span class="bc-current">Board Game LogisQuest</span>
     </div>
   </nav>
 
   <main class="buy-main-content">
 
-    <!-- S1: PRODUCT HERO -->
+    <!-- S1: PRODUCT HERO SECTION -->
     <section class="buy-product-hero">
       <div class="buy-hero-deco-top">
         <svg viewBox="0 0 1400 60" preserveAspectRatio="none" fill="none"><path d="M0 30 C 350 55, 700 5, 1050 40, 1400 15 L1400 60 L0 60 Z" fill="rgba(14,165,233,0.06)"/></svg>
       </div>
+
       <div class="buy-hero-container">
         <div class="buy-hero-grid">
-          <!-- GALLERY COL -->
+          
+          <!-- LEFT: GALLERY COLUMN WITH 3D TILT -->
           <div class="buy-gallery-col">
-            <div class="buy-main-img-frame">
-              <div class="buy-badge-freeship">FREESHIP &amp; GIẢM 60K</div>
+            <div class="buy-main-img-frame" id="productImgFrame">
+              <div class="buy-badge-freeship">
+                <span class="pulse-fire">🔥</span> FREESHIP &amp; GIẢM 60K
+              </div>
               <div class="buy-img-glass-wrap">
                 <img src="assets/product-box-3d.png" alt="Board Game LogisQuest" id="mainProductImg" class="buy-featured-img">
               </div>
             </div>
+
+            <!-- Thumbnail row -->
             <div class="buy-thumb-row" id="thumbnailRow">
-              <button class="buy-thumb-btn active" data-img="assets/product-box-3d.png"><img src="assets/product-box-3d.png" alt="Hộp 3D"></button>
-              <button class="buy-thumb-btn" data-img="assets/product-rising-night.jpg"><img src="assets/product-rising-night.jpg" alt="Combo sản phẩm"></button>
-              <button class="buy-thumb-btn" data-img="assets/hero-card.png"><img src="assets/hero-card.png" alt="Thẻ bài"></button>
-              <button class="buy-thumb-btn" data-img="assets/bg-gameplay.png"><img src="assets/bg-gameplay.png" alt="Bàn chơi"></button>
-              <button class="buy-thumb-btn" data-img="assets/product-workshop.png"><img src="assets/product-workshop.png" alt="Thực tế sản phẩm"></button>
+              <button class="buy-thumb-btn active" data-img="assets/product-box-3d.png" aria-label="Hộp 3D"><img src="assets/product-box-3d.png" alt="Hộp 3D"></button>
+              <button class="buy-thumb-btn" data-img="assets/product-rising-night.jpg" aria-label="Combo sản phẩm"><img src="assets/product-rising-night.jpg" alt="Combo sản phẩm"></button>
+              <button class="buy-thumb-btn" data-img="assets/hero-card.png" aria-label="Thẻ bài"><img src="assets/hero-card.png" alt="Thẻ bài"></button>
+              <button class="buy-thumb-btn" data-img="assets/bg-gameplay.png" aria-label="Bàn chơi"><img src="assets/bg-gameplay.png" alt="Bàn chơi"></button>
+              <button class="buy-thumb-btn" data-img="assets/product-workshop.png" aria-label="Thực tế sản phẩm"><img src="assets/product-workshop.png" alt="Thực tế sản phẩm"></button>
             </div>
+
+            <!-- Trust badges row -->
             <div class="buy-trust-row">
-              <div class="buy-trust-badge"><span class="trust-icon">&#128737;</span><span>Chính hãng 100%</span></div>
-              <div class="buy-trust-badge"><span class="trust-icon">&#128260;</span><span>Đổi trả trong 7 ngày</span></div>
-              <div class="buy-trust-badge"><span class="trust-icon">&#9889;</span><span>Giao nhanh toàn quốc</span></div>
+              <div class="buy-trust-badge"><span class="trust-icon">🛡️</span><span>Chính hãng 100%</span></div>
+              <div class="buy-trust-badge"><span class="trust-icon">🔄</span><span>Đổi trả trong 7 ngày</span></div>
+              <div class="buy-trust-badge"><span class="trust-icon">⚡</span><span>Giao nhanh toàn quốc</span></div>
             </div>
           </div>
 
-          <!-- INFO COL -->
+          <!-- RIGHT: INFO & ORDER COLUMN -->
           <div class="buy-info-col">
-            <div class="buy-category-tag"><span class="cat-dot"></span>Board Game &middot; Chiến Thuật &middot; Logistics &amp; Incoterms</div>
+            <div class="buy-category-tag">
+              <span class="cat-dot"></span>Board Game · Chiến Thuật · Logistics &amp; Incoterms
+            </div>
+
             <h1 class="buy-product-title">BOARD GAME<br><em>LOGISQUEST</em></h1>
             <div class="buy-title-underline"></div>
+
             <div class="buy-rating-row">
-              <span class="rating-stars-gold">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="rating-stars-gold">★★★★★</span>
               <span class="rating-score">4.9</span>
-              <span class="rating-count">&bull; 128 đánh giá</span>
+              <span class="rating-count">• 128 đánh giá</span>
               <span class="rating-sold">| Đã bán: <strong>1.200+</strong></span>
             </div>
+
+            <!-- Price Block -->
             <div class="buy-price-block">
-              <span class="buy-price-current" id="buyPriceCurrent">340.000 &#8363;</span>
-              <span class="buy-price-original">400.000 &#8363;</span>
-              <span class="buy-price-badge">-15%</span>
+              <span class="buy-price-current" id="buyPriceCurrent">340.000 ₫</span>
+              <span class="buy-price-original">400.000 ₫</span>
+              <span class="buy-price-badge">-15% TIẾT KIỆM</span>
             </div>
+
+            <!-- Voucher Box -->
             <div class="buy-voucher-box">
               <div class="voucher-left-accent"></div>
               <div class="voucher-content">
-                <div class="voucher-header-row"><span class="voucher-fire">&#128293;</span><strong>Freeship toàn quốc &amp; Ưu đãi Mùa hè 2026</strong></div>
-                <p class="voucher-desc">Giá sản phẩm đã tự động giảm 60.000₫. Nhập mã voucher <code class="buy-voucher-code" id="voucherCopyBtn" title="Click để copy">SHIP15</code> để nhận Freeship toàn quốc.</p>
+                <div class="voucher-header-row">
+                  <span class="voucher-fire">🎁</span>
+                  <strong>Freeship Toàn Quốc &amp; Ưu Đãi Ra Mắt 2026</strong>
+                </div>
+                <p class="voucher-desc">
+                  Giá sản phẩm đã tự động giảm 60.000₫. Nhập mã voucher 
+                  <code class="buy-voucher-code" id="voucherCopyBtn" title="Click để copy">SHIP15</code> 
+                  để nhận Freeship toàn quốc.
+                </p>
               </div>
             </div>
+
+            <!-- Description Block -->
             <div class="buy-desc-block">
-              <h3 class="buy-desc-heading"><span class="desc-heading-line"></span>MÔ TẢ SẢN PHẨM</h3>
+              <h3 class="buy-desc-heading"><span class="desc-heading-line"></span>MÔ TẢ CHIẾN THUẬT</h3>
               <div class="buy-desc-text">
                 <p><strong>LogisQuest</strong> đưa người chơi vào vai trò nhà quản trị điều hành chi nhánh công ty logistics quốc tế, tranh tài tích lũy điểm uy tín thương mại trên hải trình kết nối 5 cảng biển lớn của Việt Nam.</p>
                 <p>Được xây dựng trên nền tảng <strong>11 điều khoản Incoterms</strong> (từ EXW, FOB, CIF đến DDP) kết hợp cơ chế phương tiện chung cực kỳ độc đáo: <em>Bạn có thể là người xếp container lên tàu, nhưng đối thủ hoàn toàn có thể điều con tàu đó xuất bến sớm hơn ý bạn!</em> Hãy tính toán nước đi, kích hoạt thẻ hợp đồng EXW, vượt qua 24 thẻ sự cố thời tiết &amp; rủi ro hàng hải để đưa hàng về đích an toàn.</p>
                 <p class="desc-conclusion">Học sâu - Hiểu thật - Chơi cuốn: Trải nghiệm vừa mang tính giải trí chiến thuật đỉnh cao, vừa nắm trọn bức tranh vận tải và thương mại quốc tế trong tầm tay!</p>
               </div>
-              <a href="index.html#gameplay" class="buy-story-link">Xem chi tiết hướng dẫn và luật chơi &#10141;</a>
+              <a href="index.html#gameplay" class="buy-story-link">Xem chi tiết hướng dẫn và luật chơi ➔</a>
             </div>
 
-            <!-- ACCORDIONS -->
+            <!-- Accordions (Product Specs & Components) -->
             <div class="buy-accordions">
               <div class="buy-acc-item">
                 <button class="buy-acc-header accordion-header" data-target="accProductInfo">
-                  <span class="acc-icon-ship">&#9875;</span><span>Thông tin sản phẩm</span><span class="acc-icon">&#9662;</span>
+                  <span class="acc-icon-ship">⚓</span>
+                  <span>Thông số quy cách sản phẩm</span>
+                  <span class="acc-icon">▾</span>
                 </button>
                 <div class="buy-acc-content accordion-content" id="accProductInfo">
                   <ul class="buy-spec-list">
@@ -154,13 +255,16 @@
                     <li><span class="spec-key">Chất liệu thẻ bài:</span> Giấy C350 cao cấp cán màng mờ mướt tay, chống ẩm và trầy xước</li>
                     <li><span class="spec-key">Linh kiện &amp; Mô hình:</span> 8 Tàu biển 3D, 4 Bảng nhà kho, 60+ Khối container đa màu, Thước đo uy tín</li>
                     <li><span class="spec-key">Số người chơi:</span> 2 – 4 người (Thời lượng mỗi ván: 45 – 60 phút)</li>
-                    <li><span class="spec-key">Độ tuổi phù hợp:</span> 12+ (Phù hợp sinh viên, nhóm bạn trẻ, gia đình và cộng đồng board game)</li>
+                    <li><span class="spec-key">Độ tuổi phù hợp:</span> 12+ (Phù hợp sinh viên, nhóm bạn trẻ, gia đình và workshop đào tạo)</li>
                   </ul>
                 </div>
               </div>
+
               <div class="buy-acc-item">
                 <button class="buy-acc-header accordion-header" data-target="accComponents">
-                  <span class="acc-icon-ship">&#127924;</span><span>Thành phần bộ Board Game</span><span class="acc-icon">&#9662;</span>
+                  <span class="acc-icon-ship">🎲</span>
+                  <span>Trọn bộ thành phần trong hộp game</span>
+                  <span class="acc-icon">▾</span>
                 </button>
                 <div class="buy-acc-content accordion-content" id="accComponents">
                   <ul class="buy-spec-list">
@@ -178,55 +282,82 @@
               </div>
             </div>
 
-            <!-- QUANTITY -->
+            <!-- Quantity Stepper -->
             <div class="buy-qty-wrapper">
-              <label for="qtyInput" class="buy-qty-label">Số lượng</label>
+              <label for="qtyInput" class="buy-qty-label">Số lượng:</label>
               <div class="buy-qty-picker">
-                <button type="button" class="qty-btn" id="btnMinus" aria-label="Giảm số lượng"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <button type="button" class="qty-btn" id="btnMinus" aria-label="Giảm số lượng">
+                  <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
                 <input type="number" id="qtyInput" class="qty-input" value="1" min="1" max="99" readonly>
-                <button type="button" class="qty-btn" id="btnPlus" aria-label="Tăng số lượng"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <button type="button" class="qty-btn" id="btnPlus" aria-label="Tăng số lượng">
+                  <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
               </div>
-              <span class="buy-qty-stock">&#128230; Còn hàng - Đóng gói và giao trong 24h</span>
+              <span class="buy-qty-stock">📦 Còn hàng — Đóng gói và giao trong 24h</span>
             </div>
 
-            <!-- BUY BUTTONS -->
+            <!-- Action Buttons -->
             <div class="buy-action-group">
-              <button class="order-button product-delivery-btn" id="btnBuyNow" type="button" aria-label="MUA NGAY">
-                <span class="button-label button-label--default" id="btnBuyNowText">MUA NGAY (340.000 &#8363;)</span>
-                <span class="button-label button-label--success">ĐÃ ĐẶT HÀNG!<span class="checkmark" aria-hidden="true"></span></span>
-                <span class="package" aria-hidden="true"></span>
-                <span class="truck" aria-hidden="true">
-                  <span class="truck__cargo"></span>
-                  <span class="truck__cab"><span class="truck__window"></span></span>
-                  <span class="truck__light truck__light--top"></span>
-                  <span class="truck__light truck__light--bottom"></span>
+              <!-- ADD-TO-CART BUTTON (from add-to-cart/ library) -->
+              <!-- After animation completes (~2.45s), opens the checkout modal -->
+              <button class="cart-button cart-button--buy" id="btnBuyNow" type="button" data-cart-button aria-label="Thêm vào giỏ hàng">
+                <span class="cart-button__stage" aria-hidden="true">
+                  <span class="cart-button__label" id="btnBuyNowText">MUA NGAY (340.000 ₫)</span>
+                  <svg class="cart-button__cart" viewBox="0 0 32 32">
+                    <path class="cart-button__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z"/>
+                    <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1"/>
+                    <path d="M13.1 26.2h.1M23.4 26.2h.1"/>
+                    <path class="cart-button__check" d="m14.1 15.7 2.1 2.1 4.3-4.6"/>
+                  </svg>
                 </span>
-                <span class="road" aria-hidden="true"></span>
+                <svg class="cart-button__shirt" aria-hidden="true" viewBox="0 0 32 32">
+                  <path d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z"/>
+                </svg>
               </button>
+
               <button class="buy-btn-fb" id="btnContactFB">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M13.86 22v-8.45h2.84l.43-3.3h-3.27V8.14c0-.96.27-1.61 1.64-1.61h1.75V3.58a23.4 23.4 0 0 0-2.55-.13c-2.52 0-4.25 1.54-4.25 4.36v2.44H7.6v3.3h2.85V22h3.41Z"/></svg>
                 Nhắn tin tư vấn qua Fanpage
               </button>
             </div>
+
           </div>
         </div>
       </div>
+
       <div class="buy-hero-wave-bottom">
         <svg viewBox="0 0 1400 80" preserveAspectRatio="none" fill="none"><path d="M0 40 C 350 70, 700 10, 1050 55, 1400 25 L1400 80 L0 80 Z" fill="var(--bg-secondary)"/></svg>
       </div>
     </section>
 
-    <!-- S2: FEATURES -->
+    <!-- S2: 4 FEATURES HIGHLIGHT STRIP -->
     <section class="buy-features-strip">
       <div class="buy-features-container">
-        <div class="buy-feature-card"><div class="feature-icon-wrap">&#127919;</div><h4>Chiến thuật sâu sắc</h4><p>Vận dụng thông minh 11 điều khoản Incoterms 2020 kết hợp cơ chế tàu chung độc đáo</p></div>
-        <div class="buy-feature-card"><div class="feature-icon-wrap">&#127912;</div><h4>Thiết kế 3D độc quyền</h4><p>Bộ thẻ bài sắc nét, mô hình tàu biển và container sinh động mang tính tương tác cao</p></div>
-        <div class="buy-feature-card"><div class="feature-icon-wrap">&#128101;</div><h4>2 – 4 người chơi</h4><p>Tối ưu cho cả nhóm bạn, sinh viên, gia đình và workshop đào tạo (45–60 phút/ván)</p></div>
-        <div class="buy-feature-card"><div class="feature-icon-wrap">&#127942;</div><h4>Chất liệu cao cấp</h4><p>In trên giấy C350 cán màng mờ kháng ẩm nhẹ, hộp cứng cáp dập nổi sang trọng</p></div>
+        <div class="buy-feature-card">
+          <div class="feature-icon-wrap">🎯</div>
+          <h4>Chiến thuật sâu sắc</h4>
+          <p>Vận dụng thông minh 11 điều khoản Incoterms 2020 kết hợp cơ chế tàu chung độc đáo</p>
+        </div>
+        <div class="buy-feature-card">
+          <div class="feature-icon-wrap">🎨</div>
+          <h4>Thiết kế 3D độc quyền</h4>
+          <p>Bộ thẻ bài sắc nét, mô hình tàu biển và container sinh động mang tính tương tác cao</p>
+        </div>
+        <div class="buy-feature-card">
+          <div class="feature-icon-wrap">👥</div>
+          <h4>2 – 4 người chơi</h4>
+          <p>Tối ưu cho cả nhóm bạn, sinh viên, gia đình và workshop đào tạo (45–60 phút/ván)</p>
+        </div>
+        <div class="buy-feature-card">
+          <div class="feature-icon-wrap">🏆</div>
+          <h4>Chất liệu cao cấp</h4>
+          <p>In trên giấy C350 cán màng mờ kháng ẩm nhẹ, hộp cứng cáp dập nổi sang trọng</p>
+        </div>
       </div>
     </section>
 
-    <!-- S3: REVIEWS -->
+    <!-- S3: REVIEWS & SOCIAL PROOF -->
     <section class="buy-reviews-section">
       <div class="buy-reviews-container">
         <div class="buy-section-header">
@@ -234,33 +365,42 @@
           <div class="buy-section-underline"></div>
           <p class="buy-section-sub">Trải nghiệm chân thực từ cộng đồng người chơi LogisQuest</p>
         </div>
+
         <div class="buy-rating-summary">
           <div class="rating-score-box">
             <div class="rating-big-num">4.9</div>
-            <div class="rating-stars-big">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="rating-stars-big">★★★★★</div>
             <div class="rating-count-text">128 Đánh giá</div>
           </div>
           <div class="rating-bars-box">
-            <div class="bar-row"><span class="star-label">5 &#9733;</span><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:92%;"></div></div><span class="bar-pct">92%</span></div>
-            <div class="bar-row"><span class="star-label">4 &#9733;</span><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:6%;"></div></div><span class="bar-pct">6%</span></div>
-            <div class="bar-row"><span class="star-label">3 &#9733;</span><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:2%;"></div></div><span class="bar-pct">2%</span></div>
-            <div class="bar-row"><span class="star-label">2 &#9733;</span><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%;"></div></div><span class="bar-pct">0%</span></div>
-            <div class="bar-row"><span class="star-label">1 &#9733;</span><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%;"></div></div><span class="bar-pct">0%</span></div>
+            <div class="bar-row"><span class="star-label">5 ★</span><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:92%;"></div></div><span class="bar-pct">92%</span></div>
+            <div class="bar-row"><span class="star-label">4 ★</span><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:6%;"></div></div><span class="bar-pct">6%</span></div>
+            <div class="bar-row"><span class="star-label">3 ★</span><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:2%;"></div></div><span class="bar-pct">2%</span></div>
+            <div class="bar-row"><span class="star-label">2 ★</span><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%;"></div></div><span class="bar-pct">0%</span></div>
+            <div class="bar-row"><span class="star-label">1 ★</span><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%;"></div></div><span class="bar-pct">0%</span></div>
           </div>
         </div>
+
         <div class="buy-review-list">
           <div class="buy-review-card">
             <div class="review-header-row">
               <div class="reviewer-avatar">H</div>
-              <div class="reviewer-meta"><strong class="reviewer-name">Hà Phương (Sinh viên Ngoại Thương)</strong><div class="stars-gold">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+              <div class="reviewer-meta">
+                <strong class="reviewer-name">Hà Phương (Sinh viên Ngoại Thương)</strong>
+                <div class="stars-gold">★★★★★</div>
+              </div>
               <span class="review-time">1 tuần trước</span>
             </div>
             <p class="review-text">Game cực kỳ cuốn! Mình học chuyên ngành Logistics mà trước giờ toàn nhớ vẹt Incoterms. Chơi LogisQuest xong hiểu ngay tại sao CIF cần bảo hiểm, tại sao DDP rủi ro cao mà điểm lại đậm. Thẻ bài và mô hình tàu cực kỳ chỉn chu.</p>
           </div>
+
           <div class="buy-review-card">
             <div class="review-header-row">
               <div class="reviewer-avatar">T</div>
-              <div class="reviewer-meta"><strong class="reviewer-name">Trần Quốc Bảo (Chuyên viên Forwarder)</strong><div class="stars-gold">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+              <div class="reviewer-meta">
+                <strong class="reviewer-name">Trần Quốc Bảo (Chuyên viên Forwarder)</strong>
+                <div class="stars-gold">★★★★★</div>
+              </div>
               <span class="review-time">2 tuần trước</span>
             </div>
             <div class="review-text">
@@ -269,24 +409,33 @@
             </div>
             <div class="review-photos"><img src="assets/product-box-3d.png" alt="Ảnh thực tế"></div>
           </div>
+
           <div class="buy-review-card">
             <div class="review-header-row">
               <div class="reviewer-avatar">N</div>
-              <div class="reviewer-meta"><strong class="reviewer-name">Nguyễn Tuấn Kiệt (CLB Board Game)</strong><div class="stars-gold">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+              <div class="reviewer-meta">
+                <strong class="reviewer-name">Nguyễn Tuấn Kiệt (CLB Board Game)</strong>
+                <div class="stars-gold">★★★★★</div>
+              </div>
               <span class="review-time">3 tuần trước</span>
             </div>
             <p class="review-text">Giao hàng hỏa tốc trong 24h. Game có chiều sâu chiến thuật cao, mỗi ván bốc ngẫu nhiên cảng khác nhau nên chơi đi chơi lại không chán. Nhóm mình chơi liên tục 4 ván trong một tối!</p>
             <div class="review-photos"><img src="assets/hero-card.png" alt="Ảnh thẻ bài"></div>
           </div>
+
           <div class="buy-review-card">
             <div class="review-header-row">
               <div class="reviewer-avatar">M</div>
-              <div class="reviewer-meta"><strong class="reviewer-name">Mai Linh</strong><div class="stars-gold">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+              <div class="reviewer-meta">
+                <strong class="reviewer-name">Mai Linh</strong>
+                <div class="stars-gold">★★★★★</div>
+              </div>
               <span class="review-time">1 tháng trước</span>
             </div>
             <p class="review-text">Sách luật chơi in màu dễ hiểu, có quét mã QR xem video hướng dẫn nhanh. Mua về chơi cùng gia đình cuối tuần ai cũng thích mê.</p>
           </div>
         </div>
+
         <div class="buy-review-pagination">
           <button class="page-nav-btn" disabled>&lt;</button>
           <button class="page-num-btn active">1</button>
@@ -297,7 +446,7 @@
       </div>
     </section>
 
-    <!-- S4: FAQ -->
+    <!-- S4: FAQ ACCORDION SECTION -->
     <section class="buy-faq-section">
       <div class="buy-faq-container">
         <div class="buy-section-header">
@@ -307,7 +456,7 @@
         <div class="buy-faq-list">
           <div class="buy-faq-item">
             <button class="buy-faq-header accordion-header" data-target="faq1">
-              <span class="faq-q-icon">Q</span><span>Sản phẩm có đảm bảo chất lượng chính hãng không?</span><span class="acc-icon">&#9662;</span>
+              <span class="faq-q-icon">Q</span><span>Sản phẩm có đảm bảo chất lượng chính hãng không?</span><span class="acc-icon">▾</span>
             </button>
             <div class="buy-faq-content accordion-content" id="faq1">
               <p>Tất cả sản phẩm LogisQuest đều được sản xuất và phân phối chính thức từ đội ngũ sáng tạo tại Việt Nam. Thẻ bài in trên giấy C350 cao cấp cán màng mờ, hộp game bọc màng co và đóng gói 2 lớp bóng khí chống va đập 100% trước khi xuất kho.</p>
@@ -315,7 +464,7 @@
           </div>
           <div class="buy-faq-item">
             <button class="buy-faq-header accordion-header" data-target="faq2">
-              <span class="faq-q-icon">Q</span><span>Thời gian giao hàng là bao lâu?</span><span class="acc-icon">&#9662;</span>
+              <span class="faq-q-icon">Q</span><span>Thời gian giao hàng là bao lâu?</span><span class="acc-icon">▾</span>
             </button>
             <div class="buy-faq-content accordion-content" id="faq2">
               <p>Đơn hàng nội thành Hà Nội và TP. Hồ Chí Minh sẽ nhận được sau 1 – 2 ngày làm việc. Các tỉnh thành khác trên toàn quốc nhận hàng từ 2 – 4 ngày làm việc. Hỗ trợ giao hỏa tốc theo yêu cầu.</p>
@@ -323,7 +472,7 @@
           </div>
           <div class="buy-faq-item">
             <button class="buy-faq-header accordion-header" data-target="faq3">
-              <span class="faq-q-icon">Q</span><span>Chính sách đổi trả và bảo hành như thế nào?</span><span class="acc-icon">&#9662;</span>
+              <span class="faq-q-icon">Q</span><span>Chính sách đổi trả và bảo hành như thế nào?</span><span class="acc-icon">▾</span>
             </button>
             <div class="buy-faq-content accordion-content" id="faq3">
               <p>LogisQuest hỗ trợ chính sách <strong>1 đổi 1 hoàn toàn miễn phí trong vòng 7 ngày</strong> nếu sản phẩm có lỗi từ nhà sản xuất (thiếu linh kiện, rách mép) hoặc bị móp méo, hư hại do quá trình vận chuyển.</p>
@@ -331,7 +480,7 @@
           </div>
           <div class="buy-faq-item">
             <button class="buy-faq-header accordion-header" data-target="faq4">
-              <span class="faq-q-icon">Q</span><span>Người chưa biết gì về Logistics hay Incoterms có chơi được không?</span><span class="acc-icon">&#9662;</span>
+              <span class="faq-q-icon">Q</span><span>Người chưa biết gì về Logistics hay Incoterms có chơi được không?</span><span class="acc-icon">▾</span>
             </button>
             <div class="buy-faq-content accordion-content" id="faq4">
               <p>Hoàn toàn chơi được và rất dễ nghiền! LogisQuest được thiết kế theo cơ chế trực quan: người mới chỉ mất 5 phút xem video hoặc đọc sách hướng dẫn minh họa là có thể làm quen ngay, vừa chơi vừa tiếp thu kiến thức một cách tự nhiên.</p>
@@ -341,13 +490,29 @@
       </div>
     </section>
 
-    <!-- S5: POLICIES -->
+    <!-- S5: POLICIES SECTION -->
     <section class="buy-policies-section">
       <div class="buy-policies-container">
-        <div class="buy-policy-card"><div class="policy-icon-wrap">&#128666;</div><h3 class="policy-title">Giao hàng nhanh chóng</h3><p class="policy-desc">Nội thành 1-2 ngày, toàn quốc 2-4 ngày. Nhập mã SHIP15 để Freeship toàn quốc.</p></div>
-        <div class="buy-policy-card"><div class="policy-icon-wrap">&#128737;</div><h3 class="policy-title">Cam kết chính hãng</h3><p class="policy-desc">100% bản quyền từ tác giả LogisQuest, chất lượng gia công đạt chuẩn xuất khẩu.</p></div>
-        <div class="buy-policy-card"><div class="policy-icon-wrap">&#128230;</div><h3 class="policy-title">Đóng gói an toàn</h3><p class="policy-desc">Hộp cứng bọc màng co, lót 2 lớp chống sốc bóng khí đảm bảo vuông vức tới tay bạn.</p></div>
-        <div class="buy-policy-card"><div class="policy-icon-wrap">&#128260;</div><h3 class="policy-title">Đổi trả trong 7 ngày</h3><p class="policy-desc">Đổi mới 1-1 miễn phí nếu có lỗi sản xuất hoặc hư hại trong quá trình vận chuyển.</p></div>
+        <div class="buy-policy-card">
+          <div class="policy-icon-wrap">🚚</div>
+          <h3 class="policy-title">Giao hàng nhanh chóng</h3>
+          <p class="policy-desc">Nội thành 1-2 ngày, toàn quốc 2-4 ngày. Nhập mã SHIP15 để Freeship toàn quốc.</p>
+        </div>
+        <div class="buy-policy-card">
+          <div class="policy-icon-wrap">🛡️</div>
+          <h3 class="policy-title">Cam kết chính hãng</h3>
+          <p class="policy-desc">100% bản quyền từ tác giả LogisQuest, chất lượng gia công đạt chuẩn xuất khẩu.</p>
+        </div>
+        <div class="buy-policy-card">
+          <div class="policy-icon-wrap">📦</div>
+          <h3 class="policy-title">Đóng gói an toàn</h3>
+          <p class="policy-desc">Hộp cứng bọc màng co, lót 2 lớp chống sốc bóng khí đảm bảo vuông vức tới tay bạn.</p>
+        </div>
+        <div class="buy-policy-card">
+          <div class="policy-icon-wrap">🔄</div>
+          <h3 class="policy-title">Đổi trả trong 7 ngày</h3>
+          <p class="policy-desc">Đổi mới 1-1 miễn phí nếu có lỗi sản xuất hoặc hư hại trong quá trình vận chuyển.</p>
+        </div>
       </div>
     </section>
 
@@ -355,16 +520,43 @@
     <section class="buy-cta-banner">
       <div class="buy-cta-inner">
         <h2 class="cta-headline">Sẵn sàng bước vào hải trình cùng LogisQuest?</h2>
-        <p class="cta-subtext">Đặt mua ngay hôm nay &#8212; Nhận trọn bộ Board Game LogisQuest với mức giá ưu đãi đặc biệt!</p>
+        <p class="cta-subtext">Đặt mua ngay hôm nay — Nhận trọn bộ Board Game LogisQuest với mức giá ưu đãi đặc biệt!</p>
         <button class="btn btn-primary cta-buy-btn" onclick="document.getElementById('btnBuyNow').scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>document.getElementById('btnBuyNow').click(),400);">
-          ĐẶT MUA NGAY &#8212; 340.000 &#8363;
+          ĐẶT MUA NGAY — 340.000 ₫
         </button>
       </div>
     </section>
 
   </main>
 
-  <!-- 3-TIER FOOTER -->
+  <!-- STICKY BOTTOM QUICK-BUY FLOATING DOCK -->
+  <div class="buy-floating-dock" id="buyFloatingDock" aria-hidden="true">
+    <div class="dock-container">
+      <div class="dock-product-preview">
+        <img src="assets/product-box-3d.png" alt="LogisQuest Mini" class="dock-img">
+        <div class="dock-meta">
+          <strong class="dock-title">Board Game LogisQuest</strong>
+          <span class="dock-badge">Freeship Toàn Quốc</span>
+        </div>
+      </div>
+      <div class="dock-action-wrap">
+        <div class="dock-price-tag">
+          <span class="dock-label">Tổng cộng:</span>
+          <strong class="dock-price" id="dockPriceText">340.000 ₫</strong>
+        </div>
+        <div class="dock-qty-picker">
+          <button type="button" class="dock-qty-btn" id="dockMinus" aria-label="Giảm">-</button>
+          <span class="dock-qty-val" id="dockQtyVal">1</span>
+          <button type="button" class="dock-qty-btn" id="dockPlus" aria-label="Tăng">+</button>
+        </div>
+        <button class="btn btn-primary dock-buy-btn" id="dockBuyNowBtn">
+          MUA NGAY ➔
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3-TIER FOOTER (SYNCHRONIZED WITH HOMEPAGE) -->
   <footer class="bg-footer" id="bgFooter">
     <div class="bg-checker-strip strip-top"><div class="checker-pattern-line"></div></div>
     <div class="bg-footer-hero">
@@ -472,7 +664,7 @@
     <div class="modal-content checkout-modal-card">
       <button class="modal-close" id="checkoutClose" aria-label="Đóng">&times;</button>
       <div class="checkout-modal-header">
-        <div class="checkout-modal-icon">&#128674;</div>
+        <div class="checkout-modal-icon">🚢</div>
         <h2 class="modal-title-blue">XÁC NHẬN ĐẶT HÀNG</h2>
         <p class="modal-sub-text">Nhập thông tin giao hàng để hoàn tất đơn hàng Board Game LogisQuest</p>
       </div>
@@ -505,20 +697,23 @@
         </div>
         <div class="checkout-summary-box">
           <div class="summary-line"><span>Sản phẩm:</span><span>Board Game LogisQuest x <strong id="summaryQty">1</strong></span></div>
-          <div class="summary-line"><span>Tạm tính:</span><span id="summarySubtotal">340.000 &#8363;</span></div>
+          <div class="summary-line"><span>Tạm tính:</span><span id="summarySubtotal">340.000 ₫</span></div>
           <div class="summary-line text-green"><span>Phí vận chuyển:</span><span id="summaryShipping">Miễn phí (Freeship SHIP15)</span></div>
-          <div class="summary-line total-line"><span>TỔNG THANH TOÁN:</span><strong class="total-price-blue" id="summaryTotal">340.000 &#8363;</strong></div>
+          <div class="summary-line total-line"><span>TỔNG THANH TOÁN:</span><strong class="total-price-blue" id="summaryTotal">340.000 ₫</strong></div>
         </div>
         <button type="submit" class="btn btn-primary btn-submit-order">HOÀN TẤT ĐẶT HÀNG</button>
       </form>
       <div class="checkout-success-msg" id="checkoutSuccessMsg" style="display:none;">
-        <div class="success-icon">&#127881;</div>
+        <div class="success-icon">🎉</div>
         <h3>ĐẶT HÀNG THÀNH CÔNG!</h3>
         <p>Cảm ơn bạn đã lựa chọn <strong>Board Game LogisQuest</strong>. Nhân viên chăm sóc khách hàng sẽ liên hệ qua số điện thoại để xác nhận và điều phối giao hàng tới bạn trong thời gian sớm nhất!</p>
         <button class="btn btn-secondary" id="btnCloseSuccess">Đóng</button>
       </div>
     </div>
   </div>
+
+  <!-- Screen reader live region for button state announcements -->
+  <p class="sr-only" id="buy-status" role="status" aria-live="polite"></p>
 
   <script src="buy.js"></script>
 </body>
