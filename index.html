@@ -557,286 +557,535 @@
         </div>
       </section>
 
-      <!-- ===== 5. SỨ MỆNH GIÁO DỤC VÀ KẾT NỐI CỘNG ĐỒNG (TACTICAL MARITIME BOARD GAME JOURNEY - 16:10) ===== -->
-      <section class="home-quychien-section tactical-boardgame-section" id="block5-values">
-        
-        <!-- LAYER 1: ATMOSPHERE & DIORAMA BACKGROUND ASSETS (MÂY & LINH KIỆN 3D PHỤ TRỢ) -->
-        <div class="boardgame-atmosphere-layer" aria-hidden="true">
-          <!-- Mây hoạt họa bồng bềnh trên cao -->
-          <div class="boardgame-cloud cloud-l"></div>
-          <div class="boardgame-cloud cloud-r"></div>
-          
-          <!-- Silhouette Cần cẩu bốc dỡ cảng biển 3D (Góc trên trái xa) -->
-          <div class="boardgame-diorama-item diorama-crane-left">
-            <img src="assets/ảnh cont 3d và cần cẩu.png" alt="Cần cẩu cảng biển 3D" class="diorama-3d-img">
-          </div>
-
-          <!-- Cụm container 3D xếp chồng (Góc dưới phải xa) -->
-          <div class="boardgame-diorama-item diorama-cont-right">
-            <img src="assets/ảnh cont 3d xếp chồng.png" alt="Container 3D xếp chồng" class="diorama-3d-img">
-          </div>
-
-          <!-- Container đơn lẻ nổi trên phao tiêu (Góc trên phải) -->
-          <div class="boardgame-diorama-item diorama-cont-top">
-            <img src="assets/ảnh cont 3d riêng lẻ.png" alt="Container 3D nổi" class="diorama-3d-img">
-          </div>
+      <!-- ===== 5. VIDEO HƯỚNG DẪN CÁCH CHƠI (BLOCK 5 NAUTICAL SUNLIT EXPEDITION - 16:10) ===== -->
+      <section class="home-guide-section" id="block5-guide">
+        <!-- Background Artwork Layer -->
+        <div class="guide-bg-layer" aria-hidden="true">
+          <img src="assets/bg-block5-nautical.png" alt="LogisQuest Sunlit Maritime Expedition" class="guide-bg-img" loading="eager">
+          <div class="guide-bg-vignette"></div>
         </div>
 
-        <div class="tactical-boardgame-container">
-
-          <!-- COMPACT HEADER CHUẨN TỶ LỆ 16:10 -->
-          <div class="boardgame-header text-center">
-            <!-- Nhãn Ribbon Ruy Băng Hàng Hải -->
-            <div class="nautical-ribbon-badge">
-              <span class="ribbon-tail-l"></span>
-              <span class="ribbon-content">
-                <span class="ribbon-icon">⚓</span>
-                <span class="ribbon-text">HẢI ĐỒ TRI THỨC</span>
-                <span class="ribbon-icon">⚓</span>
-              </span>
-              <span class="ribbon-tail-r"></span>
+        <div class="home-guide-container">
+          <!-- 1. NAUTICAL SECTION BADGE (CARTOON BOARDGAME WOODEN PLAQUE SPEC) -->
+          <div class="nautical-boardgame-badge" role="status" aria-label="Hướng Dẫn Thực Chiến">
+            <!-- Left Medallion -->
+            <div class="badge-medallion medallion-left" aria-hidden="true">
+              <svg class="medallion-token-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="tokenGradLeft" cx="38%" cy="32%" r="68%">
+                    <stop offset="0%" stop-color="#38BDF8" />
+                    <stop offset="40%" stop-color="#0284C7" />
+                    <stop offset="85%" stop-color="#035384" />
+                    <stop offset="100%" stop-color="#02385C" />
+                  </radialGradient>
+                  <filter id="anchorShadowLeft" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="2" stdDeviation="0.8" flood-color="#022B48" flood-opacity="0.65"/>
+                  </filter>
+                </defs>
+                <!-- Outer Faceted Decagon Token Base -->
+                <polygon points="20,4 44,4 58,16 61,38 48,58 20,60 6,48 3,24 10,12" fill="url(#tokenGradLeft)" stroke="#075B91" stroke-width="3" stroke-linejoin="round" />
+                <!-- Top-Left Facet Highlights -->
+                <path d="M20 4.5L44 4.5L58 16.5" stroke="#7DD3FC" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.85" />
+                <path d="M10 12L20 4.5" stroke="#BAE6FD" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.9" />
+                <!-- Bottom-Right Facet Dark Bevels -->
+                <path d="M58 16.5L61 38L48 58L20 60" stroke="#042C44" stroke-width="2.6" stroke-linecap="round" fill="none" opacity="0.75" />
+                <path d="M6 48L3 24" stroke="#034E7B" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5" />
+                <!-- Inner Bevel Circle Rim -->
+                <circle cx="32" cy="32" r="21.5" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" fill="none" />
+                <!-- 3D White Nautical Anchor -->
+                <g filter="url(#anchorShadowLeft)">
+                  <circle cx="32" cy="18" r="4.2" stroke="#FFFFFF" stroke-width="3.2" fill="none" />
+                  <path d="M32 22.2V46.5" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" />
+                  <path d="M23 28.5H41" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" />
+                  <path d="M16 36C18 44.5 24.5 48 32 48C39.5 48 46 44.5 48 36" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" fill="none" />
+                  <path d="M14 34.5L16.5 37M50 34.5L47.5 37" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" />
+                </g>
+              </svg>
             </div>
 
-            <!-- Tiêu đề chính sắc nét: Navy + Cyan -->
-            <h2 class="boardgame-main-headline">
-              CHINH PHỤC 4 TRẠM CHIẾN THUẬT<br>
-              <span class="quychien-highlight-cyan">TRÊN HẢI TRÌNH LOGISTICS</span>
-            </h2>
-            <div class="quychien-headline-divider-amber"></div>
+            <!-- Main Wooden Plaque Surface -->
+            <div class="badge-wooden-plaque">
+              <!-- Rich Illustrated Boardgame Wood Grain SVG -->
+              <svg class="plaque-woodgrain-svg" viewBox="0 0 380 56" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- 1. Background Grain Striation Bands (Soft alternating wood tones) -->
+                <path d="M0 10C80 9 180 12 280 10C330 9 380 11 380 11V16C320 17 240 15 160 16C80 17 0 15 0 15V10Z" fill="rgba(255, 235, 190, 0.14)" />
+                <path d="M0 24C90 23 200 25 300 24C350 23.5 380 25 380 25V30C310 29 210 31 120 30C60 29.5 0 31 0 31V24Z" fill="rgba(80, 28, 5, 0.16)" />
+                <path d="M0 38C100 37 220 39 320 38C360 37.5 380 39 380 39V45C300 44 190 46 90 45C40 44.5 0 46 0 46V38Z" fill="rgba(70, 22, 4, 0.18)" />
 
-            <!-- Mô tả 2 dòng súc tích -->
-            <p class="boardgame-lead-desc">
-              Mỗi khay linh kiện trên bàn cờ là một trạm tôi luyện tư duy <b class="gameplay-kw">Logistics</b>, giúp bạn chuyển hóa tri thức sách vở thành bản lĩnh đàm phán và thống trị thị trường.
-              <span class="boardgame-lead-hint">Nhấp vào từng khay linh kiện để lật mở bí kíp chiến thuật!</span>
-            </p>
-          </div>
+                <!-- 2. Primary Deep Wood Grain Fibers (Dark lines with paired warm golden highlights) -->
+                <!-- Top grain layer -->
+                <path d="M20 9C70 8 130 10 190 9C260 8 320 10 365 9" stroke="#522005" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="28 8 45 12 60 10" opacity="0.75" />
+                <path d="M25 10.5C75 9.5 135 11.5 195 10.5C265 9.5 325 11.5 368 10.5" stroke="#FDE8B5" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="20 16 35 22" opacity="0.5" />
 
-          <!-- 16:10 TACTICAL BOARDGAME CANVAS (SA BÀN BÀN CỜ 3D UỐN LƯỢN) -->
-          <div class="boardgame-canvas-1610" id="boardgameCanvas1610">
+                <!-- Upper-mid grain layer -->
+                <path d="M15 17C55 16 95 19 145 17C195 15 255 18 315 17C345 16.5 370 17 370 17" stroke="#421602" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="45 15 70 20 40 12" opacity="0.8" />
+                <path d="M18 18.8C58 17.8 98 20.8 148 18.8C198 16.8 258 19.8 318 18.8" stroke="#FEEEC2" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="30 30 50 40" opacity="0.55" />
 
-            <!-- SVG S-CURVE NAUTICAL TRACK & WAKE WAVES -->
-            <svg class="boardgame-route-svg" viewBox="0 0 1000 560" fill="none" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="boardgameTrackGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#F59E0B" />
-                  <stop offset="33%" stop-color="#EF4444" />
-                  <stop offset="66%" stop-color="#0284C7" />
-                  <stop offset="100%" stop-color="#10B981" />
-                </linearGradient>
-                <filter id="boardgameSoftShadow" x="-10%" y="-10%" width="120%" height="130%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0369A1" flood-opacity="0.28" />
-                </filter>
-              </defs>
+                <!-- Center grain layer -->
+                <path d="M10 26C60 25 110 27 165 26C220 25 280 27 340 26C360 25.5 375 26 375 26" stroke="#3D1402" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="55 22 80 18 35 15" opacity="0.75" />
+                <path d="M12 27.6C62 26.6 112 28.6 167 27.6C222 26.6 282 28.6 342 27.6" stroke="#FDE9B6" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="40 35 60 40" opacity="0.5" />
 
-              <!-- Tuyến sóng nền mờ phía sau -->
-              <path class="track-under-glow" 
-                d="M 140,180 C 240,180 260,390 380,390 C 500,390 540,170 670,170 C 780,170 800,380 890,380" 
-                stroke="rgba(14, 165, 233, 0.22)" stroke-width="16" stroke-linecap="round" />
+                <!-- Lower-mid grain layer -->
+                <path d="M12 34C65 35 125 33 185 34C245 35 305 33 365 34" stroke="#381201" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="65 18 50 25 60 15" opacity="0.82" />
+                <path d="M14 35.8C67 36.8 127 34.8 187 35.8C247 36.8 307 34.8 367 35.8" stroke="#FDE5AF" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="50 30 40 35" opacity="0.5" />
 
-              <!-- Tuyến hải trình S-curve nét đứt đa sắc chuẩn Boardgame -->
-              <path class="track-main-line" 
-                d="M 140,180 C 240,180 260,390 380,390 C 500,390 540,170 670,170 C 780,170 800,380 890,380" 
-                stroke="url(#boardgameTrackGrad)" stroke-width="6" stroke-dasharray="14 16" stroke-linecap="round" filter="url(#boardgameSoftShadow)" />
-            </svg>
+                <!-- Bottom grain layer -->
+                <path d="M15 43C75 42 140 44 205 43C270 42 330 44 370 43" stroke="#2E0E01" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="40 15 75 22 55 18" opacity="0.88" />
+                <path d="M18 44.8C78 43.8 143 45.8 208 44.8C273 43.8 333 45.8 372 44.8" stroke="#FCD692" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="35 25 50 45" opacity="0.55" />
 
-            <!-- CON TÀU CONTAINER 3D THỰC TẾ LƯỚT SÓNG (3D SHIP TOKEN) -->
-            <div class="boardgame-ship-token" id="boardgameShipToken" style="left: 14%; top: 32%;">
-              <div class="ship-token-wake"></div>
-              <img src="assets/ảnh tàu 3d_góc 3 phần 4.png" alt="Quân cờ Tàu container 3D" class="ship-token-img">
+                <!-- 3. Distinct Wood Cleft Notches & Natural Fissures (Matching Reference Image) -->
+                <!-- Left upper fissure notch (near left medallion) -->
+                <path d="M46 12C45 15 47 18 45 22" stroke="#220900" stroke-width="2.2" stroke-linecap="round" opacity="0.9" />
+                <path d="M47.8 13C46.8 16 48.8 19 46.8 23" stroke="#FEE8BA" stroke-width="1.3" stroke-linecap="round" opacity="0.7" />
+                <path d="M43.5 14C42.5 16 43.5 18 42.5 20" stroke="#3D1403" stroke-width="1.5" stroke-linecap="round" opacity="0.75" />
+
+                <!-- Left lower fissure slit -->
+                <path d="M54 33C53 37 55 41 53 45" stroke="#220900" stroke-width="2.4" stroke-linecap="round" opacity="0.92" />
+                <path d="M55.8 34C54.8 38 56.8 42 54.8 46" stroke="#FEE8BA" stroke-width="1.4" stroke-linecap="round" opacity="0.75" />
+                <path d="M58 36C57 39 59 42 58 44" stroke="#451804" stroke-width="1.5" stroke-linecap="round" opacity="0.75" />
+
+                <!-- Left knot contour curves -->
+                <path d="M68 20C65 24 65 28 69 32" stroke="#4D1D04" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="6 3" opacity="0.7" />
+                <path d="M74 22C72 25 72 27 75 30" stroke="#4D1D04" stroke-width="1.2" stroke-linecap="round" opacity="0.6" />
+
+                <!-- Center-right subtle grain fissure notch -->
+                <path d="M232 38C231 41 233 43 231 46" stroke="#2A0B00" stroke-width="2" stroke-linecap="round" opacity="0.82" />
+                <path d="M233.8 39C232.8 42 234.8 44 232.8 47" stroke="#FDE5AF" stroke-width="1.2" stroke-linecap="round" opacity="0.6" />
+
+                <!-- Right fissure slit (near right medallion) -->
+                <path d="M318 16C317 20 319 24 317 28" stroke="#220900" stroke-width="2.2" stroke-linecap="round" opacity="0.88" />
+                <path d="M319.8 17C318.8 21 320.8 25 318.8 29" stroke="#FEE8BA" stroke-width="1.3" stroke-linecap="round" opacity="0.7" />
+                <path d="M324 20C323 23 325 26 324 28" stroke="#451804" stroke-width="1.4" stroke-linecap="round" opacity="0.7" />
+              </svg>
+
+              <div class="plaque-highlight"></div>
+              <span class="plaque-typography">HƯỚNG DẪN THỰC CHIẾN</span>
+              <div class="plaque-bottom-bevel"></div>
             </div>
 
-            <!-- 4 TACTICAL COMPONENT TRAYS (4 KHAY LINH KIỆN 3D NHẤC BỔNG) -->
-            <div class="boardgame-trays-layer">
-
-              <!-- KHAY 01: THẺ INCOTERMS & CON DẤU PHÁP LÝ (Orange / Amber) -->
-              <div class="component-tray-item tray-active tray-amber" id="componentTray-1" data-tray="1" style="left: 14%; top: 32%;">
-                <div class="tray-ripple-aura"></div>
-                <button class="tray-3d-button" aria-label="Xem chi tiết Khay 01: Thẻ Incoterms">
-                  <div class="tray-inner-visual">
-                    <img src="assets/The Incoterm/FOB.png" alt="Thẻ Incoterm FOB" class="tray-mini-card">
-                    <span class="tray-icon-overlay">📜</span>
-                  </div>
-                  <span class="tray-badge-num">01</span>
-                </button>
-                <div class="tray-title-tag">
-                  <span class="tag-sub">KHAY LINH KIỆN 01</span>
-                  <span class="tag-name">Pháp Lý Incoterms</span>
-                </div>
-
-                <!-- Thẻ Popover Boardgame Sáng 01 -->
-                <div class="boardgame-popover-card popover-pos-bottom" id="trayPopover-1">
-                  <div class="popover-board-box">
-                    <button class="popover-close-btn" type="button" aria-label="Đóng">&times;</button>
-                    <div class="popover-box-header theme-amber">
-                      <span class="popover-tray-pill">⚓ KHAY LINH KIỆN 01 / 04</span>
-                      <h4 class="popover-box-title">11 Điều Khoản Incoterms 2020</h4>
-                    </div>
-                    <div class="popover-box-body">
-                      <div class="popover-mission-box">
-                        <span class="mission-tag">🎲 Trên Bàn Cờ</span>
-                        <p>Thực chiến phân định ranh giới rủi ro, chi phí bốc dỡ và chuyển giao quyền sở hữu hàng hóa qua 11 thẻ Incoterms chuyên biệt.</p>
-                      </div>
-                      <div class="popover-mission-box highlight-real">
-                        <span class="mission-tag tag-real">💼 Năng Lực Thực Tiễn</span>
-                        <p>Nắm vững bản chất pháp lý thương mại quốc tế, xóa bỏ tư duy học vẹt lý thuyết, tự tin soạn thảo và đàm phán hợp đồng ngoại thương.</p>
-                      </div>
-                    </div>
-                    <div class="popover-box-footer">
-                      <span class="popover-chip">#Incoterms2020</span>
-                      <span class="popover-chip">#PhápLýGiaoThương</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- KHAY 02: CHỒNG CONTAINER 3D & THẺ SỰ KIỆN (Red / Coral) -->
-              <div class="component-tray-item tray-red" id="componentTray-2" data-tray="2" style="left: 38%; top: 70%;">
-                <div class="tray-ripple-aura"></div>
-                <button class="tray-3d-button" aria-label="Xem chi tiết Khay 02: Quản trị rủi ro">
-                  <div class="tray-inner-visual">
-                    <img src="assets/ảnh cont 3d xếp chồng.png" alt="Container 3D" class="tray-mini-cont">
-                    <span class="tray-icon-overlay">🛡️</span>
-                  </div>
-                  <span class="tray-badge-num">02</span>
-                </button>
-                <div class="tray-title-tag">
-                  <span class="tag-sub">KHAY LINH KIỆN 02</span>
-                  <span class="tag-name">Quản Trị Rủi Ro</span>
-                </div>
-
-                <!-- Thẻ Popover Boardgame Sáng 02 -->
-                <div class="boardgame-popover-card popover-pos-top" id="trayPopover-2">
-                  <div class="popover-board-box">
-                    <button class="popover-close-btn" type="button" aria-label="Đóng">&times;</button>
-                    <div class="popover-box-header theme-red">
-                      <span class="popover-tray-pill">⚓ KHAY LINH KIỆN 02 / 04</span>
-                      <h4 class="popover-box-title">Quản Trị Biến Cố &amp; Chuỗi Cung Ứng</h4>
-                    </div>
-                    <div class="popover-box-body">
-                      <div class="popover-mission-box">
-                        <span class="mission-tag">🎲 Trên Bàn Cờ</span>
-                        <p>Đối phó với bão biển, cấm vận, tắc nghẽn cảng và biến động cước tàu từ hệ thống 24 Thẻ Sự Kiện bất ngờ.</p>
-                      </div>
-                      <div class="popover-mission-box highlight-real">
-                        <span class="mission-tag tag-real">💼 Năng Lực Thực Tiễn</span>
-                        <p>Xây dựng kịch bản dự phòng (Contingency Plan), rèn luyện tâm lý vững vàng và sự nhạy bén khi đối mặt khủng hoảng chuỗi cung ứng.</p>
-                      </div>
-                    </div>
-                    <div class="popover-box-footer">
-                      <span class="popover-chip">#RiskManagement</span>
-                      <span class="popover-chip">#ỨngBiếnKhủngHoảng</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- KHAY 03: ĐỘI TÀU VẬN TẢI 3D & CẦU CẢNG (Cyan / Blue) -->
-              <div class="component-tray-item tray-cyan" id="componentTray-3" data-tray="3" style="left: 67%; top: 30%;">
-                <div class="tray-ripple-aura"></div>
-                <button class="tray-3d-button" aria-label="Xem chi tiết Khay 03: Tối ưu vận tải">
-                  <div class="tray-inner-visual">
-                    <img src="assets/ảnh tàu 3d phía trước.png" alt="Mô hình tàu 3D" class="tray-mini-ship">
-                    <span class="tray-icon-overlay">🚢</span>
-                  </div>
-                  <span class="tray-badge-num">03</span>
-                </button>
-                <div class="tray-title-tag">
-                  <span class="tag-sub">KHAY LINH KIỆN 03</span>
-                  <span class="tag-name">Tối Ưu Vận Tải</span>
-                </div>
-
-                <!-- Thẻ Popover Boardgame Sáng 03 -->
-                <div class="boardgame-popover-card popover-pos-bottom" id="trayPopover-3">
-                  <div class="popover-board-box">
-                    <button class="popover-close-btn" type="button" aria-label="Đóng">&times;</button>
-                    <div class="popover-box-header theme-cyan">
-                      <span class="popover-tray-pill">⚓ KHAY LINH KIỆN 03 / 04</span>
-                      <h4 class="popover-box-title">Tối Ưu Tuyến Vận Tải &amp; Dòng Vốn</h4>
-                    </div>
-                    <div class="popover-box-body">
-                      <div class="popover-mission-box">
-                        <span class="mission-tag">🎲 Trên Bàn Cờ</span>
-                        <p>Lựa chọn tải trọng tàu (Tàu Feeder, Tàu Mẹ), quay vòng vốn hàng hóa và giành lấy các hợp đồng vận chuyển siêu lợi nhuận tại Thẻ Chợ.</p>
-                      </div>
-                      <div class="popover-mission-box highlight-real">
-                        <span class="mission-tag tag-real">💼 Năng Lực Thực Tiễn</span>
-                        <p>Tư duy tối ưu chi phí vận hành (Cost Optimization), cân bằng dòng tiền và khai thác hiệu quả tài sản logistics quốc tế.</p>
-                      </div>
-                    </div>
-                    <div class="popover-box-footer">
-                      <span class="popover-chip">#FleetOptimization</span>
-                      <span class="popover-chip">#QuảnTrịDòngTiền</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- KHAY 04: THẺ CHỢ HÀNG HÓA & HỢP ĐỒNG LIÊN MINH (Green / Emerald) -->
-              <div class="component-tray-item tray-green" id="componentTray-4" data-tray="4" style="left: 89%; top: 68%;">
-                <div class="tray-ripple-aura"></div>
-                <button class="tray-3d-button" aria-label="Xem chi tiết Khay 04: Kết nối đồng đội">
-                  <div class="tray-inner-visual">
-                    <img src="assets/card-back-cho.png" alt="Thẻ Chợ" class="tray-mini-card">
-                    <span class="tray-icon-overlay">🤝</span>
-                  </div>
-                  <span class="tray-badge-num">04</span>
-                </button>
-                <div class="tray-title-tag">
-                  <span class="tag-sub">KHAY LINH KIỆN 04</span>
-                  <span class="tag-name">Kết Nối Đồng Đội</span>
-                </div>
-
-                <!-- Thẻ Popover Boardgame Sáng 04 -->
-                <div class="boardgame-popover-card popover-pos-top" id="trayPopover-4">
-                  <div class="popover-board-box">
-                    <button class="popover-close-btn" type="button" aria-label="Đóng">&times;</button>
-                    <div class="popover-box-header theme-green">
-                      <span class="popover-tray-pill">⚓ KHAY LINH KIỆN 04 / 04</span>
-                      <h4 class="popover-box-title">Gắn Kết Cộng Đồng &amp; Đàm Phán</h4>
-                    </div>
-                    <div class="popover-box-body">
-                      <div class="popover-mission-box">
-                        <span class="mission-tag">🎲 Trên Bàn Cờ</span>
-                        <p>Thương lượng mua bán quyền đi tàu, hợp tác liên minh vận tải hoặc bóp nghẹt tuyến đường cảng biển của đối thủ cạnh tranh.</p>
-                      </div>
-                      <div class="popover-mission-box highlight-real">
-                        <span class="mission-tag tag-real">💼 Năng Lực Thực Tiễn</span>
-                        <p>Nâng cao kỹ năng đàm phán thương mại (Negotiation Skills), tinh thần đồng đội và gắn kết cộng đồng Logistics trẻ đầy nhiệt huyết.</p>
-                      </div>
-                    </div>
-                    <div class="popover-box-footer">
-                      <span class="popover-chip">#Teamwork</span>
-                      <span class="popover-chip">#ĐàmPhánChiếnLược</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+            <!-- Right Medallion -->
+            <div class="badge-medallion medallion-right" aria-hidden="true">
+              <svg class="medallion-token-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="tokenGradRight" cx="38%" cy="32%" r="68%">
+                    <stop offset="0%" stop-color="#38BDF8" />
+                    <stop offset="40%" stop-color="#0284C7" />
+                    <stop offset="85%" stop-color="#035384" />
+                    <stop offset="100%" stop-color="#02385C" />
+                  </radialGradient>
+                  <filter id="anchorShadowRight" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="2" stdDeviation="0.8" flood-color="#022B48" flood-opacity="0.65"/>
+                  </filter>
+                </defs>
+                <!-- Outer Faceted Decagon Token Base -->
+                <polygon points="20,4 44,4 58,16 61,38 48,58 20,60 6,48 3,24 10,12" fill="url(#tokenGradRight)" stroke="#075B91" stroke-width="3" stroke-linejoin="round" />
+                <!-- Top-Left Facet Highlights -->
+                <path d="M20 4.5L44 4.5L58 16.5" stroke="#7DD3FC" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.85" />
+                <path d="M10 12L20 4.5" stroke="#BAE6FD" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.9" />
+                <!-- Bottom-Right Facet Dark Bevels -->
+                <path d="M58 16.5L61 38L48 58L20 60" stroke="#042C44" stroke-width="2.6" stroke-linecap="round" fill="none" opacity="0.75" />
+                <path d="M6 48L3 24" stroke="#034E7B" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5" />
+                <!-- Inner Bevel Circle Rim -->
+                <circle cx="32" cy="32" r="21.5" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" fill="none" />
+                <!-- 3D White Nautical Anchor -->
+                <g filter="url(#anchorShadowRight)">
+                  <circle cx="32" cy="18" r="4.2" stroke="#FFFFFF" stroke-width="3.2" fill="none" />
+                  <path d="M32 22.2V46.5" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" />
+                  <path d="M23 28.5H41" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" />
+                  <path d="M16 36C18 44.5 24.5 48 32 48C39.5 48 46 44.5 48 36" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" fill="none" />
+                  <path d="M14 34.5L16.5 37M50 34.5L47.5 37" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" />
+                </g>
+              </svg>
             </div>
           </div>
 
-          <!-- BOTTOM MISSION SELECTOR (4 NÚT LINH KIỆN NỀN TRẮNG SÁNG VIỀN XANH NHẠT) -->
-          <div class="boardgame-mission-row" id="boardgameMissionRow">
-            <button class="boardgame-mission-btn btn-amber active" data-tray="1" type="button">
-              <span class="m-num">01</span>
-              <span class="m-icon">📜</span>
-              <span class="m-text">Pháp Lý Incoterms</span>
-            </button>
-            <button class="boardgame-mission-btn btn-red" data-tray="2" type="button">
-              <span class="m-num">02</span>
-              <span class="m-icon">🛡️</span>
-              <span class="m-text">Quản Trị Rủi Ro</span>
-            </button>
-            <button class="boardgame-mission-btn btn-cyan" data-tray="3" type="button">
-              <span class="m-num">03</span>
-              <span class="m-icon">🚢</span>
-              <span class="m-text">Tối Ưu Vận Tải</span>
-            </button>
-            <button class="boardgame-mission-btn btn-green" data-tray="4" type="button">
-              <span class="m-num">04</span>
-              <span class="m-icon">🤝</span>
-              <span class="m-text">Kết Nối Đồng Đội</span>
-            </button>
+          <!-- 2. Typography Headline -->
+          <h2 class="guide-nautical-headline">
+            <span class="headline-part-top">HẢI TRÌNH NHẬP CUỘC</span>
+            <span class="headline-part-bottom">CÁCH CHƠI LOGISQUEST TỪ A ĐẾN Z</span>
+          </h2>
+
+          <!-- 3. Nautical Boardgame Video Frame (Spec Implementation) -->
+          <div class="video-frame">
+            <div class="video-frame__body">
+              <div class="video-frame__viewport">
+                <iframe 
+                  src="https://www.youtube-nocookie.com/embed/_U5oIVW2SUk?rel=0" 
+                  title="Hướng dẫn cách chơi Board Game LogisQuest" 
+                  loading="lazy"
+                  frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <!-- 4 Corner Compass Badges (Raised 3D Nautical Medallions with Brass Bezel) -->
+            <div class="video-frame__corner top-left" aria-hidden="true">
+              <div class="compass-badge">
+                <svg class="compass-badge-svg" viewBox="0 0 48 48" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="compassDialGradTL" cx="36%" cy="32%" r="68%">
+                      <stop offset="0%" stop-color="#FFFFFF" />
+                      <stop offset="55%" stop-color="#F3F9FD" />
+                      <stop offset="100%" stop-color="#CFE4F0" />
+                    </radialGradient>
+                    <linearGradient id="brassBezelGradTL" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FFE8A3" />
+                      <stop offset="35%" stop-color="#D9A855" />
+                      <stop offset="70%" stop-color="#B88334" />
+                      <stop offset="100%" stop-color="#825215" />
+                    </linearGradient>
+                    <linearGradient id="starGoldTL" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FFF0B8" />
+                      <stop offset="50%" stop-color="#E5B258" />
+                      <stop offset="100%" stop-color="#B47A22" />
+                    </linearGradient>
+                    <filter id="compassDropTL" x="-25%" y="-20%" width="150%" height="145%">
+                      <feDropShadow dx="0" dy="3" stdDeviation="2.2" flood-color="#0A3E5C" flood-opacity="0.4" />
+                    </filter>
+                  </defs>
+                  <g filter="url(#compassDropTL)">
+                    <!-- Outer 3D Antique Brass Bezel with Nautical Cyan Base -->
+                    <circle cx="24" cy="24" r="22.5" fill="url(#brassBezelGradTL)" stroke="#0E4264" stroke-width="1.3" />
+                    <circle cx="24" cy="24" r="20.2" stroke="#FFFDE8" stroke-width="0.9" opacity="0.9" />
+                    <!-- Inner Pearl Dial -->
+                    <circle cx="24" cy="24" r="19" fill="url(#compassDialGradTL)" stroke="#165D88" stroke-width="0.9" />
+                    <circle cx="24" cy="24" r="16" stroke="#9AC7DE" stroke-width="0.6" stroke-dasharray="1.5 2.5" opacity="0.85" />
+                    
+                    <!-- 4 Diagonal Points (NE, SE, SW, NW) -->
+                    <polygon points="24,24 22.5,21 34,14" fill="#38BDF8" />
+                    <polygon points="24,24 25.5,25.5 34,14" fill="#0284C7" />
+                    <polygon points="24,24 25.5,22.5 34,34" fill="#0284C7" />
+                    <polygon points="24,24 22.5,25.5 34,34" fill="#0369A1" />
+                    <polygon points="24,24 25.5,25.5 14,34" fill="#0284C7" />
+                    <polygon points="24,24 21,22.5 14,34" fill="#38BDF8" />
+                    <polygon points="24,24 22.5,25.5 14,14" fill="#0369A1" />
+                    <polygon points="24,24 25.5,21 14,14" fill="#38BDF8" />
+
+                    <!-- 4 Primary Cardinal Points (N, S, E, W) -->
+                    <!-- North -->
+                    <polygon points="24,24 20,24 24,4.5" fill="url(#starGoldTL)" />
+                    <polygon points="24,24 28,24 24,4.5" fill="#0A4D78" />
+                    <line x1="24" y1="24" x2="24" y2="4.5" stroke="#FFFFFF" stroke-width="0.9" />
+
+                    <!-- South -->
+                    <polygon points="24,24 20,24 24,43.5" fill="#0A4D78" />
+                    <polygon points="24,24 28,24 24,43.5" fill="url(#starGoldTL)" />
+                    <line x1="24" y1="24" x2="24" y2="43.5" stroke="#B8E1F8" stroke-width="0.8" />
+
+                    <!-- East -->
+                    <polygon points="24,24 24,20 43.5,24" fill="url(#starGoldTL)" />
+                    <polygon points="24,24 24,28 43.5,24" fill="#0A4D78" />
+                    <line x1="24" y1="24" x2="43.5" y2="24" stroke="#FFFFFF" stroke-width="0.9" />
+
+                    <!-- West -->
+                    <polygon points="24,24 24,20 4.5,24" fill="#0A4D78" />
+                    <polygon points="24,24 24,28 4.5,24" fill="url(#starGoldTL)" />
+                    <line x1="24" y1="24" x2="4.5" y2="24" stroke="#B8E1F8" stroke-width="0.8" />
+
+                    <!-- Center Pivot Hub & Sapphire Core -->
+                    <circle cx="24" cy="24" r="4.8" fill="url(#brassBezelGradTL)" stroke="#683C08" stroke-width="0.9" />
+                    <circle cx="24" cy="24" r="2.5" fill="#0284C7" stroke="#044D76" stroke-width="0.7" />
+                    <circle cx="23.1" cy="23.1" r="0.85" fill="#FFFFFF" opacity="0.95" />
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <div class="video-frame__corner top-right" aria-hidden="true">
+              <div class="compass-badge">
+                <svg class="compass-badge-svg" viewBox="0 0 48 48" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="compassDialGradTR" cx="36%" cy="32%" r="68%">
+                      <stop offset="0%" stop-color="#FFFFFF" />
+                      <stop offset="55%" stop-color="#F3F9FD" />
+                      <stop offset="100%" stop-color="#CFE4F0" />
+                    </radialGradient>
+                    <linearGradient id="brassBezelGradTR" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FFE8A3" />
+                      <stop offset="35%" stop-color="#D9A855" />
+                      <stop offset="70%" stop-color="#B88334" />
+                      <stop offset="100%" stop-color="#825215" />
+                    </linearGradient>
+                    <linearGradient id="starGoldTR" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FFF0B8" />
+                      <stop offset="50%" stop-color="#E5B258" />
+                      <stop offset="100%" stop-color="#B47A22" />
+                    </linearGradient>
+                    <filter id="compassDropTR" x="-25%" y="-20%" width="150%" height="145%">
+                      <feDropShadow dx="0" dy="3" stdDeviation="2.2" flood-color="#0A3E5C" flood-opacity="0.4" />
+                    </filter>
+                  </defs>
+                  <g filter="url(#compassDropTR)">
+                    <circle cx="24" cy="24" r="22.5" fill="url(#brassBezelGradTR)" stroke="#0E4264" stroke-width="1.3" />
+                    <circle cx="24" cy="24" r="20.2" stroke="#FFFDE8" stroke-width="0.9" opacity="0.9" />
+                    <circle cx="24" cy="24" r="19" fill="url(#compassDialGradTR)" stroke="#165D88" stroke-width="0.9" />
+                    <circle cx="24" cy="24" r="16" stroke="#9AC7DE" stroke-width="0.6" stroke-dasharray="1.5 2.5" opacity="0.85" />
+                    
+                    <polygon points="24,24 22.5,21 34,14" fill="#38BDF8" />
+                    <polygon points="24,24 25.5,25.5 34,14" fill="#0284C7" />
+                    <polygon points="24,24 25.5,22.5 34,34" fill="#0284C7" />
+                    <polygon points="24,24 22.5,25.5 34,34" fill="#0369A1" />
+                    <polygon points="24,24 25.5,25.5 14,34" fill="#0284C7" />
+                    <polygon points="24,24 21,22.5 14,34" fill="#38BDF8" />
+                    <polygon points="24,24 22.5,25.5 14,14" fill="#0369A1" />
+                    <polygon points="24,24 25.5,21 14,14" fill="#38BDF8" />
+
+                    <polygon points="24,24 20,24 24,4.5" fill="url(#starGoldTR)" />
+                    <polygon points="24,24 28,24 24,4.5" fill="#0A4D78" />
+                    <line x1="24" y1="24" x2="24" y2="4.5" stroke="#FFFFFF" stroke-width="0.9" />
+
+                    <polygon points="24,24 20,24 24,43.5" fill="#0A4D78" />
+                    <polygon points="24,24 28,24 24,43.5" fill="url(#starGoldTR)" />
+                    <line x1="24" y1="24" x2="24" y2="43.5" stroke="#B8E1F8" stroke-width="0.8" />
+
+                    <polygon points="24,24 24,20 43.5,24" fill="url(#starGoldTR)" />
+                    <polygon points="24,24 24,28 43.5,24" fill="#0A4D78" />
+                    <line x1="24" y1="24" x2="43.5" y2="24" stroke="#FFFFFF" stroke-width="0.9" />
+
+                    <polygon points="24,24 24,20 4.5,24" fill="#0A4D78" />
+                    <polygon points="24,24 24,28 4.5,24" fill="url(#starGoldTR)" />
+                    <line x1="24" y1="24" x2="4.5" y2="24" stroke="#B8E1F8" stroke-width="0.8" />
+
+                    <circle cx="24" cy="24" r="4.8" fill="url(#brassBezelGradTR)" stroke="#683C08" stroke-width="0.9" />
+                    <circle cx="24" cy="24" r="2.5" fill="#0284C7" stroke="#044D76" stroke-width="0.7" />
+                    <circle cx="23.1" cy="23.1" r="0.85" fill="#FFFFFF" opacity="0.95" />
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <div class="video-frame__corner bottom-left" aria-hidden="true">
+              <div class="compass-badge">
+                <svg class="compass-badge-svg" viewBox="0 0 48 48" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="compassDialGradBL" cx="36%" cy="32%" r="68%">
+                      <stop offset="0%" stop-color="#FFFFFF" />
+                      <stop offset="55%" stop-color="#F3F9FD" />
+                      <stop offset="100%" stop-color="#CFE4F0" />
+                    </radialGradient>
+                    <linearGradient id="brassBezelGradBL" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FFE8A3" />
+                      <stop offset="35%" stop-color="#D9A855" />
+                      <stop offset="70%" stop-color="#B88334" />
+                      <stop offset="100%" stop-color="#825215" />
+                    </linearGradient>
+                    <linearGradient id="starGoldBL" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FFF0B8" />
+                      <stop offset="50%" stop-color="#E5B258" />
+                      <stop offset="100%" stop-color="#B47A22" />
+                    </linearGradient>
+                    <filter id="compassDropBL" x="-25%" y="-20%" width="150%" height="145%">
+                      <feDropShadow dx="0" dy="3" stdDeviation="2.2" flood-color="#0A3E5C" flood-opacity="0.4" />
+                    </filter>
+                  </defs>
+                  <g filter="url(#compassDropBL)">
+                    <circle cx="24" cy="24" r="22.5" fill="url(#brassBezelGradBL)" stroke="#0E4264" stroke-width="1.3" />
+                    <circle cx="24" cy="24" r="20.2" stroke="#FFFDE8" stroke-width="0.9" opacity="0.9" />
+                    <circle cx="24" cy="24" r="19" fill="url(#compassDialGradBL)" stroke="#165D88" stroke-width="0.9" />
+                    <circle cx="24" cy="24" r="16" stroke="#9AC7DE" stroke-width="0.6" stroke-dasharray="1.5 2.5" opacity="0.85" />
+                    
+                    <polygon points="24,24 22.5,21 34,14" fill="#38BDF8" />
+                    <polygon points="24,24 25.5,25.5 34,14" fill="#0284C7" />
+                    <polygon points="24,24 25.5,22.5 34,34" fill="#0284C7" />
+                    <polygon points="24,24 22.5,25.5 34,34" fill="#0369A1" />
+                    <polygon points="24,24 25.5,25.5 14,34" fill="#0284C7" />
+                    <polygon points="24,24 21,22.5 14,34" fill="#38BDF8" />
+                    <polygon points="24,24 22.5,25.5 14,14" fill="#0369A1" />
+                    <polygon points="24,24 25.5,21 14,14" fill="#38BDF8" />
+
+                    <polygon points="24,24 20,24 24,4.5" fill="url(#starGoldBL)" />
+                    <polygon points="24,24 28,24 24,4.5" fill="#0A4D78" />
+                    <line x1="24" y1="24" x2="24" y2="4.5" stroke="#FFFFFF" stroke-width="0.9" />
+
+                    <polygon points="24,24 20,24 24,43.5" fill="#0A4D78" />
+                    <polygon points="24,24 28,24 24,43.5" fill="url(#starGoldBL)" />
+                    <line x1="24" y1="24" x2="24" y2="43.5" stroke="#B8E1F8" stroke-width="0.8" />
+
+                    <polygon points="24,24 24,20 43.5,24" fill="url(#starGoldBL)" />
+                    <polygon points="24,24 24,28 43.5,24" fill="#0A4D78" />
+                    <line x1="24" y1="24" x2="43.5" y2="24" stroke="#FFFFFF" stroke-width="0.9" />
+
+                    <polygon points="24,24 24,20 4.5,24" fill="#0A4D78" />
+                    <polygon points="24,24 24,28 4.5,24" fill="url(#starGoldBL)" />
+                    <line x1="24" y1="24" x2="4.5" y2="24" stroke="#B8E1F8" stroke-width="0.8" />
+
+                    <circle cx="24" cy="24" r="4.8" fill="url(#brassBezelGradBL)" stroke="#683C08" stroke-width="0.9" />
+                    <circle cx="24" cy="24" r="2.5" fill="#0284C7" stroke="#044D76" stroke-width="0.7" />
+                    <circle cx="23.1" cy="23.1" r="0.85" fill="#FFFFFF" opacity="0.95" />
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <div class="video-frame__corner bottom-right" aria-hidden="true">
+              <div class="compass-badge">
+                <svg class="compass-badge-svg" viewBox="0 0 48 48" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="compassDialGradBR" cx="36%" cy="32%" r="68%">
+                      <stop offset="0%" stop-color="#FFFFFF" />
+                      <stop offset="55%" stop-color="#F3F9FD" />
+                      <stop offset="100%" stop-color="#CFE4F0" />
+                    </radialGradient>
+                    <linearGradient id="brassBezelGradBR" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FFE8A3" />
+                      <stop offset="35%" stop-color="#D9A855" />
+                      <stop offset="70%" stop-color="#B88334" />
+                      <stop offset="100%" stop-color="#825215" />
+                    </linearGradient>
+                    <linearGradient id="starGoldBR" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FFF0B8" />
+                      <stop offset="50%" stop-color="#E5B258" />
+                      <stop offset="100%" stop-color="#B47A22" />
+                    </linearGradient>
+                    <filter id="compassDropBR" x="-25%" y="-20%" width="150%" height="145%">
+                      <feDropShadow dx="0" dy="3" stdDeviation="2.2" flood-color="#0A3E5C" flood-opacity="0.4" />
+                    </filter>
+                  </defs>
+                  <g filter="url(#compassDropBR)">
+                    <circle cx="24" cy="24" r="22.5" fill="url(#brassBezelGradBR)" stroke="#0E4264" stroke-width="1.3" />
+                    <circle cx="24" cy="24" r="20.2" stroke="#FFFDE8" stroke-width="0.9" opacity="0.9" />
+                    <circle cx="24" cy="24" r="19" fill="url(#compassDialGradBR)" stroke="#165D88" stroke-width="0.9" />
+                    <circle cx="24" cy="24" r="16" stroke="#9AC7DE" stroke-width="0.6" stroke-dasharray="1.5 2.5" opacity="0.85" />
+                    
+                    <polygon points="24,24 22.5,21 34,14" fill="#38BDF8" />
+                    <polygon points="24,24 25.5,25.5 34,14" fill="#0284C7" />
+                    <polygon points="24,24 25.5,22.5 34,34" fill="#0284C7" />
+                    <polygon points="24,24 22.5,25.5 34,34" fill="#0369A1" />
+                    <polygon points="24,24 25.5,25.5 14,34" fill="#0284C7" />
+                    <polygon points="24,24 21,22.5 14,34" fill="#38BDF8" />
+                    <polygon points="24,24 22.5,25.5 14,14" fill="#0369A1" />
+                    <polygon points="24,24 25.5,21 14,14" fill="#38BDF8" />
+
+                    <polygon points="24,24 20,24 24,4.5" fill="url(#starGoldBR)" />
+                    <polygon points="24,24 28,24 24,4.5" fill="#0A4D78" />
+                    <line x1="24" y1="24" x2="24" y2="4.5" stroke="#FFFFFF" stroke-width="0.9" />
+
+                    <polygon points="24,24 20,24 24,43.5" fill="#0A4D78" />
+                    <polygon points="24,24 28,24 24,43.5" fill="url(#starGoldBR)" />
+                    <line x1="24" y1="24" x2="24" y2="43.5" stroke="#B8E1F8" stroke-width="0.8" />
+
+                    <polygon points="24,24 24,20 43.5,24" fill="url(#starGoldBR)" />
+                    <polygon points="24,24 24,28 43.5,24" fill="#0A4D78" />
+                    <line x1="24" y1="24" x2="43.5" y2="24" stroke="#FFFFFF" stroke-width="0.9" />
+
+                    <polygon points="24,24 24,20 4.5,24" fill="#0A4D78" />
+                    <polygon points="24,24 24,28 4.5,24" fill="url(#starGoldBR)" />
+                    <line x1="24" y1="24" x2="4.5" y2="24" stroke="#B8E1F8" stroke-width="0.8" />
+
+                    <circle cx="24" cy="24" r="4.8" fill="url(#brassBezelGradBR)" stroke="#683C08" stroke-width="0.9" />
+                    <circle cx="24" cy="24" r="2.5" fill="#0284C7" stroke="#044D76" stroke-width="0.7" />
+                    <circle cx="23.1" cy="23.1" r="0.85" fill="#FFFFFF" opacity="0.95" />
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Left & Right Dual Rope Bindings (Fixed to Frame Sides) -->
+            <div class="video-frame__rope left" aria-hidden="true">
+              <svg class="rope-dual-svg" viewBox="0 0 36 136" width="36" height="136" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="ropeGradL" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#803D0E" />
+                    <stop offset="22%" stop-color="#BC7B32" />
+                    <stop offset="55%" stop-color="#E8BA73" />
+                    <stop offset="78%" stop-color="#F5D79B" />
+                    <stop offset="100%" stop-color="#73350A" />
+                  </linearGradient>
+                  <filter id="ropeShadowL" x="-35%" y="-15%" width="170%" height="130%">
+                    <feDropShadow dx="2" dy="3" stdDeviation="2.2" flood-color="#0E3D5C" flood-opacity="0.36" />
+                  </filter>
+                </defs>
+                <g filter="url(#ropeShadowL)">
+                  <!-- UPPER COIL (3 Chunky Wraps) -->
+                  <g transform="rotate(-3 18 16)">
+                    <rect x="2" y="8" width="31" height="11.5" rx="5.75" fill="url(#ropeGradL)" stroke="#5A2805" stroke-width="1.2" />
+                    <path d="M7 11.5C13 10 24 10 29 11.8" stroke="#FFF5C2" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+                    <path d="M6 16.5C12 17.8 23 17.8 28 16.2" stroke="#441C02" stroke-width="1.1" stroke-linecap="round" opacity="0.65" />
+                  </g>
+                  <g transform="rotate(-3 18 28)">
+                    <rect x="1" y="20.5" width="33" height="11.5" rx="5.75" fill="url(#ropeGradL)" stroke="#5A2805" stroke-width="1.2" />
+                    <path d="M6 24C12 22.5 25 22.5 30 24.3" stroke="#FFF5C2" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+                    <path d="M5 29C11 30.3 24 30.3 29 28.7" stroke="#441C02" stroke-width="1.1" stroke-linecap="round" opacity="0.65" />
+                  </g>
+                  <g transform="rotate(-3 18 40)">
+                    <rect x="2" y="33" width="31" height="11.5" rx="5.75" fill="url(#ropeGradL)" stroke="#5A2805" stroke-width="1.2" />
+                    <path d="M7 36.5C13 35 24 35 29 36.8" stroke="#FFF5C2" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+                    <path d="M6 41.5C12 42.8 23 42.8 28 41.2" stroke="#441C02" stroke-width="1.1" stroke-linecap="round" opacity="0.65" />
+                  </g>
+
+                  <!-- LOWER COIL (3 Chunky Wraps) -->
+                  <g transform="rotate(-3 18 88)">
+                    <rect x="2" y="80" width="31" height="11.5" rx="5.75" fill="url(#ropeGradL)" stroke="#5A2805" stroke-width="1.2" />
+                    <path d="M7 83.5C13 82 24 82 29 83.8" stroke="#FFF5C2" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+                    <path d="M6 88.5C12 89.8 23 89.8 28 88.2" stroke="#441C02" stroke-width="1.1" stroke-linecap="round" opacity="0.65" />
+                  </g>
+                  <g transform="rotate(-3 18 100)">
+                    <rect x="1" y="92.5" width="33" height="11.5" rx="5.75" fill="url(#ropeGradL)" stroke="#5A2805" stroke-width="1.2" />
+                    <path d="M6 96C12 94.5 25 94.5 30 96.3" stroke="#FFF5C2" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+                    <path d="M5 101C11 102.3 24 102.3 29 100.7" stroke="#441C02" stroke-width="1.1" stroke-linecap="round" opacity="0.65" />
+                  </g>
+                  <g transform="rotate(-3 18 112)">
+                    <rect x="2" y="105" width="31" height="11.5" rx="5.75" fill="url(#ropeGradL)" stroke="#5A2805" stroke-width="1.2" />
+                    <path d="M7 108.5C13 107 24 107 29 108.8" stroke="#FFF5C2" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+                    <path d="M6 113.5C12 114.8 23 114.8 28 113.2" stroke="#441C02" stroke-width="1.1" stroke-linecap="round" opacity="0.65" />
+                  </g>
+                </g>
+              </svg>
+            </div>
+
+            <div class="video-frame__rope right" aria-hidden="true">
+              <svg class="rope-dual-svg" viewBox="0 0 36 136" width="36" height="136" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="ropeGradR" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#73350A" />
+                    <stop offset="22%" stop-color="#F5D79B" />
+                    <stop offset="55%" stop-color="#E8BA73" />
+                    <stop offset="78%" stop-color="#BC7B32" />
+                    <stop offset="100%" stop-color="#803D0E" />
+                  </linearGradient>
+                  <filter id="ropeShadowR" x="-35%" y="-15%" width="170%" height="130%">
+                    <feDropShadow dx="-2" dy="3" stdDeviation="2.2" flood-color="#0E3D5C" flood-opacity="0.36" />
+                  </filter>
+                </defs>
+                <g filter="url(#ropeShadowR)">
+                  <!-- UPPER COIL (3 Chunky Wraps) -->
+                  <g transform="rotate(3 18 16)">
+                    <rect x="3" y="8" width="31" height="11.5" rx="5.75" fill="url(#ropeGradR)" stroke="#5A2805" stroke-width="1.2" />
+                    <path d="M8 11.5C14 10 25 10 30 11.8" stroke="#FFF5C2" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+                    <path d="M7 16.5C13 17.8 24 17.8 29 16.2" stroke="#441C02" stroke-width="1.1" stroke-linecap="round" opacity="0.65" />
+                  </g>
+                  <g transform="rotate(3 18 28)">
+                    <rect x="2" y="20.5" width="33" height="11.5" rx="5.75" fill="url(#ropeGradR)" stroke="#5A2805" stroke-width="1.2" />
+                    <path d="M7 24C13 22.5 26 22.5 31 24.3" stroke="#FFF5C2" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+                    <path d="M6 29C12 30.3 25 30.3 30 28.7" stroke="#441C02" stroke-width="1.1" stroke-linecap="round" opacity="0.65" />
+                  </g>
+                  <g transform="rotate(3 18 40)">
+                    <rect x="3" y="33" width="31" height="11.5" rx="5.75" fill="url(#ropeGradR)" stroke="#5A2805" stroke-width="1.2" />
+                    <path d="M8 36.5C14 35 25 35 30 36.8" stroke="#FFF5C2" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+                    <path d="M7 41.5C13 42.8 24 42.8 29 41.2" stroke="#441C02" stroke-width="1.1" stroke-linecap="round" opacity="0.65" />
+                  </g>
+
+                  <!-- LOWER COIL (3 Chunky Wraps) -->
+                  <g transform="rotate(3 18 88)">
+                    <rect x="3" y="80" width="31" height="11.5" rx="5.75" fill="url(#ropeGradR)" stroke="#5A2805" stroke-width="1.2" />
+                    <path d="M8 83.5C14 82 25 82 30 83.8" stroke="#FFF5C2" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+                    <path d="M7 88.5C13 89.8 24 89.8 29 88.2" stroke="#441C02" stroke-width="1.1" stroke-linecap="round" opacity="0.65" />
+                  </g>
+                  <g transform="rotate(3 18 100)">
+                    <rect x="2" y="92.5" width="33" height="11.5" rx="5.75" fill="url(#ropeGradR)" stroke="#5A2805" stroke-width="1.2" />
+                    <path d="M7 96C13 94.5 26 94.5 31 96.3" stroke="#FFF5C2" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+                    <path d="M6 101C12 102.3 25 102.3 30 100.7" stroke="#441C02" stroke-width="1.1" stroke-linecap="round" opacity="0.65" />
+                  </g>
+                  <g transform="rotate(3 18 112)">
+                    <rect x="3" y="105" width="31" height="11.5" rx="5.75" fill="url(#ropeGradR)" stroke="#5A2805" stroke-width="1.2" />
+                    <path d="M8 108.5C14 107 25 107 30 108.8" stroke="#FFF5C2" stroke-width="1.2" stroke-linecap="round" opacity="0.9" />
+                    <path d="M7 113.5C13 114.8 24 114.8 29 113.2" stroke="#441C02" stroke-width="1.1" stroke-linecap="round" opacity="0.65" />
+                  </g>
+                </g>
+              </svg>
+            </div>
           </div>
 
         </div>

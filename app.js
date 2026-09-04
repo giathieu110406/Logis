@@ -632,6 +632,7 @@ function initEvents() {
       const executeNav = () => {
         if (targetView === 'buy') {
           switchView('home');
+          history.pushState(null, '', '#buy');
           setTimeout(() => {
             const buySection = document.getElementById('buy');
             if (buySection) {
@@ -640,7 +641,8 @@ function initEvents() {
           }, 100);
         } else {
           switchView(targetView);
-          
+          history.pushState(null, '', '#' + targetView);
+
           // Kéo về đầu trang của trang vừa bấm
           if (typeof lenis !== 'undefined' && lenis) {
             lenis.scrollTo(0, { immediate: true });
@@ -662,6 +664,27 @@ function initEvents() {
       }
     });
   });
+
+  // Handle URL Hash Routing on page load and hashchange
+  function handleHashRouting() {
+    const rawHash = window.location.hash.replace('#', '').trim();
+    if (!rawHash) return;
+
+    if (rawHash === 'about' || rawHash === 'team' || rawHash === 'gameplay' || rawHash === 'cards' || rawHash === 'home') {
+      switchView(rawHash);
+    } else if (rawHash === 'buy') {
+      switchView('home');
+      setTimeout(() => {
+        const buySection = document.getElementById('buy');
+        if (buySection) {
+          buySection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 200);
+    }
+  }
+
+  window.addEventListener('hashchange', handleHashRouting);
+  setTimeout(handleHashRouting, 50);
 
   // Tab Filtering (Cards page)
   tabButtons.forEach(btn => {
@@ -859,7 +882,7 @@ function closeMobileNav(onCompleteCallback) {
     document.body.style.top = '';
     document.body.style.width = '';
     document.body.style.overflow = '';
-    
+
     if (onCompleteCallback) {
       onCompleteCallback();
     } else {
@@ -1241,43 +1264,30 @@ function initGSAPAnimations() {
     });
   }
 
-  // ── 7. KHỐI 5 (SỨ MỆNH GIÁO DỤC 16:9 CINEMA CARD - #block5-values) ──
+  // ── 7. KHỐI 5 (VIDEO HƯỚNG DẪN CÁCH CHƠI - #block5-guide) ──
   if (typeof ScrollTrigger !== 'undefined') {
-    // Cinema 16:9 Card Entrance
-    gsap.from('.edu-cinema-169-card', {
+    gsap.from('#block5-guide .nautical-boardgame-badge, #block5-guide .guide-nautical-headline', {
       scrollTrigger: {
-        trigger: '#block5-values',
-        start: 'top 75%'
+        trigger: '#block5-guide',
+        start: 'top 80%'
       },
-      scale: 0.94,
+      y: 25,
       opacity: 0,
-      duration: 0.95,
+      duration: 0.8,
+      stagger: 0.1,
       ease: 'power2.out'
     });
 
-    // Hotspot Pins Pop-up with Bounce
-    gsap.from('.edu-hotspot', {
+    gsap.from('.video-frame', {
       scrollTrigger: {
-        trigger: '.edu-cinema-visual',
-        start: 'top 70%'
-      },
-      scale: 0,
-      opacity: 0,
-      stagger: 0.18,
-      duration: 0.7,
-      ease: 'back.out(2.0)'
-    });
-
-    // Right Column 3 Glass Mission Rows Slide-in
-    gsap.from('.edu-pillar-glass-row', {
-      scrollTrigger: {
-        trigger: '.edu-cinema-pillars-list',
+        trigger: '#block5-guide',
         start: 'top 75%'
       },
-      x: 50,
+      scale: 0.96,
+      y: 30,
       opacity: 0,
-      stagger: 0.15,
-      duration: 0.8,
+      duration: 0.85,
+      stagger: 0.12,
       ease: 'power2.out'
     });
   }
@@ -1703,6 +1713,17 @@ function switchView(viewName) {
   if (viewName === 'cards') {
     renderCards();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    }, 100);
+  }
+
+  // Handle about view switch
+  if (viewName === 'about') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof replayAboutAnimations === 'function') {
+      replayAboutAnimations();
+    }
     setTimeout(() => {
       if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
     }, 100);
@@ -2434,7 +2455,7 @@ function initBlock3PhotoCarousel() {
   function updateDeckClasses() {
     slides.forEach((slide, idx) => {
       slide.classList.remove('card-top', 'card-middle', 'card-bottom', 'card-swiping-out', 'card-swiping-in-reverse', 'active');
-      
+
       const pos = (idx - currentIndex + totalSlides) % totalSlides;
       if (pos === 0) {
         slide.classList.add('card-top', 'active');
@@ -2984,17 +3005,451 @@ function initTacticalBoardgameBlock5() {
   setActiveTray('1', false);
 }
 
+// ============================================================
+// ABOUT VIEW REDESIGN ANIMATIONS & FAN-OUT CARDS SPOTLIGHT
+// ============================================================
+const SPOTLIGHT_CARDS_DATA = {
+  fcl: {
+    category: 'THẺ CHỢ EXW — TÁC CHIẾN TỐC ĐỘ',
+    name: 'FCL KHẨN CẤP',
+    effect: 'Cho phép người chơi điều động ngay 01 con tàu rời cảng bốc hàng mà không cần đợi đủ số lượng container theo quy định tải trọng.',
+    tip: '💡 Mẹo tác chiến: Tung thẻ bất ngờ khi tàu mới chỉ có duy nhất container của bạn để cướp trọn điểm cảng nhanh, khiến đối thủ trở tay không kịp!',
+    theme: '#0284C7'
+  },
+  fiata: {
+    category: 'THẺ CHỢ EXW — TÍCH SẢN DÀI HẠN',
+    name: 'CHỨNG CHỈ FIATA',
+    effect: 'Chứng chỉ hành nghề giao nhận quốc tế cao cấp. Mỗi chứng chỉ sở hữu ở cuối ván sẽ nhân hệ số điểm uy tín (1 thẻ = 4đ, 2 thẻ = 10đ, 3 thẻ = 18đ, 4 thẻ = 30đ).',
+    tip: '💡 Mẹo tác chiến: Chiến lược "ăn chắc mặc bền" cực kỳ đáng sợ nếu bạn gom từ 3 chứng chỉ trở lên mà không cần tranh giành quá nhiều bến cảng.',
+    theme: '#D97706'
+  },
+  storm: {
+    category: 'THẺ BIẾN CỐ HẢI TRÌNH — ĐẠI DƯƠNG',
+    name: 'BÃO NHIỆT ĐỚI',
+    effect: 'Bão cấp 12 đổ bộ bất ngờ. Toàn bộ tàu đang trên biển không có điều khoản bảo hiểm (CIF/CIP) bị trừ 2 điểm uy tín mỗi container. Tàu có bảo hiểm được bồi thường trọn vẹn và nhận thêm +3 điểm thưởng danh tiếng.',
+    tip: '💡 Mẹo tác chiến: Luôn chuẩn bị trước điều khoản bảo hiểm CIF trước khi thả thẻ Bão để biến tổn thất của đối phương thành chiến thắng của bạn!',
+    theme: '#0891B2'
+  },
+  tax: {
+    category: 'THẺ BIẾN CỐ HẢI TRÌNH — THUẾ QUAN',
+    name: 'THUẾ BẤT NGỜ',
+    effect: 'Hải quan nước sở tại tăng thuế nhập khẩu khẩn cấp. Mọi hợp đồng giao hàng thông thường bị phạt 3 điểm chi phí. Riêng người nắm giữ hợp đồng DDP (Giao đã nộp thuế) được miễn trừ hoàn toàn.',
+    tip: '💡 Mẹo tác chiến: "Cú chốt hạ" hủy diệt ở vòng 5 hoặc 6 khi đối thủ đang dồn toàn bộ hàng vào các cảng thông thường mà chưa đóng thuế.',
+    theme: '#7C3AED'
+  },
+  emptyship: {
+    category: 'THẺ CHỢ EXW — ĐIỀU ĐỘNG HẢI ĐỘI',
+    name: 'TÀU CHẠY RỖNG',
+    effect: 'Cho phép triệu hồi 01 con tàu đã cập bến trong vòng hiện tại quay trở lại bến bốc hàng ngay lập tức ở trạng thái sẵn sàng nhận container mới.',
+    tip: '💡 Mẹo tác chiến: Giải cứu bạn khỏi thế bế tắc khi tất cả tàu lớn đã ra khơi hết và bạn vẫn còn thừa container trong kho chưa kịp xuất xưởng!',
+    theme: '#EA580C'
+  }
+};
+
+function selectSpotlightCard(cardKey) {
+  const cardData = SPOTLIGHT_CARDS_DATA[cardKey];
+  if (!cardData) return;
+
+  const detailBox = document.getElementById('aboutCardDetailBox');
+  const catEl = document.getElementById('cardDetailCategory');
+  const nameEl = document.getElementById('cardDetailName');
+  const effEl = document.getElementById('cardDetailEffect');
+  const tipEl = document.getElementById('cardDetailTip');
+
+  // Update active card class
+  const allCards = document.querySelectorAll('.about-fan-card');
+  allCards.forEach(c => {
+    if (c.getAttribute('data-card') === cardKey) {
+      c.classList.add('active');
+    } else {
+      c.classList.remove('active');
+    }
+  });
+
+  if (detailBox && catEl && nameEl && effEl && tipEl) {
+    if (typeof gsap !== 'undefined') {
+      gsap.to([catEl, nameEl, effEl, tipEl], {
+        opacity: 0,
+        y: 4,
+        duration: 0.12,
+        onComplete: () => {
+          catEl.textContent = cardData.category;
+          catEl.style.color = cardData.theme;
+          nameEl.textContent = cardData.name;
+          effEl.textContent = cardData.effect;
+          tipEl.innerHTML = cardData.tip;
+          detailBox.style.borderLeftColor = cardData.theme;
+
+          gsap.to([catEl, nameEl, effEl, tipEl], {
+            opacity: 1,
+            y: 0,
+            duration: 0.22,
+            stagger: 0.03,
+            ease: 'power2.out'
+          });
+        }
+      });
+    } else {
+      catEl.textContent = cardData.category;
+      catEl.style.color = cardData.theme;
+      nameEl.textContent = cardData.name;
+      effEl.textContent = cardData.effect;
+      tipEl.innerHTML = cardData.tip;
+      detailBox.style.borderLeftColor = cardData.theme;
+    }
+  }
+}
+
+function initAboutRedesignAnimations() {
+  const aboutSection = document.getElementById('aboutRedesign');
+  if (!aboutSection) return;
+
+  // Bind click & hover events on fan cards
+  const fanCards = aboutSection.querySelectorAll('.about-fan-card');
+  fanCards.forEach(card => {
+    const cardKey = card.getAttribute('data-card');
+    card.addEventListener('mouseenter', () => selectSpotlightCard(cardKey));
+    card.addEventListener('click', () => selectSpotlightCard(cardKey));
+    card.addEventListener('focus', () => selectSpotlightCard(cardKey));
+  });
+
+  const fadeElements = aboutSection.querySelectorAll('.about-fade-up');
+
+  if ('IntersectionObserver' in window) {
+    const aboutObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+
+          setTimeout(() => {
+            el.classList.add('is-visible');
+
+            // GSAP enhanced entrance
+            if (typeof gsap !== 'undefined') {
+              // If this element contains a photo stack, animate images with back.out spring
+              const photoStack = el.querySelector('.about-photo-stack') || (el.classList.contains('about-photo-stack') ? el : null);
+              if (photoStack) {
+                const imgs = photoStack.querySelectorAll('img');
+                gsap.fromTo(imgs,
+                  { opacity: 0, scale: 0.82, y: 25 },
+                  { opacity: 1, scale: 1, y: 0, duration: 0.75, stagger: 0.12, ease: 'back.out(1.4)' }
+                );
+              }
+
+              // If this element is the spotlight section, animate fan cards in an arc wave
+              if (el.classList.contains('about-spotlight-section')) {
+                const cards = el.querySelectorAll('.about-fan-card');
+                gsap.fromTo(cards,
+                  { opacity: 0, scale: 0.75, y: 40 },
+                  { opacity: 1, scale: 1, y: 0, duration: 0.7, stagger: 0.08, ease: 'back.out(1.5)' }
+                );
+              }
+            }
+          }, delay);
+
+          observer.unobserve(el);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.12
+    });
+
+    fadeElements.forEach(el => aboutObserver.observe(el));
+  } else {
+    // Fallback if no IntersectionObserver
+    fadeElements.forEach(el => el.classList.add('is-visible'));
+  }
+}
+
+function replayAboutAnimations() {
+  const aboutSection = document.getElementById('aboutRedesign');
+  if (!aboutSection) return;
+
+  const fadeElements = aboutSection.querySelectorAll('.about-fade-up');
+  fadeElements.forEach(el => {
+    el.classList.remove('is-visible');
+    const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+    setTimeout(() => {
+      el.classList.add('is-visible');
+    }, delay + 50);
+  });
+
+  if (typeof gsap !== 'undefined') {
+    const photoStacks = aboutSection.querySelectorAll('.about-photo-stack');
+    photoStacks.forEach(stack => {
+      const imgs = stack.querySelectorAll('img');
+      gsap.fromTo(imgs,
+        { opacity: 0, scale: 0.85, y: 20 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.65, stagger: 0.1, ease: 'back.out(1.4)' }
+      );
+    });
+
+    const fanCards = aboutSection.querySelectorAll('.about-fan-card');
+    if (fanCards.length > 0) {
+      gsap.fromTo(fanCards,
+        { opacity: 0, scale: 0.8, y: 25 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.07, ease: 'back.out(1.5)', delay: 0.12 }
+      );
+    }
+  }
+}
+
+// ============================================================
+// GAMEPLAY VIEW ANIMATIONS (SCROLLYTELLING - TACTICAL BOARD GAME HUB)
+// ============================================================
+function initGameplayAnimations() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  const gameplaySection = document.getElementById('gameplayBrightSection') || document.querySelector('.gameplay-bright-section');
+  if (!gameplaySection) return;
+
+  // 1. Animate the timeline line fill
+  const progressLine = document.getElementById('timelineProgress');
+  const timelineContainer = document.querySelector('.gameplay-scrollytelling-bright');
+  if (progressLine && timelineContainer) {
+    gsap.to(progressLine, {
+      height: '100%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: timelineContainer,
+        start: 'top 65%',
+        end: 'bottom 75%',
+        scrub: 0.5,
+      }
+    });
+  }
+
+  // 2. Animate nodes and content cards when they come into view
+  const stations = document.querySelectorAll('.gameplay-station-item');
+  stations.forEach((station, index) => {
+    const node = station.querySelector('.station-node');
+    const card = station.querySelector('.station-card-bright');
+
+    // Node activation
+    if (node) {
+      ScrollTrigger.create({
+        trigger: station,
+        start: 'top 65%',
+        onEnter: () => node.classList.add('active'),
+        onLeaveBack: () => node.classList.remove('active'),
+      });
+    }
+
+    // Content card fade & float up
+    if (card) {
+      gsap.fromTo(card,
+        { opacity: 0, y: 35 },
+        {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+          scrollTrigger: {
+            trigger: station,
+            start: 'top 75%',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
+    }
+
+    // Number counter animation for phase 4
+    if (station.id === 'phase4' || station.classList.contains('phase-4')) {
+      const scoreEl = document.getElementById('victoryScore');
+      if (scoreEl) {
+        ScrollTrigger.create({
+          trigger: station,
+          start: 'top 65%',
+          onEnter: () => {
+            gsap.to(scoreEl, {
+              innerHTML: 1000000,
+              duration: 2.2,
+              snap: { innerHTML: 1 },
+              onUpdate: function () {
+                scoreEl.innerHTML = Number(scoreEl.innerHTML).toLocaleString('en-US');
+              },
+              ease: 'power3.out'
+            });
+          },
+          once: true
+        });
+      }
+    }
+  });
+
+  // 3. Interactive Freight Dice Roller with Document Delegation
+  const diceRates = [
+    { rate: '$10,000 / TEU', tag: '⚓ Cước Thấp — Mùa Thấp Điểm' },
+    { rate: '$15,000 / TEU', tag: '⚓ Cước Tiết Kiệm Khởi Đầu' },
+    { rate: '$25,000 / TEU', tag: '⚓ Cước Chuẩn Hải Trình' },
+    { rate: '$35,000 / TEU', tag: '🔥 Cước Cao — Cao Điểm Mùa Vụ' },
+    { rate: '$50,000 / TEU', tag: '⚡ Cước Đỉnh Điểm — Khan Hiếm Tàu!' },
+  ];
+
+  document.addEventListener('click', (e) => {
+    const rollBtn = e.target.closest('#btnRollDice, .btn-roll-tactical');
+    if (rollBtn) {
+      const diceCube = document.getElementById('dice3dCube');
+      const diceRateVal = document.getElementById('diceRateValue');
+      const diceRateTag = document.getElementById('diceRateTag');
+      if (diceCube && diceRateVal && diceRateTag) {
+        diceCube.classList.remove('rolling');
+        void diceCube.offsetWidth; // trigger reflow
+        diceCube.classList.add('rolling');
+
+        let rollCount = 0;
+        const interval = setInterval(() => {
+          const randomItem = diceRates[Math.floor(Math.random() * diceRates.length)];
+          diceRateVal.innerText = randomItem.rate;
+          diceRateTag.innerText = randomItem.tag;
+          rollCount++;
+          if (rollCount > 7) {
+            clearInterval(interval);
+            const finalItem = diceRates[Math.floor(Math.random() * diceRates.length)];
+            diceRateVal.innerText = finalItem.rate;
+            diceRateTag.innerText = finalItem.tag;
+          }
+        }, 60);
+      }
+    }
+
+    // 4. Interactive Incoterms Switcher Delegation
+    const incotermBtn = e.target.closest('.incoterm-tab-btn');
+    if (incotermBtn) {
+      document.querySelectorAll('.incoterm-tab-btn').forEach(b => b.classList.remove('active'));
+      incotermBtn.classList.add('active');
+      const termKey = incotermBtn.getAttribute('data-incoterm');
+      const data = incotermData[termKey];
+      const incotermCardImg = document.getElementById('incotermCardImg');
+      const incotermTitle = document.getElementById('incotermTitle');
+      const incotermFreight = document.getElementById('incotermFreight');
+      const incotermInsurance = document.getElementById('incotermInsurance');
+      const incotermRisk = document.getElementById('incotermRisk');
+      const incotermTip = document.getElementById('incotermTip');
+
+      if (data && incotermCardImg && incotermTitle && incotermFreight && incotermInsurance && incotermRisk && incotermTip) {
+        incotermCardImg.src = data.img;
+        incotermTitle.innerText = data.title;
+        incotermFreight.innerText = data.freight;
+        incotermInsurance.innerText = data.insurance;
+        incotermRisk.innerText = data.risk;
+        incotermTip.innerHTML = data.tip;
+      }
+    }
+
+    // 5. Interactive Event Simulator Delegation
+    const eventBtn = e.target.closest('.event-tab-btn');
+    if (eventBtn) {
+      document.querySelectorAll('.event-tab-btn').forEach(b => b.classList.remove('active'));
+      eventBtn.classList.add('active');
+      const evtKey = eventBtn.getAttribute('data-event');
+      const data = eventData[evtKey];
+      const eventCardImg = document.getElementById('eventCardImg');
+      const eventTitle = document.getElementById('eventTitle');
+      const eventLossText = document.getElementById('eventLossText');
+      const eventWinText = document.getElementById('eventWinText');
+
+      if (data && eventCardImg && eventTitle && eventLossText && eventWinText) {
+        eventCardImg.src = data.img;
+        eventTitle.innerText = data.title;
+        eventLossText.innerText = data.loss;
+        eventWinText.innerText = data.win;
+      }
+    }
+  });
+
+  const incotermData = {
+    fob: {
+      img: 'assets/The Incoterm/FOB.png',
+      title: 'FOB — GIAO DỌC MẠN TÀU (FREE ON BOARD)',
+      freight: 'Người Mua tự trả cước biển',
+      insurance: 'Không bắt buộc (Tự gánh rủi ro bão)',
+      risk: 'Lan can tàu tại Cảng Xuất Khẩu',
+      tip: '💡 <strong>Mẹo tác chiến:</strong> Tiết kiệm vốn ban đầu, thích hợp khi cước xúc xắc đang thấp!'
+    },
+    cif: {
+      img: 'assets/The Incoterm/CIF.png',
+      title: 'CIF — TIỀN HÀNG, BẢO HIỂM & CƯỚC (COST, INSURANCE, FREIGHT)',
+      freight: 'Người Bán chịu toàn bộ cước biển',
+      insurance: 'Bắt buộc người bán mua Bảo hiểm hàng hải',
+      risk: 'Lan can tàu tại Cảng Đến (Bồi thường 100%)',
+      tip: '💡 <strong>Mẹo tác chiến:</strong> Miễn nhiễm bão biển cấp 12, biến rủi ro của đối phương thành cơ hội!'
+    },
+    ddp: {
+      img: 'assets/The Incoterm/DDP.png',
+      title: 'DDP — GIAO ĐÃ NỘP THUẾ (DELIVERED DUTY PAID)',
+      freight: 'Người Bán bao trọn mọi cước phí & thuế nhập khẩu',
+      insurance: 'Bảo hiểm trọn gói tận kho đích',
+      risk: 'Kho hàng người nhận (Điểm an toàn tuyệt đối)',
+      tip: '💡 <strong>Mẹo tác chiến:</strong> Đem lại lợi nhuận uy tín +450,000 điểm khi cập bến thành công!'
+    },
+    exw: {
+      img: 'assets/The Incoterm/EXW.png',
+      title: 'EXW — GIAO TẠI XƯỞNG (EX WORKS)',
+      freight: 'Người Mua chịu toàn bộ hành trình',
+      insurance: 'Người Mua tự lo liệu',
+      risk: 'Ngay tại cổng xưởng người bán',
+      tip: '💡 <strong>Mẹo tác chiến:</strong> Chi phí vốn tối thiểu, xoay vòng tiền nhanh để mua thêm tàu Panamax!'
+    }
+  };
+
+  const eventData = {
+    storm: {
+      img: 'assets/The Su Kien/BÃO NHIỆT ĐỚI.png',
+      title: 'CƠ CHẾ TÁC ĐỘNG: BÃO CẤP 12',
+      loss: 'Tàu bị bão đánh dạt, trừ ngay 2 Điểm Uy Tín mỗi container trên biển.',
+      win: 'Bảo hiểm bồi thường 100% thiệt hại + Nhận thưởng danh tiếng +3 Uy Tín!'
+    },
+    pirate: {
+      img: 'assets/The Su Kien/CƯỚP BIỂN.png',
+      title: 'CƠ CHẾ TÁC ĐỘNG: CƯỚP BIỂN VỊNH ADEN',
+      loss: 'Đội tàu không trang bị hộ tống bị cướp mất 1 container giá trị cao nhất.',
+      win: 'Tàu có điều khoản CIP/CIF được hải quân quốc tế hộ tống qua eo biển an toàn!'
+    },
+    suez: {
+      img: 'assets/The Su Kien/KÊNH ĐÀO TẮC.png',
+      title: 'CƠ CHẾ TÁC ĐỘNG: TẮC NGHẼN KÊNH ĐÀO',
+      loss: 'Tất cả tàu biển bị giữ lại 1 lượt chơi, phạt chậm giao hàng $15,000.',
+      win: 'Thuyền trưởng nắm Thẻ Vận Tải Đa Phương Thức được chuyển hàng sang đường hàng không!'
+    },
+    customs: {
+      img: 'assets/The Su Kien/HẢI QUAN GIỮ HÀNG.png',
+      title: 'CƠ CHẾ TÁC ĐỘNG: HẢI QUAN KIỂM TRA ĐỘT XUẤT',
+      loss: 'Container thiếu chứng từ hợp lệ bị giữ lại kiểm dịch 2 lượt.',
+      win: 'Sở hữu Chứng Chỉ FIATA được thông quan luồng xanh ngay lập tức!'
+    }
+  };
+
+  // 6. Fade up animations for other elements
+  const otherFadeEls = gameplaySection.querySelectorAll('.fade-up-anim:not(.station-card-bright)');
+  otherFadeEls.forEach(el => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        }
+      }
+    );
+  });
+}
+
 // Khởi chạy khi DOM sẵn sàng
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initNauticalScrollRail();
     initTacticalBoardgameBlock5();
+    initAboutRedesignAnimations();
+    initGameplayAnimations();
   });
 } else {
   initNauticalScrollRail();
   initTacticalBoardgameBlock5();
+  initAboutRedesignAnimations();
+  initGameplayAnimations();
 }
-
 
 
 
