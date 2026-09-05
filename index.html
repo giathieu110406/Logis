@@ -1125,54 +1125,46 @@
     <!-- 2. CARDS VIEW (BỘ SƯU TẬP THẺ BÀI) -->
     <!-- ========================================== -->
     <div id="cardsView" class="view-section">
-      <section class="cards-section">
-        <div class="section-container">
-          <!-- ========================================================
-               CARDS INTELLIGENCE HERO & EDITORIAL CAPSULE DOCK
-               ======================================================== -->
-          <div class="sx-cards-hero text-center">
-            <!-- Nautical Ribbon Capsule Badge -->
-            <div class="cards-nautical-badge sx-status-chip">
-              <span class="badge-nautical-ico left" aria-hidden="true">⚓</span>
-              <span class="badge-nautical-text">KHO TÀNG THẺ BÀI CHIẾN LƯỢC</span>
-              <span class="badge-nautical-tag">36 LÁ NGUYÊN BẢN</span>
-              <span class="badge-nautical-ico right" aria-hidden="true">🧭</span>
+      <!-- ===== PANORAMIC MARITIME HERO BANNER ===== -->
+      <section class="cards-hero-banner" id="cardsHeroBanner">
+        <div class="cards-hero-wrapper">
+          <img src="assets/cards-hero-bg.png" alt="LogisQuest Thư Viện Thẻ Bài Hải Trình" class="cards-hero-img" fetchpriority="high">
+          
+          <div class="cards-hero-content">
+            <div class="cards-hero-badge-wrap">
+              <img src="assets/cards-hero-helm-badge.png" alt="LogisQuest Helm Emblem" class="cards-hero-helm-badge" width="1774" height="887">
             </div>
-
-            <!-- 2-Tier Nautical Boardgame 3D Headline -->
-            <h2 class="sx-cards-title cards-nautical-headline">
-              <span class="cards-title-line-top">HỆ THỐNG THẺ BÀI ĐA DẠNG</span>
-              <span class="cards-title-line-main">4 TRỤ CỘT HẢI TRÌNH ĐẤU TRÍ</span>
-            </h2>
-
-            <!-- Nautical Navigation Sea-Route Divider -->
-            <div class="sx-title-divider cards-nautical-divider">
-              <span class="nautical-route-dash"></span>
-              <span class="nautical-compass-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="12" cy="12" r="10.5" stroke="#0284C7" stroke-width="1.8" fill="#F0F9FF"/>
-                  <polygon points="12,2.5 14.2,9.8 21.5,12 14.2,14.2 12,21.5 9.8,14.2 2.5,12 9.8,9.8" fill="url(#compRoseGrad)"/>
-                  <polygon points="12,4 13.5,10.5 12,12 10.5,10.5" fill="#38BDF8"/>
-                  <circle cx="12" cy="12" r="2.8" fill="#F59E0B" stroke="#0284C7" stroke-width="1"/>
-                  <circle cx="11.4" cy="11.4" r="0.8" fill="#FFFFFF"/>
-                  <defs>
-                    <linearGradient id="compRoseGrad" x1="2" y1="2" x2="22" y2="22">
-                      <stop offset="0%" stop-color="#38BDF8"/>
-                      <stop offset="50%" stop-color="#0284C7"/>
-                      <stop offset="100%" stop-color="#0369A1"/>
-                    </linearGradient>
-                  </defs>
+            <span class="cards-hero-eyebrow">THƯ VIỆN</span>
+            <h1 class="cards-hero-title">THẺ BÀI LOGISQUEST</h1>
+            
+            <div class="cards-hero-subtag">
+              <span class="subtag-ornament left" aria-hidden="true">
+                <svg width="28" height="12" viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="2" y1="6" x2="20" y2="6" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round"/>
+                  <path d="M16 2.5L21 6L16 9.5" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="25" cy="6" r="1.5" fill="#0284C7"/>
                 </svg>
               </span>
-              <span class="nautical-route-dash"></span>
+              <span class="subtag-text">HỆ THỐNG THẺ BÀI ĐA DẠNG</span>
+              <span class="subtag-ornament right" aria-hidden="true">
+                <svg width="28" height="12" viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="3" cy="6" r="1.5" fill="#0284C7"/>
+                  <path d="M12 2.5L7 6L12 9.5" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="8" y1="6" x2="26" y2="6" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
             </div>
 
-            <p class="sx-cards-lead">
-              Tra cứu toàn bộ cơ chế, chỉ số và hiệu ứng chiến lược của 
-              <span class="lead-highlight-tag">4 nhóm thẻ bài cốt lõi</span> trong 
-              <strong class="lead-brand">LogisQuest</strong> để hoạch định hải trình giao thương bất khả chiến bại.
+            <p class="cards-hero-desc">
+              Khám phá toàn bộ thẻ bài trong LogisQuest. Nắm vững chiến thuật,<br>
+              linh hoạt kết hợp và làm chủ mọi hành trình!
             </p>
           </div>
+        </div>
+      </section>
+
+      <section class="cards-section">
+        <div class="section-container">
 
           <!-- Editorial Segmented Capsule Dock (Pure Typography - No Icons) -->
           <div class="cards-capsule-command-dock">

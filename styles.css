@@ -887,160 +887,190 @@ h6 {
   --sx-transition-base: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 1. Nautical Cards Hero Header */
-.sx-cards-hero {
-  margin-bottom: 34px;
+/* ============================================================
+   PANORAMIC MARITIME HERO BANNER (THƯ VIỆN THẺ BÀI LOGISQUEST)
+   Mô phỏng 100% bố cục từ ảnh bìa & ảnh mẫu của người dùng
+   ============================================================ */
+
+.cards-hero-banner {
   position: relative;
+  width: 100%;
+  margin-top: var(--header-height, 68px);
+  background-color: #D4EEFF;
+  overflow: hidden;
+  user-select: none;
+}
+
+.cards-hero-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  aspect-ratio: 3884 / 1261;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  object-position: center;
+  pointer-events: none;
+  display: block;
+}
+
+/* Central typography floating on the open sky between wheel and waves */
+.cards-hero-content {
+  position: absolute;
+  top: 37%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 860px;
+  padding: 0 clamp(16px, 3vw, 32px);
+  text-align: center;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Nautical Ribbon Capsule Badge (Sunlit Maritime Tactile Pill) */
-.cards-nautical-badge {
+/* 0. 3D Nautical Helm Badge with LOGISQUEST Ribbon */
+.cards-hero-badge-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+  filter: drop-shadow(0 6px 14px rgba(6, 32, 70, 0.22));
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
+}
+
+.cards-hero-badge-wrap:hover {
+  transform: translateY(-2px) scale(1.03);
+  filter: drop-shadow(0 8px 18px rgba(6, 32, 70, 0.3));
+}
+
+.cards-hero-helm-badge {
+  width: clamp(120px, 13.5vw, 190px);
+  height: auto;
+  display: block;
+  user-select: none;
+}
+
+/* 1. Eyebrow Tag: THƯ VIỆN */
+.cards-hero-eyebrow {
+  display: block;
+  font-family: 'Montserrat', 'Outfit', sans-serif;
+  font-size: clamp(0.95rem, 1.35vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #0077B6;
+  text-transform: uppercase;
+  margin: 0 0 1px 0;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
+}
+
+/* 2. Main 3D Title: THẺ BÀI LOGISQUEST */
+.cards-hero-title {
+  display: block;
+  font-family: 'Montserrat', 'Outfit', sans-serif;
+  font-size: clamp(1.85rem, 3.8vw, 3.35rem);
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 0 0 3px 0;
+  line-height: 1.12;
+  color: #0A3F88;
+  background: linear-gradient(180deg, #0C51AB 0%, #083D86 52%, #052654 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: 
+    drop-shadow(0 0 1px #FFFFFF)
+    drop-shadow(0 0 12px rgba(255, 255, 255, 0.95))
+    drop-shadow(0 3px 0 #05234A)
+    drop-shadow(0 6px 14px rgba(4, 28, 62, 0.25));
+  white-space: nowrap;
+}
+
+/* 3. Nautical Subtag Ornament: —» HỆ THỐNG THẺ BÀI ĐA DẠNG «— */
+.cards-hero-subtag {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 249, 255, 0.94) 100%);
-  border: 1.8px solid #7DD3FC;
-  border-radius: 9999px;
-  padding: 6px 18px;
-  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.12), 0 2px 6px rgba(11, 37, 69, 0.05), inset 0 1px 0 #FFFFFF;
-  margin-bottom: 22px;
-  user-select: none;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  gap: 12px;
+  margin: 1px 0 5px 0;
 }
 
-.cards-nautical-badge:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(2, 132, 199, 0.18), 0 3px 8px rgba(11, 37, 69, 0.08), inset 0 1px 0 #FFFFFF;
+.subtag-ornament {
+  display: flex;
+  align-items: center;
+  color: #0284C7;
+  opacity: 0.9;
 }
 
-.badge-nautical-ico {
-  font-size: 1rem;
-  line-height: 1;
-  filter: drop-shadow(0 1px 2px rgba(2, 132, 199, 0.35));
-}
-
-.badge-nautical-text {
-  font-family: 'Outfit', 'Montserrat', sans-serif;
-  font-size: 0.82rem;
+.subtag-text {
+  font-family: 'Montserrat', 'Outfit', sans-serif;
+  font-size: clamp(0.8rem, 1.05vw, 0.98rem);
   font-weight: 800;
-  letter-spacing: 1.8px;
-  color: #034A75;
-  text-transform: uppercase;
-}
-
-.badge-nautical-tag {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.6px;
-  background: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%);
-  color: #FFFFFF;
-  padding: 3px 11px;
-  border-radius: 9999px;
-  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35);
-  text-transform: uppercase;
-}
-
-/* 2-Tier Nautical Boardgame 3D Headline */
-.cards-nautical-headline {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 8px !important;
-  margin: 0 0 16px 0 !important;
-  padding: 0 !important;
-  text-align: center !important;
-}
-
-.cards-title-line-top {
-  display: block;
-  font-family: 'Outfit', 'Montserrat', sans-serif;
-  font-size: clamp(0.95rem, 1.8vw, 1.22rem);
-  font-weight: 800;
-  letter-spacing: 3px;
+  letter-spacing: 2.5px;
   color: #0284C7;
   text-transform: uppercase;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
-  line-height: 1.3;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.95);
+  white-space: nowrap;
 }
 
-.cards-title-line-main {
-  display: block;
-  font-family: 'Outfit', 'Montserrat', sans-serif;
-  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
-  font-weight: 900;
-  line-height: 1.18;
-  letter-spacing: -0.3px;
-  text-transform: uppercase;
-  margin: 0;
-  background: linear-gradient(180deg, #0284C7 0%, #0369A1 50%, #073B68 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 3px 10px rgba(2, 132, 199, 0.22));
-}
-
-/* Nautical Navigation Sea-Route Divider */
-.cards-nautical-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  margin: 16px auto 18px;
-  width: 100%;
-  max-width: 320px;
-}
-
-.nautical-route-dash {
-  flex: 1;
-  height: 2px;
-  background-image: repeating-linear-gradient(90deg, #0284C7 0, #0284C7 6px, transparent 6px, transparent 12px);
-  mask-image: linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent);
-  opacity: 0.8;
-}
-
-.nautical-compass-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  filter: drop-shadow(0 2px 8px rgba(2, 132, 199, 0.35));
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: default;
-}
-
-.cards-nautical-divider:hover .nautical-compass-icon {
-  transform: rotate(45deg);
-}
-
-.sx-cards-lead {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(0.94rem, 1.15vw, 1.05rem);
-  color: #1E4E79;
-  line-height: 1.7;
-  max-width: 720px;
+/* 4. Description Lead */
+.cards-hero-desc {
+  font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
+  font-size: clamp(0.85rem, 1vw, 0.98rem);
+  font-weight: 600;
+  color: #0B3564;
+  line-height: 1.48;
+  max-width: 600px;
   margin: 0 auto;
-  text-align: center;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95);
 }
 
-.lead-highlight-tag {
-  display: inline-block;
-  padding: 1px 8px;
-  border-radius: 6px;
-  background: rgba(56, 189, 248, 0.14);
-  border: 1px solid rgba(56, 189, 248, 0.45);
-  color: #0284C7;
-  font-weight: 700;
+/* Reduce top padding of cards section since hero banner is above */
+.cards-section .section-container {
+  padding-top: 28px;
 }
 
-.lead-brand {
-  color: #034A75;
-  font-weight: 800;
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .cards-hero-wrapper {
+    aspect-ratio: 3884 / 1261;
+    min-height: auto;
+    height: auto;
+  }
+  .cards-hero-img {
+    object-fit: fill;
+    object-position: center;
+  }
+  .cards-hero-content {
+    top: 50%;
+    max-width: 92%;
+    padding: 0 12px;
+  }
+  .cards-hero-helm-badge {
+    width: clamp(70px, 14vw, 110px);
+  }
+  .cards-hero-title {
+    white-space: normal;
+  }
+  .cards-hero-subtag {
+    gap: 6px;
+  }
+  .cards-hero-desc br {
+    display: none;
+  }
+  .cards-section .section-container {
+    padding-top: 20px;
+  }
 }
 
 /* 2. Editorial Segmented Capsule Dock (Pure Typography - No Icons) */
@@ -15244,9 +15274,9 @@ media (max-width: 1100px) {
 /* 3. NAUTICAL BOARDGAME VIDEO FRAME (SLIM & ELEGANT 3D ACCESSORY) */
 .video-frame {
   position: relative;
-  width: min(100%, 1173px);
+  width: min(90%, 1056px);
   aspect-ratio: 1376 / 768;
-  margin: -70px auto 0;
+  margin: -63px auto 0;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
   filter: drop-shadow(0 16px 36px rgba(6, 32, 55, 0.32)) drop-shadow(0 4px 12px rgba(8, 42, 72, 0.18));
 }
@@ -15302,7 +15332,7 @@ media (max-width: 1100px) {
     min-height: auto;
   }
   .video-frame {
-    width: 96vw;
+    width: 86.4vw;
     margin-top: 8px;
     filter: drop-shadow(0 10px 20px rgba(6, 32, 55, 0.28));
   }

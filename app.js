@@ -1813,7 +1813,10 @@ function switchView(viewName) {
   if (viewName === 'cards') {
     renderCards();
     if (typeof gsap !== 'undefined') {
-      gsap.set(['.sx-status-chip', '.sx-cards-title', '.sx-title-divider', '.sx-cards-lead'], { clearProps: 'transform' });
+      gsap.fromTo('.cards-hero-content',
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out', delay: 0.05 }
+      );
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(() => {
