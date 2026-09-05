@@ -887,7 +887,7 @@ h6 {
   --sx-transition-base: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 1. StyleX Hero Header */
+/* 1. Nautical Cards Hero Header */
 .sx-cards-hero {
   margin-bottom: 34px;
   position: relative;
@@ -896,106 +896,151 @@ h6 {
   align-items: center;
 }
 
-/* Skewed Dynamic Sport Ribbon Section Label */
-.cards-sport-ribbon-badge {
+/* Nautical Ribbon Capsule Badge (Sunlit Maritime Tactile Pill) */
+.cards-nautical-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, #071E4B 0%, #0F387A 50%, #071E4B 100%);
-  border: 1.5px solid rgba(56, 189, 248, 0.7);
-  border-radius: 6px;
-  transform: skewX(-14deg);
-  padding: 6px 20px;
-  box-shadow: 0 6px 22px rgba(2, 20, 56, 0.5), 0 0 16px rgba(56, 189, 248, 0.35) inset;
-  margin-bottom: 18px;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 249, 255, 0.94) 100%);
+  border: 1.8px solid #7DD3FC;
+  border-radius: 9999px;
+  padding: 6px 18px;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.12), 0 2px 6px rgba(11, 37, 69, 0.05), inset 0 1px 0 #FFFFFF;
+  margin-bottom: 22px;
   user-select: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
-.sport-ribbon-unskew {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  transform: skewX(14deg);
+.cards-nautical-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(2, 132, 199, 0.18), 0 3px 8px rgba(11, 37, 69, 0.08), inset 0 1px 0 #FFFFFF;
 }
 
-.sport-ribbon-icon {
-  font-size: 0.95rem;
+.badge-nautical-ico {
+  font-size: 1rem;
   line-height: 1;
-  color: #38BDF8;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0 1px 2px rgba(2, 132, 199, 0.35));
 }
 
-.sport-ribbon-title {
+.badge-nautical-text {
   font-family: 'Outfit', 'Montserrat', sans-serif;
   font-size: 0.82rem;
   font-weight: 800;
-  letter-spacing: 2px;
-  color: #FFFFFF;
+  letter-spacing: 1.8px;
+  color: #034A75;
   text-transform: uppercase;
-  text-shadow: 0 1px 3px rgba(0, 20, 50, 0.6);
 }
 
-.sport-ribbon-badge-tag {
+.badge-nautical-tag {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.6px;
-  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  background: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%);
   color: #FFFFFF;
-  padding: 2px 10px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.4);
+  padding: 3px 11px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35);
   text-transform: uppercase;
 }
 
-/* Hero Title with Crisp Proportions */
-.sx-cards-title {
-  font-family: 'Outfit', 'Montserrat', sans-serif !important;
-  font-size: clamp(2.1rem, 4vw, 3.2rem) !important;
-  font-weight: 900 !important;
-  line-height: 1.15;
-  letter-spacing: 0.5px;
-  color: #0F172A;
+/* 2-Tier Nautical Boardgame 3D Headline */
+.cards-nautical-headline {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 0 0 16px 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+.cards-title-line-top {
+  display: block;
+  font-family: 'Outfit', 'Montserrat', sans-serif;
+  font-size: clamp(0.95rem, 1.8vw, 1.22rem);
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #0284C7;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+  line-height: 1.3;
+}
+
+.cards-title-line-main {
+  display: block;
+  font-family: 'Outfit', 'Montserrat', sans-serif;
+  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: -0.3px;
   text-transform: uppercase;
   margin: 0;
-  background: linear-gradient(180deg, #0F172A 0%, #032B54 100%);
+  background: linear-gradient(180deg, #0284C7 0%, #0369A1 50%, #073B68 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 3px 10px rgba(2, 132, 199, 0.22));
 }
 
-/* Modern Geometric Title Divider */
-.sx-title-divider {
+/* Nautical Navigation Sea-Route Divider */
+.cards-nautical-divider {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin: 14px auto 16px;
+  gap: 14px;
+  margin: 16px auto 18px;
   width: 100%;
-  max-width: 220px;
+  max-width: 320px;
 }
 
-.sx-divider-line {
+.nautical-route-dash {
   flex: 1;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #38BDF8, #F59E0B, transparent);
-  border-radius: var(--sx-radius-full);
+  background-image: repeating-linear-gradient(90deg, #0284C7 0, #0284C7 6px, transparent 6px, transparent 12px);
+  mask-image: linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent);
+  opacity: 0.8;
 }
 
-.sx-divider-node {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #F59E0B;
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+.nautical-compass-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 2px 8px rgba(2, 132, 199, 0.35));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+
+.cards-nautical-divider:hover .nautical-compass-icon {
+  transform: rotate(45deg);
 }
 
 .sx-cards-lead {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(0.92rem, 1.1vw, 1.02rem);
-  color: #0369A1;
-  line-height: 1.65;
-  max-width: 680px;
+  font-size: clamp(0.94rem, 1.15vw, 1.05rem);
+  color: #1E4E79;
+  line-height: 1.7;
+  max-width: 720px;
   margin: 0 auto;
+  text-align: center;
+}
+
+.lead-highlight-tag {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 6px;
+  background: rgba(56, 189, 248, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: #0284C7;
+  font-weight: 700;
+}
+
+.lead-brand {
+  color: #034A75;
+  font-weight: 800;
 }
 
 /* 2. Editorial Segmented Capsule Dock (Pure Typography - No Icons) */
@@ -2116,7 +2161,7 @@ h6 {
 
 /* NEW RULES SECTION STYLES */
 .rules-block {
-  margin-top: 40px;
+  margin-top: 140px;
 }
 
 .rules-subtitle {
@@ -10876,39 +10921,40 @@ media (max-width: 1100px) {
 .home-pillars-section {
   position: relative;
   width: 100%;
-  padding: clamp(72px, 8vw, 110px) 0 clamp(68px, 7.5vw, 105px);
-  background: linear-gradient(180deg, transparent 0%, rgba(12, 35, 64, 0.85) 18%, #0c2340 100%);
+  padding: clamp(60px, 7vw, 90px) 0 clamp(20px, 2.5vw, 36px);
+  background: linear-gradient(180deg, #F0F9FF 0%, #E0F2FE 20%, #BAE6FD 55%, #62B8F6 82%, #2296F3 100%);
   border-top: none;
   border-bottom: none;
   overflow: hidden;
 }
 
-/* Lớp sương biển mờ ảo và dải chuyển tiếp mượt mà giữa Khối 3 & 4 (xóa bỏ vệt trắng) */
+/* Lớp sương biển mờ ảo và dải chuyển tiếp mượt mà giữa Khối 3 & 4 */
 .home-pillars-section::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: clamp(80px, 12vw, 160px);
-  background: linear-gradient(180deg, rgba(235, 243, 250, 0.05) 0%, rgba(14, 165, 233, 0.12) 45%, transparent 100%);
+  height: clamp(60px, 8vw, 110px);
+  background: linear-gradient(180deg, rgba(240, 249, 255, 0.95) 0%, rgba(14, 165, 233, 0.08) 60%, transparent 100%);
   z-index: 3;
   pointer-events: none;
 }
 
+/* Chuyển tiếp mỏng mịn, hòa sắc đại dương liền mạch giữa Khối 4 và Khối 5 (gọn gàng, thanh thoát) */
 .home-pillars-section::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: clamp(30px, 3.5vw, 50px);
-  background: linear-gradient(0deg, #EBF8FF 0%, rgba(235, 248, 255, 0.6) 40%, transparent 100%);
+  height: clamp(20px, 2vw, 32px);
+  background: linear-gradient(180deg, transparent 0%, rgba(34, 150, 243, 0.4) 60%, #2296F3 100%);
   z-index: 3;
   pointer-events: none;
 }
 
-/* Layer hậu cảnh Sa Bàn Cảng Biển 3D (Hòa tan tự nhiên bằng mask-image) */
+/* Layer hậu cảnh Sa Bàn Cảng Biển 3D (Hòa tan tự nhiên mượt mà) */
 .pillars-diorama-bg-layer {
   position: absolute;
   top: 0;
@@ -10918,8 +10964,8 @@ media (max-width: 1100px) {
   pointer-events: none;
   z-index: 1;
   overflow: hidden;
-  mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 10%, black 28%, black 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 10%, black 28%, black 92%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 6%, black 18%, black 72%, transparent 98%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 6%, black 18%, black 72%, transparent 98%);
 }
 
 .pillars-diorama-img {
@@ -10927,21 +10973,21 @@ media (max-width: 1100px) {
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
-  filter: saturate(1.15) brightness(0.95);
+  filter: saturate(1.12) brightness(0.98);
   transform: scale(1.03);
 }
 
-/* Lớp phủ chuyển sắc thông minh: làm sáng nhẹ ở giữa để thẻ bài & chữ nổi bật tuyệt đối */
+/* Lớp phủ chuyển sắc tươi sáng: làm sáng biển, kết nối liền mạch tông xanh nắng với Khối 5 */
 .pillars-diorama-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.75) 0%, rgba(240, 249, 255, 0.85) 40%, rgba(2, 44, 92, 0.65) 100%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, transparent 25%, transparent 75%, rgba(7, 26, 48, 0.65) 100%);
-  backdrop-filter: blur(1.5px);
-  -webkit-backdrop-filter: blur(1.5px);
+  background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.82) 0%, rgba(240, 249, 255, 0.85) 45%, rgba(14, 165, 233, 0.2) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, transparent 25%, transparent 75%, rgba(34, 150, 243, 0.45) 100%);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
 }
 
 .home-pillars-container {
@@ -14981,13 +15027,13 @@ media (max-width: 1100px) {
 .home-guide-section {
   position: relative;
   width: 100%;
-  min-height: clamp(620px, 78vh, 860px);
-  padding: clamp(36px, 4vw, 54px) 0 clamp(40px, 4.5vw, 60px);
+  min-height: clamp(600px, 75vh, 840px);
+  padding: clamp(28px, 3.2vw, 44px) 0 clamp(36px, 4vw, 54px);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #72C5F8;
+  background-color: #2296F3;
   border-top: none;
   border-bottom: none;
 }
@@ -15002,6 +15048,8 @@ media (max-width: 1100px) {
   z-index: 1;
   pointer-events: none;
   overflow: hidden;
+  mask-image: linear-gradient(180deg, transparent 0%, black 24px, black 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 24px, black 100%);
 }
 
 .guide-bg-img {
@@ -15018,7 +15066,7 @@ media (max-width: 1100px) {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, transparent 12%, transparent 88%, rgba(7, 26, 48, 0.35) 100%);
+  background: linear-gradient(180deg, rgba(34, 150, 243, 0.25) 0%, transparent 14%, transparent 86%, rgba(7, 26, 48, 0.35) 100%);
   pointer-events: none;
 }
 
@@ -15026,7 +15074,7 @@ media (max-width: 1100px) {
   position: relative;
   z-index: 3;
   width: 100%;
-  max-width: 1040px;
+  max-width: 1220px;
   margin: 0 auto;
   padding: 0 clamp(14px, 2.5vw, 28px);
   display: flex;
@@ -15043,6 +15091,7 @@ media (max-width: 1100px) {
   justify-content: center;
   width: clamp(350px, 30vw, 395px);
   height: clamp(52px, 4.4vw, 58px);
+  margin-top: 105px;
   margin-bottom: 8px;
   user-select: none;
   filter: drop-shadow(0 7px 14px rgba(13, 71, 107, 0.22));
@@ -15159,7 +15208,7 @@ media (max-width: 1100px) {
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  margin: 10px 0 14px;
+  margin: 6px 0 2px;
   font-family: 'Outfit', 'Montserrat', 'Plus Jakarta Sans', sans-serif !important;
   text-align: center;
   user-select: none;
@@ -15192,187 +15241,72 @@ media (max-width: 1100px) {
   white-space: nowrap;
 }
 
-/* 3. NAUTICAL BOARDGAME VIDEO FRAME (3D GAME ACCESSORY SPEC) */
+/* 3. NAUTICAL BOARDGAME VIDEO FRAME (SLIM & ELEGANT 3D ACCESSORY) */
 .video-frame {
   position: relative;
-  width: min(100%, 1020px);
-  aspect-ratio: 2.07 / 1;
-  border-radius: 32px;
-  margin-top: 6px;
-  transition: transform 0.3s ease, filter 0.3s ease;
+  width: min(100%, 1173px);
+  aspect-ratio: 1376 / 768;
+  margin: -70px auto 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  filter: drop-shadow(0 16px 36px rgba(6, 32, 55, 0.32)) drop-shadow(0 4px 12px rgba(8, 42, 72, 0.18));
 }
 
 .video-frame:hover {
-  transform: translateY(-2px);
-  filter: drop-shadow(0 10px 24px rgba(14, 62, 98, 0.18));
+  transform: translateY(-3px) scale(1.005);
+  filter: drop-shadow(0 22px 44px rgba(6, 32, 55, 0.38)) drop-shadow(0 6px 16px rgba(8, 42, 72, 0.22));
 }
 
-/* MAIN FRAME BODY: 3D nautical off-white boardgame frame */
-.video-frame__body {
-  position: absolute;
-  inset: 0;
-  border-radius: 32px;
-  background: linear-gradient(
-    180deg,
-    #FFFFFF 0%,
-    #F6FAFD 46%,
-    #DEECF4 100%
-  );
-  border: 4px solid #7EC8EC;
-  box-shadow:
-    0 0 0 1.5px rgba(28, 155, 218, 0.45),
-    inset 0 3.5px 0 #FFFFFF,
-    inset 0 -4px 0 rgba(75, 145, 185, 0.25),
-    0 7px 0 rgba(55, 120, 155, 0.22),
-    0 18px 36px rgba(10, 50, 85, 0.2);
-  z-index: 1;
-}
-
-/* Outer cyan micro outline */
-.video-frame__body::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  border: 1px solid rgba(41, 164, 220, 0.5);
-  pointer-events: none;
-}
-
-/* VIDEO VIEWPORT: Inset tightly with rounded corners; 16:9 iframe fills edge-to-edge without black bars */
+/* 1. Recessed Video Screen - Located precisely inside the slim 3D frame opening */
 .video-frame__viewport {
   position: absolute;
-  inset: 16px;
-  border-radius: 20px;
+  left: 12.8%;
+  top: 12.4%;
+  width: 74.3%;
+  height: 76.6%;
+  border-radius: 18px;
   overflow: hidden;
   background: #021B30;
-  box-shadow:
-    inset 0 2px 7px rgba(0, 0, 0, 0.45),
-    0 0 0 1.5px rgba(255, 255, 255, 0.65);
   z-index: 2;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
 .video-frame__viewport iframe {
   position: absolute;
   top: 50%;
-  left: 0;
-  width: 100%;
-  height: 116.5%;
-  transform: translateY(-50%);
+  left: 50%;
+  width: 103.5%;
+  height: 103.5%;
+  min-width: 103.5%;
+  min-height: 103.5%;
+  transform: translate(-50%, -50%);
   border: none;
   display: block;
 }
 
-/* 4 CORNER COMPASS BADGES (OVERLAPPING PHYSICAL MEDALLIONS) */
-.video-frame__corner {
+/* 2. 3D Lifelike Nautical Frame Overlay (Sits over the video edges, with pointer-events: none) */
+.video-frame__3d-overlay {
   position: absolute;
-  width: 58px;
-  height: 58px;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
   pointer-events: none;
+  z-index: 10;
   user-select: none;
 }
 
-.video-frame__corner.top-left {
-  top: -12px;
-  left: -12px;
-}
-
-.video-frame__corner.top-right {
-  top: -12px;
-  right: -12px;
-}
-
-.video-frame__corner.bottom-left {
-  bottom: -12px;
-  left: -12px;
-}
-
-.video-frame__corner.bottom-right {
-  bottom: -12px;
-  right: -12px;
-}
-
-.compass-badge {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.compass-badge-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* 2 DUAL ROPE BINDINGS (LEFT & RIGHT) */
-.video-frame__rope {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 36px;
-  height: 136px;
-  z-index: 15;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  user-select: none;
-}
-
-.video-frame__rope.left {
-  left: -12px;
-}
-
-.video-frame__rope.right {
-  right: -12px;
-}
-
-.rope-dual-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* RESPONSIVE */
+/* Responsive adjustment for small screens */
 @media (max-width: 768px) {
   .home-guide-section {
     padding: 24px 0 28px;
     min-height: auto;
   }
   .video-frame {
-    width: 95vw;
-    border-radius: 20px;
-    margin-top: 6px;
-  }
-  .video-frame__body {
-    border-radius: 20px;
-    border-width: 3px;
+    width: 96vw;
+    margin-top: 8px;
+    filter: drop-shadow(0 10px 20px rgba(6, 32, 55, 0.28));
   }
   .video-frame__viewport {
-    inset: 10px;
-    border-radius: 12px;
+    border-radius: 10px;
   }
-  .video-frame__corner {
-    width: 40px;
-    height: 40px;
-  }
-  .video-frame__corner.top-left { top: -8px; left: -8px; }
-  .video-frame__corner.top-right { top: -8px; right: -8px; }
-  .video-frame__corner.bottom-left { bottom: -8px; left: -8px; }
-  .video-frame__corner.bottom-right { bottom: -8px; right: -8px; }
-  .video-frame__rope {
-    width: 24px;
-    height: 96px;
-  }
-  .video-frame__rope.left { left: -7px; }
-  .video-frame__rope.right { right: -7px; }
 }
-
-
-
-

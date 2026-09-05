@@ -622,17 +622,70 @@ function initEvents() {
     }
   }, { passive: false });
 
-  // Handle Virtual View Transitions
+  // Function để làm mới trang về Trang Chủ nguyên bản như lần đầu vào web
+  function reloadToHomeFresh() {
+    if (typeof lenis !== 'undefined' && lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    }
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
+    const cleanPath = window.location.pathname;
+    if (window.location.search || window.location.hash || window.location.pathname !== cleanPath) {
+      window.location.href = cleanPath;
+    } else {
+      window.location.reload();
+    }
+  }
+
+  // Handle Clean Virtual View Transitions (No URL Hash)
   const navElements = document.querySelectorAll('[data-nav]');
   navElements.forEach(el => {
     el.addEventListener('click', (e) => {
       e.preventDefault();
       const targetView = el.getAttribute('data-nav');
+      const isLogoClick = el.classList.contains('logo-area') || el.closest('.logo-area');
+      const isHomeViewActive = document.getElementById('homeView') && document.getElementById('homeView').classList.contains('active');
+
+      // 1. Khi bấm vào Logo banner trên navbar HOẶC từ trang khác quay về Trang Chủ:
+      // Luôn tải lại mới hoàn toàn (Fresh Reload) để mọi hoạt cảnh, ScrollTrigger, Banner trở về trạng thái ban đầu
+      if (targetView === 'home' && (isLogoClick || !isHomeViewActive)) {
+        if (mobileNav && mobileNav.classList.contains('active')) {
+          closeMobileNav(() => {
+            reloadToHomeFresh();
+          });
+        } else {
+          reloadToHomeFresh();
+        }
+        return;
+      }
+
+      // 2. Nếu đang ở Trang Chủ và bấm "Trang Chủ" trên menu: cuộn mượt về đỉnh
+      if (targetView === 'home' && isHomeViewActive && !isLogoClick) {
+        if (mobileNav && mobileNav.classList.contains('active')) {
+          closeMobileNav(() => {
+            if (typeof lenis !== 'undefined' && lenis) {
+              lenis.scrollTo(0);
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          });
+        } else {
+          if (typeof lenis !== 'undefined' && lenis) {
+            lenis.scrollTo(0);
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }
+        return;
+      }
 
       const executeNav = () => {
         if (targetView === 'buy') {
           switchView('home');
-          history.pushState(null, '', '#buy');
+          // Clean URL without hash
+          history.pushState({ view: 'home', section: 'buy' }, '', window.location.pathname);
           setTimeout(() => {
             const buySection = document.getElementById('buy');
             if (buySection) {
@@ -641,7 +694,8 @@ function initEvents() {
           }, 100);
         } else {
           switchView(targetView);
-          history.pushState(null, '', '#' + targetView);
+          // Clean URL without hash
+          history.pushState({ view: targetView }, '', window.location.pathname);
 
           // Kéo về đầu trang của trang vừa bấm
           if (typeof lenis !== 'undefined' && lenis) {
@@ -665,26 +719,64 @@ function initEvents() {
     });
   });
 
-  // Handle URL Hash Routing on page load and hashchange
-  function handleHashRouting() {
-    const rawHash = window.location.hash.replace('#', '').trim();
-    if (!rawHash) return;
-
-    if (rawHash === 'about' || rawHash === 'team' || rawHash === 'gameplay' || rawHash === 'cards' || rawHash === 'home') {
-      switchView(rawHash);
-    } else if (rawHash === 'buy') {
-      switchView('home');
-      setTimeout(() => {
-        const buySection = document.getElementById('buy');
-        if (buySection) {
-          buySection.scrollIntoView({ behavior: 'smooth' });
+  // Global interceptor: Ngăn mọi thẻ <a> có href="#" hay href="#id" gắn hash lên thanh URL
+  document.addEventListener('click', (e) => {
+    const anchor = e.target.closest('a[href^="#"]');
+    if (anchor) {
+      e.preventDefault();
+      const href = anchor.getAttribute('href');
+      if (href && href.length > 1) {
+        const targetId = href.substring(1);
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 200);
+      }
+    }
+  });
+
+  // Handle Initial Routing on page load & clean URL bar immediately
+  function handleInitialRouting() {
+    const rawHash = window.location.hash.replace('#', '').trim();
+    if (rawHash) {
+      if (rawHash === 'about' || rawHash === 'team' || rawHash === 'gameplay' || rawHash === 'cards' || rawHash === 'home') {
+        switchView(rawHash);
+      } else if (rawHash === 'buy') {
+        switchView('home');
+        setTimeout(() => {
+          const buySection = document.getElementById('buy');
+          if (buySection) {
+            buySection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 200);
+      }
+      // Clean hash from URL bar immediately so user always sees a clean URL
+      try {
+        history.replaceState({ view: rawHash }, '', window.location.pathname + window.location.search);
+      } catch (err) {}
     }
   }
 
-  window.addEventListener('hashchange', handleHashRouting);
-  setTimeout(handleHashRouting, 50);
+  // Handle Browser Back / Forward buttons cleanly
+  window.addEventListener('popstate', (e) => {
+    if (e.state && e.state.view) {
+      if (e.state.view === 'home') {
+        reloadToHomeFresh();
+        return;
+      }
+      switchView(e.state.view);
+      if (e.state.section === 'buy') {
+        setTimeout(() => {
+          const buySection = document.getElementById('buy');
+          if (buySection) buySection.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    } else {
+      reloadToHomeFresh();
+    }
+  });
+
+  setTimeout(handleInitialRouting, 50);
 
   // Tab Filtering (Cards page)
   tabButtons.forEach(btn => {
@@ -1347,7 +1439,7 @@ function initCardsAnimations() {
     opacity: 0,
     stagger: 0.1,
     duration: 0.8,
-    ease: 'power2.out'
+    ease: 'power2.out', clearProps: 'transform'
   });
 
   // 2. Command Dock (Search & Filter Tabs)
@@ -1712,6 +1804,9 @@ function switchView(viewName) {
   // Handle cards view switch
   if (viewName === 'cards') {
     renderCards();
+    if (typeof gsap !== 'undefined') {
+      gsap.set(['.sx-status-chip', '.sx-cards-title', '.sx-title-divider', '.sx-cards-lead'], { clearProps: 'transform' });
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(() => {
       if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
