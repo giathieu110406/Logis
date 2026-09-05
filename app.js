@@ -631,7 +631,8 @@ function initEvents() {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
 
-    const cleanPath = window.location.pathname;
+        var cleanPath = window.location.pathname.replace(/\/index\.html$/, '/').replace(/index\.html$/, '');
+    if (!cleanPath) cleanPath = '/';
     if (window.location.search || window.location.hash || window.location.pathname !== cleanPath) {
       window.location.href = cleanPath;
     } else {
@@ -738,6 +739,9 @@ function initEvents() {
   // Handle Initial Routing on page load & clean URL bar immediately
   function handleInitialRouting() {
     const rawHash = window.location.hash.replace('#', '').trim();
+    var cleanPath = window.location.pathname.replace(/\/index\.html$/, '/').replace(/index\.html$/, '');
+    if (!cleanPath) cleanPath = '/';
+
     if (rawHash) {
       if (rawHash === 'about' || rawHash === 'team' || rawHash === 'gameplay' || rawHash === 'cards' || rawHash === 'home') {
         switchView(rawHash);
@@ -752,7 +756,11 @@ function initEvents() {
       }
       // Clean hash from URL bar immediately so user always sees a clean URL
       try {
-        history.replaceState({ view: rawHash }, '', window.location.pathname + window.location.search);
+        history.replaceState({ view: rawHash }, '', cleanPath + window.location.search);
+      } catch (err) {}
+    } else {
+      try {
+        history.replaceState(null, '', cleanPath + window.location.search);
       } catch (err) {}
     }
   }

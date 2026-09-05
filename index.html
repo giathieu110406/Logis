@@ -9,6 +9,20 @@
     content="Trang chủ giới thiệu LogisQuest - Trò chơi board game chiến thuật hải trình thương mại quốc tế Incoterms. Khám phá các điều khoản cảng biển và cơ chế đối phó rủi ro.">
   <meta name="google-site-verification" content="vg5ftAAqOBpdmyk9pyX5EQIlgQJQmBg7RILx0ebMp8g" />
 
+  <script>
+    // Clean URL: Tự động loại bỏ /index.html để URL thanh địa chỉ luôn là / sạch đẹp
+    (function() {
+      try {
+        var path = window.location.pathname;
+        if (path.endsWith('/index.html') || path.endsWith('index.html')) {
+          var cleanPath = path.replace(/\/index\.html$/, '/').replace(/index\.html$/, '');
+          if (!cleanPath) cleanPath = '/';
+          window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+        }
+      } catch(e) {}
+    })();
+  </script>
+
   <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

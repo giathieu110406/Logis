@@ -7,6 +7,19 @@
   <meta name="description" content="Trang mua hàng chính thức Board Game LogisQuest — Khám phá hải trình thương mại quốc tế & 11 điều khoản Incoterms. Đặt mua ngay hôm nay để nhận ưu đãi giảm 60k và Freeship toàn quốc.">
   <meta name="google-site-verification" content="vg5ftAAqOBpdmyk9pyX5EQIlgQJQmBg7RILx0ebMp8g" />
   
+  <script>
+    // Clean URL: Tự động chuẩn hóa thanh địa chỉ từ /buy.html thành /buy sạch đẹp
+    (function() {
+      try {
+        var path = window.location.pathname;
+        if (path.endsWith('/buy.html') || path.endsWith('buy.html')) {
+          var cleanPath = path.replace(/\/buy\.html$/, '/buy').replace(/buy\.html$/, 'buy');
+          window.history.replaceState({ page: 'buy' }, '', cleanPath + window.location.search);
+        }
+      } catch(e) {}
+    })();
+  </script>
+
   <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,27 +42,27 @@
   <!-- HEADER NAVIGATION (SYNCHRONIZED WITH HOMEPAGE) -->
   <header class="main-header" id="header">
     <div class="header-container">
-      <a href="index.html#home" class="logo-area">
+      <a href="/" class="logo-area" data-nav-home="true">
         <img src="assets/logo.png" alt="LogisQuest Logo" class="site-logo">
         <span class="logo-text">LOGISQUEST<span class="sub-logo">BOARD GAME</span></span>
       </a>
 
       <nav class="nav-menu" id="navMenu">
-        <a href="index.html#home" class="nav-link">Trang Chủ</a>
+        <a href="/" class="nav-link" data-nav-home="true">Trang Chủ</a>
 
         <!-- Dropdown menu Giới Thiệu -->
         <div class="nav-dropdown">
-          <a href="index.html#about" class="nav-link dropdown-toggle">
+          <a href="/#about" class="nav-link dropdown-toggle">
             Giới Thiệu <span class="dropdown-caret">▾</span>
           </a>
           <div class="dropdown-menu">
-            <a href="index.html#about" class="dropdown-item">Về LogisQuest</a>
-            <a href="index.html#team" class="dropdown-item">Đội Ngũ Sáng Tạo</a>
+            <a href="/#about" class="dropdown-item">Về LogisQuest</a>
+            <a href="/#team" class="dropdown-item">Đội Ngũ Sáng Tạo</a>
           </div>
         </div>
 
-        <a href="index.html#gameplay" class="nav-link">Cách Chơi</a>
-        <a href="index.html#cards" class="nav-link">Thẻ Bài</a>
+        <a href="/#gameplay" class="nav-link">Cách Chơi</a>
+        <a href="/#cards" class="nav-link">Thẻ Bài</a>
       </nav>
 
       <div class="header-actions">
@@ -98,14 +111,14 @@
 
   <!-- MOBILE NAVIGATION DRAWER (SYNCHRONIZED WITH HOMEPAGE) -->
   <div class="mobile-nav" id="mobileNav">
-    <a href="index.html#home" class="mobile-link">Trang Chủ</a>
+    <a href="/" class="mobile-link" data-nav-home="true">Trang Chủ</a>
     <div class="mobile-dropdown-group">
       <span class="mobile-group-title">Giới Thiệu</span>
-      <a href="index.html#about" class="mobile-link mobile-sub-link">— Về LogisQuest</a>
-      <a href="index.html#team" class="mobile-link mobile-sub-link">— Đội Ngũ Sáng Tạo</a>
+      <a href="/#about" class="mobile-link mobile-sub-link">— Về LogisQuest</a>
+      <a href="/#team" class="mobile-link mobile-sub-link">— Đội Ngũ Sáng Tạo</a>
     </div>
-    <a href="index.html#gameplay" class="mobile-link">Cách Chơi</a>
-    <a href="index.html#cards" class="mobile-link">Thẻ Bài</a>
+    <a href="/#gameplay" class="mobile-link">Cách Chơi</a>
+    <a href="/#cards" class="mobile-link">Thẻ Bài</a>
 
     <!-- DELIVERY BUTTON (BUY PAGE SIDEBAR) — Full Phase 1+2 from delivery-button library -->
     <button class="order-button nav-delivery-btn" type="button" aria-label="Mua ngay" id="sidebarBuyBtn" style="margin-top:12px; width:100%;">
@@ -145,9 +158,9 @@
   <!-- BREADCRUMB -->
   <nav class="buy-breadcrumb" aria-label="Breadcrumb">
     <div class="breadcrumb-container">
-      <a href="index.html#home" class="bc-link">Trang chủ</a>
+      <a href="/" class="bc-link" data-nav-home="true">Trang chủ</a>
       <span class="bc-sep">›</span>
-      <a href="index.html#cards" class="bc-link">Sản phẩm</a>
+      <a href="/#cards" class="bc-link">Sản phẩm</a>
       <span class="bc-sep">›</span>
       <span class="bc-current">Board Game LogisQuest</span>
     </div>
@@ -239,7 +252,7 @@
                 <p>Được xây dựng trên nền tảng <strong>11 điều khoản Incoterms</strong> (từ EXW, FOB, CIF đến DDP) kết hợp cơ chế phương tiện chung cực kỳ độc đáo: <em>Bạn có thể là người xếp container lên tàu, nhưng đối thủ hoàn toàn có thể điều con tàu đó xuất bến sớm hơn ý bạn!</em> Hãy tính toán nước đi, kích hoạt thẻ hợp đồng EXW, vượt qua 24 thẻ sự cố thời tiết &amp; rủi ro hàng hải để đưa hàng về đích an toàn.</p>
                 <p class="desc-conclusion">Học sâu - Hiểu thật - Chơi cuốn: Trải nghiệm vừa mang tính giải trí chiến thuật đỉnh cao, vừa nắm trọn bức tranh vận tải và thương mại quốc tế trong tầm tay!</p>
               </div>
-              <a href="index.html#gameplay" class="buy-story-link">Xem chi tiết hướng dẫn và luật chơi ➔</a>
+              <a href="/#gameplay" class="buy-story-link">Xem chi tiết hướng dẫn và luật chơi ➔</a>
             </div>
 
             <!-- Accordions (Product Specs & Components) -->
@@ -596,7 +609,7 @@
           <div class="bg-title-underline"></div>
           <p class="bg-col-desc">LogisQuest là board game chiến thuật mô phỏng vận tải quốc tế, giúp người chơi làm quen và vận dụng 11 điều khoản Incoterms 2020 một cách trực quan, kịch tính và đầy hứng khởi.</p>
           <div class="bg-btn-and-cont-row">
-            <a href="index.html#about" class="bg-btn-more">TÌM HIỂU THÊM &rarr;</a>
+            <a href="/#about" class="bg-btn-more">TÌM HIỂU THÊM &rarr;</a>
             <div class="bg-col-single-cont-wrap"><img src="assets/ảnh cont 3d riêng lẻ.png" alt="Container 3D riêng lẻ" class="bg-col-single-cont-img"></div>
           </div>
         </div>
@@ -607,11 +620,11 @@
           </div>
           <div class="bg-title-underline"></div>
           <ul class="bg-footer-links">
-            <li><a href="index.html#home"><span class="bg-link-arrow">&#9654;</span> Trang chủ</a></li>
-            <li><a href="index.html#about"><span class="bg-link-arrow">&#9654;</span> Về LogisQuest</a></li>
-            <li><a href="index.html#team"><span class="bg-link-arrow">&#9654;</span> Đội ngũ sáng tạo</a></li>
-            <li><a href="index.html#cards"><span class="bg-link-arrow">&#9654;</span> Sản phẩm &amp; Thẻ bài</a></li>
-            <li><a href="index.html#about"><span class="bg-link-arrow">&#9654;</span> Tin tức &amp; Sự kiện</a></li>
+            <li><a href="/" data-nav-home="true"><span class="bg-link-arrow">&#9654;</span> Trang chủ</a></li>
+            <li><a href="/#about"><span class="bg-link-arrow">&#9654;</span> Về LogisQuest</a></li>
+            <li><a href="/#team"><span class="bg-link-arrow">&#9654;</span> Đội ngũ sáng tạo</a></li>
+            <li><a href="/#cards"><span class="bg-link-arrow">&#9654;</span> Sản phẩm &amp; Thẻ bài</a></li>
+            <li><a href="/#about"><span class="bg-link-arrow">&#9654;</span> Tin tức &amp; Sự kiện</a></li>
           </ul>
         </div>
         <div class="bg-footer-col">
@@ -621,11 +634,11 @@
           </div>
           <div class="bg-title-underline"></div>
           <ul class="bg-footer-links">
-            <li><a href="index.html#gameplay"><span class="bg-link-arrow">&#9654;</span> Hướng dẫn chơi</a></li>
-            <li><a href="index.html#gameplay"><span class="bg-link-arrow">&#9654;</span> Câu hỏi thường gặp</a></li>
-            <li><a href="buy.html"><span class="bg-link-arrow">&#9654;</span> Chính sách đổi trả 7 ngày</a></li>
-            <li><a href="index.html#gameplay"><span class="bg-link-arrow">&#9654;</span> Điều khoản bảo hành</a></li>
-            <li><a href="index.html#team"><span class="bg-link-arrow">&#9654;</span> Liên hệ hợp tác</a></li>
+            <li><a href="/#gameplay"><span class="bg-link-arrow">&#9654;</span> Hướng dẫn chơi</a></li>
+            <li><a href="/#gameplay"><span class="bg-link-arrow">&#9654;</span> Câu hỏi thường gặp</a></li>
+            <li><a href="/buy"><span class="bg-link-arrow">&#9654;</span> Chính sách đổi trả 7 ngày</a></li>
+            <li><a href="/#gameplay"><span class="bg-link-arrow">&#9654;</span> Điều khoản bảo hành</a></li>
+            <li><a href="/#team"><span class="bg-link-arrow">&#9654;</span> Liên hệ hợp tác</a></li>
           </ul>
         </div>
         <div class="bg-footer-col">

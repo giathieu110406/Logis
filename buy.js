@@ -614,6 +614,25 @@
   }
 
   /* ============================================================
+     HOMEPAGE & CLEAN NAVIGATION HANDLERS
+     ============================================================ */
+  function navigateToHomeFresh() {
+    // Xác định clean base path (loại bỏ /buy hay /buy.html)
+    var path = window.location.pathname;
+    var cleanBase = path.replace(/\/(buy|buy\.html).*$/, '') || '/';
+    if (!cleanBase.endsWith('/')) cleanBase += '/';
+    // Điều hướng trực tiếp tới trang chủ sạch sẽ
+    window.location.href = window.location.origin + cleanBase;
+  }
+
+  document.querySelectorAll('[data-nav-home="true"], .logo-area').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      navigateToHomeFresh();
+    });
+  });
+
+  /* ============================================================
      INIT — run initial state
      ============================================================ */
   updateQuantityAndPrice(1);
