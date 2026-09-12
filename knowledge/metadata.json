@@ -1,0 +1,46 @@
+{
+  "title": "LogisQuest Board Game Platform & Landing Architecture",
+  "summary": "Tài liệu tri thức toàn diện về dự án LogisQuest: Kiến trúc giao diện Web Landing & E-commerce Checkout, Sunlit Maritime Design System, cơ chế dữ liệu thẻ bài Incoterms/Phương tiện/Sự kiện, và toàn bộ luật chơi Board Game logistics.",
+  "references": [
+    {
+      "type": "conversation_id",
+      "value": "ed192c51-4ce9-4e5e-b8ac-decc83c2d86f"
+    },
+    {
+      "type": "file",
+      "value": "c:/Users/Tran Gia Thieu/.gemini/antigravity-ide/scratch/Logis/design.md"
+    },
+    {
+      "type": "file",
+      "value": "c:/Users/Tran Gia Thieu/.gemini/antigravity-ide/scratch/Logis/package.json"
+    },
+    {
+      "type": "file",
+      "value": "c:/Users/Tran Gia Thieu/.gemini/antigravity-ide/scratch/Logis/index.html"
+    },
+    {
+      "type": "file",
+      "value": "c:/Users/Tran Gia Thieu/.gemini/antigravity-ide/scratch/Logis/app.js"
+    },
+    {
+      "type": "file",
+      "value": "c:/Users/Tran Gia Thieu/.gemini/antigravity-ide/scratch/Logis/buy.html"
+    },
+    {
+      "type": "file",
+      "value": "c:/Users/Tran Gia Thieu/.gemini/antigravity-ide/scratch/Logis/buy.js"
+    },
+    {
+      "type": "file",
+      "value": "c:/Users/Tran Gia Thieu/.gemini/antigravity-ide/scratch/Logis/styles.css"
+    },
+    {
+      "type": "file",
+      "value": "c:/Users/Tran Gia Thieu/.gemini/antigravity-ide/scratch/Logis/luat_choi_clean.txt"
+    },
+    {
+      "type": "file",
+      "value": "c:/Users/Tran Gia Thieu/.gemini/antigravity-ide/scratch/Logis/knowledge/artifacts/architecture/card_showcase_shelves.md"
+    }
+  ]
+}

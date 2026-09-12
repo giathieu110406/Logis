@@ -850,6 +850,8 @@ h6 {
 .cards-section {
   background: url('assets/bg-gameplay.png') no-repeat center top / cover fixed, #FAFCFF;
   min-height: 100vh;
+  position: relative;
+  z-index: 4;
 }
 
 .gallery-controls {
@@ -897,7 +899,6 @@ h6 {
   width: 100%;
   margin-top: var(--header-height, 68px);
   background-color: #D4EEFF;
-  overflow: hidden;
   user-select: none;
 }
 
@@ -905,21 +906,13 @@ h6 {
   position: relative;
   width: 100%;
   margin: 0 auto;
-  aspect-ratio: 3884 / 1261;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .cards-hero-img {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
-  object-fit: fill;
-  object-position: center;
-  pointer-events: none;
+  height: auto;
   display: block;
+  pointer-events: none;
 }
 
 /* Central typography floating on the open sky between wheel and waves */
@@ -974,7 +967,7 @@ h6 {
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
 }
 
-/* 2. Main 3D Title: THẺ BÀI LOGISQUEST */
+/* 2. Main 3D Title: THẺ BÀI LOGISQUEST (Fixed Diacritics Clipping) */
 .cards-hero-title {
   display: block;
   font-family: 'Montserrat', 'Outfit', sans-serif;
@@ -982,8 +975,9 @@ h6 {
   font-weight: 900;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  margin: 0 0 3px 0;
-  line-height: 1.12;
+  margin: 0 0 2px 0;
+  padding: 0.14em 0 0.08em 0; /* Ensures Vietnamese diacritics like Ẻ and À have full headroom without clipping */
+  line-height: 1.25;
   color: #0A3F88;
   background: linear-gradient(180deg, #0C51AB 0%, #083D86 52%, #052654 100%);
   -webkit-background-clip: text;
@@ -996,30 +990,22 @@ h6 {
   white-space: nowrap;
 }
 
-/* 3. Nautical Subtag Ornament: —» HỆ THỐNG THẺ BÀI ĐA DẠNG «— */
+/* 3. Clean Subtag: HỆ THỐNG THẺ BÀI ĐA DẠNG (No clunky arrows or ornaments) */
 .cards-hero-subtag {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin: 1px 0 5px 0;
-}
-
-.subtag-ornament {
-  display: flex;
-  align-items: center;
-  color: #0284C7;
-  opacity: 0.9;
+  margin: 2px 0 8px 0;
 }
 
 .subtag-text {
   font-family: 'Montserrat', 'Outfit', sans-serif;
-  font-size: clamp(0.8rem, 1.05vw, 0.98rem);
+  font-size: clamp(0.82rem, 1.05vw, 0.96rem);
   font-weight: 800;
-  letter-spacing: 2.5px;
+  letter-spacing: 2.8px;
   color: #0284C7;
   text-transform: uppercase;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
   white-space: nowrap;
 }
 
@@ -1037,19 +1023,18 @@ h6 {
 
 /* Reduce top padding of cards section since hero banner is above */
 .cards-section .section-container {
-  padding-top: 28px;
+  padding-top: 0;
 }
 
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
   .cards-hero-wrapper {
-    aspect-ratio: 3884 / 1261;
-    min-height: auto;
+    width: 100%;
     height: auto;
   }
   .cards-hero-img {
-    object-fit: fill;
-    object-position: center;
+    width: 100%;
+    height: auto;
   }
   .cards-hero-content {
     top: 50%;
@@ -1062,115 +1047,51 @@ h6 {
   .cards-hero-title {
     white-space: normal;
   }
-  .cards-hero-subtag {
-    gap: 6px;
-  }
   .cards-hero-desc br {
     display: none;
   }
   .cards-section .section-container {
-    padding-top: 20px;
+    padding-top: 0;
   }
 }
 
-/* 2. Editorial Segmented Capsule Dock (Pure Typography - No Icons) */
-.cards-capsule-command-dock {
+/* ============================================================
+   NAUTICAL SEGMENTED COMMAND DOCK (FLOATING ON HERO BOTTOM RIM)
+   ============================================================ */
+.cards-command-dock-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 42px;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.96);
-  border: 1.5px solid #BAE6FD;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  margin-top: 0;
+  transform: translateY(-50%);
+  margin-bottom: -10px;
+}
+
+.cards-capsule-command-dock {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 8px 10px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0F9FF 55%, #E0F2FE 100%);
+  border: 2.75px solid #38BDF8;
   border-radius: 9999px;
-  box-shadow: 0 14px 36px rgba(2, 44, 92, 0.09), 0 0 0 1px rgba(255, 255, 255, 0.95) inset;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 14px 36px rgba(2, 132, 199, 0.18), 0 2px 6px rgba(0, 0, 0, 0.04), inset 0 2px 4px rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (min-width: 980px) {
-  .cards-capsule-command-dock {
-    flex-direction: row;
-  }
-}
-
-@media (max-width: 979px) {
+@media (max-width: 768px) {
   .cards-capsule-command-dock {
     border-radius: 24px;
-    padding: 14px;
+    padding: 8px;
+    width: 100%;
+    max-width: 480px;
   }
-}
-
-/* Capsule Search Component */
-.capsule-search-wrap {
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-  display: flex;
-  align-items: center;
-}
-
-.capsule-search-ico {
-  position: absolute;
-  left: 14px;
-  width: 18px;
-  height: 18px;
-  color: #0284C7;
-  pointer-events: none;
-  transition: color 0.2s ease;
-}
-
-.capsule-search-input {
-  width: 100%;
-  background: #F8FAFC;
-  border: 1.5px solid #E2E8F0;
-  border-radius: 9999px;
-  color: #0F172A;
-  padding: 9px 42px 9px 38px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 500;
-  outline: none;
-  box-shadow: 0 1px 3px rgba(2, 44, 92, 0.04) inset;
-  transition: all 0.22s ease;
-}
-
-.capsule-search-input:focus {
-  background: #FFFFFF;
-  border-color: #0284C7;
-  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2), 0 2px 8px rgba(2, 132, 199, 0.08);
-}
-
-.capsule-search-wrap:focus-within .capsule-search-ico {
-  color: #0369A1;
-}
-
-.capsule-search-input::placeholder {
-  color: #94A3B8;
-  font-size: 0.84rem;
-}
-
-.capsule-kbd-badge {
-  position: absolute;
-  right: 12px;
-  pointer-events: none;
-  user-select: none;
-}
-
-.capsule-kbd-badge kbd {
-  display: inline-block;
-  padding: 2px 7px;
-  font-family: 'Outfit', monospace;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #64748B;
-  background: #FFFFFF;
-  border: 1px solid #CBD5E1;
-  border-radius: 4px;
-  box-shadow: 0 1px 0 #CBD5E1;
 }
 
 /* 3. Pure Typography Segmented Filter Tabs */
@@ -1186,26 +1107,28 @@ h6 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px;
-  background: #F8FAFC;
-  border: 1.5px solid transparent;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid rgba(186, 230, 253, 0.9);
   border-radius: 9999px;
-  color: #334155;
+  color: #0369A1;
   font-family: 'Outfit', 'Montserrat', sans-serif;
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   font-weight: 800;
   cursor: pointer;
   outline: none;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.08);
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
   user-select: none;
 }
 
 .sx-tab-btn:hover {
-  background: #F1F5F9;
-  color: #0F172A;
-  border-color: #CBD5E1;
+  background: #FFFFFF;
+  color: #0284C7;
+  border-color: #38BDF8;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.16);
 }
 
 .sx-tab-btn:active {
@@ -1297,6 +1220,541 @@ h6 {
   color: #FFFFFF;
 }
 
+
+/* ============================================================
+   CATEGORIZED CARD SHELVES VIEW (HORIZONTAL CAROUSEL WITH 3D MASCOTS)
+   ============================================================ */
+.cards-shelves-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 32px;
+}
+
+.showcase-shelf {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2172 / 724;
+  border-radius: 36px;
+  overflow: visible;
+  box-shadow: 0 16px 40px rgba(2, 44, 92, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.showcase-shelf:hover {
+  box-shadow: 0 22px 50px rgba(2, 44, 92, 0.12);
+}
+
+.shelf-backdrop-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 36px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.shelf-content-layer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  padding: 22px 30px;
+  box-sizing: border-box;
+}
+
+/* 1. Left Hero Stage */
+.shelf-left-stage {
+  width: 36%;
+  min-width: 36%;
+  max-width: 36%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  padding-right: 12px;
+  box-sizing: border-box;
+}
+
+.shelf-header-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 5;
+  margin-top: 4px;
+}
+
+.shelf-eyebrow {
+  font-family: 'Outfit', 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.shelf-main-title {
+  font-family: 'Montserrat', 'Outfit', sans-serif !important;
+  font-size: clamp(1.65rem, 2.3vw, 2.2rem) !important;
+  font-weight: 900 !important;
+  line-height: 1.15;
+  margin: 0 0 6px 0 !important;
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+
+.shelf-subtitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.76rem, 0.9vw, 0.86rem);
+  font-weight: 600;
+  color: #475569;
+  line-height: 1.38;
+  margin: 0;
+  max-width: 290px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Category-specific Colors */
+.shelf-phuong-tien {
+  --shelf-dot-active: #059669;
+}
+.shelf-phuong-tien .shelf-eyebrow { color: #059669; }
+.shelf-phuong-tien .shelf-main-title { color: #064E3B !important; }
+
+.shelf-cho {
+  --shelf-dot-active: #0284C7;
+}
+.shelf-cho .shelf-eyebrow { color: #0284C7; }
+.shelf-cho .shelf-main-title { color: #0C4A6E !important; }
+
+.shelf-incoterm {
+  --shelf-dot-active: #D97706;
+}
+.shelf-incoterm .shelf-eyebrow { color: #D97706; }
+.shelf-incoterm .shelf-main-title { color: #78350F !important; }
+
+.shelf-su-kien {
+  --shelf-dot-active: #E11D48;
+}
+.shelf-su-kien .shelf-eyebrow { color: #E11D48; }
+.shelf-su-kien .shelf-main-title { color: #881337 !important; }
+
+.shelf-mascot-container {
+  position: absolute;
+  bottom: -22px;
+  left: 0;
+  width: 72%;
+  max-width: 260px;
+  aspect-ratio: 1 / 1;
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* Khối 1: Thẻ Phương Tiện - Dời sang phải 20px (68px), xuống 10px (-60px), tăng 10% (max 374px) */
+.shelf-phuong-tien .shelf-mascot-container {
+  width: 96%;
+  max-width: 374px;
+  bottom: -60px;
+  left: 68px;
+}
+.shelf-phuong-tien .shelf-subtitle {
+  max-width: 230px;
+}
+
+/* Khối 2: Thẻ Chợ - Dời sang phải 40px (50px), tăng 15% (max 350px) */
+.shelf-cho .shelf-mascot-container {
+  width: 96%;
+  max-width: 350px;
+  bottom: -38px;
+  left: 50px;
+}
+
+/* Khối 3: Thẻ Incoterm - Dời sang phải 10px (115px) */
+.shelf-incoterm .shelf-mascot-container {
+  width: 84%;
+  max-width: 300px;
+  bottom: -36px;
+  left: 115px;
+}
+
+/* Khối 4: Thẻ Sự Kiện - Lên trên 10px (-32px) */
+.shelf-su-kien .shelf-mascot-container {
+  width: 88%;
+  max-width: 315px;
+  bottom: -32px;
+  left: 80px;
+}
+
+.shelf-chibi-mascot {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 22px rgba(2, 44, 92, 0.2));
+  animation: nautical-float 3.5s ease-in-out infinite alternate;
+}
+
+/* 2. Right Carousel Stage */
+.shelf-right-stage {
+  width: 64%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 10px 20px 6px;
+  z-index: 5;
+  box-sizing: border-box;
+}
+
+.shelf-cards-track-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  padding: 0 38px;
+}
+
+.shelf-cards-track {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  padding: 10px 4px 14px;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.shelf-cards-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tabbed Card Item */
+.tabbed-card-item {
+  flex: 0 0 124px;
+  width: 124px;
+  min-width: 124px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+  user-select: none;
+}
+
+.tabbed-card-item:hover {
+  transform: translateY(-8px) scale(1.04);
+}
+
+.tabbed-card-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 828 / 1280;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Backplate with colored tab: PHÓNG TO BACK LAYER LÊN 1 CHÚT (10%), GIỮ NGUYÊN KÍCH THƯỚC THẺ BÀI TRẮNG */
+.card-tab-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.12));
+  transform: scale(1.1);
+  transform-origin: center center;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.tabbed-card-item:hover .card-tab-backdrop {
+  filter: drop-shadow(0 14px 24px rgba(2, 132, 199, 0.3));
+  transform: scale(1.14);
+}
+
+/* Inner white plate for card artwork: KÉO PHẦN HÌNH THẺ BÀI XUỐNG DƯỚI THÊM 10PX */
+.card-inner-plate {
+  position: relative;
+  z-index: 2;
+  width: 84%;
+  height: 78%;
+  background: #FFFFFF;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  margin-top: 28px;
+  box-sizing: border-box;
+}
+
+.card-front-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform 0.32s ease;
+}
+
+.tabbed-card-item:hover .card-front-thumb {
+  transform: scale(1.06);
+}
+
+.tabbed-card-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #07265C;
+  margin-top: 8px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  line-height: 1.25;
+}
+
+/* Arrow Nav Buttons */
+.shelf-arrow-nav {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1.5px solid rgba(186, 230, 253, 0.9);
+  color: #0284C7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 14px rgba(2, 44, 92, 0.16);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.shelf-arrow-nav:hover {
+  background: #0284C7;
+  color: #FFFFFF;
+  border-color: #0284C7;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.shelf-arrow-nav.arrow-prev {
+  left: 0;
+}
+
+.shelf-arrow-nav.arrow-next {
+  right: 0;
+}
+
+/* Pagination Dots */
+.shelf-dots-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 10px;
+  z-index: 6;
+}
+
+.shelf-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.16);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.shelf-dot.active {
+  width: 9px;
+  height: 9px;
+  background: var(--shelf-dot-active, #0284C7);
+  box-shadow: 0 0 6px var(--shelf-dot-active, #0284C7);
+}
+
+/* Signature Watermark at the bottom of shelves */
+.cards-shelves-signature {
+  text-align: center;
+  margin: 10px 0 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Caveat', cursive, sans-serif;
+  color: #537996;
+  user-select: none;
+}
+
+.signature-line-1 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1.15;
+}
+
+.signature-line-2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .showcase-shelf {
+    aspect-ratio: auto;
+    min-height: 320px;
+  }
+  .tabbed-card-item {
+    width: 105px;
+    min-width: 105px;
+  }
+}
+
+@media (max-width: 768px) {
+  .showcase-shelf {
+    aspect-ratio: auto;
+    border-radius: 24px;
+  }
+  .shelf-content-layer {
+    flex-direction: column;
+    padding: 18px;
+  }
+  .shelf-left-stage {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 16px;
+  }
+  .shelf-mascot-container {
+    position: relative;
+    bottom: 0;
+    width: 140px;
+    margin: 8px auto 0;
+  }
+  .shelf-right-stage {
+    width: 100%;
+    padding: 0;
+  }
+  .shelf-cards-track {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 8px;
+  }
+  .shelf-arrow-nav {
+    display: none;
+  }
+}
+
+/* Cards Grid Wrapper & Header in Detailed Category View */
+.cards-grid-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.cards-grid-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 249, 255, 0.92) 100%);
+  border: 2px solid #BAE6FD;
+  border-radius: 22px;
+  padding: 16px 24px;
+  box-shadow: 0 8px 24px rgba(2, 44, 92, 0.06);
+}
+
+.cards-grid-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cards-grid-mascot-thumb {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(2, 44, 92, 0.16));
+}
+
+.cards-grid-title-text {
+  font-family: 'Outfit', 'Montserrat', sans-serif !important;
+  font-size: 1.32rem !important;
+  font-weight: 800 !important;
+  color: #07265C !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cards-grid-count-chip {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #0284C7;
+  background: rgba(2, 132, 199, 0.1);
+  padding: 2px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(2, 132, 199, 0.2);
+}
+
+.cards-grid-subtitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.84rem;
+  color: #64748B;
+  margin: 2px 0 0 0;
+}
+
+.cards-grid-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 9999px;
+  background: #FFFFFF;
+  border: 1.75px solid #38BDF8;
+  color: #0284C7;
+  font-family: 'Outfit', 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.12);
+  outline: none;
+}
+
+.cards-grid-back-btn:hover {
+  background: #0284C7;
+  color: #FFFFFF;
+  border-color: #0284C7;
+  transform: translateX(-3px);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.28);
+}
 
 .cards-grid {
   display: grid;

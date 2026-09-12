@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600&family=Montserrat:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600&family=Montserrat:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 
   <!-- GSAP & ScrollTrigger Animation Engine -->
@@ -1138,21 +1138,7 @@
             <h1 class="cards-hero-title">THẺ BÀI LOGISQUEST</h1>
             
             <div class="cards-hero-subtag">
-              <span class="subtag-ornament left" aria-hidden="true">
-                <svg width="28" height="12" viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <line x1="2" y1="6" x2="20" y2="6" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round"/>
-                  <path d="M16 2.5L21 6L16 9.5" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  <circle cx="25" cy="6" r="1.5" fill="#0284C7"/>
-                </svg>
-              </span>
               <span class="subtag-text">HỆ THỐNG THẺ BÀI ĐA DẠNG</span>
-              <span class="subtag-ornament right" aria-hidden="true">
-                <svg width="28" height="12" viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="3" cy="6" r="1.5" fill="#0284C7"/>
-                  <path d="M12 2.5L7 6L12 9.5" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  <line x1="8" y1="6" x2="26" y2="6" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round"/>
-                </svg>
-              </span>
             </div>
 
             <p class="cards-hero-desc">
@@ -1166,47 +1152,52 @@
       <section class="cards-section">
         <div class="section-container">
 
-          <!-- Editorial Segmented Capsule Dock (Pure Typography - No Icons) -->
-          <div class="cards-capsule-command-dock">
-            <!-- Search Console -->
-            <div class="capsule-search-wrap">
-              <svg class="capsule-search-ico" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-              <input type="text" id="cardSearch" class="capsule-search-input"
-                placeholder="Tìm nhanh thẻ bài: DAP, Bão biển, FIATA..." autocomplete="off">
-              <span class="capsule-kbd-badge" title="Phím tắt tìm kiếm"><kbd>/</kbd></span>
-            </div>
-
-            <!-- Pure Typography Segmented Filter Tabs -->
-            <div class="capsule-filter-group" role="tablist" aria-label="Bộ lọc nhóm thẻ bài">
-              <button class="sx-tab-btn tab-all active" data-tab="all" role="tab" aria-selected="true">
-                <span class="tab-text-label">Tất Cả</span>
-                <span class="tab-count-badge">36</span>
-              </button>
-              <button class="sx-tab-btn tab-incoterm" data-tab="incoterm" role="tab" aria-selected="false">
-                <span class="tab-text-label">Incoterms</span>
-                <span class="tab-count-badge">11</span>
-              </button>
-              <button class="sx-tab-btn tab-cho" data-tab="cho" role="tab" aria-selected="false">
-                <span class="tab-text-label">Thẻ Chợ</span>
-                <span class="tab-count-badge">9</span>
-              </button>
-              <button class="sx-tab-btn tab-phuong-tien" data-tab="phuong-tien" role="tab" aria-selected="false">
-                <span class="tab-text-label">Phương Tiện</span>
-                <span class="tab-count-badge">6</span>
-              </button>
-              <button class="sx-tab-btn tab-su-kien" data-tab="su-kien" role="tab" aria-selected="false">
-                <span class="tab-text-label">Sự Kiện</span>
-                <span class="tab-count-badge">10</span>
-              </button>
+          <!-- Tactical Segmented Command Dock (Centered Navigation) -->
+          <div class="cards-command-dock-wrapper">
+            <div class="cards-capsule-command-dock">
+              <!-- Pure Typography Segmented Filter Tabs -->
+              <div class="capsule-filter-group" role="tablist" aria-label="Bộ lọc nhóm thẻ bài">
+                <button class="sx-tab-btn tab-all active" data-tab="all" role="tab" aria-selected="true">
+                  <span class="tab-text-label">Tất Cả</span>
+                  <span class="tab-count-badge">36</span>
+                </button>
+                <button class="sx-tab-btn tab-incoterm" data-tab="incoterm" role="tab" aria-selected="false">
+                  <span class="tab-text-label">Incoterms</span>
+                  <span class="tab-count-badge">11</span>
+                </button>
+                <button class="sx-tab-btn tab-cho" data-tab="cho" role="tab" aria-selected="false">
+                  <span class="tab-text-label">Thẻ Chợ</span>
+                  <span class="tab-count-badge">9</span>
+                </button>
+                <button class="sx-tab-btn tab-phuong-tien" data-tab="phuong-tien" role="tab" aria-selected="false">
+                  <span class="tab-text-label">Phương Tiện</span>
+                  <span class="tab-count-badge">6</span>
+                </button>
+                <button class="sx-tab-btn tab-su-kien" data-tab="su-kien" role="tab" aria-selected="false">
+                  <span class="tab-text-label">Sự Kiện</span>
+                  <span class="tab-count-badge">10</span>
+                </button>
+              </div>
             </div>
           </div>
 
-          <!-- Cards Grid -->
-          <div class="cards-grid" id="cardsGrid">
-            <div class="loading-placeholder">Đang tải danh sách thẻ bài...</div>
+          <!-- 1. Cards Shelves View (Hiển thị 4 kệ ngang có Mascot 3D dẫn đầu khi ở tab Tất Cả) -->
+          <div class="cards-shelves-container" id="cardsShelvesContainer">
+            <div class="loading-placeholder">Đang chuẩn bị các kệ thẻ bài...</div>
+          </div>
+
+          <!-- Signature Slogan at the bottom of shelves -->
+          <div class="cards-shelves-signature">
+            <span class="signature-line-1">Logistics Knowledge</span>
+            <span class="signature-line-2">A Brighter Tomorrow</span>
+          </div>
+
+          <!-- 2. Cards Grid View (Hiển thị lưới chi tiết khi lọc theo từng danh mục riêng) -->
+          <div class="cards-grid-wrapper" id="cardsGridWrapper" style="display: none;">
+            <div class="cards-grid-header" id="cardsGridHeader"></div>
+            <div class="cards-grid" id="cardsGrid">
+              <div class="loading-placeholder">Đang tải danh sách thẻ bài...</div>
+            </div>
           </div>
         </div>
       </section>

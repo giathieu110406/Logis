@@ -501,6 +501,10 @@ const CARDS_DATA = [
 
 const navLinks = document.querySelectorAll('.nav-link, .mobile-link');
 const cardsGrid = document.getElementById('cardsGrid');
+const cardsGridWrapper = document.getElementById('cardsGridWrapper');
+const cardsGridHeader = document.getElementById('cardsGridHeader');
+const cardsShelvesContainer = document.getElementById('cardsShelvesContainer');
+const cardsShelvesSignature = document.querySelector('.cards-shelves-signature');
 const cardSearch = document.getElementById('cardSearch');
 const tabButtons = document.querySelectorAll('.tab-btn, .tactical-tab-btn, .game-btn-tab, .sx-tab-btn');
 
@@ -827,23 +831,25 @@ function initEvents() {
     });
   });
 
-  // Search input filtering
-  cardSearch.addEventListener('input', (e) => {
-    searchQuery = e.target.value.toLowerCase().trim();
-    renderCards();
-  });
+  // Search input filtering (guarded)
+  if (cardSearch) {
+    cardSearch.addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      renderCards();
+    });
 
-  // Global Keyboard Shortcut: '/' to focus Card Search Input
-  window.addEventListener('keydown', (e) => {
-    if (e.key === '/' && document.activeElement !== cardSearch && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-      const cardsView = document.getElementById('cardsView');
-      if (cardsView && cardsView.classList.contains('active')) {
-        e.preventDefault();
-        cardSearch.focus();
-        cardSearch.select();
+    // Global Keyboard Shortcut: '/' to focus Card Search Input
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== cardSearch && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+        const cardsView = document.getElementById('cardsView');
+        if (cardsView && cardsView.classList.contains('active')) {
+          e.preventDefault();
+          cardSearch.focus();
+          cardSearch.select();
+        }
       }
-    }
-  });
+    });
+  }
 
   // Smooth Auto-hide / Reveal Header on Scroll
   let lastScrollTop = 0;
@@ -1855,14 +1861,275 @@ function switchView(viewName) {
   document.body.style.overflow = 'auto';
 }
 
-// RENDER CARDS GRID WITH GSAP STAGGER & 3D TILT
+// CONFIGURATION FOR 4 SHELVES WITH ASSETS FROM USER MOCKUP
+const SHELVES_CONFIG = [
+  {
+    id: 'phuong-tien',
+    categoryName: 'Thẻ phương tiện',
+    subtitle: 'Những phương tiện vận tải kết nối thế giới',
+    shelfClass: 'shelf-phuong-tien',
+    bgImg: 'assets/shelves-new/nen-phuong-tien.png',
+    mascotImg: 'assets/shelves-new/mascot-phuong-tien.png',
+    mascotAlt: 'Mascot Tàu Container LQ 3D',
+    tabImg: 'assets/shelves-new/tab-xanh.png',
+    title: 'Thẻ Phương Tiện Vận Tải',
+    desc: 'Những phương tiện vận tải kết nối thế giới'
+  },
+  {
+    id: 'cho',
+    categoryName: 'Thẻ chợ',
+    subtitle: 'Công cụ kinh doanh và hợp đồng thương mại',
+    shelfClass: 'shelf-cho',
+    bgImg: 'assets/shelves-new/nen-cho.png',
+    mascotImg: 'assets/shelves-new/mascot-cho.png',
+    mascotAlt: 'Mascot Chibi Thẻ Chợ LQ',
+    tabImg: 'assets/shelves-new/tab-xanh-duong.png',
+    title: 'Thẻ Chợ & Hợp Đồng',
+    desc: 'Công cụ kinh doanh và hợp đồng thương mại'
+  },
+  {
+    id: 'incoterm',
+    categoryName: 'Thẻ Incoterm',
+    subtitle: 'Bộ luật thương mại quốc tế dành cho mọi nhà logistics',
+    shelfClass: 'shelf-incoterm',
+    bgImg: 'assets/shelves-new/nen-incoterm.png',
+    mascotImg: 'assets/shelves-new/mascot-incoterm.png',
+    mascotAlt: 'Mascot Chibi Incoterms LQ',
+    tabImg: 'assets/shelves-new/tab-vang.png',
+    title: 'Thẻ Luật Incoterms 2020',
+    desc: 'Bộ luật thương mại quốc tế dành cho mọi nhà logistics'
+  },
+  {
+    id: 'su-kien',
+    categoryName: 'Thẻ sự kiện',
+    subtitle: 'Biến động bất ngờ, thử thách bản lĩnh',
+    shelfClass: 'shelf-su-kien',
+    bgImg: 'assets/shelves-new/nen-su-kien.png',
+    mascotImg: 'assets/shelves-new/mascot-su-kien.png',
+    mascotAlt: 'Mascot Chibi Sự Kiện Cứu Hỏa LQ',
+    tabImg: 'assets/shelves-new/tab-do.png',
+    title: 'Thẻ Sự Kiện Hải Trình',
+    desc: 'Biến động bất ngờ, thử thách bản lĩnh'
+  }
+];
+
+// HELPER: Setup horizontal scroll and pagination indicator for a shelf
+function setupShelfHorizontalScroll(shelfEl, shelf, shelfCards) {
+  const track = shelfEl.querySelector('.shelf-cards-track');
+  const dotsBar = shelfEl.querySelector('.shelf-dots-bar');
+  const prevBtn = shelfEl.querySelector('.arrow-prev');
+  const nextBtn = shelfEl.querySelector('.arrow-next');
+  if (!track || !dotsBar) return;
+
+  // 1. Render TOÀN BỘ thẻ bài vào track để cuộn ngang
+  track.innerHTML = shelfCards.map(card => `
+    <div class="tabbed-card-item" data-card-title="${card.title}">
+      <div class="tabbed-card-frame">
+        <img src="${shelf.tabImg}" alt="" class="card-tab-backdrop" loading="lazy">
+        <div class="card-inner-plate">
+          <img src="${card.image}" alt="${card.title}" class="card-front-thumb" loading="lazy">
+        </div>
+      </div>
+      <div class="tabbed-card-label" title="${card.title}">${card.title}</div>
+    </div>
+  `).join('');
+
+  // 2. Click vào thẻ mở modal chi tiết
+  track.querySelectorAll('.tabbed-card-item').forEach(cardItem => {
+    const title = cardItem.getAttribute('data-card-title');
+    const cardObj = CARDS_DATA.find(c => c.title === title);
+    if (cardObj) {
+      cardItem.addEventListener('click', () => openCardModal(cardObj));
+    }
+  });
+
+  // 3. Render số lượng chấm pagination dots
+  const totalDots = Math.max(2, Math.ceil(shelfCards.length / 3.5));
+  dotsBar.innerHTML = Array.from({ length: totalDots }).map((_, i) => `
+    <span class="shelf-dot ${i === 0 ? 'active' : ''}" data-dot-index="${i}" role="button" aria-label="Đoạn thẻ ${i + 1}"></span>
+  `).join('');
+
+  const dots = dotsBar.querySelectorAll('.shelf-dot');
+
+  // 4. Đồng bộ chấm active khi cuộn ngang
+  const updateActiveDot = () => {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    if (maxScroll <= 5) return;
+    const progress = Math.min(1, Math.max(0, track.scrollLeft / maxScroll));
+    const activeIdx = Math.min(totalDots - 1, Math.round(progress * (totalDots - 1)));
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === activeIdx);
+    });
+  };
+
+  track.addEventListener('scroll', updateActiveDot, { passive: true });
+
+  // 5. Nút bấm mũi tên điều khiển cuộn ngang (smooth scroll)
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const scrollStep = track.clientWidth * 0.72;
+      track.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const scrollStep = track.clientWidth * 0.72;
+      track.scrollBy({ left: scrollStep, behavior: 'smooth' });
+    });
+  }
+
+  // 6. Click chấm dot để cuộn đến đoạn tương ứng
+  dots.forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const dotIdx = parseInt(dot.getAttribute('data-dot-index'), 10);
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      if (maxScroll > 0) {
+        const targetScrollLeft = (dotIdx / (totalDots - 1)) * maxScroll;
+        track.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
+      }
+    });
+  });
+}
+
+// DUAL-MODE CARD RENDERER (SHOWCASE SHELVES & DETAILED GRID)
 function renderCards() {
+  if (!cardsGrid || !cardsShelvesContainer) return;
+
+  // CHẾ ĐỘ 1: KỆ TRƯNG BÀY HÀNG NGANG (Khi ở tab Tất Cả và không có tìm kiếm văn bản)
+  if (activeCategory === 'all' && !searchQuery) {
+    cardsShelvesContainer.style.display = 'flex';
+    if (cardsShelvesSignature) {
+      cardsShelvesSignature.style.display = 'block';
+    }
+    if (cardsGridWrapper) {
+      cardsGridWrapper.style.display = 'none';
+    } else {
+      cardsGrid.style.display = 'none';
+    }
+
+    cardsShelvesContainer.innerHTML = '';
+
+    SHELVES_CONFIG.forEach(shelf => {
+      const shelfCards = CARDS_DATA.filter(c => c.category === shelf.id);
+      if (shelfCards.length === 0) return;
+
+      const shelfEl = document.createElement('div');
+      shelfEl.className = `showcase-shelf ${shelf.shelfClass}`;
+      shelfEl.id = `shelf-${shelf.id}`;
+
+      shelfEl.innerHTML = `
+        <img src="${shelf.bgImg}" alt="${shelf.categoryName}" class="shelf-backdrop-img" loading="lazy">
+        <div class="shelf-content-layer">
+          <div class="shelf-left-stage">
+            <div class="shelf-text-group">
+              <div class="shelf-eyebrow">KHÁM PHÁ THẺ BÀI</div>
+              <h3 class="shelf-main-title">${shelf.categoryName}</h3>
+              <p class="shelf-subtitle">${shelf.subtitle}</p>
+            </div>
+            <div class="shelf-mascot-container">
+              <img src="${shelf.mascotImg}" alt="${shelf.mascotAlt}" class="shelf-chibi-mascot" loading="lazy">
+            </div>
+          </div>
+          <div class="shelf-right-stage">
+            <div class="shelf-cards-track-wrapper">
+              <button class="shelf-arrow-nav arrow-prev" aria-label="Cuộn thẻ sang trái">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <div class="shelf-cards-track"></div>
+              <button class="shelf-arrow-nav arrow-next" aria-label="Cuộn thẻ sang phải">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+            <div class="shelf-dots-bar"></div>
+          </div>
+        </div>
+      `;
+
+      // Cài đặt cuộn ngang trơn tru và các sự kiện
+      setupShelfHorizontalScroll(shelfEl, shelf, shelfCards);
+
+      cardsShelvesContainer.appendChild(shelfEl);
+    });
+
+    return;
+  }
+
+  // CHẾ ĐỘ 2: LƯỚI CHI TIẾT FULL GRID (Khi chọn tab riêng hoặc có tìm kiếm)
+  cardsShelvesContainer.style.display = 'none';
+  if (cardsShelvesSignature) {
+    cardsShelvesSignature.style.display = 'none';
+  }
+  if (cardsGridWrapper) {
+    cardsGridWrapper.style.display = 'flex';
+  }
+  cardsGrid.style.display = 'grid';
   cardsGrid.innerHTML = '';
+
+  // Render Header cho chế độ Grid nếu có cardsGridHeader
+  if (cardsGridHeader) {
+    const currentCatConfig = SHELVES_CONFIG.find(s => s.id === activeCategory);
+    const catTitle = currentCatConfig ? currentCatConfig.title : (activeCategory === 'all' ? 'Tất Cả Thẻ Bài' : 'Danh Sách Thẻ');
+    const catDesc = currentCatConfig ? currentCatConfig.desc : (searchQuery ? `Kết quả tìm kiếm cho "${searchQuery}"` : 'Toàn bộ kho thẻ bài chiến thuật LogisQuest');
+    const catMascot = currentCatConfig ? currentCatConfig.mascotImg : 'assets/logo.png';
+
+    const categoryCardCount = CARDS_DATA.filter(c => activeCategory === 'all' || c.category === activeCategory).length;
+
+    cardsGridHeader.innerHTML = `
+      <div class="cards-grid-title-wrap">
+        <img src="${catMascot}" alt="${catTitle}" class="cards-grid-mascot-thumb" loading="lazy">
+        <div>
+          <h2 class="cards-grid-title-text">
+            ${catTitle}
+            <span class="cards-grid-count-chip">${categoryCardCount} Thẻ</span>
+          </h2>
+          <p class="cards-grid-subtitle">${catDesc}</p>
+        </div>
+      </div>
+      <button class="cards-grid-back-btn" id="cardsGridBackBtn" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Quay Lại Tất Cả Kệ
+      </button>
+    `;
+
+    const backBtn = document.getElementById('cardsGridBackBtn');
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        activeCategory = 'all';
+        searchQuery = '';
+        if (cardSearch) cardSearch.value = '';
+        tabButtons.forEach(b => {
+          if (b.getAttribute('data-tab') === 'all') {
+            b.classList.add('active');
+            b.setAttribute('aria-selected', 'true');
+          } else {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          }
+        });
+        renderCards();
+        const dock = document.querySelector('.cards-capsule-command-dock');
+        if (dock) {
+          dock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+  }
 
   // Filter cards based on tab and search query
   const filteredCards = CARDS_DATA.filter(card => {
     const matchesTab = activeCategory === 'all' || card.category === activeCategory;
-    const matchesSearch = card.title.toLowerCase().includes(searchQuery) ||
+    const matchesSearch = !searchQuery || card.title.toLowerCase().includes(searchQuery) ||
       card.effect.toLowerCase().includes(searchQuery);
     return matchesTab && matchesSearch;
   });
@@ -1876,7 +2143,7 @@ function renderCards() {
     return;
   }
 
-  // Create card items
+  // Create card items in Grid
   filteredCards.forEach(card => {
     const cardEl = document.createElement('div');
     cardEl.className = `card-item card-cat-${card.category}`;
