@@ -734,7 +734,14 @@ function initEvents() {
         const targetId = href.substring(1);
         const targetEl = document.getElementById(targetId);
         if (targetEl) {
-          targetEl.scrollIntoView({ behavior: 'smooth' });
+          const offset = document.querySelector('.main-header')?.offsetHeight || 0;
+          const top = targetEl.getBoundingClientRect().top + window.scrollY - offset - 12;
+          const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (typeof lenis !== 'undefined' && lenis) {
+            lenis.scrollTo(top, { immediate: reducedMotion });
+          } else {
+            window.scrollTo({ top, behavior: reducedMotion ? 'auto' : 'smooth' });
+          }
         }
       }
     }
@@ -797,37 +804,6 @@ function initEvents() {
       btn.classList.add('active');
       activeCategory = btn.getAttribute('data-tab');
       renderCards();
-    });
-  });
-
-  // Gameplay Page Tab Navigation (.gp-tab) with Smooth Scroll & GSAP spring highlight
-  document.querySelectorAll('.gp-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.gp-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      const targetTab = tab.getAttribute('data-gptab');
-      if (targetTab === 'overview') {
-        const stats = document.querySelector('.gp-stats-bar');
-        if (stats) {
-          stats.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      } else if (targetTab === 'guide') {
-        const sec = document.getElementById('gpActions');
-        if (sec) {
-          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      } else if (targetTab === 'components') {
-        const sec = document.getElementById('gpFlow');
-        if (sec) {
-          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      } else if (targetTab === 'glossary') {
-        const sec = document.getElementById('gpIncoterms');
-        if (sec) {
-          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
     });
   });
 
@@ -1258,7 +1234,7 @@ function initGSAPAnimations() {
     });
   }
 
-  // ── 5. KHỐI 3 (QUY MÔ CHIẾN TRƯỜNG 2-5 NGƯỜI - #block3-scale) ──
+  // ── 5. KHỐI 3 (QUY MÔ CHIẾN TRƯỜNG 2-4 NGƯỜI - #block3-scale) ──
   if (typeof ScrollTrigger !== 'undefined') {
     // Left Photo Showcase
     gsap.from('#block3-scale .quychien-photo-showcase', {
@@ -3379,191 +3355,318 @@ function initTacticalBoardgameBlock5() {
 }
 
 // ============================================================
-// ABOUT VIEW REDESIGN ANIMATIONS & FAN-OUT CARDS SPOTLIGHT
+// ABOUT VIEW REDESIGN CONTROLLER (5 PHÂN KHU CHUẨN SUNLIT MARITIME)
 // ============================================================
-const SPOTLIGHT_CARDS_DATA = {
-  fcl: {
-    category: 'THẺ CHỢ EXW — TÁC CHIẾN TỐC ĐỘ',
-    name: 'FCL KHẨN CẤP',
-    effect: 'Cho phép người chơi điều động ngay 01 con tàu rời cảng bốc hàng mà không cần đợi đủ số lượng container theo quy định tải trọng.',
-    tip: '💡 Mẹo tác chiến: Tung thẻ bất ngờ khi tàu mới chỉ có duy nhất container của bạn để cướp trọn điểm cảng nhanh, khiến đối thủ trở tay không kịp!',
-    theme: '#0284C7'
+
+// Data cho 3 Tabs Bối Cảnh Interactive Lore
+const ABOUT_LORE_DATA = [
+  {
+    title: 'HẢI TRÌNH TOÀN CẦU',
+    lead: 'Nơi hàng triệu container lưu chuyển không ngừng nghỉ giữa các đại dương mênh mông, kết nối chuỗi cung ứng của các cường quốc ngoại thương. Trong thế giới LogisQuest, bạn không chỉ vận chuyển hàng hóa — bạn nắm trong tay vận mệnh kinh tế của cả một hạm đội thương mại toàn cầu.',
+    bg: 'assets/cards-hero-bg.png'
   },
-  fiata: {
-    category: 'THẺ CHỢ EXW — TÍCH SẢN DÀI HẠN',
-    name: 'CHỨNG CHỈ FIATA',
-    effect: 'Chứng chỉ hành nghề giao nhận quốc tế cao cấp. Mỗi chứng chỉ sở hữu ở cuối ván sẽ nhân hệ số điểm uy tín (1 thẻ = 4đ, 2 thẻ = 10đ, 3 thẻ = 18đ, 4 thẻ = 30đ).',
-    tip: '💡 Mẹo tác chiến: Chiến lược "ăn chắc mặc bền" cực kỳ đáng sợ nếu bạn gom từ 3 chứng chỉ trở lên mà không cần tranh giành quá nhiều bến cảng.',
-    theme: '#D97706'
+  {
+    title: 'BÀN ĐẤU NGOẠI THƯƠNG',
+    lead: 'Lấy cảm hứng từ kiệt tác cờ bàn Imhotep, người chơi cùng chia sẻ nguồn tài nguyên tàu container trên biển. Bạn phải tính toán xếp hàng, chọn thời điểm cho tàu xuất bến và vận dụng 11 điều khoản Incoterms 2020 để phân chia trách nhiệm, chi phí và rủi ro có lợi nhất cho doanh nghiệp của mình.',
+    bg: 'assets/anh-nen-giao-thuong.png'
   },
-  storm: {
-    category: 'THẺ BIẾN CỐ HẢI TRÌNH — ĐẠI DƯƠNG',
-    name: 'BÃO NHIỆT ĐỚI',
-    effect: 'Bão cấp 12 đổ bộ bất ngờ. Toàn bộ tàu đang trên biển không có điều khoản bảo hiểm (CIF/CIP) bị trừ 2 điểm uy tín mỗi container. Tàu có bảo hiểm được bồi thường trọn vẹn và nhận thêm +3 điểm thưởng danh tiếng.',
-    tip: '💡 Mẹo tác chiến: Luôn chuẩn bị trước điều khoản bảo hiểm CIF trước khi thả thẻ Bão để biến tổn thất của đối phương thành chiến thắng của bạn!',
-    theme: '#0891B2'
-  },
-  tax: {
-    category: 'THẺ BIẾN CỐ HẢI TRÌNH — THUẾ QUAN',
-    name: 'THUẾ BẤT NGỜ',
-    effect: 'Hải quan nước sở tại tăng thuế nhập khẩu khẩn cấp. Mọi hợp đồng giao hàng thông thường bị phạt 3 điểm chi phí. Riêng người nắm giữ hợp đồng DDP (Giao đã nộp thuế) được miễn trừ hoàn toàn.',
-    tip: '💡 Mẹo tác chiến: "Cú chốt hạ" hủy diệt ở vòng 5 hoặc 6 khi đối thủ đang dồn toàn bộ hàng vào các cảng thông thường mà chưa đóng thuế.',
-    theme: '#7C3AED'
-  },
-  emptyship: {
-    category: 'THẺ CHỢ EXW — ĐIỀU ĐỘNG HẢI ĐỘI',
-    name: 'TÀU CHẠY RỖNG',
-    effect: 'Cho phép triệu hồi 01 con tàu đã cập bến trong vòng hiện tại quay trở lại bến bốc hàng ngay lập tức ở trạng thái sẵn sàng nhận container mới.',
-    tip: '💡 Mẹo tác chiến: Giải cứu bạn khỏi thế bế tắc khi tất cả tàu lớn đã ra khơi hết và bạn vẫn còn thừa container trong kho chưa kịp xuất xưởng!',
-    theme: '#EA580C'
+  {
+    title: 'GIÁ TRỊ TIÊN PHONG',
+    lead: 'Dự án tiên phong kết hợp học thuật chuyên sâu và nghệ thuật cờ bàn tại Việt Nam. Biến những điều khoản luật ngoại thương và chuỗi cung ứng khô khan thành trò chơi nhập vai chiến thuật kịch tính, tạo nguồn cảm hứng bất tận cho sinh viên, giảng viên và các chuyên gia logistics.',
+    bg: 'assets/tactical-harbor-diorama.jpg'
   }
-};
+];
 
-function selectSpotlightCard(cardKey) {
-  const cardData = SPOTLIGHT_CARDS_DATA[cardKey];
-  if (!cardData) return;
+let aboutCarouselTimer = null;
+let currentAboutSlide = 0;
 
-  const detailBox = document.getElementById('aboutCardDetailBox');
-  const catEl = document.getElementById('cardDetailCategory');
-  const nameEl = document.getElementById('cardDetailName');
-  const effEl = document.getElementById('cardDetailEffect');
-  const tipEl = document.getElementById('cardDetailTip');
+function initAboutGameRedesign() {
+  const aboutView = document.getElementById('aboutView');
+  if (!aboutView) return;
 
-  // Update active card class
-  const allCards = document.querySelectorAll('.about-fan-card');
-  allCards.forEach(c => {
-    if (c.getAttribute('data-card') === cardKey) {
-      c.classList.add('active');
-    } else {
-      c.classList.remove('active');
-    }
-  });
+  // ------------------------------------------------------------
+  // 1. HERO CAROUSEL CONTROLLER
+  // ------------------------------------------------------------
+  const carouselTrack = document.getElementById('aboutCarouselTrack');
+  const slides = aboutView.querySelectorAll('.about-carousel-slide');
+  const dots = aboutView.querySelectorAll('.about-dot');
+  const prevBtn = document.getElementById('aboutCarouselPrev');
+  const nextBtn = document.getElementById('aboutCarouselNext');
+  const totalSlides = slides.length;
 
-  if (detailBox && catEl && nameEl && effEl && tipEl) {
-    if (typeof gsap !== 'undefined') {
-      gsap.to([catEl, nameEl, effEl, tipEl], {
-        opacity: 0,
-        y: 4,
-        duration: 0.12,
-        onComplete: () => {
-          catEl.textContent = cardData.category;
-          catEl.style.color = cardData.theme;
-          nameEl.textContent = cardData.name;
-          effEl.textContent = cardData.effect;
-          tipEl.innerHTML = cardData.tip;
-          detailBox.style.borderLeftColor = cardData.theme;
+  function updateAboutCarousel(index) {
+    if (!carouselTrack || totalSlides === 0) return;
+    currentAboutSlide = (index + totalSlides) % totalSlides;
 
-          gsap.to([catEl, nameEl, effEl, tipEl], {
-            opacity: 1,
-            y: 0,
-            duration: 0.22,
-            stagger: 0.03,
-            ease: 'power2.out'
-          });
-        }
-      });
-    } else {
-      catEl.textContent = cardData.category;
-      catEl.style.color = cardData.theme;
-      nameEl.textContent = cardData.name;
-      effEl.textContent = cardData.effect;
-      tipEl.innerHTML = cardData.tip;
-      detailBox.style.borderLeftColor = cardData.theme;
-    }
-  }
-}
-
-function initAboutRedesignAnimations() {
-  const aboutSection = document.getElementById('aboutRedesign');
-  if (!aboutSection) return;
-
-  // Bind click & hover events on fan cards
-  const fanCards = aboutSection.querySelectorAll('.about-fan-card');
-  fanCards.forEach(card => {
-    const cardKey = card.getAttribute('data-card');
-    card.addEventListener('mouseenter', () => selectSpotlightCard(cardKey));
-    card.addEventListener('click', () => selectSpotlightCard(cardKey));
-    card.addEventListener('focus', () => selectSpotlightCard(cardKey));
-  });
-
-  const fadeElements = aboutSection.querySelectorAll('.about-fade-up');
-
-  if ('IntersectionObserver' in window) {
-    const aboutObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
-
-          setTimeout(() => {
-            el.classList.add('is-visible');
-
-            // GSAP enhanced entrance
-            if (typeof gsap !== 'undefined') {
-              // If this element contains a photo stack, animate images with back.out spring
-              const photoStack = el.querySelector('.about-photo-stack') || (el.classList.contains('about-photo-stack') ? el : null);
-              if (photoStack) {
-                const imgs = photoStack.querySelectorAll('img');
-                gsap.fromTo(imgs,
-                  { opacity: 0, scale: 0.82, y: 25 },
-                  { opacity: 1, scale: 1, y: 0, duration: 0.75, stagger: 0.12, ease: 'back.out(1.4)' }
-                );
-              }
-
-              // If this element is the spotlight section, animate fan cards in an arc wave
-              if (el.classList.contains('about-spotlight-section')) {
-                const cards = el.querySelectorAll('.about-fan-card');
-                gsap.fromTo(cards,
-                  { opacity: 0, scale: 0.75, y: 40 },
-                  { opacity: 1, scale: 1, y: 0, duration: 0.7, stagger: 0.08, ease: 'back.out(1.5)' }
-                );
-              }
-            }
-          }, delay);
-
-          observer.unobserve(el);
-        }
-      });
-    }, {
-      rootMargin: '0px 0px -40px 0px',
-      threshold: 0.12
+    slides.forEach((slide, i) => {
+      if (i === currentAboutSlide) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
     });
 
-    fadeElements.forEach(el => aboutObserver.observe(el));
-  } else {
-    // Fallback if no IntersectionObserver
-    fadeElements.forEach(el => el.classList.add('is-visible'));
+    dots.forEach((dot, i) => {
+      if (i === currentAboutSlide) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+
+    // Calculate translate offset for centering the active slide
+    const slideWidth = slides[0].offsetWidth;
+    const gap = 24;
+    const containerWidth = carouselTrack.parentElement.offsetWidth;
+    const centerOffset = (containerWidth - slideWidth) / 2;
+    const targetTranslate = -(currentAboutSlide * (slideWidth + gap)) + Math.max(0, centerOffset);
+
+    carouselTrack.style.transform = `translateX(${targetTranslate}px)`;
   }
+
+  function startAboutCarouselAutoPlay() {
+    stopAboutCarouselAutoPlay();
+    aboutCarouselTimer = setInterval(() => {
+      updateAboutCarousel(currentAboutSlide + 1);
+    }, 5000);
+  }
+
+  function stopAboutCarouselAutoPlay() {
+    if (aboutCarouselTimer) {
+      clearInterval(aboutCarouselTimer);
+      aboutCarouselTimer = null;
+    }
+  }
+
+  if (prevBtn) {
+    prevBtn.onclick = (e) => {
+      e.stopPropagation();
+      updateAboutCarousel(currentAboutSlide - 1);
+      startAboutCarouselAutoPlay();
+    };
+  }
+
+  if (nextBtn) {
+    nextBtn.onclick = (e) => {
+      e.stopPropagation();
+      updateAboutCarousel(currentAboutSlide + 1);
+      startAboutCarouselAutoPlay();
+    };
+  }
+
+  dots.forEach((dot, i) => {
+    dot.onclick = (e) => {
+      e.stopPropagation();
+      updateAboutCarousel(i);
+      startAboutCarouselAutoPlay();
+    };
+  });
+
+  // Touch / Drag swipe
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  if (carouselTrack) {
+    carouselTrack.addEventListener('mouseenter', stopAboutCarouselAutoPlay);
+    carouselTrack.addEventListener('mouseleave', startAboutCarouselAutoPlay);
+
+    carouselTrack.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    carouselTrack.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].clientX;
+      const diff = touchEndX - touchStartX;
+      if (Math.abs(diff) > 45) {
+        if (diff < 0) updateAboutCarousel(currentAboutSlide + 1);
+        else updateAboutCarousel(currentAboutSlide - 1);
+        startAboutCarouselAutoPlay();
+      }
+    });
+  }
+
+  // Initial layout calculation
+  updateAboutCarousel(0);
+  startAboutCarouselAutoPlay();
+
+  window.addEventListener('resize', () => {
+    updateAboutCarousel(currentAboutSlide);
+  });
+
+  // ------------------------------------------------------------
+  // 2. INTERACTIVE LORE TABS
+  // ------------------------------------------------------------
+  const loreTabs = aboutView.querySelectorAll('.about-lore-pill-btn');
+  const loreTitle = document.getElementById('aboutLoreTitle');
+  const loreLead = document.getElementById('aboutLoreLead');
+  const loreBgImg = aboutView.querySelector('.about-lore-bg-img');
+
+  loreTabs.forEach((tab, index) => {
+    tab.onclick = () => {
+      loreTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const data = ABOUT_LORE_DATA[index];
+      if (!data) return;
+
+      if (typeof gsap !== 'undefined') {
+        gsap.to([loreTitle, loreLead], {
+          opacity: 0,
+          y: -8,
+          duration: 0.15,
+          onComplete: () => {
+            loreTitle.textContent = data.title;
+            loreLead.textContent = data.lead;
+            if (loreBgImg) loreBgImg.src = data.bg;
+
+            gsap.to([loreTitle, loreLead], {
+              opacity: 1,
+              y: 0,
+              duration: 0.3,
+              ease: 'power2.out'
+            });
+          }
+        });
+      } else {
+        loreTitle.textContent = data.title;
+        loreLead.textContent = data.lead;
+        if (loreBgImg) loreBgImg.src = data.bg;
+      }
+    };
+  });
+
+  // ------------------------------------------------------------
+  // 3. TOP 5 FAN-OUT CARDS SPOTLIGHT
+  // ------------------------------------------------------------
+  const fanCards = aboutView.querySelectorAll('.about-fan-card');
+  const spotType = document.getElementById('spotlightType');
+  const spotTitle = document.getElementById('spotlightTitle');
+  const spotPower = document.getElementById('spotlightPower');
+  const spotDesc = document.getElementById('spotlightDesc');
+
+  function updateSpotlight(cardEl) {
+    if (!cardEl) return;
+    fanCards.forEach(c => c.classList.remove('active-center'));
+    cardEl.classList.add('active-center');
+
+    const name = cardEl.getAttribute('data-name');
+    const type = cardEl.getAttribute('data-type');
+    const power = cardEl.getAttribute('data-power');
+    const desc = cardEl.getAttribute('data-desc');
+
+    if (spotType && spotTitle && spotPower && spotDesc) {
+      if (typeof gsap !== 'undefined') {
+        gsap.to([spotType, spotTitle, spotPower, spotDesc], {
+          opacity: 0,
+          y: 4,
+          duration: 0.12,
+          onComplete: () => {
+            spotType.textContent = type;
+            spotTitle.textContent = name;
+            spotPower.textContent = `Sức mạnh: ${power}`;
+            spotDesc.textContent = desc;
+
+            gsap.to([spotType, spotTitle, spotPower, spotDesc], {
+              opacity: 1,
+              y: 0,
+              duration: 0.25,
+              stagger: 0.03,
+              ease: 'power2.out'
+            });
+          }
+        });
+      } else {
+        spotType.textContent = type;
+        spotTitle.textContent = name;
+        spotPower.textContent = `Sức mạnh: ${power}`;
+        spotDesc.textContent = desc;
+      }
+    }
+  }
+
+  fanCards.forEach(card => {
+    card.addEventListener('mouseenter', () => updateSpotlight(card));
+    card.addEventListener('click', () => updateSpotlight(card));
+  });
+
+  // ------------------------------------------------------------
+  // 4. PRODUCT SHOWCASE GALLERY & ACCORDIONS
+  // ------------------------------------------------------------
+  const mainProductImg = document.getElementById('aboutProductMainImg');
+  const thumbBtns = aboutView.querySelectorAll('.about-thumb-item');
+
+  thumbBtns.forEach(btn => {
+    btn.onclick = () => {
+      thumbBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const targetSrc = btn.getAttribute('data-img');
+      if (mainProductImg && targetSrc) {
+        if (typeof gsap !== 'undefined') {
+          gsap.to(mainProductImg, {
+            opacity: 0,
+            scale: 0.95,
+            duration: 0.15,
+            onComplete: () => {
+              mainProductImg.src = targetSrc;
+              gsap.to(mainProductImg, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.25,
+                ease: 'power2.out'
+              });
+            }
+          });
+        } else {
+          mainProductImg.src = targetSrc;
+        }
+      }
+    };
+  });
+
+  // Accordions
+  const accItems = aboutView.querySelectorAll('.about-acc-item');
+  accItems.forEach(item => {
+    const trigger = item.querySelector('.about-acc-trigger');
+    if (trigger) {
+      trigger.onclick = () => {
+        const isActive = item.classList.contains('active');
+        // Toggle this item
+        if (isActive) {
+          item.classList.remove('active');
+          trigger.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('active');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      };
+    }
+  });
 }
 
+// Replay Animations khi người dùng chuyển vào view 'about'
 function replayAboutAnimations() {
-  const aboutSection = document.getElementById('aboutRedesign');
-  if (!aboutSection) return;
+  const aboutView = document.getElementById('aboutView');
+  if (!aboutView) return;
 
-  const fadeElements = aboutSection.querySelectorAll('.about-fade-up');
-  fadeElements.forEach(el => {
-    el.classList.remove('is-visible');
-    const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
-    setTimeout(() => {
-      el.classList.add('is-visible');
-    }, delay + 50);
-  });
+  // Re-init carousel position & timer
+  initAboutGameRedesign();
 
   if (typeof gsap !== 'undefined') {
-    const photoStacks = aboutSection.querySelectorAll('.about-photo-stack');
-    photoStacks.forEach(stack => {
-      const imgs = stack.querySelectorAll('img');
-      gsap.fromTo(imgs,
-        { opacity: 0, scale: 0.85, y: 20 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.65, stagger: 0.1, ease: 'back.out(1.4)' }
-      );
-    });
-
-    const fanCards = aboutSection.querySelectorAll('.about-fan-card');
+    // Fan cards entrance wave
+    const fanCards = aboutView.querySelectorAll('.about-fan-card');
     if (fanCards.length > 0) {
       gsap.fromTo(fanCards,
-        { opacity: 0, scale: 0.8, y: 25 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.07, ease: 'back.out(1.5)', delay: 0.12 }
+        { opacity: 0, scale: 0.8, y: 35 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.65, stagger: 0.08, ease: 'back.out(1.5)', delay: 0.1 }
+      );
+    }
+
+    // Mechanics rows stagger fade-in
+    const mechRows = aboutView.querySelectorAll('.about-mech-row');
+    if (mechRows.length > 0) {
+      gsap.fromTo(mechRows,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out', delay: 0.15 }
       );
     }
   }
@@ -3809,19 +3912,104 @@ function initGameplayAnimations() {
   });
 }
 
+function initGameplayJourney() {
+  const page = document.getElementById('gameplay');
+  if (!page || page.dataset.journeyReady) return;
+  page.dataset.journeyReady = 'true';
+
+  const actionData = {
+    load: {
+      label: 'HÀNH ĐỘNG 01',
+      title: 'Nạp Container',
+      image: 'assets/gameplay-action-load-v3.png',
+      alt: 'Minh họa nạp container vào kho cá nhân',
+      description: 'Lấy 3 container màu của bạn từ nguồn chung và đặt vào kho cá nhân. Kho chứa tối đa 5 container.',
+      tip: 'Mẹo: Chỉ nhận số container tương ứng với số chỗ còn trống trong kho.'
+    },
+    ship: {
+      label: 'HÀNH ĐỘNG 02',
+      title: 'Xếp Hàng Lên Tàu',
+      image: 'assets/gameplay-action-ship-v3.png',
+      alt: 'Minh họa xếp container lên tàu',
+      description: 'Lấy 1 container từ kho cá nhân và đặt vào một vị trí trống trên tàu đang chờ xuất phát.',
+      tip: 'Mẹo: Vị trí xếp hàng có thể quyết định số điểm bạn nhận tại cảng FAS.'
+    },
+    port: {
+      label: 'HÀNH ĐỘNG 03',
+      title: 'Điều Tàu Cập Cảng',
+      image: 'assets/gameplay-action-port-v3.png',
+      alt: 'Minh họa điều tàu container cập cảng',
+      description: 'Điều một tàu đủ điều kiện đến cảng Incoterms còn trống, sau đó xử lý đủ bốn bước cập cảng.',
+      tip: 'Điều kiện: Tàu phải đầy hoặc chỉ còn thiếu 1 container so với sức chứa tối đa.'
+    }
+  };
+
+  const actionButtons = page.querySelectorAll('[data-gp-action]');
+  const actionImage = document.getElementById('gpActionImage');
+  const actionLabel = document.getElementById('gpActionLabel');
+  const actionTitle = document.getElementById('gpActionTitle');
+  const actionDescription = document.getElementById('gpActionDescription');
+  const actionTip = document.getElementById('gpActionTip');
+
+  actionButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const action = actionData[button.dataset.gpAction];
+      if (!action) return;
+      actionButtons.forEach(item => {
+        const selected = item === button;
+        item.classList.toggle('active', selected);
+        item.setAttribute('aria-pressed', String(selected));
+      });
+      actionImage.src = action.image;
+      actionImage.alt = action.alt;
+      actionLabel.textContent = action.label;
+      actionTitle.textContent = action.title;
+      actionDescription.textContent = action.description;
+      actionTip.textContent = action.tip;
+    });
+  });
+
+  const journeyLinks = [...page.querySelectorAll('.gp-journey-link')];
+  const sections = journeyLinks
+    .map(link => document.getElementById(link.dataset.gpSection))
+    .filter(Boolean);
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      const active = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!active) return;
+      journeyLinks.forEach(link => {
+        const selected = link.dataset.gpSection === active.target.id;
+        link.classList.toggle('active', selected);
+        if (selected) link.setAttribute('aria-current', 'step');
+        else link.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-18% 0px -62% 0px', threshold: [0, 0.15, 0.4] });
+    sections.forEach(section => observer.observe(section));
+  }
+
+  if (window.matchMedia('(max-width: 700px)').matches) {
+    page.querySelectorAll('.gp-inc-card').forEach(details => details.removeAttribute('open'));
+  }
+}
+
 // Khởi chạy khi DOM sẵn sàng
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initNauticalScrollRail();
     initTacticalBoardgameBlock5();
-    initAboutRedesignAnimations();
+    initAboutGameRedesign();
     initGameplayAnimations();
+    initGameplayJourney();
   });
 } else {
   initNauticalScrollRail();
   initTacticalBoardgameBlock5();
-  initAboutRedesignAnimations();
+  initAboutGameRedesign();
   initGameplayAnimations();
+  initGameplayJourney();
 }
 
 

@@ -1209,101 +1209,139 @@
     <div id="gameplayView" class="view-section">
       <section class="gp-page" id="gameplay">
 
-        <!-- ── HERO HEADER ── -->
+        <!-- ── HERO HÀNH TRÌNH (SUNLIT MARITIME DESIGN - FULL 100VH VIEWPORT) ── -->
         <div class="gp-hero">
-          <h1 class="gp-hero-title">Cách Chơi LogisQuest</h1>
-          <div class="gp-hero-divider"></div>
-          <p class="gp-hero-sub">Trở thành nhà quản lý logistics tài ba, vận chuyển hàng hóa qua các cảng<br>Incoterms
-            và tích lũy uy tín để giành chiến thắng!</p>
+          <!-- Background image layer & Readability Wash -->
+          <div class="gp-hero-bg-wrap" aria-hidden="true">
+            <img src="assets/gameplay-hero-bg.png" alt="LogisQuest Gameplay Background" class="gp-hero-bg-img" fetchpriority="high">
+            <div class="gp-hero-wash"></div>
+          </div>
 
-          <!-- Tab Navigation -->
-          <div class="gp-tabs">
-            <button class="gp-tab" data-gptab="overview">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
-                <polyline points="13,2 13,9 20,9" />
+          <!-- Floating Hand-script Slogan -->
+          <div class="gp-floating-quote" aria-hidden="true">
+            <span class="quote-line-1">More</span>
+            <span class="quote-line-2">Than a Game</span>
+            <span class="quote-line-3">A Brighter</span>
+            <span class="quote-line-4">Supply Chain</span>
+          </div>
+
+          <!-- Vertical Branding Rail (Desktop Right) -->
+          <aside class="gp-vertical-rail" aria-hidden="true">
+            <span class="gp-rail-dot"></span>
+            <span class="gp-rail-text">LOGISQUEST • PLAY • LEARN • CONNECT</span>
+            <div class="gp-rail-anchor">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="5" r="3"/>
+                <line x1="12" y1="8" x2="12" y2="21"/>
+                <path d="M5 12H2a10 10 0 0 0 20 0h-3"/>
               </svg>
-              Tổng Quan
-            </button>
-            <button class="gp-tab active" data-gptab="guide">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            </div>
+          </aside>
+
+          <!-- Main Hero Content (Left side) -->
+          <div class="gp-hero-copy">
+            <span class="gp-eyebrow">HƯỚNG DẪN NHẬP CUỘC</span>
+            <h1 class="gp-hero-title">
+              CÁCH CHƠI<br>
+              <span class="gp-hero-title-brand">LOGISQUEST</span>
+            </h1>
+            <div class="gp-hero-divider"></div>
+            <p class="gp-hero-sub">
+              Trở thành nhà quản lý logistics, điều phối container qua các cảng Incoterms
+              và tích lũy nhiều điểm uy tín nhất sau 6 vòng chơi.
+            </p>
+            <a class="gp-hero-cta" href="#gpActions">
+              <span class="gp-cta-play-icon" aria-hidden="true">▶</span>
+              <span class="gp-cta-label">BẮT ĐẦU HÀNH TRÌNH</span>
+              <span class="gp-cta-arrow" aria-hidden="true">&gt;</span>
+            </a>
+          </div>
+
+          <!-- ── QUICK STATS (GLASSMORPHISM PANEL) ── -->
+          <div class="gp-stats-bar">
+            <div class="gp-stat">
+              <svg class="gp-stat-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              <div class="gp-stat-text">
+                <strong>2 – 4</strong>
+                <span>Người chơi</span>
+              </div>
+            </div>
+            <div class="gp-stat">
+              <svg class="gp-stat-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="8" x2="12" y2="12" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
+                <polyline points="12,6 12,12 16,14" />
               </svg>
-              Hướng Dẫn Chi Tiết
-            </button>
-            <button class="gp-tab" data-gptab="components">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="3" width="7" height="7" />
-                <rect x="15" y="3" width="7" height="7" />
-                <rect x="15" y="14" width="7" height="7" />
-                <rect x="2" y="14" width="7" height="7" />
+              <div class="gp-stat-text">
+                <strong>45 – 60 phút</strong>
+                <span>Thời lượng / ván</span>
+              </div>
+            </div>
+            <div class="gp-stat">
+              <svg class="gp-stat-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
               </svg>
-              Thành Phần
-            </button>
-            <button class="gp-tab" data-gptab="glossary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              <div class="gp-stat-text">
+                <strong>12+</strong>
+                <span>Độ tuổi</span>
+              </div>
+            </div>
+            <div class="gp-stat gp-stat-goal">
+              <svg class="gp-stat-icon gp-goal-icon" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                <path d="M4 22h16" />
+                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2z" />
               </svg>
-              Thuật Ngữ
-            </button>
+              <div class="gp-stat-text">
+                <strong>Mục tiêu</strong>
+                <span>Tích lũy nhiều điểm uy tín nhất sau 6 vòng chơi.</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- ── QUICK STATS ── -->
-        <div class="gp-stats-bar">
-          <div class="gp-stat">
-            <svg class="gp-stat-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="1.5">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        <!-- ── TAB NAVIGATION (TRẢ LẠI NGUYÊN VẸN NHƯ CŨ) ── -->
+        <div class="gp-tabs">
+          <button class="gp-tab" data-gptab="overview">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+              <polyline points="13,2 13,9 20,9" />
             </svg>
-            <div class="gp-stat-text">
-              <strong>2 – 4</strong>
-              <span>Người chơi</span>
-            </div>
-          </div>
-          <div class="gp-stat">
-            <svg class="gp-stat-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="1.5">
+            Tổng Quan
+          </button>
+          <button class="gp-tab active" data-gptab="guide">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10" />
-              <polyline points="12,6 12,12 16,14" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
             </svg>
-            <div class="gp-stat-text">
-              <strong>45 – 60 phút</strong>
-              <span>Thời lượng / ván</span>
-            </div>
-          </div>
-          <div class="gp-stat">
-            <svg class="gp-stat-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="1.5">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
+            Hướng Dẫn Chi Tiết
+          </button>
+          <button class="gp-tab" data-gptab="components">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="7" height="7" />
+              <rect x="15" y="3" width="7" height="7" />
+              <rect x="15" y="14" width="7" height="7" />
+              <rect x="2" y="14" width="7" height="7" />
             </svg>
-            <div class="gp-stat-text">
-              <strong>12+</strong>
-              <span>Độ tuổi</span>
-            </div>
-          </div>
-          <div class="gp-stat gp-stat-goal">
-            <svg class="gp-stat-icon gp-goal-icon" width="36" height="36" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="1.5">
-              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-              <path d="M4 22h16" />
-              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
-              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
-              <path d="M18 2H6v7a6 6 0 0 0 12 0V2z" />
+            Thành Phần
+          </button>
+          <button class="gp-tab" data-gptab="glossary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
-            <div class="gp-stat-text">
-              <strong>Mục tiêu</strong>
-              <span>Tích lũy nhiều điểm uy tín nhất sau 6 vòng chơi.</span>
-            </div>
-          </div>
+            Thuật Ngữ
+          </button>
+        </div>
         </div>
 
         <!-- ── MAIN CONTENT ── -->
