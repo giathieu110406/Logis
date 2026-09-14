@@ -6,3 +6,9 @@ Thumbs.db
 /gameplay-*.png
 /setup_section_*.png
 *.png.tmp
+.playwright-cli/
+/*-block*.png
+/block3-*.png
+/perfect-*.png
+/final-*.png
+/mobile-*.png

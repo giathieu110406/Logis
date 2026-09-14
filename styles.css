@@ -5897,6 +5897,12 @@ h6 {
   max-width: 680px;
 }
 
+@media (min-width: 992px) {
+  #block3-scale .home-quychien-text-col {
+    transform: translateX(-20px);
+  }
+}
+
 #block3-scale .home-quychien-img-col {
   position: relative;
   z-index: 2;
@@ -17855,6 +17861,7 @@ media (max-width: 1100px) {
 
 /* 6. Onboarding Stepper (Phóng to kích thước rõ nét, dễ bấm theo góp ý) */
 #gameplay .gp-stepper {
+  margin-bottom: 48px;
   position: relative;
   z-index: 3;
   display: flex;
@@ -18281,43 +18288,48 @@ media (max-width: 1100px) {
   color: #475569;
 }
 
-/* 3. Section 1 Layout: Chuẩn Bị Bàn Chơi (Infographic 3:1 Split) */
-#gameplay .gp-setup-card-container {
-  background: #ffffff;
-  border-radius: 30px;
-  border: 1px solid rgba(226, 238, 248, 0.95);
-  box-shadow: 0 18px 45px -10px rgba(0, 35, 70, 0.07), 0 2px 8px rgba(0, 0, 0, 0.02);
-  padding: 38px 44px;
-  margin-bottom: 48px;
-  position: relative;
-  box-sizing: border-box;
+/* ============================================================
+   TÁI THIẾT KẾ PHÂN HỆ 1 & 2: THEO MẪU INFOGRAPHIC SUNLIT MARITIME
+   (Không đóng khung ngoài lớn, Header trên nền, Card nội dung tinh gọn)
+   ============================================================ */
+
+/* ── BLOCK SECTION CHUNG CHO GAMEPLAY ── */
+#gameplay .gp-content {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 60px 20px 80px;
+}
+
+#gameplay .gp-block-section {
+  margin-bottom: 56px;
   scroll-margin-top: 86px;
-  display: grid;
-  grid-template-columns: 57.5% 42.5%;
-  column-gap: 36px;
-  align-items: stretch;
+  width: 100%;
 }
 
-#gameplay .gp-setup-col-left {
-  display: flex;
-  flex-direction: column;
-}
-
-#gameplay .gp-setup-title-cluster {
+/* ── HEADER ĐỘC LẬP TRÊN NỀN ── */
+#gameplay .gp-block-header {
   display: flex;
   align-items: flex-start;
-  gap: 18px;
-  margin-bottom: 22px;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
-#gameplay .gp-setup-badge-number {
-  width: 58px;
-  height: 58px;
+#gameplay .gp-block-header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+#gameplay .gp-block-badge-num {
+  width: 50px;
+  height: 50px;
   background: linear-gradient(135deg, #FF9500 0%, #FF5E00 100%);
-  border-radius: 16px;
+  border-radius: 14px;
   color: #ffffff;
   font-family: 'Outfit', sans-serif;
-  font-size: 2.1rem;
+  font-size: 1.95rem;
   font-weight: 900;
   display: flex;
   align-items: center;
@@ -18325,206 +18337,173 @@ media (max-width: 1100px) {
   flex-shrink: 0;
   box-shadow: 0 6px 18px rgba(255, 94, 0, 0.32);
   line-height: 1;
+  position: relative;
 }
 
-#gameplay .gp-setup-title-texts {
+#gameplay .gp-badge-burst::before {
+  content: '✦';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  font-size: 14px;
+  color: #FF9500;
+  filter: drop-shadow(0 0 4px rgba(255, 149, 0, 0.7));
+}
+
+#gameplay .gp-block-title-texts {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
-#gameplay .gp-setup-sub-heading {
+#gameplay .gp-block-kicker {
   font-family: 'Outfit', sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   color: #0284C7;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   line-height: 1.2;
 }
 
-#gameplay .gp-setup-main-title {
+#gameplay .gp-block-main-title {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(1.6rem, 2.3vw, 2.15rem);
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
   font-weight: 900;
   letter-spacing: -0.02em;
   color: #0A192F;
-  margin: 0 0 6px 0;
+  margin: 0 0 5px 0;
   text-transform: uppercase;
   line-height: 1.15;
-  white-space: nowrap;
 }
 
-#gameplay .gp-setup-brief {
-  font-size: 0.92rem;
+#gameplay .gp-block-brief {
+  font-size: 0.9rem;
   color: #64748B;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.45;
   margin: 0;
+  max-width: 620px;
 }
 
-#gameplay .gp-setup-showcase-frame {
-  width: 100%;
-  aspect-ratio: 1.7 / 1;
-  border-radius: 20px;
-  background: linear-gradient(180deg, #F0F8FF 0%, #E1F0FD 100%);
-  border: 2px dashed rgba(56, 189, 248, 0.55);
-  box-sizing: border-box;
-  overflow: hidden;
-  position: relative;
+#gameplay .gp-block-slogan-wrap {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 24px;
-  transition: border-color 0.25s ease, transform 0.25s ease;
-}
-
-#gameplay .gp-setup-showcase-frame:hover {
-  border-color: #0284C7;
-}
-
-#gameplay .gp-setup-showcase-inner {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#gameplay .gp-setup-showcase-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 10px;
-}
-
-#gameplay .gp-setup-placeholder-icon {
-  width: 68px;
-  height: 68px;
-  border-radius: 18px;
-  background: #ffffff;
-  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 4px;
-}
-
-#gameplay .gp-setup-placeholder-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  font-weight: 800;
-  color: #0A192F;
-}
-
-#gameplay .gp-setup-placeholder-note {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #0284C7;
-  background: rgba(255, 255, 255, 0.75);
-  padding: 4px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(186, 230, 253, 0.6);
-}
-
-#gameplay .gp-setup-col-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-#gameplay .gp-setup-right-note {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 14px;
-  min-height: 58px;
-  margin-bottom: 20px;
-}
-
-#gameplay .gp-setup-ship-art {
+  gap: 12px;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.2));
 }
 
-#gameplay .gp-setup-note-text-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  line-height: 1.18;
-}
-
-#gameplay .gp-setup-note-line {
+#gameplay .gp-block-hand-note {
   font-family: 'Dancing Script', 'Caveat', cursive, sans-serif;
-  font-size: 1.22rem;
+  font-size: 1.18rem;
   font-weight: 700;
   color: #38BDF8;
-  white-space: nowrap;
-  letter-spacing: 0.02em;
-}
-
-#gameplay .gp-setup-note-highlight-wrap {
-  position: relative;
-  display: inline-flex;
+  line-height: 1.18;
+  display: flex;
   flex-direction: column;
   align-items: flex-end;
+  white-space: nowrap;
 }
 
-#gameplay .gp-setup-note-highlight {
+#gameplay .gp-hand-highlight {
   color: #0284C7;
-  font-size: 1.25rem;
-  font-weight: 700;
 }
 
-#gameplay .gp-setup-note-underline {
-  margin-top: -2px;
-  overflow: visible;
-  filter: drop-shadow(0 1px 3px rgba(56, 189, 248, 0.3));
-}
-
-#gameplay .gp-setup-guide-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  flex: 1;
-  justify-content: space-between;
-}
-
-#gameplay .gp-guide-card {
+/* ── PHÂN HỆ 1: CHUẨN BỊ BÀN CHƠI (CARD NỘI DUNG) ── */
+#gameplay .gp-setup-card-body {
   background: #ffffff;
-  border-radius: 18px;
-  border: 1px solid rgba(226, 238, 248, 0.85);
-  box-shadow: 0 4px 16px rgba(0, 35, 70, 0.04);
-  padding: 16px 20px;
+  border-radius: 24px;
+  border: 1.5px solid #BAE6FD;
+  box-shadow: 0 12px 36px rgba(2, 132, 199, 0.08);
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+#gameplay .gp-setup-col-media {
   display: flex;
   align-items: center;
-  gap: 18px;
+  justify-content: center;
+  height: 100%;
+}
+
+#gameplay .gp-setup-media-backdrop {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  max-height: 350px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #E0F2FE 0%, #BAE6FD 55%, #E0F2FE 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+#gameplay .gp-setup-crane-silhouette {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#gameplay .gp-setup-board-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 10px 22px rgba(2, 43, 84, 0.16));
+  transition: transform 0.3s ease;
+}
+
+#gameplay .gp-setup-board-img:hover {
+  transform: scale(1.02);
+}
+
+#gameplay .gp-setup-col-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: space-between;
+  height: 100%;
+}
+
+#gameplay .gp-setup-step-item {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1.5px solid #E2E8F0;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.04);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
   flex: 1;
-  min-height: 84px;
   box-sizing: border-box;
   transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
 }
 
-#gameplay .gp-guide-card:hover {
+#gameplay .gp-setup-step-item:hover {
   transform: translateY(-2px);
-  border-color: rgba(56, 189, 248, 0.5);
-  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.09);
+  border-color: #38BDF8;
+  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.1);
 }
 
-#gameplay .gp-guide-card-num {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+#gameplay .gp-step-pill {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
   background: #E0F2FE;
   color: #0284C7;
   font-family: 'Outfit', sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 900;
   display: flex;
   align-items: center;
@@ -18533,286 +18512,313 @@ media (max-width: 1100px) {
   line-height: 1;
 }
 
-#gameplay .gp-guide-card-icon {
-  width: 40px;
-  height: 40px;
+#gameplay .gp-step-icon {
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-#gameplay .gp-guide-card-icon svg {
-  width: 34px;
-  height: 34px;
-  display: block;
-}
-
-#gameplay .gp-icon-navy svg {
-  stroke: #0A192F;
-}
-
-#gameplay .gp-icon-red svg {
-  stroke: #EF4444;
-}
-
-#gameplay .gp-guide-card-text {
+#gameplay .gp-step-content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
-#gameplay .gp-guide-card-title {
+#gameplay .gp-step-title {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.12rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: #0A192F;
   margin: 0 0 3px 0;
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
-#gameplay .gp-guide-card-desc {
-  font-size: 0.88rem;
+#gameplay .gp-step-desc {
+  font-size: 0.84rem;
   color: #64748B;
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.42;
   margin: 0;
 }
 
-/* Responsive adjustments for Section 1 */
-@media (max-width: 992px) {
-  #gameplay .gp-setup-card-container {
-    grid-template-columns: 1fr;
-    row-gap: 32px;
-    padding: 28px 24px;
-  }
-
-  #gameplay .gp-setup-main-title {
-    white-space: normal;
-  }
-
-  #gameplay .gp-setup-col-right {
-    justify-content: flex-start;
-    gap: 20px;
-  }
-
-  #gameplay .gp-setup-right-note {
-    justify-content: flex-start;
-    min-height: auto;
-    margin-bottom: 0;
-  }
-
-  #gameplay .gp-setup-note-text-wrap {
-    align-items: flex-start;
-  }
-}
-
-@media (max-width: 576px) {
-  #gameplay .gp-setup-card-container {
-    padding: 20px 16px;
-    border-radius: 20px;
-  }
-
-  #gameplay .gp-setup-title-cluster {
-    gap: 14px;
-  }
-
-  #gameplay .gp-setup-badge-number {
-    width: 48px;
-    height: 48px;
-    font-size: 1.6rem;
-    border-radius: 12px;
-  }
-
-  #gameplay .gp-guide-card {
-    padding: 14px 16px;
-    gap: 14px;
-  }
-
-  #gameplay .gp-guide-card-num {
-    width: 38px;
-    height: 38px;
-    font-size: 1.1rem;
-  }
-
-  #gameplay .gp-guide-card-icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  #gameplay .gp-guide-card-icon svg {
-    width: 28px;
-    height: 28px;
-  }
-}
-
-
-/* 4. Section 2 Layout: Ba Hành Động (Master-Detail Tabs) */
-#gameplay .gp-actions-interactive-layout {
+/* ── PHÂN HỆ 2: BA HÀNH ĐỘNG TRONG LƯỢT (CARD NỘI DUNG GỌN CHIỀU DỌC) ── */
+#gameplay .gp-action-card-body {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1.5px solid #BAE6FD;
+  box-shadow: 0 12px 36px rgba(2, 132, 199, 0.08);
+  padding: 18px 22px;
   display: grid;
-  grid-template-columns: 240px 1.15fr 1fr;
-  gap: 22px;
+  grid-template-columns: 270px 1.15fr 1fr;
+  gap: 20px;
   align-items: stretch;
+  box-sizing: border-box;
+  min-height: 270px;
 }
 
-#gameplay .gp-action-tabs {
+#gameplay .gp-action-tabs-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  justify-content: space-between;
+  height: 100%;
 }
 
-#gameplay .gp-action-tab {
+#gameplay .gp-action-item-tab {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 14px 18px;
+  padding: 12px 16px;
   border-radius: 14px;
-  border: 1.5px solid rgba(226, 238, 248, 0.9);
-  background: #ffffff;
+  border: 1.5px solid #E0F2FE;
+  background: #F8FAFC;
   color: #0A192F;
   font-family: 'Outfit', sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.94rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 12px rgba(0, 35, 70, 0.02);
+  box-sizing: border-box;
   text-align: left;
+  flex: 1;
 }
 
-#gameplay .gp-action-tab:hover:not(.active) {
+#gameplay .gp-action-item-tab:hover:not(.active) {
   border-color: #38BDF8;
   background: #F0F9FF;
   transform: translateX(3px);
 }
 
-#gameplay .gp-action-tab.active {
-  background: linear-gradient(90deg, #FF6A00 0%, #FF4500 100%);
+#gameplay .gp-action-item-tab.active {
+  background: linear-gradient(90deg, #FF6A00 0%, #FF8A00 100%);
   border-color: transparent;
   color: #ffffff;
-  box-shadow: 0 8px 22px rgba(255, 106, 0, 0.35);
+  box-shadow: 0 6px 18px rgba(255, 106, 0, 0.32);
 }
 
-#gameplay .gp-act-tab-num {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
+#gameplay .gp-act-pill-num {
+  padding: 3px 10px;
+  border-radius: 999px;
   background: #ffffff;
   color: #FF6A00;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 900;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+#gameplay .gp-act-icon-sq {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #E0F2FE;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-#gameplay .gp-act-tab-num-alt {
+#gameplay .gp-act-num-text {
   font-size: 0.88rem;
   font-weight: 800;
   color: #0284C7;
-  background: #E0F2FE;
-  padding: 3px 8px;
-  border-radius: 6px;
   flex-shrink: 0;
 }
 
-#gameplay .gp-act-tab-icon-box {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: #F0F9FF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-#gameplay .gp-act-tab-text {
+#gameplay .gp-act-item-title {
   flex: 1;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.92rem;
+  font-weight: 700;
 }
 
-#gameplay .gp-act-tab-arrow {
-  font-size: 1rem;
+#gameplay .gp-act-item-arrow {
+  font-size: 0.95rem;
   font-weight: 900;
   opacity: 0.8;
 }
 
-#gameplay .gp-action-visual {
-  min-height: 300px;
+#gameplay .gp-action-item-tab:not(.active) .gp-act-item-arrow {
+  color: #0284C7;
 }
 
-#gameplay .gp-action-detail-col {
+#gameplay .gp-action-media-view {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #F1F5F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 220px;
+  max-height: 270px;
+  border: 1px solid #E2E8F0;
+  position: relative;
+}
+
+#gameplay .gp-action-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px;
+  transition: opacity 0.22s ease, transform 0.25s ease;
+}
+
+#gameplay .gp-action-detail-panel {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 6px 4px;
+  height: 100%;
 }
 
-#gameplay .gp-action-pill-badge {
-  display: inline-block;
-  align-self: flex-start;
-  background: #FFEDD5;
-  color: #EA580C;
-  font-size: 0.78rem;
+#gameplay .gp-action-badge-pill {
+  background: #FF6A00;
+  color: #ffffff;
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 5px 14px;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
   border-radius: 999px;
-  margin-bottom: 12px;
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 6px;
+  text-transform: uppercase;
 }
 
-#gameplay .gp-action-detail-title {
+#gameplay .gp-action-detail-heading {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.7rem;
+  font-size: 1.35rem;
   font-weight: 900;
   color: #0A192F;
-  margin: 0 0 12px;
+  margin: 0 0 6px 0;
   line-height: 1.2;
 }
 
-#gameplay .gp-action-detail-desc {
-  font-size: 0.94rem;
+#gameplay .gp-action-detail-text {
+  font-size: 0.85rem;
   color: #475569;
-  line-height: 1.6;
-  margin: 0 0 20px;
+  font-weight: 500;
+  line-height: 1.48;
+  margin: 0 0 12px 0;
 }
 
-#gameplay .gp-strategy-callout {
+#gameplay .gp-strategy-tip-box {
   background: #FFFBEB;
-  border: 1px solid #FDE68A;
-  border-radius: 14px;
-  padding: 14px 18px;
+  border: 1px solid #FEF3C7;
+  border-radius: 12px;
+  padding: 10px 14px;
   display: flex;
+  gap: 10px;
   align-items: flex-start;
-  gap: 12px;
-  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.05);
+  margin-top: auto;
 }
 
-#gameplay .gp-strategy-icon-box {
+#gameplay .gp-tip-bulb-icon {
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 2px;
 }
 
-#gameplay .gp-strategy-label {
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  color: #D97706;
-  text-transform: uppercase;
-  margin: 0 0 4px;
+#gameplay .gp-tip-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-#gameplay .gp-strategy-text {
-  font-size: 0.88rem;
-  font-weight: 600;
+#gameplay .gp-tip-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #D97706;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+#gameplay .gp-tip-content {
+  font-size: 0.8rem;
   color: #78350F;
-  line-height: 1.45;
+  font-weight: 600;
+  line-height: 1.38;
   margin: 0;
+}
+
+/* ── RESPONSIVE CHO KHỐI 1 & 2 ── */
+@media (max-width: 992px) {
+  #gameplay .gp-setup-card-body {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+    padding: 18px;
+  }
+
+  #gameplay .gp-setup-media-backdrop {
+    min-height: 240px;
+  }
+
+  #gameplay .gp-action-card-body {
+    grid-template-columns: 1fr;
+    row-gap: 18px;
+    padding: 18px;
+  }
+
+  #gameplay .gp-action-media-view {
+    min-height: 220px;
+    max-height: 280px;
+  }
+
+  #gameplay .gp-block-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #gameplay .gp-block-slogan-wrap {
+    justify-content: flex-start;
+  }
+
+  #gameplay .gp-block-hand-note {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 576px) {
+  #gameplay .gp-setup-card-body,
+  #gameplay .gp-action-card-body {
+    padding: 14px 12px;
+    border-radius: 18px;
+  }
+
+  #gameplay .gp-block-badge-num {
+    width: 42px;
+    height: 42px;
+    font-size: 1.5rem;
+    border-radius: 12px;
+  }
+
+  #gameplay .gp-block-main-title {
+    font-size: 1.3rem;
+  }
+
+  #gameplay .gp-setup-step-item {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  #gameplay .gp-step-pill {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
 }
 
 /* 5. Section 3 Layout: Quy Trình Cập Cảng 4 Bước */
