@@ -17609,7 +17609,7 @@ media (max-width: 1100px) {
   width: 100%;
   height: 100vh;
   min-height: 100vh;
-  padding: clamp(84px, 11vh, 108px) clamp(32px, 5vw, 76px) clamp(22px, 3vh, 34px);
+  padding: clamp(92px, 12vh, 116px) clamp(28px, 4vw, 64px) clamp(14px, 2.2vh, 26px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -17641,249 +17641,375 @@ media (max-width: 1100px) {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(
-    ellipse 75% 68% at 14% 65%,
-    rgba(255, 255, 255, 0.97) 0%,
-    rgba(255, 255, 255, 0.86) 38%,
-    rgba(255, 255, 255, 0.35) 70%,
-    rgba(255, 255, 255, 0) 88%
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(255, 255, 255, 0.84) 28%,
+    rgba(255, 255, 255, 0.32) 42%,
+    rgba(255, 255, 255, 0) 54%
   );
-  backdrop-filter: blur(1.5px);
-  -webkit-backdrop-filter: blur(1.5px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
-/* 2. Floating Hand-script Slogan */
+/* 2. Floating Hand-script Slogan (3 lines matching original) */
 #gameplay .gp-floating-quote {
   position: absolute;
   z-index: 3;
-  top: 17%;
-  left: 48%;
-  transform: rotate(-13deg);
+  top: 15%;
+  left: 47%;
+  transform: rotate(-14deg);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
   font-family: 'Caveat', cursive, sans-serif;
-  font-size: clamp(1.25rem, 1.85vw, 1.75rem);
+  font-size: clamp(1.15rem, 1.6vw, 1.6rem);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.94);
-  line-height: 1.15;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.2;
   text-shadow: 0 2px 8px rgba(11, 34, 56, 0.5);
   pointer-events: none;
   user-select: none;
 }
 
 #gameplay .gp-floating-quote .quote-line-2 {
-  padding-left: 14px;
+  padding-left: 12px;
 }
 
-#gameplay .gp-floating-quote .quote-line-4 {
+#gameplay .gp-floating-quote .quote-line-3 {
   padding-left: 16px;
-}
-
-/* 3. Vertical Branding Rail (Desktop Right) */
-#gameplay .gp-vertical-rail {
-  position: absolute;
-  z-index: 4;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 46px;
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-left: 1px solid rgba(255, 255, 255, 0.65);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 86px 0 24px;
-  pointer-events: none;
-  user-select: none;
-}
-
-#gameplay .gp-rail-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #0077ff;
-  box-shadow: 0 0 8px rgba(0, 119, 255, 0.5);
-}
-
-#gameplay .gp-rail-text {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.24em;
-  color: #475569;
-  text-transform: uppercase;
   white-space: nowrap;
 }
 
-#gameplay .gp-rail-anchor {
-  color: #0b2238;
-  opacity: 0.85;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* 3. Vertical Branding Rail — ĐÃ LOẠI BỎ THEO GÓP Ý NGƯỜI DÙNG */
+#gameplay .gp-vertical-rail {
+  display: none !important;
 }
 
-/* 4. Main Hero Typography & Content (Left side - Align Start) */
+/* 4. Main Hero Typography & Content (Left side - Hạ thêm 22px theo yêu cầu người dùng) */
 #gameplay .gp-hero-copy {
   position: relative;
   z-index: 3;
   align-self: flex-start;
-  max-width: 520px;
+  max-width: 560px;
   text-align: left;
-  margin: 0;
+  margin: 32px 0 0 0;
   padding-top: 0;
 }
 
 #gameplay .gp-eyebrow {
   display: inline-block;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 800;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.16em;
   color: #0284c7;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 #gameplay .gp-hero-title {
   font-family: 'Outfit', 'Montserrat', var(--font-body), sans-serif;
-  font-size: clamp(2.9rem, 5.2vw, 4.6rem);
+  font-size: clamp(2.75rem, 4.8vw, 4.35rem);
   font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.04em;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
   color: #0a192f;
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   text-transform: uppercase;
 }
 
 #gameplay .gp-hero-title-brand {
-  color: #0075ff;
+  color: #0066ff;
   display: block;
   letter-spacing: -0.03em;
 }
 
 #gameplay .gp-hero-divider {
-  width: 52px;
-  height: 6px;
-  border-radius: 4px;
+  width: 48px;
+  height: 5px;
+  border-radius: 3px;
   background: #ff6a00;
-  margin: 0 0 20px;
+  margin: 0 0 18px;
 }
 
 #gameplay .gp-hero-sub {
-  font-size: clamp(1.02rem, 1.18vw, 1.18rem);
-  line-height: 1.62;
+  font-size: clamp(1.05rem, 1.2vw, 1.18rem);
+  line-height: 1.6;
   color: #334155;
   font-weight: 500;
-  margin: 0 0 32px;
-  max-width: 480px;
+  margin: 0 0 24px;
+  max-width: 520px;
 }
 
 #gameplay .gp-hero-cta {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  padding: 16px 36px;
-  border-radius: 16px;
+  gap: 12px;
+  padding: 13px 32px;
+  border-radius: 999px;
   background: linear-gradient(90deg, #ff6a00 0%, #ff4500 100%);
   color: #fff;
-  font-size: 1.02rem;
+  font-size: 1rem;
   font-weight: 800;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   text-decoration: none;
-  box-shadow: 0 12px 28px -2px rgba(255, 85, 0, 0.48);
+  box-shadow: 0 8px 22px -2px rgba(255, 85, 0, 0.42);
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
 #gameplay .gp-hero-cta:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 16px 34px -2px rgba(255, 85, 0, 0.6);
+  box-shadow: 0 12px 28px -2px rgba(255, 85, 0, 0.58);
 }
 
 #gameplay .gp-cta-play-icon {
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   line-height: 1;
 }
 
 #gameplay .gp-cta-arrow {
-  font-size: 1.18rem;
+  font-size: 1.15rem;
   font-weight: 900;
   line-height: 1;
 }
 
-/* 5. Quick Stats Bar (Glassmorphism Floating Card - Center Bottom) */
+/* 5. Quick Stats Bar (Hạ vị trí xuống sát gần 4 viên thuốc Stepper) */
 #gameplay .gp-stats-bar {
   position: relative;
   z-index: 3;
   align-self: center;
   width: 100%;
-  max-width: 1180px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.88);
+  max-width: 1040px;
+  margin: auto auto 10px auto;
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 20px 45px -10px rgba(0, 35, 70, 0.1), 0 4px 12px rgba(0, 0, 0, 0.03);
-  display: flex;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 32px -6px rgba(0, 35, 70, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02);
+  display: grid;
+  grid-template-columns: 1.1fr 1.25fr 1fr 2.35fr;
   align-items: center;
-  padding: 16px 32px;
-  gap: clamp(18px, 3vw, 42px);
+  padding: 10px 24px;
+  gap: 0;
   box-sizing: border-box;
 }
 
 #gameplay .gp-stat {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 8px 4px;
-  flex: 0 0 auto;
+  gap: 12px;
+  padding: 6px 18px;
+  border-right: 1px solid rgba(226, 238, 248, 0.9);
+  min-width: 0;
+}
+
+#gameplay .gp-stat:last-child,
+#gameplay .gp-stat-goal {
+  border-right: none;
+  padding-right: 0;
 }
 
 #gameplay .gp-stat-icon {
-  color: #0091ff;
+  color: #0ea5e9;
+  width: 28px;
+  height: 28px;
   flex-shrink: 0;
+}
+
+#gameplay .gp-stat-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 #gameplay .gp-stat-text strong {
   display: block;
-  font-size: 1.2rem;
+  font-size: 1.08rem;
   font-weight: 800;
   color: #0b2238;
-  line-height: 1.2;
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
 #gameplay .gp-stat-text span {
   display: block;
-  font-size: 0.86rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: #64748b;
   line-height: 1.25;
-  margin-top: 3px;
+  margin-top: 2px;
+  white-space: nowrap;
 }
 
-#gameplay .gp-stat-goal {
-  flex: 1 1 auto;
-  margin-left: auto;
+#gameplay .gp-stat-goal .gp-stat-text span {
+  white-space: normal;
+  max-width: 440px;
 }
 
 #gameplay .gp-stat-goal .gp-stat-text strong {
   color: #0b2238;
 }
 
-#gameplay .gp-stat-goal .gp-stat-text span {
-  color: #475569;
-  font-weight: 500;
-  max-width: 460px;
+/* 6. Onboarding Stepper (Phóng to kích thước rõ nét, dễ bấm theo góp ý) */
+#gameplay .gp-stepper {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
 }
 
-/* 6. Gameplay Tabs (Dưới Hero) */
+#gameplay .gp-step-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 24px;
+  border-radius: 999px;
+  border: 1.5px solid #BAE6FD;
+  background: rgba(255, 255, 255, 0.95);
+  color: #0369A1;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.08);
+  white-space: nowrap;
+}
+
+#gameplay .gp-step-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #0284C7;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.22s ease;
+}
+
+#gameplay .gp-step-pill:not(.active):hover {
+  background: #ffffff;
+  border-color: #38BDF8;
+  color: #0284C7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(14, 165, 233, 0.16);
+}
+
+#gameplay .gp-step-pill.active {
+  background: linear-gradient(90deg, #0072FF 0%, #00C6FF 100%);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 114, 255, 0.42);
+}
+
+#gameplay .gp-step-pill.active .gp-step-badge {
+  background: #ffffff;
+  color: #FF6A00;
+}
+
+#gameplay .gp-step-line {
+  flex: 1;
+  max-width: 44px;
+  height: 0;
+  border-top: 2.5px dashed #93C5FD;
+  margin: 0 6px;
+}
+
+/* 7. Setup Grid (Section 0) */
+#gameplay .gp-setup-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+#gameplay .gp-setup-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(226, 238, 248, 0.85);
+  border-radius: 16px;
+  padding: 22px 18px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#gameplay .gp-setup-card:hover {
+  border-color: #BAE6FD;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.12);
+}
+
+#gameplay .gp-setup-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #E0F2FE;
+  color: #0284C7;
+  font-weight: 800;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#gameplay .gp-setup-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+  line-height: 1.3;
+}
+
+#gameplay .gp-setup-desc {
+  font-size: 0.84rem;
+  color: #475569;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 8. Header Order Button Compact on Desktop & Nav Link Active Bar */
+.header-actions .order-button {
+  width: 152px !important;
+  height: 44px !important;
+  min-width: 0 !important;
+}
+
+.header-actions .order-button .button-label {
+  font-size: 0.86rem !important;
+}
+
+.order-button .button-label--default {
+  gap: 7px;
+}
+
+.order-button .header-cart-icon {
+  color: #ffffff;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+#navMenu .nav-link::after {
+  background: #0284c7 !important;
+  height: 2px !important;
+  border-radius: 2px;
+}
+
+/* 9. Gameplay Tabs (Dưới Hero) */
 #gameplay .gp-tabs {
   display: flex;
   justify-content: center;
@@ -17930,73 +18056,1066 @@ media (max-width: 1100px) {
   box-shadow: 0 4px 14px rgba(0, 117, 255, 0.35);
 }
 
+/* ============================================================
+   GAMEPLAY UNIFIED CARD DESIGN SYSTEM (4 SECTIONS PIXEL-PERFECT)
+   ============================================================ */
 #gameplay .gp-content {
   max-width: 1180px;
-  padding: 0 24px 90px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
 }
 
-#gameplay .gp-section-block {
-  padding: 76px 0;
-  scroll-margin-top: 78px;
+#gameplay .gp-unified-card {
+  background: #ffffff;
+  border-radius: 28px;
+  border: 1px solid rgba(226, 238, 248, 0.95);
+  box-shadow: 0 16px 40px -10px rgba(0, 35, 70, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+  padding: 38px 44px;
+  margin-bottom: 48px;
+  position: relative;
+  box-sizing: border-box;
+  scroll-margin-top: 86px;
 }
 
-#gameplay .gp-section-heading {
-  max-width: 850px;
-  margin-bottom: 34px;
+/* 1. Header Card Chuẩn Hóa */
+#gameplay .gp-sec-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
 }
 
-#gameplay .gp-section-num {
+#gameplay .gp-sec-header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+#gameplay .gp-sec-badge {
   width: 48px;
   height: 48px;
-  background: linear-gradient(145deg, #ff8a00, var(--gp-orange));
-  border-radius: 15px;
+  background: linear-gradient(135deg, #FF7700 0%, #FF4500 100%);
+  border-radius: 12px;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.65rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 6px 18px rgba(255, 69, 0, 0.32);
 }
 
-#gameplay .gp-section-title {
-  color: var(--gp-navy);
-  font: 800 clamp(1.35rem, 2.5vw, 2rem)/1.25 var(--font-body);
-  letter-spacing: -.02em;
+#gameplay .gp-badge-burst {
+  position: relative;
 }
 
-#gameplay .gp-actions-grid[hidden] {
-  display: none;
+#gameplay .gp-badge-burst::before {
+  content: '✦';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 12px;
+  color: #FF6A00;
 }
 
-#gameplay .gp-flow-grid {
+#gameplay .gp-sec-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+#gameplay .gp-sec-eyebrow {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #0284C7;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+#gameplay .gp-sec-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.5rem, 2.2vw, 1.95rem);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: #0A192F;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+
+#gameplay .gp-sec-sub {
+  font-size: 0.94rem;
+  color: #475569;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 680px;
+}
+
+#gameplay .gp-sec-slogan-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#gameplay .gp-sec-slogan-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#gameplay .gp-slogan-two-lines {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+#gameplay .gp-sec-hand-slogan {
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: #38BDF8;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+#gameplay .gp-slogan-incoterms {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#gameplay .gp-slogan-slash {
+  font-size: 1.8rem;
+  color: #93C5FD;
+  font-weight: 300;
+  transform: rotate(15deg);
+}
+
+#gameplay .gp-slogan-text-stacked {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+#gameplay .gp-slogan-text-stacked strong {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #0284C7;
+  letter-spacing: 0.06em;
+}
+
+#gameplay .gp-slogan-text-stacked span {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #64748B;
+  letter-spacing: 0.04em;
+}
+
+/* 2. Visual Frame & Placeholder (Tạo viền ảnh theo đúng yêu cầu) */
+#gameplay .gp-visual-frame {
+  position: relative;
+  border-radius: 18px;
+  border: 2px dashed rgba(56, 189, 248, 0.5);
+  background: linear-gradient(135deg, rgba(240, 249, 255, 0.85) 0%, rgba(224, 242, 254, 0.45) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+#gameplay .gp-visual-frame:hover {
+  border-color: #0284C7;
+}
+
+#gameplay .gp-visual-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+  text-align: center;
+}
+
+#gameplay .gp-visual-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 6px 16px rgba(14, 165, 233, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+#gameplay .gp-visual-label {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0A192F;
+}
+
+#gameplay .gp-visual-hint {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #0284C7;
+  background: rgba(224, 242, 254, 0.8);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+#gameplay .gp-placeholder-compact {
+  padding: 12px;
+}
+
+#gameplay .gp-visual-mini-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+/* 3. Section 1 Layout: Chuẩn Bị Bàn Chơi (Infographic 3:1 Split) */
+#gameplay .gp-setup-card-container {
+  background: #ffffff;
+  border-radius: 30px;
+  border: 1px solid rgba(226, 238, 248, 0.95);
+  box-shadow: 0 18px 45px -10px rgba(0, 35, 70, 0.07), 0 2px 8px rgba(0, 0, 0, 0.02);
+  padding: 38px 44px;
+  margin-bottom: 48px;
+  position: relative;
+  box-sizing: border-box;
+  scroll-margin-top: 86px;
+  display: grid;
+  grid-template-columns: 57.5% 42.5%;
+  column-gap: 36px;
+  align-items: stretch;
+}
+
+#gameplay .gp-setup-col-left {
+  display: flex;
+  flex-direction: column;
+}
+
+#gameplay .gp-setup-title-cluster {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+#gameplay .gp-setup-badge-number {
+  width: 58px;
+  height: 58px;
+  background: linear-gradient(135deg, #FF9500 0%, #FF5E00 100%);
+  border-radius: 16px;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.1rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 6px 18px rgba(255, 94, 0, 0.32);
+  line-height: 1;
+}
+
+#gameplay .gp-setup-title-texts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#gameplay .gp-setup-sub-heading {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #0284C7;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+#gameplay .gp-setup-main-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.6rem, 2.3vw, 2.15rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #0A192F;
+  margin: 0 0 6px 0;
+  text-transform: uppercase;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+#gameplay .gp-setup-brief {
+  font-size: 0.92rem;
+  color: #64748B;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
+
+#gameplay .gp-setup-showcase-frame {
+  width: 100%;
+  aspect-ratio: 1.7 / 1;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #F0F8FF 0%, #E1F0FD 100%);
+  border: 2px dashed rgba(56, 189, 248, 0.55);
+  box-sizing: border-box;
+  overflow: hidden;
   position: relative;
   display: flex;
-  align-items: stretch;
-  gap: 16px;
-  overflow: visible;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
-#gameplay .gp-flow-card {
-  flex: 1;
-  min-width: 0;
+#gameplay .gp-setup-showcase-frame:hover {
+  border-color: #0284C7;
+}
+
+#gameplay .gp-setup-showcase-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#gameplay .gp-setup-showcase-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+}
+
+#gameplay .gp-setup-placeholder-icon {
+  width: 68px;
+  height: 68px;
   border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
 }
 
-#gameplay .gp-flow-arrow {
-  display: none;
+#gameplay .gp-setup-placeholder-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0A192F;
 }
 
-#gameplay .gp-incoterm-grid {
+#gameplay .gp-setup-placeholder-note {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0284C7;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 4px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(186, 230, 253, 0.6);
+}
+
+#gameplay .gp-setup-col-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#gameplay .gp-setup-right-note {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  min-height: 58px;
+  margin-bottom: 20px;
+}
+
+#gameplay .gp-setup-ship-art {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.2));
+}
+
+#gameplay .gp-setup-note-text-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.18;
+}
+
+#gameplay .gp-setup-note-line {
+  font-family: 'Dancing Script', 'Caveat', cursive, sans-serif;
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: #38BDF8;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+#gameplay .gp-setup-note-highlight-wrap {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#gameplay .gp-setup-note-highlight {
+  color: #0284C7;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+#gameplay .gp-setup-note-underline {
+  margin-top: -2px;
+  overflow: visible;
+  filter: drop-shadow(0 1px 3px rgba(56, 189, 248, 0.3));
+}
+
+#gameplay .gp-setup-guide-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+  justify-content: space-between;
+}
+
+#gameplay .gp-guide-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(226, 238, 248, 0.85);
+  box-shadow: 0 4px 16px rgba(0, 35, 70, 0.04);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+  min-height: 84px;
+  box-sizing: border-box;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+#gameplay .gp-guide-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.09);
+}
+
+#gameplay .gp-guide-card-num {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #E0F2FE;
+  color: #0284C7;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+#gameplay .gp-guide-card-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+#gameplay .gp-guide-card-icon svg {
+  width: 34px;
+  height: 34px;
+  display: block;
+}
+
+#gameplay .gp-icon-navy svg {
+  stroke: #0A192F;
+}
+
+#gameplay .gp-icon-red svg {
+  stroke: #EF4444;
+}
+
+#gameplay .gp-guide-card-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#gameplay .gp-guide-card-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #0A192F;
+  margin: 0 0 3px 0;
+  line-height: 1.25;
+}
+
+#gameplay .gp-guide-card-desc {
+  font-size: 0.88rem;
+  color: #64748B;
+  font-weight: 500;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Responsive adjustments for Section 1 */
+@media (max-width: 992px) {
+  #gameplay .gp-setup-card-container {
+    grid-template-columns: 1fr;
+    row-gap: 32px;
+    padding: 28px 24px;
+  }
+
+  #gameplay .gp-setup-main-title {
+    white-space: normal;
+  }
+
+  #gameplay .gp-setup-col-right {
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  #gameplay .gp-setup-right-note {
+    justify-content: flex-start;
+    min-height: auto;
+    margin-bottom: 0;
+  }
+
+  #gameplay .gp-setup-note-text-wrap {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 576px) {
+  #gameplay .gp-setup-card-container {
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+
+  #gameplay .gp-setup-title-cluster {
+    gap: 14px;
+  }
+
+  #gameplay .gp-setup-badge-number {
+    width: 48px;
+    height: 48px;
+    font-size: 1.6rem;
+    border-radius: 12px;
+  }
+
+  #gameplay .gp-guide-card {
+    padding: 14px 16px;
+    gap: 14px;
+  }
+
+  #gameplay .gp-guide-card-num {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+  }
+
+  #gameplay .gp-guide-card-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  #gameplay .gp-guide-card-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+
+/* 4. Section 2 Layout: Ba Hành Động (Master-Detail Tabs) */
+#gameplay .gp-actions-interactive-layout {
+  display: grid;
+  grid-template-columns: 240px 1.15fr 1fr;
+  gap: 22px;
+  align-items: stretch;
+}
+
+#gameplay .gp-action-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#gameplay .gp-action-tab {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(226, 238, 248, 0.9);
+  background: #ffffff;
+  color: #0A192F;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 35, 70, 0.02);
+  text-align: left;
+}
+
+#gameplay .gp-action-tab:hover:not(.active) {
+  border-color: #38BDF8;
+  background: #F0F9FF;
+  transform: translateX(3px);
+}
+
+#gameplay .gp-action-tab.active {
+  background: linear-gradient(90deg, #FF6A00 0%, #FF4500 100%);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 8px 22px rgba(255, 106, 0, 0.35);
+}
+
+#gameplay .gp-act-tab-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #FF6A00;
+  font-size: 0.8rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+#gameplay .gp-act-tab-num-alt {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #0284C7;
+  background: #E0F2FE;
+  padding: 3px 8px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+#gameplay .gp-act-tab-icon-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #F0F9FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+#gameplay .gp-act-tab-text {
+  flex: 1;
+  white-space: nowrap;
+}
+
+#gameplay .gp-act-tab-arrow {
+  font-size: 1rem;
+  font-weight: 900;
+  opacity: 0.8;
+}
+
+#gameplay .gp-action-visual {
+  min-height: 300px;
+}
+
+#gameplay .gp-action-detail-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6px 4px;
+}
+
+#gameplay .gp-action-pill-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: #FFEDD5;
+  color: #EA580C;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+#gameplay .gp-action-detail-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #0A192F;
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+
+#gameplay .gp-action-detail-desc {
+  font-size: 0.94rem;
+  color: #475569;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+#gameplay .gp-strategy-callout {
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.05);
+}
+
+#gameplay .gp-strategy-icon-box {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+#gameplay .gp-strategy-label {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #D97706;
+  text-transform: uppercase;
+  margin: 0 0 4px;
+}
+
+#gameplay .gp-strategy-text {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #78350F;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* 5. Section 3 Layout: Quy Trình Cập Cảng 4 Bước */
+#gameplay .gp-panorama-visual {
+  width: 100%;
+  height: 180px;
+  margin-bottom: 28px;
+}
+
+#gameplay .gp-placeholder-panorama {
+  height: 100%;
+}
+
+#gameplay .gp-flow-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  position: relative;
+}
+
+#gameplay .gp-timeline-step-card {
+  background: #ffffff;
+  border: 1.5px solid rgba(226, 238, 248, 0.95);
+  border-radius: 18px;
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 6px 18px rgba(0, 35, 70, 0.03);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+#gameplay .gp-timeline-step-card:hover {
+  transform: translateY(-3px);
+  border-color: #38BDF8;
+  box-shadow: 0 10px 24px rgba(14, 165, 233, 0.12);
+}
+
+#gameplay .gp-step-node {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -14px;
+  left: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+#gameplay .gp-node-orange {
+  background: linear-gradient(135deg, #FF6A00 0%, #FF4500 100%);
+}
+
+#gameplay .gp-node-blue {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+}
+
+#gameplay .gp-flow-step-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #F0F9FF;
+  border: 1px solid #BAE6FD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 0 14px;
+}
+
+#gameplay .gp-flow-step-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0A192F;
+  margin: 0 0 8px;
+}
+
+#gameplay .gp-flow-step-desc {
+  font-size: 0.86rem;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* 6. Section 4 Layout: Ma Trận 11 Cảng Incoterms 2x2 */
+#gameplay .gp-incoterms-matrix {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  align-items: start;
+  gap: 20px;
+  margin-bottom: 24px;
 }
 
-#gameplay .gp-inc-card {
-  padding: 0;
-  border-radius: 18px;
-  overflow: hidden;
+#gameplay .gp-matrix-card {
+  border-radius: 20px;
+  padding: 22px 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
-#gameplay .gp-inc-header {
-  min-height: 68px;
+#gameplay .gp-matrix-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 35, 70, 0.06);
+}
+
+#gameplay .gp-matrix-e {
+  background: #ECFDF5;
+  border: 1.5px solid #A7F3D0;
+}
+
+#gameplay .gp-matrix-f {
+  background: #EFF6FF;
+  border: 1.5px solid #BFDBFE;
+}
+
+#gameplay .gp-matrix-c {
+  background: #FFFBEB;
+  border: 1.5px solid #FDE68A;
+}
+
+#gameplay .gp-matrix-d {
+  background: #FEF2F2;
+  border: 1.5px solid #FECACA;
+}
+
+#gameplay .gp-matrix-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+#gameplay .gp-matrix-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+#gameplay .gp-icon-circle-emerald { background: #10B981; }
+#gameplay .gp-icon-circle-blue { background: #0284C7; }
+#gameplay .gp-icon-circle-amber { background: #F59E0B; }
+#gameplay .gp-icon-circle-rose { background: #EF4444; }
+
+#gameplay .gp-matrix-group-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: #0A192F;
   margin: 0;
-  padding: 18px 20px;
+}
+
+#gameplay .gp-matrix-card-body {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 18px;
+  align-items: center;
+}
+
+#gameplay .gp-matrix-thumb {
+  height: 110px;
+}
+
+#gameplay .gp-matrix-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#gameplay .gp-matrix-bullets li {
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: #334155;
+  position: relative;
+  padding-left: 14px;
+}
+
+#gameplay .gp-matrix-bullets li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+#gameplay .gp-bullets-emerald li::before { color: #10B981; }
+#gameplay .gp-bullets-blue li::before { color: #0284C7; }
+#gameplay .gp-bullets-amber li::before { color: #F59E0B; }
+#gameplay .gp-bullets-rose li::before { color: #EF4444; }
+
+/* Important Note Bar */
+#gameplay .gp-important-note-bar {
+  background: #ffffff;
+  border: 1.5px solid #FDE68A;
+  border-radius: 18px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.08);
+}
+
+#gameplay .gp-note-star-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #D97706;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+#gameplay .gp-note-divider {
+  width: 1.5px;
+  height: 36px;
+  background: #FDE68A;
+  flex-shrink: 0;
+}
+
+#gameplay .gp-note-main-text {
+  flex: 1;
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0;
+}
+
+#gameplay .gp-note-side-slogan {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+#gameplay .gp-note-side-slogan span {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #0284C7;
+  letter-spacing: 0.04em;
+}
+
+/* 7. Responsive Styles for Laptop & Mobile */
+@media (max-width: 1024px) {
+  #gameplay .gp-actions-interactive-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  #gameplay .gp-setup-layout {
+    grid-template-columns: 1fr;
+  }
+  #gameplay .gp-incoterms-matrix {
+    grid-template-columns: 1fr;
+  }
+  #gameplay .gp-flow-timeline {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 16px;
+  }
+  #gameplay .gp-important-note-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  #gameplay .gp-note-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  #gameplay .gp-unified-card {
+    padding: 24px 18px;
+    border-radius: 20px;
+  }
+  #gameplay .gp-sec-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+  #gameplay .gp-sec-slogan-wrap {
+    align-self: flex-start;
+  }
+  #gameplay .gp-flow-timeline {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  #gameplay .gp-matrix-card-body {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 1024px) {

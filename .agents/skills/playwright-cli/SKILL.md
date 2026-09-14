@@ -6,6 +6,9 @@ allowed-tools: Bash(playwright-cli:*) Bash(npx:*) Bash(npm:*)
 
 # Browser Automation with playwright-cli
 
+> [!IMPORTANT]
+> **CRITICAL RULE**: Tuyệt đối KHÔNG tự ý đóng trình duyệt (`playwright-cli close`, `close-all`, `kill-all`, `browser_close`) trừ khi người dùng yêu cầu trực tiếp. Luôn duy trì phiên browser mở để người dùng quan sát và kiểm tra giao diện.
+
 ## Quick start
 
 ```bash

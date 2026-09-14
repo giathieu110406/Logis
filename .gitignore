@@ -4,3 +4,5 @@ Thumbs.db
 *.log
 .playwright-mcp/
 /gameplay-*.png
+/setup_section_*.png
+*.png.tmp

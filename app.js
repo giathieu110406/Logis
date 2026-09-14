@@ -526,6 +526,9 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCards();
   initEvents();
   initGSAPAnimations();
+  if (typeof initGameplayStepper === 'function') {
+    initGameplayStepper();
+  }
 });
 
 // EVENT LISTENERS INITIALIZATION
@@ -1551,6 +1554,151 @@ function initGameplayAnimations() {
     opacity: 0,
     duration: 0.7,
     ease: 'power2.out'
+  });
+
+  // 7. Stepper 4 bước hành trình
+  gsap.from('.gp-step-pill', {
+    scrollTrigger: {
+      trigger: '.gp-stepper',
+      start: 'top 95%'
+    },
+    y: 20,
+    opacity: 0,
+    stagger: 0.08,
+    duration: 0.6,
+    ease: 'back.out(1.5)'
+  });
+
+  initGameplayStepper();
+}
+
+// GAMEPLAY ONBOARDING STEPPER INTERACTION (SMOOTH SCROLL & OBSERVER)
+function initGameplayStepper() {
+  const stepperPills = document.querySelectorAll('.gp-step-pill');
+  if (!stepperPills.length) return;
+
+  stepperPills.forEach(pill => {
+    pill.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetSelector = pill.getAttribute('data-target');
+      if (!targetSelector) return;
+      const targetEl = document.querySelector(targetSelector);
+      if (!targetEl) return;
+
+      // Cập nhật active pill
+      stepperPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const headerOffset = document.querySelector('.main-header')?.offsetHeight || 70;
+      const topPos = targetEl.getBoundingClientRect().top + window.scrollY - headerOffset - 24;
+
+      if (typeof lenis !== 'undefined' && lenis) {
+        lenis.scrollTo(topPos, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: topPos, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // IntersectionObserver tự động update active stepper pill theo tiến trình cuộn
+  const stepSections = [
+    { id: '#gpSetup', step: '1' },
+    { id: '#gpActions', step: '2' },
+    { id: '#gpFlow', step: '3' },
+    { id: '#gpIncoterms', step: '4' }
+  ];
+
+  if (typeof IntersectionObserver !== 'undefined') {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const matching = stepSections.find(s => entry.target.matches(s.id));
+          if (matching) {
+            stepperPills.forEach(p => {
+              if (p.getAttribute('data-step') === matching.step) {
+                p.classList.add('active');
+              } else {
+                p.classList.remove('active');
+              }
+            });
+          }
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '-20% 0px -50% 0px',
+      threshold: 0.1
+    });
+
+    stepSections.forEach(s => {
+      const el = document.querySelector(s.id);
+      if (el) observer.observe(el);
+    });
+  }
+
+  initGameplayActionTabs();
+}
+
+// GAMEPLAY INTERACTIVE ACTION TABS (SECTION 2: BA HÀNH ĐỘNG)
+function initGameplayActionTabs() {
+  const actionTabs = document.querySelectorAll('#gpActions .gp-action-tab');
+  if (!actionTabs.length) return;
+
+  const actionData = {
+    '1': {
+      pill: 'HÀNH ĐỘNG 01',
+      title: 'Nạp Container',
+      desc: 'Lấy các container từ nguồn chung và đặt lên khu vực kho của bạn. Đây là bước đầu tiên để chuẩn bị hàng hóa cho hành trình vận chuyển.',
+      strategy: 'Ưu tiên nạp các loại container phù hợp với tuyến tàu bạn nhắm đến!',
+      label: 'Khung hình ảnh: Mô hình 3D Nạp Container',
+      iconSvg: '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>'
+    },
+    '2': {
+      pill: 'HÀNH ĐỘNG 02',
+      title: 'Xếp Hàng Lên Tàu',
+      desc: 'Lấy 1 container từ kho cá nhân đặt lên vị trí trống của 1 trong 4 tàu biển chờ xuất phát. Bạn tự do lựa chọn vị trí xếp hàng trên tàu.',
+      strategy: 'Chú ý vị trí đặt container trên tàu FAS để tối đa hóa điểm số từ 2 đến 5 điểm!',
+      label: 'Khung hình ảnh: Mô hình 3D Xếp Hàng Lên Tàu',
+      iconSvg: '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0284C7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17l2 4h16l2-4H2z"/><path d="M5 17l2-9h10l2 9"/><path d="M12 4v4"/></svg>'
+    },
+    '3': {
+      pill: 'HÀNH ĐỘNG 03',
+      title: 'Điều Tàu Cập Cảng',
+      desc: 'Di chuyển tàu chở container đến một cảng Incoterms đang mở. Điều kiện di chuyển: Số container trên tàu phải bằng hoặc chỉ thiếu 1 container so với sức chứa tối đa của tàu đó.',
+      strategy: 'Tính toán kỹ các điều kiện cảng đối phương nhắm đến để khóa cảng hoặc tranh chấp điểm tối ưu!',
+      label: 'Khung hình ảnh: Mô hình 3D Điều Tàu Cập Cảng',
+      iconSvg: '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0369A1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16"/><path d="M9 22V6"/><path d="M9 6h10l-3 4h-7"/><path d="M16 10v6"/></svg>'
+    }
+  };
+
+  const pillEl = document.getElementById('gpActionPill');
+  const titleEl = document.getElementById('gpActionTitle');
+  const descEl = document.getElementById('gpActionDesc');
+  const strategyTextEl = document.getElementById('gpStrategyText');
+  const visualIconEl = document.getElementById('gpActionVisualIcon');
+  const visualLabelEl = document.getElementById('gpActionVisualLabel');
+
+  actionTabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      const actionKey = tab.getAttribute('data-action');
+      const data = actionData[actionKey];
+      if (!data) return;
+
+      actionTabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      if (pillEl) pillEl.textContent = data.pill;
+      if (titleEl) titleEl.textContent = data.title;
+      if (descEl) descEl.textContent = data.desc;
+      if (strategyTextEl) strategyTextEl.textContent = data.strategy;
+      if (visualIconEl) visualIconEl.innerHTML = data.iconSvg;
+      if (visualLabelEl) visualLabelEl.textContent = data.label;
+    });
   });
 }
 
