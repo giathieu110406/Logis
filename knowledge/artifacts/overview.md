@@ -54,3 +54,6 @@ Logis/
 1. [Hệ thống thiết kế (Design System)](design_system.md): Bảng màu Sunlit Maritime, Typography, Spacing, Shadows, Glassmorphism, Micro-animations.
 2. [Nghiệp vụ Game & Luật chơi (Game Domain & Rules)](game_domain_and_rules.md): Phân loại thẻ bài, Incoterms, vòng chơi, điều kiện thắng cuộc.
 3. [Triển khai Landing & Checkout (Implementation)](landing_and_checkout.md): Chi tiết module trong `app.js`, `buy.js`, quản lý state, modal, storage.
+4. [Kệ trưng bày thẻ bài (Card Showcase Shelves)](architecture/card_showcase_shelves.md): Hệ thống giá kệ trưng bày 4 danh mục thẻ tương tác (Incoterms, Phương tiện, Sự kiện, Chợ).
+5. [Kiến trúc Tái Thiết Kế Giới Thiệu LogisQuest (About LogisQuest Redesign)](architecture/about_logisquest_redesign.md): Tái cấu trúc toàn diện phân hệ #aboutView theo chuẩn Sunlit Maritime Light Mode từ Stitch, 5 phân hệ (Hero Vision & 4 Impact Metrics, Inside The Box 5 linh kiện, 3 Trụ Cột Chiến Thuật, 3 Chân Dung Người Chơi, Sunlit CTA Ribbon), tuyệt đối không dùng nền tối đen.
+

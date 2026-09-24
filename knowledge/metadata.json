@@ -1,6 +1,6 @@
 {
   "title": "LogisQuest Board Game Platform & Landing Architecture",
-  "summary": "Tài liệu tri thức toàn diện về dự án LogisQuest: Kiến trúc giao diện Web Landing & E-commerce Checkout, Sunlit Maritime Design System, cơ chế dữ liệu thẻ bài Incoterms/Phương tiện/Sự kiện, và toàn bộ luật chơi Board Game logistics.",
+  "summary": "Tài liệu tri thức toàn diện về dự án LogisQuest: Kiến trúc giao diện Web Landing & E-commerce Checkout, Sunlit Maritime Design System, cơ chế dữ liệu thẻ bài Incoterms/Phương tiện/Sự kiện, toàn bộ luật chơi Board Game logistics, và kiến trúc tái thiết kế 5 phân hệ Giới thiệu về LogisQuest (About LogisQuest) theo chuẩn Sunlit Maritime Light Mode từ Stitch, tuyệt đối không dùng nền tối đen.",
   "references": [
     {
       "type": "conversation_id",
@@ -41,6 +41,14 @@
     {
       "type": "file",
       "value": "c:/Users/Tran Gia Thieu/.gemini/antigravity-ide/scratch/Logis/knowledge/artifacts/architecture/card_showcase_shelves.md"
+    },
+    {
+      "type": "file",
+      "value": "c:/Users/Tran Gia Thieu/.gemini/antigravity-ide/scratch/Logis/knowledge/artifacts/architecture/about_logisquest_redesign.md"
+    },
+    {
+      "type": "conversation_id",
+      "value": "aa97ccdd-0d12-47bc-a4a6-6bd8566f676c"
     }
   ]
 }
