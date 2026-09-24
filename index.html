@@ -870,70 +870,363 @@
     <!-- 1B. ABOUT VIEW (VỀ LOGISQUEST) -->
     <!-- ========================================== -->
     <div id="aboutView" class="view-section">
-      <main class="about-page">
-        <section class="about-hero" aria-labelledby="aboutTitle">
-          <div class="about-shell about-hero-grid">
-            <div class="about-hero-copy">
-              <p class="about-kicker">BOARD GAME CHIẾN THUẬT LOGISTICS</p>
-              <h1 id="aboutTitle">Biến logistics thành một hành trình đáng nhớ.</h1>
-              <p class="about-lead">LogisQuest đưa những quyết định vận tải quốc tế lên bàn chơi — để kiến thức Incoterms 2020 trở nên trực quan, có chiến thuật và giàu cảm hứng.</p>
-              <div class="about-actions">
-                <a class="about-button about-button-primary" href="javascript:void(0)" data-nav="gameplay">Khám phá cách chơi <span aria-hidden="true">→</span></a>
-                <a class="about-button about-button-secondary" href="javascript:void(0)" data-nav="cards">Xem thư viện thẻ</a>
+      <main class="about-sunlit-page">
+
+        <!-- 1. HERO VISION & IMPACT METRICS -->
+        <section class="about-hero-vision" aria-labelledby="aboutVisionTitle">
+          <div class="about-container">
+            <div class="about-hero-content">
+              <div class="about-badge-pill">
+                <svg class="about-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+                <span>DỰ ÁN BOARD GAME LOGISTICS TIÊN PHONG TẠI VIỆT NAM</span>
+              </div>
+              <h1 id="aboutVisionTitle" class="about-hero-headline">Khởi Sinh Từ Khát Vọng Số Hóa &amp; Thực Nghiệm Chuỗi Cung Ứng</h1>
+              <p class="about-hero-subtitle">
+                LogisQuest chuyển hóa những nguyên lý vận tải hàng hải phức tạp, ma trận 11 điều khoản Incoterms 2020 và bài toán cân đối dòng tiền quốc tế thành trải nghiệm cờ bàn chiến thuật kịch tính và đầy cảm hứng.
+              </p>
+              <div class="about-hero-buttons">
+                <a class="about-btn about-btn-primary" href="#aboutUnboxing">
+                  <span>Khám Phá Bộ Linh Kiện</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </a>
+                <a class="about-btn about-btn-outline" href="javascript:void(0)" data-nav="cards">
+                  <span>Thư Viện Thẻ Bài</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
               </div>
             </div>
-            <div class="about-hero-art">
-              <img src="assets/about/hero-showcase-v2.jpg" alt="Bàn chơi LogisQuest với bản đồ tuyến vận tải và các thẻ bài">
-              <span class="about-art-note about-art-note-top">TỪ BÀN CỜ ĐẾN CHUỖI CUNG ỨNG</span>
-              <span class="about-art-note about-art-note-bottom">PLAY TO LEARN</span>
+
+            <!-- 4 Impact Metric Cards -->
+            <div class="about-metrics-grid">
+              <div class="about-metric-card">
+                <div class="about-metric-icon-wrap metric-blue">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                </div>
+                <div class="about-metric-val">100%</div>
+                <div class="about-metric-label">Thiết Kế Thuần Việt</div>
+                <p class="about-metric-desc">Nghiên cứu chuyên sâu bởi đội ngũ chuyên gia Logistics &amp; Gamification Việt Nam.</p>
+              </div>
+
+              <div class="about-metric-card">
+                <div class="about-metric-icon-wrap metric-gold">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                  </svg>
+                </div>
+                <div class="about-metric-val">11</div>
+                <div class="about-metric-label">Điều Khoản Incoterms</div>
+                <p class="about-metric-desc">Mô phỏng chuẩn xác từ EXW, FOB, CIF đến DDP theo ấn bản Quốc tế ICC 2020.</p>
+              </div>
+
+              <div class="about-metric-card">
+                <div class="about-metric-icon-wrap metric-coral">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                    <line x1="13" y1="15" x2="11" y2="19"></line>
+                  </svg>
+                </div>
+                <div class="about-metric-val">50+</div>
+                <div class="about-metric-label">Biến Cố Hàng Hải</div>
+                <p class="about-metric-desc">Thách thức bão biển, ách tắc kênh đào Suez, kiểm hóa hải quan &amp; biến động cước tàu.</p>
+              </div>
+
+              <div class="about-metric-card">
+                <div class="about-metric-icon-wrap metric-emerald">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <div class="about-metric-val">2 - 6</div>
+                <div class="about-metric-label">Thuyền Trưởng Đấu Trí</div>
+                <p class="about-metric-desc">Tranh tài phân luồng vận tải container và tối ưu chu kỳ xoay vòng vốn cảng biển.</p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section class="about-proof" aria-label="Những điểm cốt lõi của LogisQuest">
-          <div class="about-shell about-proof-grid">
-            <div><strong>11</strong><span>điều kiện Incoterms 2020</span></div>
-            <div><strong>1</strong><span>bàn cờ chung, nhiều lựa chọn</span></div>
-            <div><strong>∞</strong><span>hành trình để cùng khám phá</span></div>
-          </div>
-        </section>
+        <!-- 2. INSIDE THE BOX (BỘ LINH KIỆN BOARD GAME CAO CẤP) -->
+        <section id="aboutUnboxing" class="about-unboxing-section" aria-labelledby="aboutUnboxingTitle">
+          <div class="about-container">
+            <div class="about-section-header">
+              <span class="about-sub-label">LINH KIỆN VẬT LÝ CAO CẤP</span>
+              <h2 id="aboutUnboxingTitle" class="about-section-title">Bộ Linh Kiện Board Game Tiêu Chuẩn Quốc Tế</h2>
+              <p class="about-section-desc">
+                Từng chi tiết được gia công tỉ mỉ bằng chất liệu thân thiện môi trường, hoàn thiện cán màng vân linen sang trọng mang lại cảm giác xúc giác chân thực.
+              </p>
+            </div>
 
-        <section class="about-story about-shell" aria-labelledby="aboutStoryTitle">
-          <div class="about-story-image"><img src="assets/about/board-gameplay.jpg" alt="Cận cảnh bản đồ và quân cờ trong một ván LogisQuest"></div>
-          <div class="about-story-copy">
-            <p class="about-kicker">HỌC BẰNG CÁCH NHẬP CUỘC</p>
-            <h2 id="aboutStoryTitle">Từ lớp học đến bàn chơi, kiến thức được đưa vào chuyển động.</h2>
-            <p>Thay vì ghi nhớ một chiều, người chơi quan sát tuyến hàng, cân nhắc nguồn lực dùng chung và cùng giải quyết những biến cố quen thuộc của vận tải quốc tế.</p>
-            <ol class="about-steps">
-              <li><span>01</span><div><strong>Quan sát tình huống</strong><p>Đọc bàn cờ, thẻ bài và những gì đối thủ đang chuẩn bị.</p></div></li>
-              <li><span>02</span><div><strong>Ra quyết định</strong><p>Chọn lộ trình, phân bổ container và thời điểm đưa tàu cập cảng.</p></div></li>
-              <li><span>03</span><div><strong>Cùng phản chiếu</strong><p>Biến mỗi lượt chơi thành một cuộc trao đổi về chiến thuật và Incoterms.</p></div></li>
-            </ol>
-          </div>
-        </section>
+            <div class="about-components-grid">
+              <article class="about-component-card">
+                <div class="about-comp-badge">BÀN CỜ ĐẠI DƯƠNG</div>
+                <div class="about-comp-icon">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                    <line x1="8" y1="2" x2="8" y2="18"></line>
+                    <line x1="16" y1="6" x2="16" y2="22"></line>
+                  </svg>
+                </div>
+                <h3>Bản Đồ Hải Trình Toàn Cầu (60x80cm)</h3>
+                <p>Bàn cờ gập 4 lớp kích thước lớn, phủ màng bảo vệ chống nước cao cấp, khắc họa chi tiết 5 cụm cảng quốc tế và các tuyến hàng hải tơ lụa.</p>
+                <div class="about-comp-spec">
+                  <span>Chất liệu: Bìa cứng 2.5mm</span>
+                  <span>Cán màng Linen</span>
+                </div>
+              </article>
 
-        <section class="about-benefits" aria-labelledby="aboutBenefitsTitle">
-          <div class="about-shell">
-            <div class="about-section-heading"><p class="about-kicker">GIÁ TRỊ CỐT LÕI</p><h2 id="aboutBenefitsTitle">Mỗi lượt chơi là một bài toán có thật.</h2><p>LogisQuest giữ tinh thần cạnh tranh của board game nhưng luôn neo vào tư duy vận hành.</p></div>
-            <div class="about-benefit-grid">
-              <article class="about-benefit-card"><span class="about-card-icon" aria-hidden="true">↗</span><h3>Nhìn thấy dòng chảy</h3><p>Kết nối hàng hóa, phương tiện và điểm đến thành một bức tranh dễ hình dung.</p></article>
-              <article class="about-benefit-card"><span class="about-card-icon" aria-hidden="true">⌘</span><h3>Phối hợp nguồn lực</h3><p>Học cách ưu tiên khi tàu biển, container và cơ hội đều có giới hạn.</p></article>
-              <article class="about-benefit-card"><span class="about-card-icon" aria-hidden="true">✦</span><h3>Ứng biến trước rủi ro</h3><p>Xử lý biến cố để hiểu vì sao một quyết định nhỏ có thể đổi hướng cả hành trình.</p></article>
+              <article class="about-component-card">
+                <div class="about-comp-badge">HỆ THỐNG THẺ BÀI</div>
+                <div class="about-comp-icon">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                </div>
+                <h3>120+ Thẻ Bài Cán Linen Cao Cấp</h3>
+                <p>Gồm 11 thẻ Incoterms, 30+ thẻ Sự Kiện Rủi Ro, 40+ thẻ Phương Tiện Vận Tải và 30+ thẻ Chợ Giao Thương in mực thực vật an toàn, sắc nét.</p>
+                <div class="about-comp-spec">
+                  <span>Định lượng: Core Blue 350gsm</span>
+                  <span>Gân chống trầy</span>
+                </div>
+              </article>
+
+              <article class="about-component-card">
+                <div class="about-comp-badge">TOKEN &amp; MÔ HÌNH 3D</div>
+                <div class="about-comp-icon">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                </div>
+                <h3>Đội Tàu &amp; Container 3D Độc Quyền</h3>
+                <p>Mô hình tàu mẹ FCL chuyên dụng và hàng chục khối token container tiêu chuẩn TEU phân loại Hàng Khô, Hàng Lạnh Reefer và Hàng Nguy Hiểm Hazmat.</p>
+                <div class="about-comp-spec">
+                  <span>Chi tiết đúc 3D sắc sảo</span>
+                  <span>Nhựa ABS thân thiện</span>
+                </div>
+              </article>
+
+              <article class="about-component-card">
+                <div class="about-comp-badge">CHỨNG TỪ VẬN HÀNH</div>
+                <div class="about-comp-icon">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                  </svg>
+                </div>
+                <h3>Sổ Nhật Ký &amp; Bảng Kê Vận Đơn</h3>
+                <p>Sổ điều phối tài chính cảng, biểu mẫu tính cước lưu kho lưu bãi (Demurrage &amp; Detention) và bảng đối chiếu trách nhiệm bảo hiểm hàng hải.</p>
+                <div class="about-comp-spec">
+                  <span>Biểu mẫu chuẩn thực tế</span>
+                  <span>Ghi xóa tái sử dụng</span>
+                </div>
+              </article>
+
+              <article class="about-component-card">
+                <div class="about-comp-badge">ĐIỀU KHIỂN &amp; XÚC XẮC</div>
+                <div class="about-comp-icon">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                    <path d="M16 8h.01"></path>
+                    <path d="M8 8h.01"></path>
+                    <path d="M8 16h.01"></path>
+                    <path d="M16 16h.01"></path>
+                    <path d="M12 12h.01"></path>
+                  </svg>
+                </div>
+                <h3>Xúc Xắc Thời Tiết &amp; Gỗ Tự Nhiên</h3>
+                <p>Bộ xí ngầu điều tiết hải lưu, gió bão và con trỏ điều hướng luồng lạch cảng biển được chế tác từ gỗ tự nhiên tiện mộc tinh xảo.</p>
+                <div class="about-comp-spec">
+                  <span>Gỗ sồi tiện nguyên khối</span>
+                  <span>Khắc laser tinh tế</span>
+                </div>
+              </article>
             </div>
           </div>
         </section>
 
-        <section class="about-audience about-shell" aria-labelledby="aboutAudienceTitle">
-          <div class="about-section-heading"><p class="about-kicker">AI SẼ THÍCH LOGISQUEST?</p><h2 id="aboutAudienceTitle">Một bàn chơi, hai cách bắt đầu.</h2></div>
-          <div class="about-audience-grid">
-            <article><p class="about-card-label">HỌC &amp; ĐÀO TẠO</p><h3>Cho lớp học, CLB và đội ngũ logistics</h3><p>Mở đầu một buổi học hoặc đào tạo bằng trải nghiệm chung, rồi đưa thảo luận đi sâu hơn.</p></article>
-            <article><p class="about-card-label">KẾT NỐI &amp; GIẢI TRÍ</p><h3>Cho nhóm bạn và gia đình thích chiến thuật</h3><p>Không cần là chuyên gia logistics để cùng lập kế hoạch, cạnh tranh và khám phá.</p></article>
+        <!-- 3. THREE STRATEGIC PILLARS (BA TRỤ CỘT CHIẾN THUẬT) -->
+        <section class="about-pillars-section" aria-labelledby="aboutPillarsTitle">
+          <div class="about-container">
+            <div class="about-section-header">
+              <span class="about-sub-label">TRIẾT LÝ THIẾT KẾ</span>
+              <h2 id="aboutPillarsTitle" class="about-section-title">Cân Bằng Giữa Học Thuật &amp; Giải Trí Cao Cấp</h2>
+              <p class="about-section-desc">
+                Mỗi nước đi trên bàn cờ phản ánh chính xác các bài toán quản trị và vận hành chuỗi cung ứng thực tế trên các đại dương toàn cầu.
+              </p>
+            </div>
+
+            <div class="about-pillars-grid">
+              <div class="about-pillar-card">
+                <div class="about-pillar-num">01</div>
+                <div class="about-pillar-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                  </svg>
+                </div>
+                <h3>Mô Phỏng Thực Tế Ma Trận Incoterms 2020</h3>
+                <p>
+                  Phân định rõ ràng trách nhiệm phân chia chi phí, điểm chuyển giao rủi ro và nghĩa vụ mua bảo hiểm hàng hải giữa người mua và người bán qua từng nhóm điều khoản E, F, C, D một cách tự nhiên.
+                </p>
+                <ul class="about-pillar-checklist">
+                  <li>Trực quan hóa điểm chuyển giao rủi ro tại cảng biển</li>
+                  <li>Phân định trách nhiệm thông quan xuất nhập khẩu</li>
+                  <li>Ứng dụng thực tế quy tắc bảo hiểm ICC A, B, C</li>
+                </ul>
+              </div>
+
+              <div class="about-pillar-card">
+                <div class="about-pillar-num">02</div>
+                <div class="about-pillar-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                  </svg>
+                </div>
+                <h3>Đấu Trí Tối Ưu Chi Phí &amp; Kiểm Soát Rủi Ro</h3>
+                <p>
+                  Không đơn thuần dựa vào may rủi xúc xắc; người chơi liên tục phải giải bài toán phụ phí nhiên liệu biến động (BAF), bãi bỏng container rỗng và phương án xử lý sự cố hàng hải khẩn cấp.
+                </p>
+                <ul class="about-pillar-checklist">
+                  <li>Tối ưu hóa hành trình xoay vòng tàu container</li>
+                  <li>Lập quỹ dự phòng đối phó bão biển và kẹt cảng</li>
+                  <li>Đàm phán hợp đồng nhượng quyền vận chuyển linh hoạt</li>
+                </ul>
+              </div>
+
+              <div class="about-pillar-card">
+                <div class="about-pillar-num">03</div>
+                <div class="about-pillar-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                  </svg>
+                </div>
+                <h3>Giáo Dục Trực Quan &amp; Khơi Gợi Đồng Đội</h3>
+                <p>
+                  Cầu nối thực tiễn hoàn hảo xóa tan sự khô khan của những trang sách lý thuyết. Tạo môi trường tương tác nhóm năng động cho sinh viên, giảng viên và các chuyên gia logistics tương lai.
+                </p>
+                <ul class="about-pillar-checklist">
+                  <li>Phương pháp học tập qua trải nghiệm (Experiential Learning)</li>
+                  <li>Rèn luyện phản xạ xử lý khủng hoảng vận hành</li>
+                  <li>Gia tăng tính gắn kết qua các vòng đấu trí nhóm</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section class="about-cta"><div class="about-shell about-cta-inner"><div><p class="about-kicker">SẴN SÀNG RA KHƠI?</p><h2>Bắt đầu hành trình của bạn cùng LogisQuest.</h2></div><a class="about-button about-button-light" href="javascript:void(0)" data-nav="gameplay">Đi tới cách chơi <span aria-hidden="true">→</span></a></div></section>
+        <!-- 4. TARGET EXPLORERS (ĐỐI TƯỢNG TRẢI NGHIỆM CHIẾN LƯỢC) -->
+        <section class="about-personas-section" aria-labelledby="aboutPersonasTitle">
+          <div class="about-container">
+            <div class="about-section-header">
+              <span class="about-sub-label">ĐỐI TƯỢNG PHÙ HỢP</span>
+              <h2 id="aboutPersonasTitle" class="about-section-title">LogisQuest Dành Cho Ai?</h2>
+              <p class="about-section-desc">
+                Được thiết kế đa tầng với luật chơi linh hoạt từ mức cơ bản đến nâng cao, phù hợp cho cả học thuật lẫn giải trí gia đình.
+              </p>
+            </div>
+
+            <div class="about-personas-grid">
+              <article class="about-persona-card">
+                <div class="about-persona-tag">GIẢNG ĐƯỜNG &amp; HỌC THUẬT</div>
+                <div class="about-persona-avatar">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                  </svg>
+                </div>
+                <h3>Sinh Viên &amp; Giảng Viên Logistics</h3>
+                <p>
+                  Biến những tiết học thương mại quốc tế thành buổi thảo luận sôi nổi. Giúp sinh viên ghi nhớ bản chất từng điều khoản Incoterms thông qua phản xạ xử lý trên bàn chơi thay vì học vẹt.
+                </p>
+                <div class="about-persona-footer">
+                  <span class="about-persona-stat">Ứng dụng giảng dạy hiệu quả</span>
+                </div>
+              </article>
+
+              <article class="about-persona-card">
+                <div class="about-persona-tag">DOANH NGHIỆP &amp; ĐÀO TẠO</div>
+                <div class="about-persona-avatar">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                </div>
+                <h3>Doanh Nghiệp &amp; Chuyên Gia Nhân Sự</h3>
+                <p>
+                  Công cụ độc đáo phục vụ Onboarding nhân sự mới, workshop đào tạo nội bộ và Team Building trí tuệ. Đánh giá khả năng thương lượng hợp đồng, quản trị rủi ro và tư duy chiến lược của đội ngũ.
+                </p>
+                <div class="about-persona-footer">
+                  <span class="about-persona-stat">Workshop &amp; Onboarding chuyên nghiệp</span>
+                </div>
+              </article>
+
+              <article class="about-persona-card">
+                <div class="about-persona-tag">BOARD GAME THỰC THỤ</div>
+                <div class="about-persona-avatar">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="12 8 8 12 12 16 16 12 12 8"></polygon>
+                  </svg>
+                </div>
+                <h3>Cộng Đồng Đam Mê Game Chiến Thuật</h3>
+                <p>
+                  Trải nghiệm thể loại Euro-game quản lý tài nguyên căng thẳng, tính toán cẩn trọng từng đồng vốn và thời điểm cập bến. Tương tác cao giữa các người chơi với chủ đề hàng hải chân thực.
+                </p>
+                <div class="about-persona-footer">
+                  <span class="about-persona-stat">Đấu trí 60 - 90 phút kịch tính</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. SUNLIT CALL-TO-ACTION RIBBON -->
+        <section class="about-cta-ribbon-section" aria-labelledby="aboutCtaTitle">
+          <div class="about-container">
+            <div class="about-cta-box">
+              <div class="about-cta-badge">HẢI TRÌNH SẴN SÀNG</div>
+              <h2 id="aboutCtaTitle" class="about-cta-title">Sẵn Sàng Làm Chủ Hải Trình Logistics Toàn Cầu?</h2>
+              <p class="about-cta-desc">
+                Trải nghiệm ngay bộ cờ chiến thuật tiên phong kết hợp hoàn hảo giữa tri thức thương mại quốc tế và niềm vui giải trí đỉnh cao.
+              </p>
+              <div class="about-cta-actions">
+                <a class="about-btn about-btn-primary" href="javascript:void(0)" data-nav="gameplay">
+                  <span>Khám Phá Cách Chơi</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
+                <a class="about-btn about-btn-light" href="javascript:void(0)" data-nav="cards">
+                  <span>Xem Thư Viện Thẻ Bài</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </main>
-
     </div>
 
     <!-- ========================================== -->
