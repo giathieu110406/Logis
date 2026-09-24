@@ -3511,291 +3511,45 @@ function initTacticalBoardgameBlock5() {
 }
 
 // ============================================================
-// ABOUT VIEW REDESIGN CONTROLLER (5 PHÂN KHU CHUẨN SUNLIT MARITIME)
+// ABOUT VIEW CONTROLLER (SUNLIT MARITIME LIGHT MODE)
 // ============================================================
-
-// Data cho 3 Tabs Bối Cảnh Interactive Lore
-const ABOUT_LORE_DATA = [
-  {
-    title: 'HẢI TRÌNH TOÀN CẦU',
-    lead: 'Nơi hàng triệu container lưu chuyển không ngừng nghỉ giữa các đại dương mênh mông, kết nối chuỗi cung ứng của các cường quốc ngoại thương. Trong thế giới LogisQuest, bạn không chỉ vận chuyển hàng hóa — bạn nắm trong tay vận mệnh kinh tế của cả một hạm đội thương mại toàn cầu.',
-    bg: 'assets/cards-hero-bg.png'
-  },
-  {
-    title: 'BÀN ĐẤU NGOẠI THƯƠNG',
-    lead: 'Lấy cảm hứng từ kiệt tác cờ bàn Imhotep, người chơi cùng chia sẻ nguồn tài nguyên tàu container trên biển. Bạn phải tính toán xếp hàng, chọn thời điểm cho tàu xuất bến và vận dụng 11 điều khoản Incoterms 2020 để phân chia trách nhiệm, chi phí và rủi ro có lợi nhất cho doanh nghiệp của mình.',
-    bg: 'assets/anh-nen-giao-thuong.png'
-  },
-  {
-    title: 'GIÁ TRỊ TIÊN PHONG',
-    lead: 'Dự án tiên phong kết hợp học thuật chuyên sâu và nghệ thuật cờ bàn tại Việt Nam. Biến những điều khoản luật ngoại thương và chuỗi cung ứng khô khan thành trò chơi nhập vai chiến thuật kịch tính, tạo nguồn cảm hứng bất tận cho sinh viên, giảng viên và các chuyên gia logistics.',
-    bg: 'assets/tactical-harbor-diorama.jpg'
-  }
-];
-
-let aboutCarouselTimer = null;
-let currentAboutSlide = 0;
 
 function initAboutGameRedesign() {
   const aboutView = document.getElementById('aboutView');
   if (!aboutView) return;
 
-  // ------------------------------------------------------------
-  // 1. HERO CAROUSEL CONTROLLER
-  // ------------------------------------------------------------
-  const carouselTrack = document.getElementById('aboutCarouselTrack');
-  const slides = aboutView.querySelectorAll('.about-carousel-slide');
-  const dots = aboutView.querySelectorAll('.about-dot');
-  const prevBtn = document.getElementById('aboutCarouselPrev');
-  const nextBtn = document.getElementById('aboutCarouselNext');
-  const totalSlides = slides.length;
-
-  function updateAboutCarousel(index) {
-    if (!carouselTrack || totalSlides === 0) return;
-    currentAboutSlide = (index + totalSlides) % totalSlides;
-
-    slides.forEach((slide, i) => {
-      if (i === currentAboutSlide) {
-        slide.classList.add('active');
-      } else {
-        slide.classList.remove('active');
-      }
-    });
-
-    dots.forEach((dot, i) => {
-      if (i === currentAboutSlide) {
-        dot.classList.add('active');
-      } else {
-        dot.classList.remove('active');
-      }
-    });
-
-    // Calculate translate offset for centering the active slide
-    const slideWidth = slides[0].offsetWidth;
-    const gap = 24;
-    const containerWidth = carouselTrack.parentElement.offsetWidth;
-    const centerOffset = (containerWidth - slideWidth) / 2;
-    const targetTranslate = -(currentAboutSlide * (slideWidth + gap)) + Math.max(0, centerOffset);
-
-    carouselTrack.style.transform = `translateX(${targetTranslate}px)`;
-  }
-
-  function startAboutCarouselAutoPlay() {
-    stopAboutCarouselAutoPlay();
-    aboutCarouselTimer = setInterval(() => {
-      updateAboutCarousel(currentAboutSlide + 1);
-    }, 5000);
-  }
-
-  function stopAboutCarouselAutoPlay() {
-    if (aboutCarouselTimer) {
-      clearInterval(aboutCarouselTimer);
-      aboutCarouselTimer = null;
-    }
-  }
-
-  if (prevBtn) {
-    prevBtn.onclick = (e) => {
-      e.stopPropagation();
-      updateAboutCarousel(currentAboutSlide - 1);
-      startAboutCarouselAutoPlay();
-    };
-  }
-
-  if (nextBtn) {
-    nextBtn.onclick = (e) => {
-      e.stopPropagation();
-      updateAboutCarousel(currentAboutSlide + 1);
-      startAboutCarouselAutoPlay();
-    };
-  }
-
-  dots.forEach((dot, i) => {
-    dot.onclick = (e) => {
-      e.stopPropagation();
-      updateAboutCarousel(i);
-      startAboutCarouselAutoPlay();
-    };
-  });
-
-  // Touch / Drag swipe
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  if (carouselTrack) {
-    carouselTrack.addEventListener('mouseenter', stopAboutCarouselAutoPlay);
-    carouselTrack.addEventListener('mouseleave', startAboutCarouselAutoPlay);
-
-    carouselTrack.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-    }, { passive: true });
-
-    carouselTrack.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].clientX;
-      const diff = touchEndX - touchStartX;
-      if (Math.abs(diff) > 45) {
-        if (diff < 0) updateAboutCarousel(currentAboutSlide + 1);
-        else updateAboutCarousel(currentAboutSlide - 1);
-        startAboutCarouselAutoPlay();
-      }
-    });
-  }
-
-  // Initial layout calculation
-  updateAboutCarousel(0);
-  startAboutCarouselAutoPlay();
-
-  window.addEventListener('resize', () => {
-    updateAboutCarousel(currentAboutSlide);
-  });
-
-  // ------------------------------------------------------------
-  // 2. INTERACTIVE LORE TABS
-  // ------------------------------------------------------------
-  const loreTabs = aboutView.querySelectorAll('.about-lore-pill-btn');
-  const loreTitle = document.getElementById('aboutLoreTitle');
-  const loreLead = document.getElementById('aboutLoreLead');
-  const loreBgImg = aboutView.querySelector('.about-lore-bg-img');
-
-  loreTabs.forEach((tab, index) => {
-    tab.onclick = () => {
-      loreTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      const data = ABOUT_LORE_DATA[index];
-      if (!data) return;
-
-      if (typeof gsap !== 'undefined') {
-        gsap.to([loreTitle, loreLead], {
-          opacity: 0,
-          y: -8,
-          duration: 0.15,
-          onComplete: () => {
-            loreTitle.textContent = data.title;
-            loreLead.textContent = data.lead;
-            if (loreBgImg) loreBgImg.src = data.bg;
-
-            gsap.to([loreTitle, loreLead], {
-              opacity: 1,
-              y: 0,
-              duration: 0.3,
-              ease: 'power2.out'
-            });
-          }
-        });
-      } else {
-        loreTitle.textContent = data.title;
-        loreLead.textContent = data.lead;
-        if (loreBgImg) loreBgImg.src = data.bg;
-      }
-    };
-  });
-
-  // ------------------------------------------------------------
-  // 3. TOP 5 FAN-OUT CARDS SPOTLIGHT
-  // ------------------------------------------------------------
-  const fanCards = aboutView.querySelectorAll('.about-fan-card');
-  const spotType = document.getElementById('spotlightType');
-  const spotTitle = document.getElementById('spotlightTitle');
-  const spotPower = document.getElementById('spotlightPower');
-  const spotDesc = document.getElementById('spotlightDesc');
-
-  function updateSpotlight(cardEl) {
-    if (!cardEl) return;
-    fanCards.forEach(c => c.classList.remove('active-center'));
-    cardEl.classList.add('active-center');
-
-    const name = cardEl.getAttribute('data-name');
-    const type = cardEl.getAttribute('data-type');
-    const power = cardEl.getAttribute('data-power');
-    const desc = cardEl.getAttribute('data-desc');
-
-    if (spotType && spotTitle && spotPower && spotDesc) {
-      if (typeof gsap !== 'undefined') {
-        gsap.to([spotType, spotTitle, spotPower, spotDesc], {
-          opacity: 0,
-          y: 4,
-          duration: 0.12,
-          onComplete: () => {
-            spotType.textContent = type;
-            spotTitle.textContent = name;
-            spotPower.textContent = `Sức mạnh: ${power}`;
-            spotDesc.textContent = desc;
-
-            gsap.to([spotType, spotTitle, spotPower, spotDesc], {
-              opacity: 1,
-              y: 0,
-              duration: 0.25,
-              stagger: 0.03,
-              ease: 'power2.out'
-            });
-          }
-        });
-      } else {
-        spotType.textContent = type;
-        spotTitle.textContent = name;
-        spotPower.textContent = `Sức mạnh: ${power}`;
-        spotDesc.textContent = desc;
-      }
-    }
-  }
-
-  fanCards.forEach(card => {
-    card.addEventListener('mouseenter', () => updateSpotlight(card));
-    card.addEventListener('click', () => updateSpotlight(card));
-  });
-
-  // ------------------------------------------------------------
-  // 4. PRODUCT SHOWCASE GALLERY & ACCORDIONS
-  // ------------------------------------------------------------
-  const mainProductImg = document.getElementById('aboutProductMainImg');
-  const thumbBtns = aboutView.querySelectorAll('.about-thumb-item');
-
-  thumbBtns.forEach(btn => {
-    btn.onclick = () => {
-      thumbBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const targetSrc = btn.getAttribute('data-img');
-      if (mainProductImg && targetSrc) {
-        if (typeof gsap !== 'undefined') {
-          gsap.to(mainProductImg, {
-            opacity: 0,
-            scale: 0.95,
-            duration: 0.15,
-            onComplete: () => {
-              mainProductImg.src = targetSrc;
-              gsap.to(mainProductImg, {
-                opacity: 1,
-                scale: 1,
-                duration: 0.25,
-                ease: 'power2.out'
-              });
-            }
-          });
-        } else {
-          mainProductImg.src = targetSrc;
+  // Smooth scroll for internal links inside aboutView
+  const internalLinks = aboutView.querySelectorAll('a[href^="#"]');
+  internalLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        const targetEl = aboutView.querySelector(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
-    };
+    });
   });
 
-  // Accordions
-  const accItems = aboutView.querySelectorAll('.about-acc-item');
-  accItems.forEach(item => {
-    const trigger = item.querySelector('.about-acc-trigger');
-    if (trigger) {
-      trigger.onclick = () => {
-        const isActive = item.classList.contains('active');
-        // Toggle this item
-        if (isActive) {
-          item.classList.remove('active');
-          trigger.setAttribute('aria-expanded', 'false');
-        } else {
-          item.classList.add('active');
-          trigger.setAttribute('aria-expanded', 'true');
-        }
-      };
-    }
+  // Card interactive mouse movement / 3D tilt effect (subtle maritime feel)
+  const interactiveCards = aboutView.querySelectorAll('.about-metric-card, .about-component-card, .about-pillar-card, .about-persona-card');
+  interactiveCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -3;
+      const rotateY = ((x - centerX) / centerX) * 3;
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
   });
 }
 
@@ -3804,24 +3558,32 @@ function replayAboutAnimations() {
   const aboutView = document.getElementById('aboutView');
   if (!aboutView) return;
 
-  // Re-init carousel position & timer
   initAboutGameRedesign();
 
   if (typeof gsap !== 'undefined') {
-    // Fan cards entrance wave
-    const fanCards = aboutView.querySelectorAll('.about-fan-card');
-    if (fanCards.length > 0) {
-      gsap.fromTo(fanCards,
-        { opacity: 0, scale: 0.8, y: 35 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.65, stagger: 0.08, ease: 'back.out(1.5)', delay: 0.1 }
+    // Metric cards entrance stagger
+    const metricCards = aboutView.querySelectorAll('.about-metric-card');
+    if (metricCards.length > 0) {
+      gsap.fromTo(metricCards,
+        { opacity: 0, y: 25, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }
       );
     }
 
-    // Mechanics rows stagger fade-in
-    const mechRows = aboutView.querySelectorAll('.about-mech-row');
-    if (mechRows.length > 0) {
-      gsap.fromTo(mechRows,
+    // Component cards entrance stagger
+    const compCards = aboutView.querySelectorAll('.about-component-card');
+    if (compCards.length > 0) {
+      gsap.fromTo(compCards,
         { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.45, stagger: 0.06, ease: 'power2.out', delay: 0.1 }
+      );
+    }
+
+    // Pillar cards entrance stagger
+    const pillarCards = aboutView.querySelectorAll('.about-pillar-card');
+    if (pillarCards.length > 0) {
+      gsap.fromTo(pillarCards,
+        { opacity: 0, y: 25 },
         { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out', delay: 0.15 }
       );
     }
