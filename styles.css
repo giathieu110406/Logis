@@ -19914,3 +19914,618 @@ media (max-width: 1100px) {
   }
 }
 
+/* ======================================================== */
+/* SUNLIT MARITIME LIGHT MODE - ABOUT LOGISQUEST REDESIGN   */
+/* ======================================================== */
+
+.about-sunlit-page {
+  background-color: #FFFFFF;
+  color: #131B2E;
+  font-family: 'Plus Jakarta Sans', 'Montserrat', -apple-system, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+}
+
+.about-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 1. HERO VISION & IMPACT METRICS */
+.about-hero-vision {
+  background: linear-gradient(180deg, #F0F9FF 0%, #FFFFFF 100%);
+  padding: 80px 0 60px 0;
+  position: relative;
+  text-align: center;
+}
+
+.about-hero-vision::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1000px;
+  height: 350px;
+  background: radial-gradient(circle at 50% 20%, rgba(14, 165, 233, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.about-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  background: rgba(14, 165, 233, 0.08);
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  color: #006591;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.about-icon-svg {
+  color: #0284C7;
+  flex-shrink: 0;
+}
+
+.about-hero-headline {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(34px, 4.5vw, 54px);
+  font-weight: 700;
+  line-height: 1.18;
+  color: #0A2540;
+  margin: 0 0 18px 0;
+  letter-spacing: -0.01em;
+}
+
+.about-hero-subtitle {
+  font-size: clamp(16px, 1.8vw, 18.5px);
+  line-height: 1.65;
+  color: #3E4850;
+  max-width: 820px;
+  margin: 0 auto 36px auto;
+}
+
+.about-hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+
+.about-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.about-btn-primary {
+  background: linear-gradient(135deg, #F05A22 0%, #EA580C 100%);
+  color: #FFFFFF !important;
+  border: none;
+  box-shadow: 0 8px 24px -4px rgba(240, 90, 34, 0.35);
+}
+
+.about-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(240, 90, 34, 0.45);
+}
+
+.about-btn-outline {
+  background: #FFFFFF;
+  color: #006591 !important;
+  border: 1.5px solid rgba(14, 165, 233, 0.4);
+  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.08);
+}
+
+.about-btn-outline:hover {
+  background: #F0F9FF;
+  border-color: #0EA5E9;
+  transform: translateY(-2px);
+}
+
+.about-btn-light {
+  background: rgba(255, 255, 255, 0.95);
+  color: #006591 !important;
+  border: 1.5px solid rgba(14, 165, 233, 0.25);
+  box-shadow: 0 6px 20px rgba(7, 26, 48, 0.06);
+}
+
+.about-btn-light:hover {
+  background: #FFFFFF;
+  border-color: #006591;
+  transform: translateY(-2px);
+}
+
+/* Impact Metrics Grid */
+.about-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.about-metric-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(14, 165, 233, 0.16);
+  border-radius: 16px;
+  padding: 28px 22px;
+  text-align: left;
+  box-shadow: 0 10px 30px -5px rgba(14, 165, 233, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.about-metric-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(14, 165, 233, 0.4);
+  box-shadow: 0 16px 36px -6px rgba(14, 165, 233, 0.14);
+}
+
+.about-metric-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.metric-blue { background: #E0F2FE; color: #0284C7; }
+.metric-gold { background: #FEF3C7; color: #D97706; }
+.metric-coral { background: #FFEDD5; color: #EA580C; }
+.metric-emerald { background: #DCFCE7; color: #16A34A; }
+
+.about-metric-val {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: #0A2540;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.about-metric-label {
+  font-weight: 700;
+  font-size: 15px;
+  color: #006591;
+  margin-bottom: 8px;
+}
+
+.about-metric-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #475569;
+  margin: 0;
+}
+
+/* 2. INSIDE THE BOX (UNBOXING) */
+.about-unboxing-section {
+  background: #FFFFFF;
+  padding: 96px 0 80px 0;
+  border-top: 1px solid #EBF5FF;
+}
+
+.about-section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 56px auto;
+}
+
+.about-sub-label {
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #F05A22;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.about-section-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  color: #0A2540;
+  margin: 0 0 16px 0;
+  line-height: 1.25;
+}
+
+.about-section-desc {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #475569;
+  margin: 0;
+}
+
+.about-components-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.about-component-card {
+  background: #F8FAFC;
+  border: 1px solid rgba(14, 165, 233, 0.15);
+  border-radius: 18px;
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+.about-component-card:hover {
+  background: #FFFFFF;
+  border-color: #0EA5E9;
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -8px rgba(14, 165, 233, 0.12);
+}
+
+.about-comp-badge {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #0284C7;
+  background: #E0F2FE;
+  padding: 4px 10px;
+  border-radius: 6px;
+  width: fit-content;
+  margin-bottom: 16px;
+}
+
+.about-comp-icon {
+  color: #006591;
+  margin-bottom: 16px;
+}
+
+.about-component-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0A2540;
+  margin: 0 0 10px 0;
+  line-height: 1.35;
+}
+
+.about-component-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #475569;
+  flex-grow: 1;
+  margin: 0 0 20px 0;
+}
+
+.about-comp-spec {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-top: 1px dashed rgba(14, 165, 233, 0.2);
+  padding-top: 14px;
+}
+
+.about-comp-spec span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #0369A1;
+  background: #F0F9FF;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+/* 3. THREE STRATEGIC PILLARS */
+.about-pillars-section {
+  background: linear-gradient(180deg, #F0F9FF 0%, #FFFFFF 100%);
+  padding: 96px 0;
+  border-top: 1px solid #EBF5FF;
+}
+
+.about-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.about-pillar-card {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(14, 165, 233, 0.18);
+  border-radius: 20px;
+  padding: 36px 30px;
+  position: relative;
+  box-shadow: 0 12px 32px -6px rgba(14, 165, 233, 0.08);
+  transition: all 0.28s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-pillar-card:hover {
+  transform: translateY(-8px);
+  border-color: #0099FF;
+  box-shadow: 0 24px 48px -10px rgba(0, 153, 255, 0.18);
+}
+
+.about-pillar-num {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: rgba(14, 165, 233, 0.25);
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  line-height: 1;
+}
+
+.about-pillar-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: #E0F2FE;
+  color: #0284C7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.about-pillar-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #0A2540;
+  line-height: 1.35;
+  margin: 0 0 14px 0;
+}
+
+.about-pillar-card p {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #475569;
+  margin: 0 0 22px 0;
+  flex-grow: 1;
+}
+
+.about-pillar-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid #F1F5F9;
+  padding-top: 18px;
+}
+
+.about-pillar-checklist li {
+  font-size: 13.5px;
+  color: #1E293B;
+  line-height: 1.5;
+  padding-left: 22px;
+  position: relative;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.about-pillar-checklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #0284C7;
+  font-weight: 700;
+}
+
+/* 4. TARGET EXPLORERS */
+.about-personas-section {
+  background: #FFFFFF;
+  padding: 96px 0;
+  border-top: 1px solid #EBF5FF;
+}
+
+.about-personas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.about-persona-card {
+  background: #F8FAFC;
+  border: 1px solid rgba(14, 165, 233, 0.15);
+  border-radius: 18px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+.about-persona-card:hover {
+  background: #FFFFFF;
+  border-color: #F05A22;
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -8px rgba(240, 90, 34, 0.12);
+}
+
+.about-persona-tag {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #EA580C;
+  background: #FFEDD5;
+  padding: 4px 10px;
+  border-radius: 6px;
+  width: fit-content;
+  margin-bottom: 16px;
+}
+
+.about-persona-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #EBF5FF;
+  color: #006591;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.about-persona-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0A2540;
+  margin: 0 0 12px 0;
+}
+
+.about-persona-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #475569;
+  flex-grow: 1;
+  margin: 0 0 20px 0;
+}
+
+.about-persona-footer {
+  border-top: 1px dashed rgba(14, 165, 233, 0.2);
+  padding-top: 14px;
+}
+
+.about-persona-stat {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #006591;
+}
+
+/* 5. SUNLIT CTA RIBBON */
+.about-cta-ribbon-section {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0F9FF 100%);
+  padding: 70px 0 110px 0;
+}
+
+.about-cta-box {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  border-radius: 24px;
+  padding: 60px 48px;
+  text-align: center;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 24px 50px -10px rgba(2, 132, 199, 0.35);
+}
+
+.about-cta-box::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.about-cta-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+  margin-bottom: 18px;
+}
+
+.about-cta-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 16px 0;
+  color: #FFFFFF;
+}
+
+.about-cta-desc {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #E0F2FE;
+  max-width: 680px;
+  margin: 0 auto 36px auto;
+}
+
+.about-cta-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 1024px) {
+  .about-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .about-components-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .about-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .about-personas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero-vision {
+    padding: 60px 0 40px 0;
+  }
+  .about-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-components-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-personas-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  .about-cta-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .about-btn {
+    width: 100%;
+  }
+  .about-cta-box {
+    padding: 40px 20px;
+  }
+}
+
+
