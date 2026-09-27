@@ -542,54 +542,6 @@ function initEvents() {
     }
   });
 
-  // ── NAV DELIVERY BUTTON HANDLER (Header / Sidebar) ──
-  const navDeliveryBtns = document.querySelectorAll('.nav-delivery-btn, [data-nav-delivery-btn], #headerDeliveryBtn, #sidebarDeliveryBtn');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  navDeliveryBtns.forEach(btn => {
-    btn.removeAttribute('onclick');
-
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-
-      if (
-        btn.classList.contains('is-adding') ||
-        btn.classList.contains('is-animating') ||
-        btn.classList.contains('is-complete')
-      ) return;
-
-      btn.setAttribute('aria-disabled', 'true');
-
-      // Reduced motion: navigate ngay
-      if (reduceMotion.matches) {
-        btn.classList.add('is-complete');
-        window.location.href = 'buy.html';
-        return;
-      }
-
-      // Phase 1: Thêm vào giỏ hàng (2.45s)
-      btn.classList.add('is-adding');
-
-      // Phase 2: Bắt đầu giao hàng xe tải chạy qua (5.3s)
-      setTimeout(() => {
-        btn.classList.remove('is-adding');
-        btn.classList.add('is-animating');
-
-        // Khi xe tải vừa chạy hết đoạn đường (~5.3s), lập tức chuyển hướng sang buy.html (cắt bỏ toàn bộ hoạt cảnh thành công phía sau)
-        setTimeout(() => {
-          btn.classList.add('is-complete');
-          window.location.href = 'buy.html';
-        }, 5300);
-
-        // Reset an toàn
-        setTimeout(() => {
-          btn.classList.remove('is-adding', 'is-animating', 'is-complete');
-          btn.removeAttribute('aria-disabled');
-        }, 6500);
-      }, 2450);
-    });
-  });
-
   // CRITICAL REQUIREMENT: Strictly lock page scroll when sidebar is open or closing
   let isClosingNav = false;
 
@@ -612,6 +564,7 @@ function initEvents() {
 
   // Intercept Wheel & Touch events to force Sidebar exit BEFORE any page scroll
   window.addEventListener('wheel', (e) => {
+    if (mobileNav.contains(e.target) && mobileNav.scrollHeight > mobileNav.clientHeight) return;
     // If sidebar is active, ANY scroll wheel action (especially UP) closes sidebar first and prevents page scroll
     if (mobileNav.classList.contains('active') || isClosingNav) {
       closeSidebarFirst(e);
@@ -624,6 +577,7 @@ function initEvents() {
   }, { passive: true });
 
   window.addEventListener('touchmove', (e) => {
+    if (mobileNav.contains(e.target) && mobileNav.scrollHeight > mobileNav.clientHeight) return;
     if (mobileNav.classList.contains('active') || isClosingNav) {
       closeSidebarFirst(e);
     }
@@ -865,65 +819,7 @@ function initEvents() {
     }
   });
 
-  // ── DELIVERY BUTTON HANDLER (Phase 1 + Phase 2) ──
-  // All .order-button elements (both header and sidebar) get the full animation sequence
-  const CART_ANIM_DURATION = 2450;   // ms — Phase 1 shirt→cart
-  const DELIVERY_DURATION = 8000;   // ms — Phase 2 truck
-  const reduceMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const deliveryTimerMap = new WeakMap();
-
-  function resetDeliveryBtn(btn) {
-    const timers = deliveryTimerMap.get(btn) || [];
-    timers.forEach(clearTimeout);
-    deliveryTimerMap.delete(btn);
-    btn.classList.remove('is-adding', 'is-animating', 'is-complete');
-    btn.removeAttribute('aria-disabled');
-    btn.setAttribute('aria-label', 'Mua ngay');
-  }
-
-  function deliveryPhase2(btn) {
-    btn.classList.remove('is-adding');
-    btn.classList.add('is-animating');
-
-    // Sau khi xe tải chạy qua hoàn tất (5.3s): Cắt bỏ hoạt cảnh "Đặt hàng thành công", ngay lập tức chuyển sang trang mua hàng
-    const t = setTimeout(() => {
-      btn.classList.add('is-complete');
-      window.location.href = 'buy.html';
-    }, 5300);
-
-    deliveryTimerMap.set(btn, [t]);
-  }
-
-  function deliveryPhase1(btn) {
-    if (btn.classList.contains('is-adding') ||
-      btn.classList.contains('is-animating') ||
-      btn.classList.contains('is-complete')) return;
-
-    btn.setAttribute('aria-disabled', 'true');
-
-    // Reduced motion: skip animations, redirect immediately
-    if (reduceMotionMQ.matches) {
-      btn.classList.add('is-complete');
-      const t = setTimeout(() => { window.location.href = 'buy.html'; }, 600);
-      deliveryTimerMap.set(btn, [t]);
-      return;
-    }
-
-    btn.classList.add('is-adding');
-    const t = setTimeout(() => deliveryPhase2(btn), CART_ANIM_DURATION);
-    deliveryTimerMap.set(btn, [t]);
-  }
-
-  // Wire all .order-button elements on this page
-  document.querySelectorAll('.order-button').forEach(btn => {
-    // Remove inline onclick to avoid double firing — replace with JS
-    btn.removeAttribute('onclick');
-    btn.addEventListener('click', () => deliveryPhase1(btn));
-  });
-
-  reduceMotionMQ.addEventListener('change', () => {
-    document.querySelectorAll('.order-button').forEach(btn => resetDeliveryBtn(btn));
-  });
+  initDeliveryButtons(() => { window.location.href = 'buy.html'; });
 }
 
 
@@ -3239,6 +3135,7 @@ function initNauticalScrollRail() {
 
   let isDragging = false;
   let trackRect = null;
+  let grabOffset = 0;
 
   function updateTrackRect() {
     trackRect = track.getBoundingClientRect();
@@ -3266,7 +3163,8 @@ function initNauticalScrollRail() {
       }
 
       progress.style.height = `${progressPercent}%`;
-      thumb.style.top = `${progressPercent}%`;
+      const inset = thumb.offsetHeight / 2;
+      thumb.style.top = `${inset + progressRatio * Math.max(0, track.clientHeight - 2 * inset)}px`;
       thumb.setAttribute('aria-valuenow', Math.round(progressPercent));
       rafPending = false;
     });
@@ -3287,7 +3185,8 @@ function initNauticalScrollRail() {
     if (e.target.closest('.nautical-ship-thumb')) return;
     updateTrackRect();
     const clickY = e.clientY - trackRect.top;
-    const ratio = Math.min(Math.max(clickY / trackRect.height, 0), 1);
+    const inset = thumb.offsetHeight / 2;
+    const ratio = Math.min(Math.max((clickY - inset) / Math.max(1, trackRect.height - 2 * inset), 0), 1);
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     const targetScroll = ratio * scrollHeight;
 
@@ -3303,6 +3202,8 @@ function initNauticalScrollRail() {
 
   // Handle dragging the topdown ship with live window scroll sync
   function startDrag(e) {
+    const rect = thumb.getBoundingClientRect();
+    grabOffset = (e.clientY ?? e.touches?.[0]?.clientY ?? 0) - (rect.top + rect.height / 2);
     isDragging = true;
     thumb.classList.add('is-dragging');
     document.body.style.userSelect = 'none';
@@ -3313,20 +3214,23 @@ function initNauticalScrollRail() {
 
   function onDragMove(e) {
     if (!isDragging || !trackRect) return;
-    const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
-    const relativeY = clientY - trackRect.top;
-    const ratio = Math.min(Math.max(relativeY / trackRect.height, 0), 1);
+    const clientY = e.clientY ?? e.touches?.[0]?.clientY ?? 0;
+    const inset = thumb.offsetHeight / 2;
+    const travel = Math.max(0, trackRect.height - 2 * inset);
+    const relativeY = clientY - grabOffset - trackRect.top - inset;
+    const ratio = Math.min(Math.max(relativeY / Math.max(1, travel), 0), 1);
     const percent = ratio * 100;
 
     progress.style.height = `${percent}%`;
-    thumb.style.top = `${percent}%`;
+    thumb.style.top = `${inset + ratio * travel}px`;
     thumb.setAttribute('aria-valuenow', Math.round(percent));
 
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     const targetTop = ratio * scrollHeight;
 
     if (lenis) {
-      lenis.scrollTo(targetTop, { immediate: true });
+      // Dragging stops Lenis smoothing; force allows scrolling while stopped.
+      lenis.scrollTo(targetTop, { immediate: true, force: true });
     } else {
       window.scrollTo({
         top: targetTop,
@@ -3373,6 +3277,8 @@ function initNauticalScrollRail() {
   });
 
   window.addEventListener('mouseup', stopDrag);
+  window.addEventListener('blur', stopDrag);
+  window.addEventListener('touchcancel', stopDrag);
 
   // Initial Sync
   updateTrackRect();

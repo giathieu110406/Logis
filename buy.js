@@ -23,7 +23,6 @@
      ============================================================ */
   const UNIT_PRICE = 340000;
   const CART_ANIM_DURATION = 2450;   // ms — matches CSS --anim-duration / --cart-anim-duration
-  const DELIVERY_PHASE2_DURATION = 8000; // ms — truck drive
   const MODAL_OPEN_DELAY = CART_ANIM_DURATION + 200; // open modal just after cart animation finishes
 
   /* ============================================================
@@ -126,92 +125,13 @@
 
   /* ============================================================
      3. SIDEBAR DELIVERY BUTTONS (.order-button)
-        Phase 1: add-to-cart (~2.45s)  →  Phase 2: truck drive (~8s)
+        Phase 1: add-to-cart (~2.45s)  →  Phase 2: truck drive (~5.25s)
         → On buy.html sidebar: scroll to #btnBuyNow & open modal
         → On index.html sidebar: redirect to buy.html after truck
      ============================================================ */
-  var deliveryBtns = document.querySelectorAll('.order-button');
-  var deliveryTimers = [];
-
-  function resetDeliveryButton(btn) {
-    deliveryTimers.forEach(function (t) { clearTimeout(t); });
-    deliveryTimers = [];
-    btn.classList.remove('is-adding', 'is-animating', 'is-complete');
-    btn.removeAttribute('aria-disabled');
-    btn.setAttribute('aria-label', 'Mua ngay');
-    announce('');
-  }
-
-  function startDeliveryPhase2(btn) {
-    btn.classList.remove('is-adding');
-    btn.classList.add('is-animating');
-    announce('Đang giao hàng…');
-
-    // Success label timing matches CSS delay of 5.6s
-    var t1 = setTimeout(function () {
-      btn.setAttribute('aria-label', 'Đặt hàng thành công');
-    }, 5600);
-
-    // After full truck animation, redirect or open modal
-    var t2 = setTimeout(function () {
-      // On buy.html: open checkout modal directly
-      if (checkoutModal) {
-        openModal();
-      }
-      // Reset button
-      setTimeout(function () {
-        resetDeliveryButton(btn);
-      }, 500);
-    }, DELIVERY_PHASE2_DURATION);
-
-    deliveryTimers.push(t1, t2);
-  }
-
-  function startDeliveryPhase1(btn) {
-    if (btn.classList.contains('is-adding')   ||
-        btn.classList.contains('is-animating') ||
-        btn.classList.contains('is-complete')) return;
-
-    // If sidebar is open when a sidebar delivery btn is clicked, close it first
-    if (mobileNav && mobileNav.classList.contains('active')) {
-      closeMobileNav();
-    }
-
-    btn.setAttribute('aria-disabled', 'true');
-
-    // Reduced motion: skip straight to success
-    if (reduceMotion.matches) {
-      btn.classList.add('is-complete');
-      btn.setAttribute('aria-label', 'Đặt hàng thành công');
-      announce('Đặt hàng thành công');
-      var t = setTimeout(function () {
-        if (checkoutModal) openModal();
-        resetDeliveryButton(btn);
-      }, 1500);
-      deliveryTimers.push(t);
-      return;
-    }
-
-    btn.classList.add('is-adding');
-    announce('Đang thêm vào giỏ…');
-
-    // Phase 1 duration before truck phase
-    var t = setTimeout(function () {
-      startDeliveryPhase2(btn);
-    }, CART_ANIM_DURATION);
-    deliveryTimers.push(t);
-  }
-
-  deliveryBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      startDeliveryPhase1(btn);
-    });
-  });
-
-  reduceMotion.addEventListener('change', function () {
-    deliveryBtns.forEach(function (btn) {
-      resetDeliveryButton(btn);
-    });
+  initDeliveryButtons(() => {
+    closeMobileNav();
+    if (checkoutModal) openModal();
   });
 
   /* ============================================================

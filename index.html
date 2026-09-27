@@ -101,10 +101,6 @@
             </svg>
             Mua Ngay
           </span>
-          <span class="button-label button-label--adding">Đang thêm…</span>
-          <span class="button-label button-label--success">
-            Đặt Hàng Thành Công <span class="checkmark" aria-hidden="true"></span>
-          </span>
 
           <!-- Phase 2: truck delivery layer -->
           <span class="package" aria-hidden="true"></span>
@@ -155,7 +151,6 @@
 
       <!-- Labels -->
       <span class="button-label button-label--default">Mua Ngay</span>
-      <span class="button-label button-label--adding">Đang thêm…</span>
 
       <!-- Phase 2: truck delivery layer -->
       <span class="package" aria-hidden="true"></span>
@@ -875,33 +870,38 @@
         <!-- 1. HERO VISION & IMPACT METRICS -->
         <section class="about-hero-vision" aria-labelledby="aboutVisionTitle">
           <div class="about-container">
-            <div class="about-hero-content">
-              <div class="about-badge-pill">
-                <svg class="about-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-                </svg>
-                <span>DỰ ÁN BOARD GAME LOGISTICS TIÊN PHONG TẠI VIỆT NAM</span>
-              </div>
-              <h1 id="aboutVisionTitle" class="about-hero-headline">Khởi Sinh Từ Khát Vọng Số Hóa &amp; Thực Nghiệm Chuỗi Cung Ứng</h1>
-              <p class="about-hero-subtitle">
-                LogisQuest chuyển hóa những nguyên lý vận tải hàng hải phức tạp, ma trận 11 điều khoản Incoterms 2020 và bài toán cân đối dòng tiền quốc tế thành trải nghiệm cờ bàn chiến thuật kịch tính và đầy cảm hứng.
-              </p>
-              <div class="about-hero-buttons">
-                <a class="about-btn about-btn-primary" href="#aboutUnboxing">
-                  <span>Khám Phá Bộ Linh Kiện</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <polyline points="6 9 12 15 18 9"></polyline>
+            <div class="about-hero-layout">
+              <div class="about-hero-content">
+                <div class="about-badge-pill">
+                  <svg class="about-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
                   </svg>
-                </a>
-                <a class="about-btn about-btn-outline" href="javascript:void(0)" data-nav="cards">
-                  <span>Thư Viện Thẻ Bài</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </a>
+                  <span>DỰ ÁN BOARD GAME LOGISTICS TIÊN PHONG TẠI VIỆT NAM</span>
+                </div>
+                <h1 id="aboutVisionTitle" class="about-hero-headline">Khởi Sinh Từ Khát Vọng Số Hóa &amp; Thực Nghiệm Chuỗi Cung Ứng</h1>
+                <p class="about-hero-subtitle">
+                  LogisQuest chuyển hóa những nguyên lý vận tải hàng hải phức tạp, ma trận 11 điều khoản Incoterms 2020 và bài toán cân đối dòng tiền quốc tế thành trải nghiệm cờ bàn chiến thuật kịch tính và đầy cảm hứng.
+                </p>
+                <div class="about-hero-buttons">
+                  <a class="about-btn about-btn-primary" href="#aboutUnboxing">
+                    <span>Khám Phá Bộ Linh Kiện</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </a>
+                  <a class="about-btn about-btn-outline" href="javascript:void(0)" data-nav="cards">
+                    <span>Thư Viện Thẻ Bài</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </a>
+                </div>
               </div>
+              <figure class="about-hero-media">
+                <img src="assets/about/imagegen/about-hero-visual.png" alt="Bàn cờ hải trình LogisQuest với mô hình tàu hàng, container và thẻ bài" fetchpriority="high">
+              </figure>
             </div>
 
             <!-- 4 Impact Metric Cards -->
@@ -963,13 +963,17 @@
         <!-- 2. INSIDE THE BOX (BỘ LINH KIỆN BOARD GAME CAO CẤP) -->
         <section id="aboutUnboxing" class="about-unboxing-section" aria-labelledby="aboutUnboxingTitle">
           <div class="about-container">
-            <div class="about-section-header">
+            <div class="about-section-header about-section-header-left">
               <span class="about-sub-label">LINH KIỆN VẬT LÝ CAO CẤP</span>
               <h2 id="aboutUnboxingTitle" class="about-section-title">Bộ Linh Kiện Board Game Tiêu Chuẩn Quốc Tế</h2>
               <p class="about-section-desc">
                 Từng chi tiết được gia công tỉ mỉ bằng chất liệu thân thiện môi trường, hoàn thiện cán màng vân linen sang trọng mang lại cảm giác xúc giác chân thực.
               </p>
             </div>
+
+            <figure class="about-kit-visual">
+              <img src="assets/about/imagegen/about-kit-flatlay.png" alt="Bộ linh kiện board game gồm bản đồ hải trình, thẻ bài, tàu và token container" loading="lazy">
+            </figure>
 
             <div class="about-components-grid">
               <article class="about-component-card">
@@ -1064,7 +1068,7 @@
         <!-- 3. THREE STRATEGIC PILLARS (BA TRỤ CỘT CHIẾN THUẬT) -->
         <section class="about-pillars-section" aria-labelledby="aboutPillarsTitle">
           <div class="about-container">
-            <div class="about-section-header">
+            <div class="about-section-header about-section-header-left">
               <span class="about-sub-label">TRIẾT LÝ THIẾT KẾ</span>
               <h2 id="aboutPillarsTitle" class="about-section-title">Cân Bằng Giữa Học Thuật &amp; Giải Trí Cao Cấp</h2>
               <p class="about-section-desc">
@@ -1138,7 +1142,7 @@
         <!-- 4. TARGET EXPLORERS (ĐỐI TƯỢNG TRẢI NGHIỆM CHIẾN LƯỢC) -->
         <section class="about-personas-section" aria-labelledby="aboutPersonasTitle">
           <div class="about-container">
-            <div class="about-section-header">
+            <div class="about-section-header about-section-header-left">
               <span class="about-sub-label">ĐỐI TƯỢNG PHÙ HỢP</span>
               <h2 id="aboutPersonasTitle" class="about-section-title">LogisQuest Dành Cho Ai?</h2>
               <p class="about-section-desc">
@@ -1146,7 +1150,12 @@
               </p>
             </div>
 
-            <div class="about-personas-grid">
+            <div class="about-audience-layout">
+              <figure class="about-audience-visual">
+                <img src="assets/about/imagegen/about-audience-photo.png" alt="Nhóm người trẻ cùng chơi board game logistics bên bàn học" loading="lazy">
+              </figure>
+
+              <div class="about-personas-grid">
               <article class="about-persona-card">
                 <div class="about-persona-tag">GIẢNG ĐƯỜNG &amp; HỌC THUẬT</div>
                 <div class="about-persona-avatar">
@@ -1197,6 +1206,7 @@
                   <span class="about-persona-stat">Đấu trí 60 - 90 phút kịch tính</span>
                 </div>
               </article>
+              </div>
             </div>
           </div>
         </section>
@@ -1205,23 +1215,26 @@
         <section class="about-cta-ribbon-section" aria-labelledby="aboutCtaTitle">
           <div class="about-container">
             <div class="about-cta-box">
-              <div class="about-cta-badge">HẢI TRÌNH SẴN SÀNG</div>
-              <h2 id="aboutCtaTitle" class="about-cta-title">Sẵn Sàng Làm Chủ Hải Trình Logistics Toàn Cầu?</h2>
-              <p class="about-cta-desc">
-                Trải nghiệm ngay bộ cờ chiến thuật tiên phong kết hợp hoàn hảo giữa tri thức thương mại quốc tế và niềm vui giải trí đỉnh cao.
-              </p>
-              <div class="about-cta-actions">
-                <a class="about-btn about-btn-primary" href="javascript:void(0)" data-nav="gameplay">
-                  <span>Khám Phá Cách Chơi</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </a>
-                <a class="about-btn about-btn-light" href="javascript:void(0)" data-nav="cards">
-                  <span>Xem Thư Viện Thẻ Bài</span>
-                </a>
+              <div class="about-cta-content">
+                <div class="about-cta-badge">HẢI TRÌNH SẴN SÀNG</div>
+                <h2 id="aboutCtaTitle" class="about-cta-title">Sẵn Sàng Làm Chủ Hải Trình Logistics Toàn Cầu?</h2>
+                <p class="about-cta-desc">
+                  Trải nghiệm ngay bộ cờ chiến thuật tiên phong kết hợp hoàn hảo giữa tri thức thương mại quốc tế và niềm vui giải trí đỉnh cao.
+                </p>
+                <div class="about-cta-actions">
+                  <a class="about-btn about-btn-primary" href="javascript:void(0)" data-nav="gameplay">
+                    <span>Khám Phá Cách Chơi</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </a>
+                  <a class="about-btn about-btn-light" href="javascript:void(0)" data-nav="cards">
+                    <span>Xem Thư Viện Thẻ Bài</span>
+                  </a>
+                </div>
               </div>
+              <img class="about-cta-visual" src="assets/about/imagegen/about-cta-ship.png" alt="" aria-hidden="true" loading="lazy">
             </div>
           </div>
         </section>
@@ -2359,6 +2372,7 @@
   </aside>
 
   <!-- JavaScript Link -->
+  <script src="delivery-button.js"></script>
   <script src="app.js"></script>
 </body>
 

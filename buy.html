@@ -84,10 +84,6 @@
 
           <!-- Labels -->
           <span class="button-label button-label--default">Mua Ngay</span>
-          <span class="button-label button-label--adding">Đang thêm…</span>
-          <span class="button-label button-label--success">
-            Đặt Hàng Thành Công <span class="checkmark" aria-hidden="true"></span>
-          </span>
 
           <!-- Phase 2: truck delivery layer -->
           <span class="package" aria-hidden="true"></span>
@@ -121,7 +117,7 @@
     <a href="/#cards" class="mobile-link">Thẻ Bài</a>
 
     <!-- DELIVERY BUTTON (BUY PAGE SIDEBAR) — Full Phase 1+2 from delivery-button library -->
-    <button class="order-button nav-delivery-btn" type="button" aria-label="Mua ngay" id="sidebarBuyBtn" style="margin-top:12px; width:100%;">
+    <button class="order-button nav-delivery-btn" type="button" aria-label="Mua ngay" id="sidebarBuyBtn">
 
       <!-- Phase 1: add-to-cart layer -->
       <span class="cart-layer" aria-hidden="true">
@@ -138,10 +134,6 @@
 
       <!-- Labels -->
       <span class="button-label button-label--default">Mua Ngay</span>
-      <span class="button-label button-label--adding">Đang thêm…</span>
-      <span class="button-label button-label--success">
-        Đặt Hàng Thành Công <span class="checkmark" aria-hidden="true"></span>
-      </span>
 
       <!-- Phase 2: truck delivery layer -->
       <span class="package" aria-hidden="true"></span>
@@ -729,6 +721,7 @@
   <!-- Screen reader live region for button state announcements -->
   <p class="sr-only" id="buy-status" role="status" aria-live="polite"></p>
 
+  <script src="delivery-button.js"></script>
   <script src="buy.js"></script>
 </body>
 </html>
