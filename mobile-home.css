@@ -2531,11 +2531,16 @@
 /* --- HÌNH 3: MASTER TEMPLATE (GIỚI THIỆU LOGISQUEST) --- */
 @media (max-width: 700px) {
   #block1-showcase {
-    padding-top: 36px !important;
-    padding-bottom: 56px !important;
-    min-height: 86vh !important;
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+    height: auto !important;
+    min-height: 100svh !important;
+    max-height: none !important;
     background: radial-gradient(circle at 50% 20%, #E0F2FE 0%, #BAE6FD 45%, #7DD3FC 100%) !important;
     position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
   }
   /* Họa tiết chìm gợn sóng & hải đồ */
   #block1-showcase::before {
@@ -2548,6 +2553,34 @@
     background-position: 0 0, 12px 12px !important;
     pointer-events: none !important;
     opacity: 0.65 !important;
+  }
+
+  /* Khung Card mở rộng phủ trọn, không chừa khoảng trống hụt hẫng */
+  #block1-showcase .home-showcase-container {
+    width: calc(100% - 24px) !important;
+    max-width: 420px !important;
+    padding: 20px 16px 20px !important;
+    box-sizing: border-box !important;
+    border-radius: 28px !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    border: 3.5px solid #FFFFFF !important;
+    box-shadow: 0 16px 40px rgba(2, 44, 92, 0.18), 0 0 0 1.5px #38BDF8 !important;
+  }
+
+  /* Khung ảnh Slider: hiển thị đầy đủ trọn vẹn hình ảnh (không bị cắt xén) */
+  #block1-showcase .showcase-carousel-wrap {
+    height: 220px !important;
+    max-height: 35vh !important;
+    aspect-ratio: auto !important;
+    background: #F0F9FF !important;
+    border: 1.5px solid #BAE6FD !important;
+    border-radius: 16px !important;
+  }
+
+  #block1-showcase .showcase-slide-img {
+    object-fit: contain !important;
+    padding: 8px !important;
+    box-sizing: border-box !important;
   }
   .showcase-glass-card {
     border-radius: 26px !important;
@@ -2574,9 +2607,10 @@
     background-size: 20px 20px !important;
     pointer-events: none !important;
   }
-  /* Dịch chuyển cụm 3 khối tính năng xuống dưới 12-15px */
+  /* Dịch chuyển cụm 3 khối tính năng xuống dưới 20-25px để không dính sát hình không nền */
+  .mx-gameplay-bullets,
   .mx-feature-cards {
-    margin-top: 18px !important;
+    margin-top: 24px !important;
     gap: 12px !important;
   }
   .mx-feature-card {
@@ -2603,10 +2637,19 @@
     background-size: 20px 20px !important;
     pointer-events: none !important;
   }
+  /* Đổi màu viền khung ảnh từ vàng cam sang Xanh Hải Quân / Cyan hiện đại */
+  #block3-scale .photo-card-wrapper,
   .photo-card-wrapper {
     border-radius: 24px !important;
-    border: 2px solid rgba(255, 255, 255, 0.95) !important;
-    box-shadow: 0 16px 40px rgba(2, 44, 92, 0.18) !important;
+    border: 4px solid #38BDF8 !important;
+    outline: 2px solid #FFFFFF !important;
+    box-shadow: 0 8px 0 #0284C7, 0 16px 36px rgba(2, 44, 92, 0.22) !important;
+    background: #F0F9FF !important;
+  }
+  #block3-scale .mx-scale-summary {
+    border: 2px solid #38BDF8 !important;
+    box-shadow: 0 4px 0 #0284C7, 0 10px 22px rgba(2, 44, 92, 0.12) !important;
+    background: #FFFFFF !important;
   }
 }
 
@@ -2727,6 +2770,17 @@
     background-size: 20px 20px !important;
     pointer-events: none !important;
   }
+
+  /* Tăng font chữ Hải trình nhập cuộc & Cách chơi LogisQuest từ A đến Z thêm 1-2 font size */
+  #block5-guide .headline-part-top {
+    font-size: clamp(23px, 6.6vw, 27px) !important;
+    line-height: 1.15 !important;
+  }
+  #block5-guide .headline-part-bottom {
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+  }
+
   /* Đổi nút Play sang Xanh ngọc Neon / Cyan bóng bẩy (loại bỏ màu cam) */
   .guide-play-btn,
   .btn-play-pulse,
@@ -2746,7 +2800,7 @@
   }
 }
 
-/* --- HÌNH 9: KHU VỰC SẢN PHẨM --- */
+/* --- HÌNH 9: KHU VỰC SẢN PHẨM & TÁI THIẾT KẾ HUY HIỆU --- */
 @media (max-width: 700px) {
   #buy {
     padding-top: 36px !important;
@@ -2754,26 +2808,80 @@
     position: relative !important;
     overflow: hidden !important;
   }
-  /* Background pattern mờ xóa cảm giác trống trải */
+  /* Background pattern và hoạt ảnh đại dương mờ xóa cảm giác trống trải */
   #buy::before {
     content: "" !important;
     position: absolute !important;
     inset: 0 !important;
-    background: radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.25) 0%, transparent 70%),
-                radial-gradient(rgba(2, 132, 199, 0.12) 1.5px, transparent 1.5px) !important;
+    background: radial-gradient(circle at 50% 15%, rgba(56, 189, 248, 0.35) 0%, transparent 65%),
+                radial-gradient(rgba(2, 132, 199, 0.14) 1.5px, transparent 1.5px) !important;
     background-size: 100% 100%, 20px 20px !important;
     pointer-events: none !important;
   }
-  /* Badge nguyên khối 3D cao cấp */
-  .mx-trust-badge,
-  .home-cta-trust-badge {
-    background: linear-gradient(145deg, #FFFFFF 0%, #F0F9FF 100%) !important;
+
+  /* Tái thiết kế 3 huy hiệu thoát khỏi cảm giác AI, thiết kế phẳng tối giản hiện đại */
+  #buy .home-cta-features-bar,
+  #buy .home-cta-features-strip {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
+    padding: 14px 10px 6px !important;
+    border-top: 1.5px dashed #BAE6FD !important;
+    background: transparent !important;
+  }
+  #buy .cta-feature-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    padding: 12px 6px 10px !important;
+    border-radius: 16px !important;
+    background: #FFFFFF !important;
     border: 1.5px solid #BAE6FD !important;
-    border-radius: 14px !important;
-    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.1) !important;
-    padding: 8px 12px !important;
-    font-weight: 700 !important;
-    color: #0369A1 !important;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08) !important;
+    text-align: center !important;
+  }
+  #buy .cta-feature-icon {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 10px !important;
+    background: #F0F9FF !important;
+    border: 1px solid #BAE6FD !important;
+    color: #0284C7 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  #buy .cta-feature-icon svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  #buy .cta-feature-text {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 2px !important;
+  }
+  #buy .cta-feature-title {
+    font-family: 'Outfit', 'Montserrat', sans-serif !important;
+    font-size: 11.5px !important;
+    font-weight: 800 !important;
+    color: #0F172A !important;
+    letter-spacing: 0.02em !important;
+    text-transform: uppercase !important;
+    line-height: 1.2 !important;
+  }
+  #buy .cta-feature-title[data-mobile-short] {
+    font-size: 11.5px !important;
+    line-height: 1.2 !important;
+  }
+  #buy .cta-feature-title[data-mobile-short]::after {
+    display: none !important;
+    content: none !important;
+  }
+  #buy .cta-feature-sub {
+    display: none !important; /* Ẩn bớt chữ lặp lại gây rườm rà chuẩn phong cách AI */
   }
 }
 
@@ -2859,6 +2967,25 @@
   }
   #bgFooter .social-link--youtube {
     background: #FF0000 !important;
+    display: inline-flex !important;
+  }
+  /* Tối ưu khoảng trống: kéo nội dung xuống gần sát đáy, loại bỏ tình trạng rời rạc */
+  #bgFooter {
+    padding-top: 16px !important;
+    padding-bottom: max(16px, env(safe-area-inset-bottom, 16px)) !important;
+  }
+  #bgFooter .bg-footer-main-container {
+    gap: 12px 14px !important;
+    padding: 12px 16px 8px !important;
+  }
+  #bgFooter .bg-footer-col:nth-child(1) {
+    margin-top: 6px !important;
+    padding-top: 10px !important;
+  }
+  #bgFooter .bg-footer-copyright {
+    margin: 8px auto 0 !important;
+    padding: 8px 12px 0 !important;
+    border-top: 1px solid rgba(2, 132, 199, 0.15) !important;
   }
 }
 
@@ -2875,9 +3002,17 @@
   }
 
   /* Đưa cụm 3 thẻ thông số và nút CTA xuống sát mép dưới */
+  #hero .home-banner-caption {
+    bottom: env(safe-area-inset-bottom, 8px) !important;
+    padding-bottom: 2px !important;
+  }
   #hero .home-mobile-hero-facts,
   #hero .home-banner-bottom-cluster {
-    bottom: max(14px, env(safe-area-inset-bottom, 14px)) !important;
+    bottom: 0 !important;
+    margin-bottom: 4px !important;
+  }
+  #hero .home-mobile-hero-cta {
+    margin-bottom: 0 !important;
   }
 
   /* 3 Thẻ thông số HUD Frosted-Glass cao cấp */
@@ -3023,7 +3158,7 @@
   }
 }
 
-/* --- HÌNH 7: BOTTOM SHEET CHUẨN XÁC SELECTOR .modal-card-details --- */
+/* --- HÌNH 7 FIX: NỀN TRẮNG SÁNG SỦA, LOẠI BỎ VIỀN LỒNG NHAU, SẮC NÉT SAU XOAY 3D --- */
 @media (max-width: 700px) {
   #cardModal .modal-body,
   #cardModal .modal-3d-body {
@@ -3032,27 +3167,77 @@
     height: 100vh !important;
     width: 100vw !important;
     overflow: hidden !important;
-    background: #0B192C !important;
+    background: #F8FAFC !important; /* Nền trắng sáng sủa thanh lịch theo yêu cầu */
+  }
+  #cardModal .modal-card-view,
+  #cardModal .modal-stage-wrapper {
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
   #cardModal .modal-card-view {
     flex: 0 0 52vh !important;
     height: 52vh !important;
-    background: radial-gradient(circle at 50% 45%, #1E3E62 0%, #0B192C 100%) !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    border: none !important;
-    margin: 0 !important;
-    padding: 24px 16px 10px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    padding: 16px 16px 8px !important;
   }
+
+  /* Loại bỏ toàn bộ viền đen/viền trắng lồng nhau, chỉ giữ lại một thẻ đơn duy nhất */
+  #cardModal .modal-flip-container {
+    height: 38vh !important;
+    max-height: 320px !important;
+    aspect-ratio: auto !important;
+    perspective: 1200px !important;
+  }
+  #cardModal .modal-flip-inner {
+    transform-style: preserve-3d !important;
+  }
+  #cardModal .modal-flip-face {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.16) !important;
+    border-radius: 14px !important;
+    overflow: visible !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+  }
+  #cardModal .modal-flip-back {
+    background: transparent !important;
+  }
+  #cardModal .modal-flip-front {
+    background: transparent !important;
+  }
+
+  /* Sửa lỗi mờ ảnh sau khi xoay lật 3D ở trạng thái dọc */
+  #cardModal .modal-card-img {
+    height: 100% !important;
+    width: auto !important;
+    max-width: 82vw !important;
+    object-fit: contain !important;
+    border-radius: 14px !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    transform: translateZ(0) !important;
+    image-rendering: -webkit-optimize-contrast !important;
+    filter: drop-shadow(0 10px 24px rgba(2, 44, 92, 0.2)) !important;
+  }
+
   #cardModal .modal-card-details {
     flex: 1 1 48vh !important;
     height: 48vh !important;
     background: #FFFFFF !important;
     border-radius: 28px 28px 0 0 !important;
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.45) !important;
+    box-shadow: 0 -10px 36px rgba(2, 44, 92, 0.12) !important;
+    border-top: 1.5px solid #E2E8F0 !important;
     padding: 22px 18px calc(24px + env(safe-area-inset-bottom, 16px)) !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
@@ -3068,18 +3253,5 @@
     background: #F8FAFC !important;
     border: 1.5px solid #E2E8F0 !important;
     border-radius: 16px !important;
-  }
-}
-
-/* --- HÌNH 7 FIX CUỐI: LOẠI BỎ HOÀN TOÀN KHUNG HỘP TRẮNG VÙNG TRÊN --- */
-@media (max-width: 700px) {
-  #cardModal .modal-card-view,
-  #cardModal .modal-stage-wrapper {
-    background: transparent !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
   }
 }

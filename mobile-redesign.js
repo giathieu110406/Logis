@@ -168,14 +168,49 @@
 (function initCloudWipe() {
   if (typeof window === 'undefined') return;
   
-  // Inject cloud elements if not already present
+  // Inject realistic SVG cloud elements if not already present
   var cloudWrap = document.getElementById('cloudWipeWrapper');
   if (!cloudWrap) {
     cloudWrap = document.createElement('div');
     cloudWrap.id = 'cloudWipeWrapper';
     cloudWrap.className = 'cloud-wipe-wrapper';
     cloudWrap.setAttribute('aria-hidden', 'true');
-    cloudWrap.innerHTML = '<div class="cloud-left"></div><div class="cloud-right"></div>';
+    
+    // Đồ họa mây SVG tự nhiên với các đường cong xếp lớp 3D
+    var cloudSvgLeft = `
+      <svg class="cloud-svg-layer cloud-svg-left" viewBox="0 0 500 800" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="cGradL" cx="40%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#FFFFFF" />
+            <stop offset="70%" stop-color="#F0F9FF" />
+            <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0.9" />
+          </radialGradient>
+          <filter id="cShadowL" x="-10%" y="-10%" width="130%" height="130%">
+            <feDropShadow dx="15" dy="10" stdDeviation="20" flood-color="#0284C7" flood-opacity="0.25" />
+          </filter>
+        </defs>
+        <path d="M-50 -50 H320 C360 40 420 80 400 160 C440 220 450 300 390 380 C460 460 430 560 370 620 C420 700 350 780 290 850 H-50 Z" fill="url(#cGradL)" filter="url(#cShadowL)"/>
+        <path d="M-50 40 H280 C320 120 370 180 340 250 C380 320 370 410 320 480 C370 550 340 640 290 700 C330 760 260 820 220 850 H-50 Z" fill="#FFFFFF" opacity="0.85"/>
+      </svg>
+    `;
+    var cloudSvgRight = `
+      <svg class="cloud-svg-layer cloud-svg-right" viewBox="0 0 500 800" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="cGradR" cx="60%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#FFFFFF" />
+            <stop offset="70%" stop-color="#F0F9FF" />
+            <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0.9" />
+          </radialGradient>
+          <filter id="cShadowR" x="-20%" y="-10%" width="130%" height="130%">
+            <feDropShadow dx="-15" dy="10" stdDeviation="20" flood-color="#0284C7" flood-opacity="0.25" />
+          </filter>
+        </defs>
+        <path d="M550 -50 H180 C140 40 80 80 100 160 C60 220 50 300 110 380 C40 460 70 560 130 620 C80 700 150 780 210 850 H550 Z" fill="url(#cGradR)" filter="url(#cShadowR)"/>
+        <path d="M550 40 H220 C180 120 130 180 160 250 C120 320 130 410 180 480 C130 550 160 640 210 700 C170 760 240 820 280 850 H550 Z" fill="#FFFFFF" opacity="0.85"/>
+      </svg>
+    `;
+
+    cloudWrap.innerHTML = cloudSvgLeft + cloudSvgRight;
     document.body.appendChild(cloudWrap);
 
     var cloudStyle = document.createElement('style');
@@ -187,32 +222,30 @@
         z-index: 998;
         overflow: hidden;
       }
-      .cloud-left, .cloud-right {
+      .cloud-svg-layer {
         position: absolute;
         top: 0;
         bottom: 0;
-        width: 65vw;
-        background: radial-gradient(circle at center, #FFFFFF 60%, rgba(255,255,255,0.92) 100%);
-        box-shadow: 0 0 60px rgba(255, 255, 255, 0.8), 0 0 100px rgba(56, 189, 248, 0.3);
-        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-        transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+        height: 100%;
+        width: 80vw;
+        transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
         opacity: 0;
       }
-      .cloud-left {
-        left: -65vw;
+      .cloud-svg-left {
+        left: 0;
+        transform: translateX(-100%);
+      }
+      .cloud-svg-right {
+        right: 0;
+        transform: translateX(100%);
+      }
+      .cloud-wipe-active .cloud-svg-left {
         transform: translateX(0);
+        opacity: 1;
       }
-      .cloud-right {
-        right: -65vw;
+      .cloud-wipe-active .cloud-svg-right {
         transform: translateX(0);
-      }
-      .cloud-wipe-active .cloud-left {
-        transform: translateX(55vw);
-        opacity: 0.95;
-      }
-      .cloud-wipe-active .cloud-right {
-        transform: translateX(-55vw);
-        opacity: 0.95;
+        opacity: 1;
       }
     `;
     document.head.appendChild(cloudStyle);
