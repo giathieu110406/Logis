@@ -161,3 +161,84 @@
   function init() { initFlow(); initIncoterms(); initModal(); initHomeMobileEnhancements(); initBuy(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
+
+/* ============================================================
+   CLOUD WIPE MOTION EFFECT (Hero -> Block 1 Transition)
+   ============================================================ */
+(function initCloudWipe() {
+  if (typeof window === 'undefined') return;
+  
+  // Inject cloud elements if not already present
+  var cloudWrap = document.getElementById('cloudWipeWrapper');
+  if (!cloudWrap) {
+    cloudWrap = document.createElement('div');
+    cloudWrap.id = 'cloudWipeWrapper';
+    cloudWrap.className = 'cloud-wipe-wrapper';
+    cloudWrap.setAttribute('aria-hidden', 'true');
+    cloudWrap.innerHTML = '<div class="cloud-left"></div><div class="cloud-right"></div>';
+    document.body.appendChild(cloudWrap);
+
+    var cloudStyle = document.createElement('style');
+    cloudStyle.innerHTML = `
+      .cloud-wipe-wrapper {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 998;
+        overflow: hidden;
+      }
+      .cloud-left, .cloud-right {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 65vw;
+        background: radial-gradient(circle at center, #FFFFFF 60%, rgba(255,255,255,0.92) 100%);
+        box-shadow: 0 0 60px rgba(255, 255, 255, 0.8), 0 0 100px rgba(56, 189, 248, 0.3);
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+        opacity: 0;
+      }
+      .cloud-left {
+        left: -65vw;
+        transform: translateX(0);
+      }
+      .cloud-right {
+        right: -65vw;
+        transform: translateX(0);
+      }
+      .cloud-wipe-active .cloud-left {
+        transform: translateX(55vw);
+        opacity: 0.95;
+      }
+      .cloud-wipe-active .cloud-right {
+        transform: translateX(-55vw);
+        opacity: 0.95;
+      }
+    `;
+    document.head.appendChild(cloudStyle);
+  }
+
+  // Scroll listener for Cloud Wipe transition
+  var lastScrollY = window.scrollY;
+  var wipeTriggered = false;
+
+  window.addEventListener('scroll', function() {
+    var scrollY = window.scrollY;
+    var hero = document.getElementById('hero');
+    if (!hero) return;
+    var heroHeight = hero.offsetHeight;
+
+    if (scrollY > heroHeight * 0.25 && scrollY < heroHeight * 0.85) {
+      if (!wipeTriggered) {
+        wipeTriggered = true;
+        cloudWrap.classList.add('cloud-wipe-active');
+        setTimeout(function() {
+          cloudWrap.classList.remove('cloud-wipe-active');
+        }, 650);
+      }
+    } else {
+      wipeTriggered = false;
+    }
+    lastScrollY = scrollY;
+  }, { passive: true });
+})();
