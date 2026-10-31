@@ -1,6 +1,5 @@
 /* LogisQuest - Mobile UX redesign helpers (<= 700px). Elements are CSS-hidden above 700px. */
 (function () {
-  var mq = window.matchMedia('(max-width: 700px)');
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; return e; }
 
   /* Gameplay: flow carousel dots */
@@ -252,7 +251,6 @@
   }
 
   // Scroll listener for Cloud Wipe transition
-  var lastScrollY = window.scrollY;
   var wipeTriggered = false;
 
   window.addEventListener('scroll', function() {
@@ -272,6 +270,5 @@
     } else {
       wipeTriggered = false;
     }
-    lastScrollY = scrollY;
   }, { passive: true });
 })();

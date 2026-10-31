@@ -2460,69 +2460,64 @@
 
 /* --- HÌNH 1: HERO BANNER --- */
 @media (max-width: 700px) {
-  /* Phóng to và hạ thấp cụm HẢI TRÌNH ĐÃ MỞ */
-  .home-banner-caption {
+  #hero .home-banner-caption {
     top: 104px !important;
+    bottom: env(safe-area-inset-bottom, 8px) !important;
+    padding-bottom: 2px !important;
   }
-  .home-banner-title-mobile {
-    font-size: clamp(2.35rem, 9.6vw, 3.2rem) !important;
+  #hero .home-banner-title-mobile {
+    font-size: clamp(2.4rem, 10vw, 3.3rem) !important;
     line-height: 1.08 !important;
-    text-shadow: 0 4px 18px rgba(2, 44, 92, 0.45) !important;
+    text-shadow: 0 4px 20px rgba(2, 44, 92, 0.5) !important;
   }
-
-  /* Đưa cụm 3 thẻ thông số và nút CTA xuống sát mép dưới */
-  .home-banner-bottom-cluster {
-    bottom: max(16px, env(safe-area-inset-bottom, 16px)) !important;
-    gap: 10px !important;
+  #hero .home-mobile-hero-facts,
+  #hero .home-banner-bottom-cluster {
+    bottom: 0 !important;
+    margin-bottom: 4px !important;
   }
-
-  /* 3 Thẻ thông số HUD Frosted-Glass cao cấp */
-  .home-banner-stats-pill {
-    background: rgba(255, 255, 255, 0.78) !important;
+  #hero .home-mobile-hero-facts {
+    background: rgba(255, 255, 255, 0.72) !important;
     backdrop-filter: blur(14px) !important;
     -webkit-backdrop-filter: blur(14px) !important;
     border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
     box-shadow: 0 8px 24px rgba(2, 44, 92, 0.16) !important;
-    padding: 6px 10px !important;
+    border-radius: 999px !important;
+    padding: 6px 12px !important;
   }
-  .banner-stat-item {
+  #hero .home-mobile-fact-item {
     font-size: 11px !important;
     font-weight: 700 !important;
     color: #034A75 !important;
   }
-
-  /* Đổi nút MUA NGAY sang Xanh Đại Dương bóng bẩy / Coral */
-  .home-banner-cta-btn {
+  #hero .home-mobile-hero-cta {
+    margin-bottom: 0 !important;
     background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%) !important;
-    border: 2px solid #38BDF8 !important;
-    box-shadow: 0 8px 26px rgba(2, 132, 199, 0.5), 0 4px 0 #075985 !important;
+    border: 2.5px solid #38BDF8 !important;
+    border-bottom: 6px solid #0C4A6E !important;
+    box-shadow: 0 10px 28px rgba(2, 132, 199, 0.55) !important;
     color: #FFFFFF !important;
   }
-  .home-banner-cta-btn:active {
+  #hero .home-mobile-hero-cta:active {
     transform: translateY(3px) !important;
-    box-shadow: 0 3px 12px rgba(2, 132, 199, 0.4), 0 1px 0 #075985 !important;
+    border-bottom-width: 3px !important;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4) !important;
   }
 }
 
 /* --- HÌNH 2: MENU OVERLAY --- */
 @media (max-width: 700px) {
-  /* Đẩy menu xuống dưới thêm khoảng thở */
-  .mobile-nav {
-    top: 82px !important;
+  #mobileNav.mobile-nav {
+    top: 92px !important;
     max-height: calc(100vh - 96px) !important;
   }
-
-  /* Đổi nút đóng X sang xám khói / xanh navy, bỏ màu cam */
-  .mobile-toggle.active span {
+  #mobileToggle.active {
     background: #0F172A !important;
+    border-color: #334155 !important;
+    box-shadow: 0 4px 0 #020617, 0 8px 24px rgba(15, 23, 42, 0.45) !important;
   }
-  .mobile-toggle.active {
-    background: #F1F5F9 !important;
-    border-color: #CBD5E1 !important;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15) !important;
+  #mobileToggle.active span {
+    background: #FFFFFF !important;
   }
-
-  /* Ẩn hoàn toàn tag Incoterms 2020 */
   .mx-nav-badge {
     display: none !important;
   }
@@ -2542,7 +2537,6 @@
     flex-direction: column !important;
     justify-content: center !important;
   }
-  /* Họa tiết chìm gợn sóng & hải đồ */
   #block1-showcase::before {
     content: "" !important;
     position: absolute !important;
@@ -2554,8 +2548,6 @@
     pointer-events: none !important;
     opacity: 0.65 !important;
   }
-
-  /* Khung Card mở rộng phủ trọn, không chừa khoảng trống hụt hẫng */
   #block1-showcase .home-showcase-container {
     width: calc(100% - 24px) !important;
     max-width: 420px !important;
@@ -2566,8 +2558,6 @@
     border: 3.5px solid #FFFFFF !important;
     box-shadow: 0 16px 40px rgba(2, 44, 92, 0.18), 0 0 0 1.5px #38BDF8 !important;
   }
-
-  /* Khung ảnh Slider: hiển thị đầy đủ trọn vẹn hình ảnh (không bị cắt xén) */
   #block1-showcase .showcase-carousel-wrap {
     height: 220px !important;
     max-height: 35vh !important;
@@ -2576,18 +2566,10 @@
     border: 1.5px solid #BAE6FD !important;
     border-radius: 16px !important;
   }
-
   #block1-showcase .showcase-slide-img {
     object-fit: contain !important;
     padding: 8px !important;
     box-sizing: border-box !important;
-  }
-  .showcase-glass-card {
-    border-radius: 26px !important;
-    border: 2px solid rgba(255, 255, 255, 0.95) !important;
-    background: rgba(255, 255, 255, 0.94) !important;
-    box-shadow: 0 16px 40px rgba(2, 44, 92, 0.18), 0 2px 8px rgba(0, 0, 0, 0.04) !important;
-    padding: 24px 16px 22px !important;
   }
 }
 
@@ -2607,17 +2589,9 @@
     background-size: 20px 20px !important;
     pointer-events: none !important;
   }
-  /* Dịch chuyển cụm 3 khối tính năng xuống dưới 20-25px để không dính sát hình không nền */
-  .mx-gameplay-bullets,
-  .mx-feature-cards {
+  .mx-gameplay-bullets {
     margin-top: 24px !important;
     gap: 12px !important;
-  }
-  .mx-feature-card {
-    border-radius: 18px !important;
-    border: 1.5px solid rgba(2, 132, 199, 0.15) !important;
-    background: #FFFFFF !important;
-    box-shadow: 0 8px 20px rgba(2, 44, 92, 0.08) !important;
   }
 }
 
@@ -2637,7 +2611,6 @@
     background-size: 20px 20px !important;
     pointer-events: none !important;
   }
-  /* Đổi màu viền khung ảnh từ vàng cam sang Xanh Hải Quân / Cyan hiện đại */
   #block3-scale .photo-card-wrapper,
   .photo-card-wrapper {
     border-radius: 24px !important;
@@ -2655,21 +2628,15 @@
 
 /* --- HÌNH 6: 4 TRỤ CỘT CHIẾN THUẬT --- */
 @media (max-width: 700px) {
-  /* Ẩn tag nhỏ trôi nổi và icon ngón tay */
-  #block4-pillars .pillars-diorama-overlay,
-  #block4-pillars .home-pillars-container > .text-center > div[style*="inline-block"],
-  #block4-pillars .quychien-headline-divider,
-  #block4-pillars .quychien-headline-bold + div + p + div,
-  .mx-pillar-action,
-  .fandeck-mobile-open-pill,
-  .fandeck-mobile-open-pill span {
-    /* hide floating small tag & finger icon */
+  #block4-pillars .home-pillars-container > .text-center::before {
+    display: none !important;
+    content: none !important;
   }
-  /* Khung bọc Container Kim loại dập gân & Viền Neon phát sáng */
   .pillar-fandeck-card {
     border-radius: 20px !important;
-    border: 2px solid rgba(255, 255, 255, 0.9) !important;
-    box-shadow: 0 10px 24px rgba(2, 44, 92, 0.16), 0 0 14px rgba(56, 189, 248, 0.35) !important;
+    border: 2px solid rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 12px 28px rgba(2, 44, 92, 0.18), 0 0 16px rgba(56, 189, 248, 0.3) !important;
+    background: #FFFFFF !important;
     position: relative !important;
     overflow: hidden !important;
   }
@@ -2687,8 +2654,11 @@
 @media (max-width: 700px) {
   #cardModal.modal-overlay {
     padding: 0 !important;
+    display: flex !important;
     align-items: stretch !important;
+    justify-content: stretch !important;
   }
+  #cardModal .modal-content,
   #cardModal .modal-3d-card-content {
     width: 100vw !important;
     height: 100vh !important;
@@ -2697,13 +2667,12 @@
     border-radius: 0 !important;
     border: none !important;
     margin: 0 !important;
+    padding: 0 !important;
+    background: #F8FAFC !important;
+    overflow: hidden !important;
     display: flex !important;
     flex-direction: column !important;
-    padding: 0 !important;
-    background: #0B192C !important;
-    overflow: hidden !important;
   }
-  /* Nút đóng X ghim góc trên */
   #cardModal #modalClose {
     position: fixed !important;
     top: max(16px, env(safe-area-inset-top, 16px)) !important;
@@ -2719,38 +2688,99 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
     z-index: 1000 !important;
   }
-  /* Vùng trên (Top 55%): Trình diễn thẻ lớn & Lướt ngang */
-  #cardModal .modal-card-view {
-    flex: 0 0 54vh !important;
-    height: 54vh !important;
+  #cardModal .modal-body,
+  #cardModal .modal-3d-body {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100vh !important;
+    width: 100vw !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #F8FAFC !important;
+  }
+  #cardModal .modal-card-view,
+  #cardModal .modal-stage-wrapper {
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  #cardModal .modal-stage-wrapper {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    background: radial-gradient(circle at 50% 45%, #1E3E62 0%, #0B192C 100%) !important;
-    padding: 30px 16px 10px !important;
+  }
+  #cardModal .modal-card-view {
+    flex: 0 0 52vh !important;
+    height: 52vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 16px 16px 8px !important;
     position: relative !important;
   }
   #cardModal .modal-flip-container {
     height: 38vh !important;
     max-height: 320px !important;
+    aspect-ratio: auto !important;
+    perspective: 1200px !important;
+  }
+  #cardModal .modal-flip-inner {
+    transform-style: preserve-3d !important;
+  }
+  #cardModal .modal-flip-face,
+  #cardModal .modal-flip-back,
+  #cardModal .modal-flip-front {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.16) !important;
+    border-radius: 14px !important;
+    overflow: visible !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
   }
   #cardModal .modal-card-img {
     height: 100% !important;
     width: auto !important;
     max-width: 82vw !important;
     object-fit: contain !important;
+    border-radius: 14px !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    transform: translateZ(0) !important;
+    image-rendering: -webkit-optimize-contrast !important;
+    filter: drop-shadow(0 10px 24px rgba(2, 44, 92, 0.2)) !important;
   }
-  /* Vùng dưới: Bottom Sheet cuộn dọc độc lập */
-  #cardModal .modal-info-col {
-    flex: 1 1 auto !important;
-    height: 46vh !important;
+  #cardModal .modal-card-details {
+    flex: 1 1 48vh !important;
+    height: 48vh !important;
     background: #FFFFFF !important;
-    border-radius: 26px 26px 0 0 !important;
-    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25) !important;
-    padding: 20px 20px calc(20px + env(safe-area-inset-bottom, 16px)) !important;
+    border-radius: 28px 28px 0 0 !important;
+    box-shadow: 0 -10px 36px rgba(2, 44, 92, 0.12) !important;
+    border-top: 1.5px solid #E2E8F0 !important;
+    padding: 22px 18px calc(24px + env(safe-area-inset-bottom, 16px)) !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
+  }
+  #cardModal .modal-card-title {
+    color: #0F172A !important;
+  }
+  #cardModal .modal-box-header,
+  #cardModal .modal-box-subtitle {
+    color: #0369A1 !important;
+  }
+  #cardModal .modal-card-desc-box {
+    background: #F8FAFC !important;
+    border: 1.5px solid #E2E8F0 !important;
+    border-radius: 16px !important;
   }
 }
 
@@ -2770,8 +2800,6 @@
     background-size: 20px 20px !important;
     pointer-events: none !important;
   }
-
-  /* Tăng font chữ Hải trình nhập cuộc & Cách chơi LogisQuest từ A đến Z thêm 1-2 font size */
   #block5-guide .headline-part-top {
     font-size: clamp(23px, 6.6vw, 27px) !important;
     line-height: 1.15 !important;
@@ -2779,24 +2807,6 @@
   #block5-guide .headline-part-bottom {
     font-size: 16px !important;
     line-height: 1.35 !important;
-  }
-
-  /* Đổi nút Play sang Xanh ngọc Neon / Cyan bóng bẩy (loại bỏ màu cam) */
-  .guide-play-btn,
-  .btn-play-pulse,
-  .btn-play-circle {
-    background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%) !important;
-    box-shadow: 0 0 24px rgba(0, 242, 254, 0.6), 0 4px 14px rgba(2, 44, 92, 0.3) !important;
-    color: #FFFFFF !important;
-  }
-
-  /* Cụm 3 bước dạng Waypoints Roadmap */
-  .guide-step-card {
-    border-radius: 18px !important;
-    border: 1.5px solid rgba(2, 132, 199, 0.15) !important;
-    background: #FFFFFF !important;
-    box-shadow: 0 6px 18px rgba(2, 44, 92, 0.08) !important;
-    position: relative !important;
   }
 }
 
@@ -2808,7 +2818,6 @@
     position: relative !important;
     overflow: hidden !important;
   }
-  /* Background pattern và hoạt ảnh đại dương mờ xóa cảm giác trống trải */
   #buy::before {
     content: "" !important;
     position: absolute !important;
@@ -2818,10 +2827,7 @@
     background-size: 100% 100%, 20px 20px !important;
     pointer-events: none !important;
   }
-
-  /* Tái thiết kế 3 huy hiệu thoát khỏi cảm giác AI, thiết kế phẳng tối giản hiện đại */
-  #buy .home-cta-features-bar,
-  #buy .home-cta-features-strip {
+  #buy .home-cta-features-bar {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 10px !important;
@@ -2863,7 +2869,8 @@
     align-items: center !important;
     gap: 2px !important;
   }
-  #buy .cta-feature-title {
+  #buy .cta-feature-title,
+  #buy .cta-feature-title[data-mobile-short] {
     font-family: 'Outfit', 'Montserrat', sans-serif !important;
     font-size: 11.5px !important;
     font-weight: 800 !important;
@@ -2872,16 +2879,10 @@
     text-transform: uppercase !important;
     line-height: 1.2 !important;
   }
-  #buy .cta-feature-title[data-mobile-short] {
-    font-size: 11.5px !important;
-    line-height: 1.2 !important;
-  }
-  #buy .cta-feature-title[data-mobile-short]::after {
+  #buy .cta-feature-title[data-mobile-short]::after,
+  #buy .cta-feature-sub {
     display: none !important;
     content: none !important;
-  }
-  #buy .cta-feature-sub {
-    display: none !important; /* Ẩn bớt chữ lặp lại gây rườm rà chuẩn phong cách AI */
   }
 }
 
@@ -2892,22 +2893,19 @@
     max-width: 100% !important;
     border-radius: 0 !important;
     margin: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    padding: 16px 0 max(16px, env(safe-area-inset-bottom, 16px)) !important;
     border: none !important;
     background: #F0F9FF !important;
   }
-  /* Bỏ khung viền bo góc bao quanh footer, dàn phẳng */
   #bgFooter .bg-footer-main-container {
     border-radius: 0 !important;
     border: none !important;
     box-shadow: none !important;
     background: transparent !important;
     max-width: 100% !important;
-    padding: 24px 20px !important;
+    gap: 12px 14px !important;
+    padding: 12px 16px 8px !important;
   }
-
-  /* Ẩn hoàn toàn form đăng ký nhận tin theo yêu cầu Hình 10 */
   #bgFooter .bg-footer-col:nth-child(4) > .bg-col-header,
   #bgFooter .bg-footer-col:nth-child(4) > .bg-title-underline,
   #bgFooter .bg-footer-col:nth-child(4) > .bg-col-desc,
@@ -2927,8 +2925,6 @@
     margin-bottom: 12px !important;
     text-align: center;
   }
-
-  /* Social Links thẳng hàng & đổi sang màu thương hiệu chuẩn */
   #bgFooter .social-links {
     display: flex !important;
     justify-content: center !important;
@@ -2969,15 +2965,6 @@
     background: #FF0000 !important;
     display: inline-flex !important;
   }
-  /* Tối ưu khoảng trống: kéo nội dung xuống gần sát đáy, loại bỏ tình trạng rời rạc */
-  #bgFooter {
-    padding-top: 16px !important;
-    padding-bottom: max(16px, env(safe-area-inset-bottom, 16px)) !important;
-  }
-  #bgFooter .bg-footer-main-container {
-    gap: 12px 14px !important;
-    padding: 12px 16px 8px !important;
-  }
   #bgFooter .bg-footer-col:nth-child(1) {
     margin-top: 6px !important;
     padding-top: 10px !important;
@@ -2986,272 +2973,5 @@
     margin: 8px auto 0 !important;
     padding: 8px 12px 0 !important;
     border-top: 1px solid rgba(2, 132, 199, 0.15) !important;
-  }
-}
-
-/* --- HÌNH 1 OVERRIDE: CHÍNH XÁC SELECTOR --- */
-@media (max-width: 700px) {
-  /* Phóng to và hạ thấp cụm HẢI TRÌNH ĐÃ MỞ */
-  #hero .home-banner-caption {
-    top: 104px !important;
-  }
-  #hero .home-banner-title-mobile {
-    font-size: clamp(2.4rem, 10vw, 3.3rem) !important;
-    line-height: 1.08 !important;
-    text-shadow: 0 4px 20px rgba(2, 44, 92, 0.5) !important;
-  }
-
-  /* Đưa cụm 3 thẻ thông số và nút CTA xuống sát mép dưới */
-  #hero .home-banner-caption {
-    bottom: env(safe-area-inset-bottom, 8px) !important;
-    padding-bottom: 2px !important;
-  }
-  #hero .home-mobile-hero-facts,
-  #hero .home-banner-bottom-cluster {
-    bottom: 0 !important;
-    margin-bottom: 4px !important;
-  }
-  #hero .home-mobile-hero-cta {
-    margin-bottom: 0 !important;
-  }
-
-  /* 3 Thẻ thông số HUD Frosted-Glass cao cấp */
-  #hero .home-mobile-hero-facts {
-    background: rgba(255, 255, 255, 0.72) !important;
-    backdrop-filter: blur(14px) !important;
-    -webkit-backdrop-filter: blur(14px) !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
-    box-shadow: 0 8px 24px rgba(2, 44, 92, 0.16) !important;
-    border-radius: 999px !important;
-    padding: 6px 12px !important;
-  }
-  #hero .home-mobile-fact-item {
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    color: #034A75 !important;
-  }
-
-  /* Đổi nút MUA NGAY từ cam sang Xanh Đại Dương bóng bẩy */
-  #hero .home-mobile-hero-cta {
-    background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%) !important;
-    border: 2.5px solid #38BDF8 !important;
-    border-bottom: 6px solid #0C4A6E !important;
-    box-shadow: 0 10px 28px rgba(2, 132, 199, 0.55) !important;
-    color: #FFFFFF !important;
-  }
-  #hero .home-mobile-hero-cta:active {
-    transform: translateY(3px) !important;
-    border-bottom-width: 3px !important;
-    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4) !important;
-  }
-}
-
-/* --- HÌNH 2: NÚT ĐÓNG X XANH NAVY / XÁM KHÓI & ĐẨY MENUNAV XUỐNG THÊM --- */
-@media (max-width: 700px) {
-  #mobileToggle.active {
-    background: #0F172A !important;
-    border-color: #334155 !important;
-    box-shadow: 0 4px 0 #020617, 0 8px 24px rgba(15, 23, 42, 0.45) !important;
-  }
-  #mobileToggle.active span {
-    background: #FFFFFF !important;
-  }
-  #mobileNav.mobile-nav {
-    top: 92px !important;
-  }
-}
-
-/* --- HÌNH 6: XÓA TAG TRÔI NỔI PHÍA TRÊN VÀ TINH CHỈNH KHUNG CONTAINER METALLIC --- */
-@media (max-width: 700px) {
-  #block4-pillars .home-pillars-container > .text-center::before {
-    display: none !important;
-    content: none !important;
-  }
-  .pillar-fandeck-card {
-    border-radius: 20px !important;
-    border: 2px solid rgba(255, 255, 255, 0.95) !important;
-    box-shadow: 0 12px 28px rgba(2, 44, 92, 0.18), 0 0 16px rgba(56, 189, 248, 0.3) !important;
-    background: #FFFFFF !important;
-    position: relative !important;
-  }
-}
-
-/* --- HÌNH 7: TRẢI NGHIỆM VUỐT THẺ FULLSCREEN 2 VÙNG ĐỘC LẬP --- */
-@media (max-width: 700px) {
-  #cardModal.modal-overlay {
-    padding: 0 !important;
-    display: flex !important;
-    align-items: stretch !important;
-    justify-content: stretch !important;
-  }
-  #cardModal .modal-content,
-  #cardModal .modal-3d-card-content {
-    width: 100vw !important;
-    height: 100vh !important;
-    max-width: 100vw !important;
-    max-height: 100vh !important;
-    border-radius: 0 !important;
-    border: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: #0B192C !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-  }
-  #cardModal .modal-body,
-  #cardModal .modal-3d-body {
-    flex: 1 1 auto !important;
-    height: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-  }
-  /* Vùng trên (Top 55%): Trình diễn thẻ lớn & Lướt ngang */
-  #cardModal .modal-card-view {
-    flex: 0 0 54% !important;
-    height: 54% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: radial-gradient(circle at 50% 40%, #1E3E62 0%, #0B192C 100%) !important;
-    padding: 24px 16px 12px !important;
-    position: relative !important;
-    border-radius: 0 !important;
-  }
-  #cardModal .modal-stage-wrapper {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-  #cardModal .modal-flip-container {
-    height: 36vh !important;
-    max-height: 290px !important;
-  }
-  #cardModal .modal-card-img {
-    height: 100% !important;
-    width: auto !important;
-    max-width: 80vw !important;
-    object-fit: contain !important;
-  }
-  /* Vùng dưới: Bottom Sheet bo góc vuốt dọc độc lập đọc thông tin */
-  #cardModal .modal-info-col {
-    flex: 1 1 46% !important;
-    height: 46% !important;
-    background: #FFFFFF !important;
-    border-radius: 28px 28px 0 0 !important;
-    box-shadow: 0 -10px 36px rgba(0, 0, 0, 0.35) !important;
-    padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 16px)) !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-  #cardModal .modal-title {
-    color: #0F172A !important;
-  }
-  #cardModal .rule-card {
-    background: #F8FAFC !important;
-    border: 1.5px solid #E2E8F0 !important;
-    border-radius: 16px !important;
-  }
-}
-
-/* --- HÌNH 7 FIX: NỀN TRẮNG SÁNG SỦA, LOẠI BỎ VIỀN LỒNG NHAU, SẮC NÉT SAU XOAY 3D --- */
-@media (max-width: 700px) {
-  #cardModal .modal-body,
-  #cardModal .modal-3d-body {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100vh !important;
-    width: 100vw !important;
-    overflow: hidden !important;
-    background: #F8FAFC !important; /* Nền trắng sáng sủa thanh lịch theo yêu cầu */
-  }
-  #cardModal .modal-card-view,
-  #cardModal .modal-stage-wrapper {
-    background: transparent !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  #cardModal .modal-card-view {
-    flex: 0 0 52vh !important;
-    height: 52vh !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 16px 16px 8px !important;
-  }
-
-  /* Loại bỏ toàn bộ viền đen/viền trắng lồng nhau, chỉ giữ lại một thẻ đơn duy nhất */
-  #cardModal .modal-flip-container {
-    height: 38vh !important;
-    max-height: 320px !important;
-    aspect-ratio: auto !important;
-    perspective: 1200px !important;
-  }
-  #cardModal .modal-flip-inner {
-    transform-style: preserve-3d !important;
-  }
-  #cardModal .modal-flip-face {
-    background: transparent !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.16) !important;
-    border-radius: 14px !important;
-    overflow: visible !important;
-    backface-visibility: hidden !important;
-    -webkit-backface-visibility: hidden !important;
-  }
-  #cardModal .modal-flip-back {
-    background: transparent !important;
-  }
-  #cardModal .modal-flip-front {
-    background: transparent !important;
-  }
-
-  /* Sửa lỗi mờ ảnh sau khi xoay lật 3D ở trạng thái dọc */
-  #cardModal .modal-card-img {
-    height: 100% !important;
-    width: auto !important;
-    max-width: 82vw !important;
-    object-fit: contain !important;
-    border-radius: 14px !important;
-    border: none !important;
-    outline: none !important;
-    background: transparent !important;
-    backface-visibility: hidden !important;
-    -webkit-backface-visibility: hidden !important;
-    transform: translateZ(0) !important;
-    image-rendering: -webkit-optimize-contrast !important;
-    filter: drop-shadow(0 10px 24px rgba(2, 44, 92, 0.2)) !important;
-  }
-
-  #cardModal .modal-card-details {
-    flex: 1 1 48vh !important;
-    height: 48vh !important;
-    background: #FFFFFF !important;
-    border-radius: 28px 28px 0 0 !important;
-    box-shadow: 0 -10px 36px rgba(2, 44, 92, 0.12) !important;
-    border-top: 1.5px solid #E2E8F0 !important;
-    padding: 22px 18px calc(24px + env(safe-area-inset-bottom, 16px)) !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-  #cardModal .modal-card-title {
-    color: #0F172A !important;
-  }
-  #cardModal .modal-box-header,
-  #cardModal .modal-box-subtitle {
-    color: #0369A1 !important;
-  }
-  #cardModal .modal-card-desc-box {
-    background: #F8FAFC !important;
-    border: 1.5px solid #E2E8F0 !important;
-    border-radius: 16px !important;
   }
 }
