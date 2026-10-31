@@ -505,13 +505,11 @@ const cardsGridWrapper = document.getElementById('cardsGridWrapper');
 const cardsGridHeader = document.getElementById('cardsGridHeader');
 const cardsShelvesContainer = document.getElementById('cardsShelvesContainer');
 const cardsShelvesSignature = document.querySelector('.cards-shelves-signature');
-const cardSearch = document.getElementById('cardSearch');
 const tabButtons = document.querySelectorAll('.tab-btn, .tactical-tab-btn, .game-btn-tab, .sx-tab-btn');
 
 // Modal Elements
 const cardModal = document.getElementById('cardModal');
 const modalClose = document.getElementById('modalClose');
-const modalCardImg = document.getElementById('modalCardImg');
 const modalCardType = document.getElementById('modalCardType');
 const modalCardTitle = document.getElementById('modalCardTitle');
 const modalCardEffect = document.getElementById('modalCardEffect');
@@ -585,9 +583,6 @@ function initEvents() {
 
   // Function để làm mới trang về Trang Chủ nguyên bản như lần đầu vào web
   function reloadToHomeFresh() {
-    if (typeof lenis !== 'undefined' && lenis) {
-      lenis.scrollTo(0, { immediate: true });
-    }
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
@@ -627,18 +622,10 @@ function initEvents() {
       if (targetView === 'home' && isHomeViewActive && !isLogoClick) {
         if (mobileNav && mobileNav.classList.contains('active')) {
           closeMobileNav(() => {
-            if (typeof lenis !== 'undefined' && lenis) {
-              lenis.scrollTo(0);
-            } else {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           });
         } else {
-          if (typeof lenis !== 'undefined' && lenis) {
-            lenis.scrollTo(0);
-          } else {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         return;
       }
@@ -660,9 +647,6 @@ function initEvents() {
           history.pushState({ view: targetView }, '', window.location.pathname);
 
           // Kéo về đầu trang của trang vừa bấm
-          if (typeof lenis !== 'undefined' && lenis) {
-            lenis.scrollTo(0, { immediate: true });
-          }
           window.scrollTo(0, 0);
           document.documentElement.scrollTop = 0;
           document.body.scrollTop = 0;
@@ -694,11 +678,7 @@ function initEvents() {
           const offset = document.querySelector('.main-header')?.offsetHeight || 0;
           const top = targetEl.getBoundingClientRect().top + window.scrollY - offset - 12;
           const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          if (typeof lenis !== 'undefined' && lenis) {
-            lenis.scrollTo(top, { immediate: reducedMotion });
-          } else {
-            window.scrollTo({ top, behavior: reducedMotion ? 'auto' : 'smooth' });
-          }
+          window.scrollTo({ top, behavior: reducedMotion ? 'auto' : 'smooth' });
         }
       }
     }
@@ -764,31 +744,15 @@ function initEvents() {
     });
   });
 
-  // Search input filtering (guarded)
-  if (cardSearch) {
-    cardSearch.addEventListener('input', (e) => {
-      searchQuery = e.target.value.toLowerCase().trim();
-      renderCards();
-    });
-
-    // Global Keyboard Shortcut: '/' to focus Card Search Input
-    window.addEventListener('keydown', (e) => {
-      if (e.key === '/' && document.activeElement !== cardSearch && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-        const cardsView = document.getElementById('cardsView');
-        if (cardsView && cardsView.classList.contains('active')) {
-          e.preventDefault();
-          cardSearch.focus();
-          cardSearch.select();
-        }
-      }
-    });
-  }
-
   // Smooth Auto-hide / Reveal Header on Scroll
   let lastScrollTop = 0;
   const headerEl = document.getElementById('header');
 
   window.addEventListener('scroll', () => {
+    if (window.matchMedia('(max-width: 700px)').matches) {
+      headerEl.classList.remove('header-hidden');
+      return;
+    }
     const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
     // Always show header at the very top of the page
@@ -829,36 +793,53 @@ let savedScrollY = 0;
 function openMobileNav() {
   if (mobileNav.classList.contains('active')) return;
 
+  const isPopover = window.matchMedia('(max-width: 700px)').matches;
+  const backdrop = document.getElementById('mobileNavBackdrop');
   savedScrollY = window.pageYOffset || document.documentElement.scrollTop;
   mobileToggle.classList.add('active');
   mobileNav.classList.add('active');
+  if (backdrop) backdrop.classList.add('active');
 
-  // Strictly pin the page in place using fixed positioning
-  document.body.style.position = 'fixed';
-  document.body.style.top = `-${savedScrollY}px`;
-  document.body.style.width = '100%';
-  document.body.style.overflow = 'hidden';
+  if (!isPopover) {
+    // Strictly pin the page in place using fixed positioning for full-screen drawer (> 700px)
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+  }
 
   if (typeof gsap !== 'undefined') {
     gsap.killTweensOf(mobileNav);
     gsap.killTweensOf('.mobile-link');
 
-    gsap.fromTo(mobileNav,
-      { xPercent: -100, opacity: 0 },
-      { xPercent: 0, opacity: 1, duration: 0.45, ease: 'power3.out' }
-    );
+    if (isPopover) {
+      gsap.set(mobileNav, { clearProps: 'xPercent,transform' });
+      gsap.fromTo(mobileNav,
+        { y: -10, scale: 0.96, opacity: 0 },
+        { y: 0, scale: 1, opacity: 1, duration: 0.26, ease: 'power3.out' }
+      );
+    } else {
+      gsap.fromTo(mobileNav,
+        { xPercent: -100, opacity: 0 },
+        { xPercent: 0, opacity: 1, duration: 0.45, ease: 'power3.out' }
+      );
+    }
     gsap.fromTo('.mobile-link',
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.35, stagger: 0.05, ease: 'power2.out', delay: 0.1 }
+      { y: 12, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.28, stagger: 0.04, ease: 'power2.out', delay: 0.05 }
     );
   }
 }
 
 function closeMobileNav(onCompleteCallback) {
+  const isPopover = window.matchMedia('(max-width: 700px)').matches;
+  const backdrop = document.getElementById('mobileNavBackdrop');
   mobileToggle.classList.remove('active');
+  if (backdrop) backdrop.classList.remove('active');
 
   const restoreBodyScroll = () => {
     mobileNav.classList.remove('active');
+    const wasFixed = document.body.style.position === 'fixed';
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.width = '';
@@ -866,71 +847,44 @@ function closeMobileNav(onCompleteCallback) {
 
     if (onCompleteCallback) {
       onCompleteCallback();
-    } else {
+    } else if (wasFixed) {
       window.scrollTo(0, savedScrollY);
     }
   };
 
   if (typeof gsap !== 'undefined') {
     gsap.killTweensOf(mobileNav);
-    gsap.to(mobileNav, {
-      xPercent: -100,
-      opacity: 0,
-      duration: 0.35,
-      ease: 'power3.inOut',
-      onComplete: restoreBodyScroll
-    });
+    if (isPopover) {
+      gsap.to(mobileNav, {
+        y: -8,
+        scale: 0.96,
+        opacity: 0,
+        duration: 0.2,
+        ease: 'power2.inOut',
+        onComplete: restoreBodyScroll
+      });
+    } else {
+      gsap.to(mobileNav, {
+        xPercent: -100,
+        opacity: 0,
+        duration: 0.35,
+        ease: 'power3.inOut',
+        onComplete: restoreBodyScroll
+      });
+    }
   } else {
     restoreBodyScroll();
   }
 }
 
-// GLOBAL LENIS SMOOTH SCROLL INSTANCE
-let lenis = null;
-
-function initSmoothScroll() {
-  if (typeof Lenis === 'undefined') return;
-
-  lenis = new Lenis({
-    duration: 1.15,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    orientation: 'vertical',
-    gestureOrientation: 'vertical',
-    smoothWheel: true,
-    wheelMultiplier: 1.05,
-    touchMultiplier: 1.2,
-    infinite: false,
-  });
-
-  // Sync Lenis with GSAP ScrollTrigger
-  if (typeof ScrollTrigger !== 'undefined') {
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
-  } else {
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-  }
-}
-
 // GSAP 3D & SCROLLANIMATIONS ENGINE (OPTIMIZED & ULTRA SMOOTH)
 function initGSAPAnimations() {
-  initSmoothScroll();
 
   if (typeof gsap === 'undefined') return;
 
-  // Register ScrollTrigger & ScrollToPlugin if available
+  // Register ScrollTrigger if available
   if (typeof ScrollTrigger !== 'undefined') {
-    if (typeof ScrollToPlugin !== 'undefined') {
-      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-    } else {
-      gsap.registerPlugin(ScrollTrigger);
-    }
+    gsap.registerPlugin(ScrollTrigger);
   }
 
   // ── 1. HERO TITLE ENTRANCE ──
@@ -959,7 +913,7 @@ function initGSAPAnimations() {
   const heroProductCaption = document.getElementById('heroProductCaption');
   const firstContentSec = document.getElementById('block1-showcase');
 
-  if (heroSection && heroCurtain && typeof ScrollTrigger !== 'undefined') {
+  if (heroSection && heroCurtain && typeof ScrollTrigger !== 'undefined' && !window.matchMedia('(max-width: 700px)').matches) {
     const heroTl = gsap.timeline({
       scrollTrigger: {
         trigger: heroSection,
@@ -1024,12 +978,8 @@ function initGSAPAnimations() {
       if (!st || st.progress >= 0.95) return;
 
       isAutoScrolling = true;
-      gsap.to(window, {
-        scrollTo: st.end,
-        duration: 3.5,
-        ease: 'power1.inOut',
-        onComplete: () => { isAutoScrolling = false; }
-      });
+      window.scrollTo({ top: st.end, behavior: 'smooth' });
+      setTimeout(() => { isAutoScrolling = false; }, 1000);
     });
   }
 
@@ -1310,8 +1260,6 @@ function initGSAPAnimations() {
   // ── 10. GAMEPLAY VIEW ANIMATIONS ──
   initGameplayAnimations();
 
-  // ── 11. INTRO SLIDESHOW INITIALIZATION ──
-  initIntroSlideshow();
 }
 
 // CARDS VIEW (BỘ SƯU TẬP THẺ BÀI) GSAP SCROLL & REVEAL ANIMATIONS
@@ -1606,151 +1554,6 @@ function initGameplayActionTabs() {
   });
 }
 
-// INTRO SLIDESHOW ROTATION WITH GSAP 3D ANIMATION (AUTOMATIC 4s + MANUAL DOTS & SWIPE)
-function initIntroSlideshow() {
-  const container = document.getElementById('introSlideshow');
-  const slides = document.querySelectorAll('.intro-slide');
-  const dots = document.querySelectorAll('.intro-dot');
-
-  if (!slides || slides.length === 0) return;
-
-  let currentIndex = 0;
-  let isAnimating = false;
-  let autoTimer = null;
-
-  function showSlide(nextIndex) {
-    if (isAnimating) return;
-    if (nextIndex < 0) nextIndex = slides.length - 1;
-    if (nextIndex >= slides.length) nextIndex = 0;
-    if (nextIndex === currentIndex) return;
-
-    isAnimating = true;
-    const currentSlide = slides[currentIndex];
-    const nextSlide = slides[nextIndex];
-
-    const isNext = nextIndex > currentIndex || (currentIndex === slides.length - 1 && nextIndex === 0);
-    const enterRotateY = isNext ? 35 : -35;
-    const exitRotateY = isNext ? -35 : 35;
-
-    // Fade transition đơn giản mượt mà (loại bỏ hiệu ứng 3D)
-    if (typeof gsap !== 'undefined') {
-      gsap.to(currentSlide, {
-        opacity: 0,
-        duration: 0.6,
-        ease: 'power2.inOut',
-        onComplete: () => {
-          currentSlide.classList.remove('active');
-          gsap.set(currentSlide, { visibility: 'hidden', opacity: 0 });
-        }
-      });
-
-      gsap.set(nextSlide, {
-        visibility: 'visible',
-        opacity: 0
-      });
-      nextSlide.classList.add('active');
-
-      gsap.to(nextSlide, {
-        opacity: 1,
-        duration: 0.6,
-        ease: 'power2.inOut',
-        onComplete: () => {
-          currentIndex = nextIndex;
-          isAnimating = false;
-        }
-      });
-    } else {
-      // Fallback transition
-      currentSlide.classList.remove('active');
-      nextSlide.classList.add('active');
-      currentIndex = nextIndex;
-      isAnimating = false;
-    }
-
-    // Update dots state
-    dots.forEach((dot, idx) => {
-      if (idx === nextIndex) {
-        dot.classList.add('active');
-      } else {
-        dot.classList.remove('active');
-      }
-    });
-  }
-
-  function startAutoPlay() {
-    stopAutoPlay();
-    autoTimer = setInterval(() => {
-      showSlide(currentIndex + 1);
-    }, 4000);
-  }
-
-  function stopAutoPlay() {
-    if (autoTimer) clearInterval(autoTimer);
-  }
-
-  // Dots click handlers
-  dots.forEach((dot) => {
-    dot.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const slideIdx = parseInt(dot.getAttribute('data-slide'), 10);
-      showSlide(slideIdx);
-      startAutoPlay();
-    });
-  });
-
-  // Touch & Mouse Swipe / Drag Support for manual swipe
-  if (container) {
-    let startX = 0;
-    let isDragging = false;
-
-    // Touch events for mobile
-    container.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    }, { passive: true });
-
-    container.addEventListener('touchend', (e) => {
-      const endX = e.changedTouches[0].clientX;
-      const diffX = endX - startX;
-      if (Math.abs(diffX) > 40) { // Threshold 40px
-        if (diffX < 0) {
-          showSlide(currentIndex + 1); // Swipe left -> Next
-        } else {
-          showSlide(currentIndex - 1); // Swipe right -> Prev
-        }
-        startAutoPlay();
-      }
-    }, { passive: true });
-
-    // Mouse drag events for desktop
-    container.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      startX = e.clientX;
-    });
-
-    container.addEventListener('mouseup', (e) => {
-      if (!isDragging) return;
-      isDragging = false;
-      const endX = e.clientX;
-      const diffX = endX - startX;
-      if (Math.abs(diffX) > 40) {
-        if (diffX < 0) {
-          showSlide(currentIndex + 1);
-        } else {
-          showSlide(currentIndex - 1);
-        }
-        startAutoPlay();
-      }
-    });
-
-    container.addEventListener('mouseleave', () => {
-      isDragging = false;
-    });
-  }
-
-  // Start automatic playback
-  startAutoPlay();
-}
-
 // SWITCH VIRTUAL VIEWS
 function switchView(viewName) {
   // Hide all virtual views dynamically
@@ -1759,9 +1562,6 @@ function switchView(viewName) {
   });
 
   // Kéo về đầu trang của view mới
-  if (typeof lenis !== 'undefined' && lenis) {
-    lenis.scrollTo(0, { immediate: true });
-  }
   window.scrollTo(0, 0);
   document.documentElement.scrollTop = 0;
   document.body.scrollTop = 0;
@@ -1886,6 +1686,8 @@ function switchView(viewName) {
   // Close mobile drawer
   mobileToggle.classList.remove('active');
   mobileNav.classList.remove('active');
+  const backdrop = document.getElementById('mobileNavBackdrop');
+  if (backdrop) backdrop.classList.remove('active');
   document.body.style.overflow = 'auto';
 }
 
@@ -2135,7 +1937,6 @@ function renderCards() {
       backBtn.addEventListener('click', () => {
         activeCategory = 'all';
         searchQuery = '';
-        if (cardSearch) cardSearch.value = '';
         tabButtons.forEach(b => {
           if (b.getAttribute('data-tab') === 'all') {
             b.classList.add('active');
@@ -2453,6 +2254,8 @@ function openPillarCategoryModal(categoryKey) {
   // Mặc định hiển thị mặt sau Container 3D (Ngang) và nhấp để lật (Dọc)
   toggleModalCardFlip(false);
 
+  const modalScrollEl = cardModal.querySelector('.modal-3d-card-content') || cardModal.querySelector('.modal-content');
+  if (modalScrollEl) modalScrollEl.scrollTop = 0;
   cardModal.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -2514,6 +2317,8 @@ function openCardModal(card) {
   // Directly show the front face for explicit single-card clicks
   toggleModalCardFlip(true);
 
+  const modalScrollEl = cardModal.querySelector('.modal-3d-card-content') || cardModal.querySelector('.modal-content');
+  if (modalScrollEl) modalScrollEl.scrollTop = 0;
   cardModal.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -2708,6 +2513,29 @@ function initEditorialSlider() {
         goToCard(dotIndex);
         return;
       }
+    }
+
+    // Nếu click vào nút mũi tên điều hướng
+    const clickedPrev = e.target.closest('.team-nav-prev');
+    if (clickedPrev) {
+      e.stopPropagation();
+      if (currentEditorialIndex > 0) {
+        goToCard(currentEditorialIndex - 1);
+      } else {
+        goToCard(totalCards - 1);
+      }
+      return;
+    }
+
+    const clickedNext = e.target.closest('.team-nav-next');
+    if (clickedNext) {
+      e.stopPropagation();
+      if (currentEditorialIndex < totalCards - 1) {
+        goToCard(currentEditorialIndex + 1);
+      } else {
+        goToCard(0);
+      }
+      return;
     }
 
     if (isEditorialAnimating) return;
@@ -3171,9 +2999,6 @@ function initNauticalScrollRail() {
   }
 
   window.addEventListener('scroll', onScrollSync, { passive: true });
-  if (typeof lenis !== 'undefined' && lenis) {
-    lenis.on('scroll', onScrollSync);
-  }
 
   window.addEventListener('resize', () => {
     updateTrackRect();
@@ -3190,14 +3015,10 @@ function initNauticalScrollRail() {
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     const targetScroll = ratio * scrollHeight;
 
-    if (lenis) {
-      lenis.scrollTo(targetScroll, { duration: 1.0 });
-    } else {
-      window.scrollTo({
-        top: targetScroll,
-        behavior: 'smooth'
-      });
-    }
+    window.scrollTo({
+      top: targetScroll,
+      behavior: 'smooth'
+    });
   });
 
   // Handle dragging the topdown ship with live window scroll sync
@@ -3207,7 +3028,6 @@ function initNauticalScrollRail() {
     isDragging = true;
     thumb.classList.add('is-dragging');
     document.body.style.userSelect = 'none';
-    if (lenis) lenis.stop();
     updateTrackRect();
     onDragMove(e);
   }
@@ -3228,15 +3048,10 @@ function initNauticalScrollRail() {
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     const targetTop = ratio * scrollHeight;
 
-    if (lenis) {
-      // Dragging stops Lenis smoothing; force allows scrolling while stopped.
-      lenis.scrollTo(targetTop, { immediate: true, force: true });
-    } else {
-      window.scrollTo({
-        top: targetTop,
-        behavior: 'auto'
-      });
-    }
+    window.scrollTo({
+      top: targetTop,
+      behavior: 'auto'
+    });
   }
 
   function stopDrag() {
@@ -3244,7 +3059,6 @@ function initNauticalScrollRail() {
       isDragging = false;
       thumb.classList.remove('is-dragging');
       document.body.style.userSelect = '';
-      if (lenis) lenis.start();
       onScrollSync();
     }
   }
@@ -3286,135 +3100,6 @@ function initNauticalScrollRail() {
 }
 
 
-
-// ============================================================
-// TACTICAL MARITIME BOARD GAME JOURNEY — KHỐI 5 LOGIC (16:10)
-// ============================================================
-function initTacticalBoardgameBlock5() {
-  const boardgameSection = document.getElementById('block5-values');
-  if (!boardgameSection) return;
-
-  const trayItems = boardgameSection.querySelectorAll('.component-tray-item');
-  const missionBtns = boardgameSection.querySelectorAll('.boardgame-mission-btn');
-  const shipToken = document.getElementById('boardgameShipToken');
-  const closeBtns = boardgameSection.querySelectorAll('.popover-close-btn');
-
-  const shipTrayCoords = {
-    '1': { left: '14%', top: '32%' },
-    '2': { left: '38%', top: '70%' },
-    '3': { left: '67%', top: '30%' },
-    '4': { left: '89%', top: '68%' }
-  };
-
-  let currentActiveTray = '1';
-  let autoTourTimer = null;
-  let userInteracted = false;
-
-  function setActiveTray(trayId, isUserAction = false) {
-    if (isUserAction) {
-      userInteracted = true;
-      if (autoTourTimer) clearInterval(autoTourTimer);
-    }
-
-    currentActiveTray = String(trayId);
-
-    // Update component trays
-    trayItems.forEach(tray => {
-      if (tray.getAttribute('data-tray') === currentActiveTray) {
-        tray.classList.add('tray-active');
-      } else {
-        tray.classList.remove('tray-active');
-      }
-    });
-
-    // Update bottom mission buttons
-    missionBtns.forEach(btn => {
-      if (btn.getAttribute('data-tray') === currentActiveTray) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
-    });
-
-    // Move 3D Ship Token to the selected tray location
-    if (shipToken && shipTrayCoords[currentActiveTray]) {
-      shipToken.style.left = shipTrayCoords[currentActiveTray].left;
-      shipToken.style.top = shipTrayCoords[currentActiveTray].top;
-    }
-  }
-
-  // Click on Component Tray 3D buttons & trays
-  trayItems.forEach(tray => {
-    const trayId = tray.getAttribute('data-tray');
-    const trayBtn = tray.querySelector('.tray-3d-button');
-
-    if (trayBtn) {
-      trayBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        setActiveTray(trayId, true);
-      });
-    }
-
-    tray.addEventListener('click', (e) => {
-      if (!e.target.closest('.popover-close-btn')) {
-        setActiveTray(trayId, true);
-      }
-    });
-  });
-
-  // Click on Bottom Mission Buttons
-  missionBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const trayId = btn.getAttribute('data-tray');
-      setActiveTray(trayId, true);
-    });
-  });
-
-  // Close popover buttons
-  closeBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      userInteracted = true;
-      if (autoTourTimer) clearInterval(autoTourTimer);
-      const parentTray = btn.closest('.component-tray-item');
-      if (parentTray) {
-        parentTray.classList.remove('tray-active');
-      }
-    });
-  });
-
-  // Auto-tour gentle voyage when section is in viewport
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !userInteracted) {
-          if (!autoTourTimer) {
-            autoTourTimer = setInterval(() => {
-              if (userInteracted) {
-                clearInterval(autoTourTimer);
-                return;
-              }
-              let nextTray = parseInt(currentActiveTray) + 1;
-              if (nextTray > 4) nextTray = 1;
-              setActiveTray(String(nextTray), false);
-            }, 5500);
-          }
-        } else {
-          if (autoTourTimer) {
-            clearInterval(autoTourTimer);
-            autoTourTimer = null;
-          }
-        }
-      });
-    }, { threshold: 0.35 });
-
-    observer.observe(boardgameSection);
-  }
-
-  // Initial position
-  setActiveTray('1', false);
-}
 
 // ============================================================
 // ABOUT VIEW CONTROLLER (SUNLIT MARITIME LIGHT MODE)
@@ -3496,345 +3181,13 @@ function replayAboutAnimations() {
   }
 }
 
-// ============================================================
-// GAMEPLAY VIEW ANIMATIONS (SCROLLYTELLING - TACTICAL BOARD GAME HUB)
-// ============================================================
-function initGameplayAnimations() {
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-  const gameplaySection = document.getElementById('gameplayBrightSection') || document.querySelector('.gameplay-bright-section');
-  if (!gameplaySection) return;
-
-  // 1. Animate the timeline line fill
-  const progressLine = document.getElementById('timelineProgress');
-  const timelineContainer = document.querySelector('.gameplay-scrollytelling-bright');
-  if (progressLine && timelineContainer) {
-    gsap.to(progressLine, {
-      height: '100%',
-      ease: 'none',
-      scrollTrigger: {
-        trigger: timelineContainer,
-        start: 'top 65%',
-        end: 'bottom 75%',
-        scrub: 0.5,
-      }
-    });
-  }
-
-  // 2. Animate nodes and content cards when they come into view
-  const stations = document.querySelectorAll('.gameplay-station-item');
-  stations.forEach((station, index) => {
-    const node = station.querySelector('.station-node');
-    const card = station.querySelector('.station-card-bright');
-
-    // Node activation
-    if (node) {
-      ScrollTrigger.create({
-        trigger: station,
-        start: 'top 65%',
-        onEnter: () => node.classList.add('active'),
-        onLeaveBack: () => node.classList.remove('active'),
-      });
-    }
-
-    // Content card fade & float up
-    if (card) {
-      gsap.fromTo(card,
-        { opacity: 0, y: 35 },
-        {
-          opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
-          scrollTrigger: {
-            trigger: station,
-            start: 'top 75%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-    }
-
-    // Number counter animation for phase 4
-    if (station.id === 'phase4' || station.classList.contains('phase-4')) {
-      const scoreEl = document.getElementById('victoryScore');
-      if (scoreEl) {
-        ScrollTrigger.create({
-          trigger: station,
-          start: 'top 65%',
-          onEnter: () => {
-            gsap.to(scoreEl, {
-              innerHTML: 1000000,
-              duration: 2.2,
-              snap: { innerHTML: 1 },
-              onUpdate: function () {
-                scoreEl.innerHTML = Number(scoreEl.innerHTML).toLocaleString('en-US');
-              },
-              ease: 'power3.out'
-            });
-          },
-          once: true
-        });
-      }
-    }
-  });
-
-  // 3. Interactive Freight Dice Roller with Document Delegation
-  const diceRates = [
-    { rate: '$10,000 / TEU', tag: '⚓ Cước Thấp — Mùa Thấp Điểm' },
-    { rate: '$15,000 / TEU', tag: '⚓ Cước Tiết Kiệm Khởi Đầu' },
-    { rate: '$25,000 / TEU', tag: '⚓ Cước Chuẩn Hải Trình' },
-    { rate: '$35,000 / TEU', tag: '🔥 Cước Cao — Cao Điểm Mùa Vụ' },
-    { rate: '$50,000 / TEU', tag: '⚡ Cước Đỉnh Điểm — Khan Hiếm Tàu!' },
-  ];
-
-  document.addEventListener('click', (e) => {
-    const rollBtn = e.target.closest('#btnRollDice, .btn-roll-tactical');
-    if (rollBtn) {
-      const diceCube = document.getElementById('dice3dCube');
-      const diceRateVal = document.getElementById('diceRateValue');
-      const diceRateTag = document.getElementById('diceRateTag');
-      if (diceCube && diceRateVal && diceRateTag) {
-        diceCube.classList.remove('rolling');
-        void diceCube.offsetWidth; // trigger reflow
-        diceCube.classList.add('rolling');
-
-        let rollCount = 0;
-        const interval = setInterval(() => {
-          const randomItem = diceRates[Math.floor(Math.random() * diceRates.length)];
-          diceRateVal.innerText = randomItem.rate;
-          diceRateTag.innerText = randomItem.tag;
-          rollCount++;
-          if (rollCount > 7) {
-            clearInterval(interval);
-            const finalItem = diceRates[Math.floor(Math.random() * diceRates.length)];
-            diceRateVal.innerText = finalItem.rate;
-            diceRateTag.innerText = finalItem.tag;
-          }
-        }, 60);
-      }
-    }
-
-    // 4. Interactive Incoterms Switcher Delegation
-    const incotermBtn = e.target.closest('.incoterm-tab-btn');
-    if (incotermBtn) {
-      document.querySelectorAll('.incoterm-tab-btn').forEach(b => b.classList.remove('active'));
-      incotermBtn.classList.add('active');
-      const termKey = incotermBtn.getAttribute('data-incoterm');
-      const data = incotermData[termKey];
-      const incotermCardImg = document.getElementById('incotermCardImg');
-      const incotermTitle = document.getElementById('incotermTitle');
-      const incotermFreight = document.getElementById('incotermFreight');
-      const incotermInsurance = document.getElementById('incotermInsurance');
-      const incotermRisk = document.getElementById('incotermRisk');
-      const incotermTip = document.getElementById('incotermTip');
-
-      if (data && incotermCardImg && incotermTitle && incotermFreight && incotermInsurance && incotermRisk && incotermTip) {
-        incotermCardImg.src = data.img;
-        incotermTitle.innerText = data.title;
-        incotermFreight.innerText = data.freight;
-        incotermInsurance.innerText = data.insurance;
-        incotermRisk.innerText = data.risk;
-        incotermTip.innerHTML = data.tip;
-      }
-    }
-
-    // 5. Interactive Event Simulator Delegation
-    const eventBtn = e.target.closest('.event-tab-btn');
-    if (eventBtn) {
-      document.querySelectorAll('.event-tab-btn').forEach(b => b.classList.remove('active'));
-      eventBtn.classList.add('active');
-      const evtKey = eventBtn.getAttribute('data-event');
-      const data = eventData[evtKey];
-      const eventCardImg = document.getElementById('eventCardImg');
-      const eventTitle = document.getElementById('eventTitle');
-      const eventLossText = document.getElementById('eventLossText');
-      const eventWinText = document.getElementById('eventWinText');
-
-      if (data && eventCardImg && eventTitle && eventLossText && eventWinText) {
-        eventCardImg.src = data.img;
-        eventTitle.innerText = data.title;
-        eventLossText.innerText = data.loss;
-        eventWinText.innerText = data.win;
-      }
-    }
-  });
-
-  const incotermData = {
-    fob: {
-      img: 'assets/The Incoterm/FOB.png',
-      title: 'FOB — GIAO DỌC MẠN TÀU (FREE ON BOARD)',
-      freight: 'Người Mua tự trả cước biển',
-      insurance: 'Không bắt buộc (Tự gánh rủi ro bão)',
-      risk: 'Lan can tàu tại Cảng Xuất Khẩu',
-      tip: '💡 <strong>Mẹo tác chiến:</strong> Tiết kiệm vốn ban đầu, thích hợp khi cước xúc xắc đang thấp!'
-    },
-    cif: {
-      img: 'assets/The Incoterm/CIF.png',
-      title: 'CIF — TIỀN HÀNG, BẢO HIỂM & CƯỚC (COST, INSURANCE, FREIGHT)',
-      freight: 'Người Bán chịu toàn bộ cước biển',
-      insurance: 'Bắt buộc người bán mua Bảo hiểm hàng hải',
-      risk: 'Lan can tàu tại Cảng Đến (Bồi thường 100%)',
-      tip: '💡 <strong>Mẹo tác chiến:</strong> Miễn nhiễm bão biển cấp 12, biến rủi ro của đối phương thành cơ hội!'
-    },
-    ddp: {
-      img: 'assets/The Incoterm/DDP.png',
-      title: 'DDP — GIAO ĐÃ NỘP THUẾ (DELIVERED DUTY PAID)',
-      freight: 'Người Bán bao trọn mọi cước phí & thuế nhập khẩu',
-      insurance: 'Bảo hiểm trọn gói tận kho đích',
-      risk: 'Kho hàng người nhận (Điểm an toàn tuyệt đối)',
-      tip: '💡 <strong>Mẹo tác chiến:</strong> Đem lại lợi nhuận uy tín +450,000 điểm khi cập bến thành công!'
-    },
-    exw: {
-      img: 'assets/The Incoterm/EXW.png',
-      title: 'EXW — GIAO TẠI XƯỞNG (EX WORKS)',
-      freight: 'Người Mua chịu toàn bộ hành trình',
-      insurance: 'Người Mua tự lo liệu',
-      risk: 'Ngay tại cổng xưởng người bán',
-      tip: '💡 <strong>Mẹo tác chiến:</strong> Chi phí vốn tối thiểu, xoay vòng tiền nhanh để mua thêm tàu Panamax!'
-    }
-  };
-
-  const eventData = {
-    storm: {
-      img: 'assets/The Su Kien/BÃO NHIỆT ĐỚI.png',
-      title: 'CƠ CHẾ TÁC ĐỘNG: BÃO CẤP 12',
-      loss: 'Tàu bị bão đánh dạt, trừ ngay 2 Điểm Uy Tín mỗi container trên biển.',
-      win: 'Bảo hiểm bồi thường 100% thiệt hại + Nhận thưởng danh tiếng +3 Uy Tín!'
-    },
-    pirate: {
-      img: 'assets/The Su Kien/CƯỚP BIỂN.png',
-      title: 'CƠ CHẾ TÁC ĐỘNG: CƯỚP BIỂN VỊNH ADEN',
-      loss: 'Đội tàu không trang bị hộ tống bị cướp mất 1 container giá trị cao nhất.',
-      win: 'Tàu có điều khoản CIP/CIF được hải quân quốc tế hộ tống qua eo biển an toàn!'
-    },
-    suez: {
-      img: 'assets/The Su Kien/KÊNH ĐÀO TẮC.png',
-      title: 'CƠ CHẾ TÁC ĐỘNG: TẮC NGHẼN KÊNH ĐÀO',
-      loss: 'Tất cả tàu biển bị giữ lại 1 lượt chơi, phạt chậm giao hàng $15,000.',
-      win: 'Thuyền trưởng nắm Thẻ Vận Tải Đa Phương Thức được chuyển hàng sang đường hàng không!'
-    },
-    customs: {
-      img: 'assets/The Su Kien/HẢI QUAN GIỮ HÀNG.png',
-      title: 'CƠ CHẾ TÁC ĐỘNG: HẢI QUAN KIỂM TRA ĐỘT XUẤT',
-      loss: 'Container thiếu chứng từ hợp lệ bị giữ lại kiểm dịch 2 lượt.',
-      win: 'Sở hữu Chứng Chỉ FIATA được thông quan luồng xanh ngay lập tức!'
-    }
-  };
-
-  // 6. Fade up animations for other elements
-  const otherFadeEls = gameplaySection.querySelectorAll('.fade-up-anim:not(.station-card-bright)');
-  otherFadeEls.forEach(el => {
-    gsap.fromTo(el,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse'
-        }
-      }
-    );
-  });
-}
-
-function initGameplayJourney() {
-  const page = document.getElementById('gameplay');
-  if (!page || page.dataset.journeyReady) return;
-  page.dataset.journeyReady = 'true';
-
-  const actionData = {
-    load: {
-      label: 'HÀNH ĐỘNG 01',
-      title: 'Nạp Container',
-      image: 'assets/gameplay-action-load-v3.png',
-      alt: 'Minh họa nạp container vào kho cá nhân',
-      description: 'Lấy 3 container màu của bạn từ nguồn chung và đặt vào kho cá nhân. Kho chứa tối đa 5 container.',
-      tip: 'Mẹo: Chỉ nhận số container tương ứng với số chỗ còn trống trong kho.'
-    },
-    ship: {
-      label: 'HÀNH ĐỘNG 02',
-      title: 'Xếp Hàng Lên Tàu',
-      image: 'assets/gameplay-action-ship-v3.png',
-      alt: 'Minh họa xếp container lên tàu',
-      description: 'Lấy 1 container từ kho cá nhân và đặt vào một vị trí trống trên tàu đang chờ xuất phát.',
-      tip: 'Mẹo: Vị trí xếp hàng có thể quyết định số điểm bạn nhận tại cảng FAS.'
-    },
-    port: {
-      label: 'HÀNH ĐỘNG 03',
-      title: 'Điều Tàu Cập Cảng',
-      image: 'assets/gameplay-action-port-v3.png',
-      alt: 'Minh họa điều tàu container cập cảng',
-      description: 'Điều một tàu đủ điều kiện đến cảng Incoterms còn trống, sau đó xử lý đủ bốn bước cập cảng.',
-      tip: 'Điều kiện: Tàu phải đầy hoặc chỉ còn thiếu 1 container so với sức chứa tối đa.'
-    }
-  };
-
-  const actionButtons = page.querySelectorAll('[data-gp-action]');
-  const actionImage = document.getElementById('gpActionImage');
-  const actionLabel = document.getElementById('gpActionLabel');
-  const actionTitle = document.getElementById('gpActionTitle');
-  const actionDescription = document.getElementById('gpActionDescription');
-  const actionTip = document.getElementById('gpActionTip');
-
-  actionButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const action = actionData[button.dataset.gpAction];
-      if (!action) return;
-      actionButtons.forEach(item => {
-        const selected = item === button;
-        item.classList.toggle('active', selected);
-        item.setAttribute('aria-pressed', String(selected));
-      });
-      actionImage.src = action.image;
-      actionImage.alt = action.alt;
-      actionLabel.textContent = action.label;
-      actionTitle.textContent = action.title;
-      actionDescription.textContent = action.description;
-      actionTip.textContent = action.tip;
-    });
-  });
-
-  const journeyLinks = [...page.querySelectorAll('.gp-journey-link')];
-  const sections = journeyLinks
-    .map(link => document.getElementById(link.dataset.gpSection))
-    .filter(Boolean);
-
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => {
-      const active = entries
-        .filter(entry => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!active) return;
-      journeyLinks.forEach(link => {
-        const selected = link.dataset.gpSection === active.target.id;
-        link.classList.toggle('active', selected);
-        if (selected) link.setAttribute('aria-current', 'step');
-        else link.removeAttribute('aria-current');
-      });
-    }, { rootMargin: '-18% 0px -62% 0px', threshold: [0, 0.15, 0.4] });
-    sections.forEach(section => observer.observe(section));
-  }
-
-  if (window.matchMedia('(max-width: 700px)').matches) {
-    page.querySelectorAll('.gp-inc-card').forEach(details => details.removeAttribute('open'));
-  }
-}
-
-// Khởi chạy khi DOM sẵn sàng
+// Khởi chạy các view bổ sung khi DOM sẵn sàng
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initNauticalScrollRail();
-    initTacticalBoardgameBlock5();
     initAboutGameRedesign();
-    initGameplayAnimations();
-    initGameplayJourney();
   });
 } else {
   initNauticalScrollRail();
-  initTacticalBoardgameBlock5();
   initAboutGameRedesign();
-  initGameplayAnimations();
-  initGameplayJourney();
 }
-
-
-

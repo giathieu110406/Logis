@@ -9,39 +9,24 @@
     content="Trang chủ giới thiệu LogisQuest - Trò chơi board game chiến thuật hải trình thương mại quốc tế Incoterms. Khám phá các điều khoản cảng biển và cơ chế đối phó rủi ro.">
   <meta name="google-site-verification" content="vg5ftAAqOBpdmyk9pyX5EQIlgQJQmBg7RILx0ebMp8g" />
 
-  <script>
-    // Clean URL: Tự động loại bỏ /index.html để URL thanh địa chỉ luôn là / sạch đẹp
-    (function() {
-      try {
-        var path = window.location.pathname;
-        if (path.endsWith('/index.html') || path.endsWith('index.html')) {
-          var cleanPath = path.replace(/\/index\.html$/, '/').replace(/index\.html$/, '');
-          if (!cleanPath) cleanPath = '/';
-          window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
-        }
-      } catch(e) {}
-    })();
-  </script>
-
   <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600&family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Serif:wght@600;700;800&family=Outfit:wght@600;700;800;900&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&subset=vietnamese&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&subset=vietnamese&display=swap"
     rel="stylesheet">
 
   <!-- GSAP & ScrollTrigger Animation Engine -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-  <!-- Lenis Smooth Scroll Engine -->
-  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 
   <!-- CSS Link -->
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="shortcut icon" type="image/png" href="assets/logo.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="assets/about/about-reference.css">
+  <link rel="stylesheet" href="mobile-home.css?v=20261031d">
+  <link rel="stylesheet" href="mobile-redesign.css?v=20261031h">
 </head>
 
 <body>
@@ -122,48 +107,79 @@
     </div>
   </header>
 
-  <!-- Mobile Navigation Drawer -->
+  <!-- Mobile Navigation Drawer / Floating Popover Card -->
   <div class="mobile-nav" id="mobileNav">
-    <a href="javascript:void(0)" class="mobile-link active" data-nav="home">Trang Chủ</a>
+    <div class="mx-nav-card-head mx-only">
+      <span class="mx-nav-kicker">ĐIỀU HƯỚNG HẢI TRÌNH</span>
+      <span class="mx-nav-badge">Incoterms 2020</span>
+    </div>
+    <a href="javascript:void(0)" class="mobile-link active" data-nav="home">
+      <span class="mx-nav-icon mx-only" aria-hidden="true">⚓</span>
+      <span class="mx-nav-label">Trang Chủ</span>
+      <span class="mx-nav-arrow mx-only" aria-hidden="true">→</span>
+    </a>
     <div class="mobile-dropdown-group">
       <span class="mobile-group-title">Giới Thiệu</span>
-      <a href="javascript:void(0)" class="mobile-link mobile-sub-link" data-nav="about">— Về LogisQuest</a>
-      <a href="javascript:void(0)" class="mobile-link mobile-sub-link" data-nav="team">— Đội Ngũ Sáng Tạo</a>
+      <div class="mx-nav-subgrid">
+        <a href="javascript:void(0)" class="mobile-link mobile-sub-link" data-nav="about">
+          <span class="mx-nav-icon mx-only" aria-hidden="true">🧭</span>
+          <span class="mx-nav-label">Về LogisQuest</span>
+        </a>
+        <a href="javascript:void(0)" class="mobile-link mobile-sub-link" data-nav="team">
+          <span class="mx-nav-icon mx-only" aria-hidden="true">👥</span>
+          <span class="mx-nav-label">Đội Ngũ Sáng Tạo</span>
+        </a>
+      </div>
     </div>
-    <a href="javascript:void(0)" class="mobile-link" data-nav="gameplay">Cách Chơi</a>
-    <a href="javascript:void(0)" class="mobile-link" data-nav="cards">Thẻ Bài</a>
+    <a href="javascript:void(0)" class="mobile-link" data-nav="gameplay">
+      <span class="mx-nav-icon mx-only" aria-hidden="true">🎲</span>
+      <span class="mx-nav-label">Cách Chơi</span>
+      <span class="mx-nav-arrow mx-only" aria-hidden="true">→</span>
+    </a>
+    <a href="javascript:void(0)" class="mobile-link" data-nav="cards">
+      <span class="mx-nav-icon mx-only" aria-hidden="true">🃏</span>
+      <span class="mx-nav-label">Thẻ Bài</span>
+      <span class="mx-nav-arrow mx-only" aria-hidden="true">→</span>
+    </a>
 
     <!-- DELIVERY BUTTON (SIDEBAR / MOBILE MENU) — Full Phase 1+2 from delivery-button library -->
-    <button class="order-button nav-delivery-btn" type="button" aria-label="Mua ngay" id="sidebarDeliveryBtn">
+    <div class="mx-nav-cta-footer">
+      <div class="mx-nav-price-tag mx-only">
+        <span class="mx-nav-price-label">Phiên bản giới hạn</span>
+        <strong class="mx-nav-price-val">340.000₫</strong>
+      </div>
+      <button class="order-button nav-delivery-btn" type="button" aria-label="Mua ngay" id="sidebarDeliveryBtn">
 
-      <!-- Phase 1: add-to-cart layer -->
-      <span class="cart-layer" aria-hidden="true">
-        <svg class="cart-layer__cart" viewBox="0 0 32 32">
-          <path class="cart-layer__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z" />
-          <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1" />
-          <path d="M13.1 26.2h.1M23.4 26.2h.1" />
-          <path class="cart-layer__check" d="m14.1 15.7 2.1 2.1 4.3-4.6" />
-        </svg>
-        <svg class="cart-layer__shirt" viewBox="0 0 32 32">
-          <path
-            d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z" />
-        </svg>
-      </span>
+        <!-- Phase 1: add-to-cart layer -->
+        <span class="cart-layer" aria-hidden="true">
+          <svg class="cart-layer__cart" viewBox="0 0 32 32">
+            <path class="cart-layer__basket-fill" d="M9.2 11.2h17.3l-2.1 8.5H11.3z" />
+            <path d="M3.8 6.2h3.5l3.2 14.1a2.1 2.1 0 0 0 2.1 1.7h11.5a2.1 2.1 0 0 0 2-1.5l2.1-8.6H9.1" />
+            <path d="M13.1 26.2h.1M23.4 26.2h.1" />
+            <path class="cart-layer__check" d="m14.1 15.7 2.1 2.1 4.3-4.6" />
+          </svg>
+          <svg class="cart-layer__shirt" viewBox="0 0 32 32">
+            <path
+              d="M10.6 5.1 13 3.8c.7 1.5 1.7 2.2 3 2.2s2.3-.7 3-2.2l2.4 1.3 5.2 5-3.9 4-2.1-1.8V28h-9.2V12.3l-2.1 1.8-3.9-4z" />
+          </svg>
+        </span>
 
-      <!-- Labels -->
-      <span class="button-label button-label--default">Mua Ngay</span>
+        <!-- Labels -->
+        <span class="button-label button-label--default">Mua Ngay</span>
 
-      <!-- Phase 2: truck delivery layer -->
-      <span class="package" aria-hidden="true"></span>
-      <span class="truck" aria-hidden="true">
-        <span class="truck__cargo"></span>
-        <span class="truck__cab"><span class="truck__window"></span></span>
-        <span class="truck__light truck__light--top"></span>
-        <span class="truck__light truck__light--bottom"></span>
-      </span>
-      <span class="road" aria-hidden="true"></span>
-    </button>
+        <!-- Phase 2: truck delivery layer -->
+        <span class="package" aria-hidden="true"></span>
+        <span class="truck" aria-hidden="true">
+          <span class="truck__cargo"></span>
+          <span class="truck__cab"><span class="truck__window"></span></span>
+          <span class="truck__light truck__light--top"></span>
+          <span class="truck__light truck__light--bottom"></span>
+        </span>
+        <span class="road" aria-hidden="true"></span>
+      </button>
+    </div>
   </div>
+  <div class="mobile-nav-backdrop mx-only" id="mobileNavBackdrop" aria-hidden="true"></div>
 
   <main>
     <!-- ========================================== -->
@@ -174,10 +190,15 @@
       <!-- ===== HERO BANNER: Full Aspect Ratio Image with Bottom-Centered Text ===== -->
       <section class="home-banner-section" id="hero">
         <div class="home-banner-wrapper">
-          <img src="assets/anh-bia-chinh-thuc.png" alt="LogisQuest — Hải Trình Vạn Dặm" class="home-banner-img"
-            fetchpriority="high">
+          <picture class="home-banner-picture">
+            <source media="(max-width: 700px)" srcset="assets/home-mobile-hero-v3.png">
+            <img src="assets/anh-bia-chinh-thuc.png" alt="LogisQuest — Hải Trình Vạn Dặm" class="home-banner-img"
+              fetchpriority="high">
+          </picture>
+          <img src="assets/logo.png" alt="" class="home-banner-mobile-logo" aria-hidden="true">
           <div class="home-banner-caption">
             <h1 class="home-banner-title-svg-wrapper" aria-label="HẢI TRÌNH ĐÃ MỞ">
+              <span class="home-banner-title-mobile" aria-hidden="true">HẢI TRÌNH<br>ĐÃ MỞ</span>
               <svg class="game-title-svg" viewBox="0 0 950 160" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <!-- 3. Mặt chữ: Gradient Trắng sáng -> Trắng xanh -> Xanh rất nhạt (#FFFFFF -> #EAF4FF -> #CFE6FF) -->
@@ -237,6 +258,12 @@
               <p class="home-banner-sub">Bạn có dám nhập cuộc giao thương?</p>
               <span class="sub-capsule-arrow">&lt;&lt;</span>
             </div>
+            <a class="home-mobile-hero-cta" href="buy.html">Mua ngay <span aria-hidden="true">→</span></a>
+            <ul class="home-mobile-hero-facts" aria-label="Thông tin nhanh về LogisQuest">
+              <li><span aria-hidden="true">👥</span> 2–5 người</li>
+              <li><span aria-hidden="true">⏱</span> 30–45 phút</li>
+              <li><span aria-hidden="true">🎓</span> Incoterms 2020</li>
+            </ul>
           </div>
         </div>
 
@@ -280,7 +307,10 @@
       <!-- ===== 1. GIỚI THIỆU NHANH VỀ LOGISQUEST (BLOCK 1 REDESIGN) ===== -->
       <section class="home-showcase-section" id="block1-showcase">
         <div class="home-showcase-bg-layer">
-          <img src="assets/khoi-1-bg.png" alt="LogisQuest Maritime Ocean" class="home-showcase-bg-img" loading="eager">
+          <picture class="home-showcase-bg-picture" aria-hidden="true">
+            <source media="(max-width: 700px)" srcset="assets/home-mobile-v3/block1-intro-bg.png?v=20261031b">
+            <img src="assets/khoi-1-bg.png" alt="" class="home-showcase-bg-img" loading="eager">
+          </picture>
           <!-- Plane decoration overlay on left sky -->
           <div class="showcase-plane-deco" aria-hidden="true">
             <svg viewBox="0 0 120 70" fill="none" class="plane-svg">
@@ -302,7 +332,7 @@
             <div class="showcase-brand-logo-wrap">
               <img src="assets/logo.png" alt="LogisQuest 3D Logo" class="showcase-brand-logo">
             </div>
-            <h1 class="showcase-main-headline">LOGISQUEST</h1>
+            <h2 class="showcase-main-headline">LOGISQUEST</h2>
             <p class="showcase-sub-headline">Hải Trình Thương Mại Thu Nhỏ</p>
           </div>
 
@@ -313,24 +343,24 @@
               <div class="showcase-glass-card">
                 <div class="showcase-carousel-wrap" id="block1ShowcaseCarousel">
                   <div class="showcase-carousel-track" id="block1CarouselTrack">
-                    <!-- Slide 1 (cũ 3): Standee nhân vật -->
+                    <!-- Slide 1: Toàn cảnh bàn cờ -->
+                    <div class="showcase-slide">
+                      <img src="assets/intro-1.jpg" alt="Bàn cờ LogisQuest" class="showcase-slide-img" loading="eager">
+                    </div>
+                    <!-- Slide 2: Standee nhân vật -->
                     <div class="showcase-slide">
                       <img src="assets/intro-3.jpg" alt="Standee nhân vật LogisQuest" class="showcase-slide-img"
                         loading="eager">
                     </div>
-                    <!-- Slide 2 (cũ 4): Vỏ hộp Boardgame 3D -->
-                    <div class="showcase-slide">
-                      <img src="assets/product-box-3d.png" alt="Vỏ hộp LogisQuest" class="showcase-slide-img"
-                        loading="lazy">
-                    </div>
-                    <!-- Slide 3 (cũ 1): Toàn cảnh bàn cờ -->
-                    <div class="showcase-slide">
-                      <img src="assets/intro-1.jpg" alt="Bàn cờ LogisQuest" class="showcase-slide-img" loading="lazy">
-                    </div>
-                    <!-- Slide 4 (cũ 2): Chi tiết thẻ bài & hải trình -->
+                    <!-- Slide 3: Chi tiết thẻ bài & hải trình -->
                     <div class="showcase-slide">
                       <img src="assets/intro-2.jpg" alt="Chi tiết thẻ bài và hải trình" class="showcase-slide-img"
-                        loading="lazy">
+                        loading="eager">
+                    </div>
+                    <!-- Slide 4: Vỏ hộp Boardgame 3D -->
+                    <div class="showcase-slide">
+                      <img src="assets/product-box-3d.png" alt="Vỏ hộp LogisQuest" class="showcase-slide-img showcase-slide-img--box"
+                        loading="eager">
                     </div>
                   </div>
                 </div>
@@ -341,6 +371,10 @@
                   <span class="showcase-dot" data-index="1"></span>
                   <span class="showcase-dot" data-index="2"></span>
                   <span class="showcase-dot" data-index="3"></span>
+                </div>
+                <div class="mx-showcase-caption-bar mx-only" id="block1SlideCaption">
+                  <span class="mx-caption-step" id="block1CaptionStep">01 / 04</span>
+                  <span class="mx-caption-title" id="block1CaptionTitle">Bàn Cờ Hải Trình Thực Tế</span>
                 </div>
               </div>
             </div>
@@ -377,6 +411,9 @@
           <div class="home-quychien-img-col">
             <div class="quychien-boardgame-showcase">
               <div class="boardgame-glow-backdrop"></div>
+              <img src="assets/ảnh tàu 3d_góc 3 phần 4.png" alt="" class="mx-board-float mx-board-float--ship mx-only" aria-hidden="true">
+              <img src="assets/hero-card.png" alt="" class="mx-board-float mx-board-float--card mx-only" aria-hidden="true">
+              <img src="assets/ảnh cont 3d xếp chồng.png" alt="" class="mx-board-float mx-board-float--cont mx-only" aria-hidden="true">
               <img src="assets/gameplay-board-cutout.png" alt="Bộ cờ LogisQuest và bàn chơi chiến thuật Logistics" class="quychien-boardgame-cutout-img">
             </div>
           </div>
@@ -400,6 +437,30 @@
               <span class="quychien-highlight-cyan">TỐI ƯU CẢNG BIỂN ĐỂ THỐNG TRỊ!</span>
             </h2>
             <div class="quychien-headline-divider-amber"></div>
+
+            <ul class="mx-gameplay-bullets mx-only" aria-label="Điểm nhấn lối chơi">
+              <li class="mx-gameplay-bullet">
+                <span class="mx-bullet-icon" aria-hidden="true">🚢</span>
+                <div class="mx-bullet-copy">
+                  <strong>Điều phối đội tàu</strong>
+                  <span>Vận chuyển container &amp; tối ưu tuyến cảng biển</span>
+                </div>
+              </li>
+              <li class="mx-gameplay-bullet">
+                <span class="mx-bullet-icon" aria-hidden="true">🃏</span>
+                <div class="mx-bullet-copy">
+                  <strong>Kết hợp 4 loại thẻ</strong>
+                  <span>Phương Tiện, Chợ, Incoterms &amp; Sự Kiện</span>
+                </div>
+              </li>
+              <li class="mx-gameplay-bullet">
+                <span class="mx-bullet-icon" aria-hidden="true">⚡</span>
+                <div class="mx-bullet-copy">
+                  <strong>Xoay chuyển biến cố</strong>
+                  <span>Vận dụng Logistics cập cảng giành chiến thắng</span>
+                </div>
+              </li>
+            </ul>
 
             <!-- Khối văn bản nội dung chiến thuật theo yêu cầu -->
             <div class="quychien-gameplay-paragraphs">
@@ -428,6 +489,11 @@
           <span class="route-compass-icon">🧭</span>
           <span class="route-compass-pulse"></span>
         </div>
+        <svg class="mx-wave-divider mx-only" viewBox="0 0 400 44" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,18 C65,36 135,2 200,20 C265,38 335,4 400,20 L400,44 L0,44 Z" fill="#E0F2FE"/>
+          <path d="M0,26 C70,10 130,38 200,24 C270,10 330,38 400,24 L400,44 L0,44 Z" fill="#FFFFFF"/>
+          <path d="M0,20 C65,38 135,4 200,22 C265,40 335,6 400,22" fill="none" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+        </svg>
       </div>
 
       <!-- ===== 3. QUY MÔ CHIẾN TRƯỜNG (2 - 5 NGƯỜI CHƠI) ===== -->
@@ -438,17 +504,23 @@
             <div class="quychien-photo-showcase" id="block3PhotoShowcase">
               <div class="photo-glow-backdrop"></div>
               <div class="photo-card-wrapper" id="block3PhotoCard">
+                <div class="mx-porthole-frame-badge mx-only" aria-hidden="true">⚓ BOONG TÀU THỰC CHIẾN</div>
                 <div class="photo-carousel-track" id="block3PhotoTrack">
                   <div class="photo-slide active">
                     <img src="assets/block3-community.jpg" alt="Trải nghiệm LogisQuest thực tế - Nhóm 3 người chơi" class="quychien-community-photo" loading="eager">
                   </div>
                   <div class="photo-slide">
-                    <img src="assets/block3-community-2.jpg" alt="Trải nghiệm LogisQuest thực tế - Bàn cờ và đội tàu chiến thuật" class="quychien-community-photo" loading="lazy">
+                    <img src="assets/block3-community-2.jpg" alt="Trải nghiệm LogisQuest thực tế - Bàn cờ và đội tàu chiến thuật" class="quychien-community-photo" loading="eager">
                   </div>
                   <div class="photo-slide">
-                    <img src="assets/block3-community-3.jpg" alt="Trải nghiệm LogisQuest thực tế - Đấu trí tay đôi 1v1" class="quychien-community-photo" loading="lazy">
+                    <img src="assets/block3-community-3.jpg" alt="Trải nghiệm LogisQuest thực tế - Đấu trí tay đôi 1v1" class="quychien-community-photo" loading="eager">
                   </div>
                 </div>
+              </div>
+              <div class="mx-photo-dots mx-only" id="block3PhotoDots" aria-label="Chuyển ảnh trải nghiệm">
+                <button type="button" class="mx-photo-dot active" data-slide="0" aria-label="Ảnh 1"></button>
+                <button type="button" class="mx-photo-dot" data-slide="1" aria-label="Ảnh 2"></button>
+                <button type="button" class="mx-photo-dot" data-slide="2" aria-label="Ảnh 3"></button>
               </div>
             </div>
           </div>
@@ -473,6 +545,16 @@
             </h2>
             <div class="quychien-headline-divider-amber"></div>
 
+            <div class="mx-scale-badges mx-only" aria-label="Thông số chiến trường">
+              <span class="mx-scale-chip">⚔️ Đấu trí 1v1</span>
+              <span class="mx-scale-chip">🔥 Đại chiến 4–5 người</span>
+              <span class="mx-scale-chip">⏱ 30–45 phút</span>
+            </div>
+
+            <p class="mx-scale-summary mx-only">
+              Các thuyền trưởng liên tục <b>đàm phán, gài bẫy</b> và <b>xoay chuyển tình thế</b> — tạo nên những phút giây kịch tính và tiếng cười gắn kết khó quên trên bàn cờ!
+            </p>
+
             <!-- Khối văn bản nội dung -->
             <div class="quychien-gameplay-paragraphs">
               <p class="gameplay-p">
@@ -490,8 +572,11 @@
       <section class="home-pillars-section alt-bg" id="block4-pillars">
         <!-- Hậu cảnh Sa Bàn Chiến Lược Cảng Biển 3D (Tactical Harbor Diorama Artwork) -->
         <div class="pillars-diorama-bg-layer" aria-hidden="true">
-          <img src="assets/tactical-harbor-diorama.jpg" alt="Tactical Harbor Seaport Diorama"
-            class="pillars-diorama-img">
+          <picture class="pillars-diorama-picture">
+            <source media="(max-width: 700px)" srcset="assets/home-mobile-v3/block4-pillars-bg.png?v=20261031b">
+            <img src="assets/tactical-harbor-diorama.jpg" alt="Tactical Harbor Seaport Diorama"
+              class="pillars-diorama-img">
+          </picture>
           <div class="pillars-diorama-overlay"></div>
         </div>
 
@@ -504,7 +589,7 @@
             <p
               style="color: var(--text-secondary); max-width: 680px; margin: 0 auto; font-size: clamp(0.92rem, 1.15vw, 1.02rem); line-height: 1.6;">
               Bốn nhóm thẻ bài cốt lõi tạo nên chiều sâu chiến thuật và sự kịch tính của từng ván cờ.
-              <b style="color: var(--color-sky);">Nhấp vào từng thẻ để lật mở bí mật chiến thuật & chi tiết linh
+              <b style="color: var(--color-sky);">Chọn từng thẻ để lật mở bí mật chiến thuật & chi tiết linh
                 kiện!</b>
             </p>
           </div>
@@ -516,26 +601,54 @@
               <!-- Thẻ Bài 1: Thẻ Phương Tiện (Xanh lá) -->
               <div class="pillar-fandeck-card card-green-style" data-category="phuong-tien"
                 title="Khám phá Thẻ Phương Tiện">
-                <img src="assets/card-back-phuongtien.png" alt="Thẻ Phương Tiện" class="fandeck-card-img">
+                <div class="mx-pillar-art-stage">
+                  <img src="assets/card-back-phuongtien.png" alt="Thẻ Phương Tiện" class="fandeck-card-img">
+                </div>
+                <div class="mx-pillar-meta mx-only">
+                  <span class="mx-pillar-role">VẬN TẢI CHỦ LỰC</span>
+                  <strong class="mx-pillar-name">Thẻ Phương Tiện</strong>
+                  <span class="mx-pillar-cta"><span aria-hidden="true">👆</span> Chạm mở thẻ</span>
+                </div>
                 <div class="fandeck-card-glare"></div>
               </div>
 
               <!-- Thẻ Bài 2: Thẻ Sự Kiện (Đỏ) -->
               <div class="pillar-fandeck-card card-red-style" data-category="su-kien" title="Khám phá Thẻ Sự Kiện">
-                <img src="assets/card-back-sukien.png" alt="Thẻ Sự Kiện" class="fandeck-card-img">
+                <div class="mx-pillar-art-stage">
+                  <img src="assets/card-back-sukien.png" alt="Thẻ Sự Kiện" class="fandeck-card-img">
+                </div>
+                <div class="mx-pillar-meta mx-only">
+                  <span class="mx-pillar-role">BIẾN CỐ ĐẠI DƯƠNG</span>
+                  <strong class="mx-pillar-name">Thẻ Sự Kiện</strong>
+                  <span class="mx-pillar-cta"><span aria-hidden="true">👆</span> Chạm mở thẻ</span>
+                </div>
                 <div class="fandeck-card-glare"></div>
               </div>
 
               <!-- Thẻ Bài 3: Thẻ Chợ (Xanh dương) -->
               <div class="pillar-fandeck-card card-blue-style" data-category="cho" title="Khám phá Thẻ Chợ">
-                <img src="assets/card-back-cho.png" alt="Thẻ Chợ" class="fandeck-card-img">
+                <div class="mx-pillar-art-stage">
+                  <img src="assets/card-back-cho.png" alt="Thẻ Chợ" class="fandeck-card-img">
+                </div>
+                <div class="mx-pillar-meta mx-only">
+                  <span class="mx-pillar-role">ĐÒN BẨY THƯƠNG TRƯỜNG</span>
+                  <strong class="mx-pillar-name">Thẻ Chợ</strong>
+                  <span class="mx-pillar-cta"><span aria-hidden="true">👆</span> Chạm mở thẻ</span>
+                </div>
                 <div class="fandeck-card-glare"></div>
               </div>
 
               <!-- Thẻ Bài 4: Thẻ Incoterm (Vàng) -->
               <div class="pillar-fandeck-card card-yellow-style" data-category="incoterm"
                 title="Khám phá Thẻ Incoterms">
-                <img src="assets/card-back-incoterm.png" alt="Thẻ Incoterms" class="fandeck-card-img">
+                <div class="mx-pillar-art-stage">
+                  <img src="assets/card-back-incoterm.png" alt="Thẻ Incoterms" class="fandeck-card-img">
+                </div>
+                <div class="mx-pillar-meta mx-only">
+                  <span class="mx-pillar-role">LUẬT GIAO THƯƠNG</span>
+                  <strong class="mx-pillar-name">Thẻ Incoterms</strong>
+                  <span class="mx-pillar-cta"><span aria-hidden="true">👆</span> Chạm mở thẻ</span>
+                </div>
                 <div class="fandeck-card-glare"></div>
               </div>
 
@@ -579,7 +692,10 @@
       <section class="home-guide-section" id="block5-guide">
         <!-- Background Artwork Layer -->
         <div class="guide-bg-layer" aria-hidden="true">
-          <img src="assets/bg-block5-nautical.png" alt="LogisQuest Sunlit Maritime Expedition" class="guide-bg-img" loading="eager">
+          <picture class="guide-bg-picture">
+            <source media="(max-width: 700px)" srcset="assets/home-mobile-v2/guide.webp">
+            <img src="assets/bg-block5-nautical.png" alt="LogisQuest Sunlit Maritime Expedition" class="guide-bg-img" loading="eager">
+          </picture>
           <div class="guide-bg-vignette"></div>
         </div>
 
@@ -725,8 +841,9 @@
 
           <!-- 3. Nautical Boardgame Video Frame (3D Lifelike Accessory) -->
           <div class="video-frame video-frame--3d">
-            <div class="video-frame__viewport">
+            <div class="video-frame__viewport" id="guideVideoViewport">
               <iframe
+                id="guideYoutubeIframe"
                 src="https://www.youtube-nocookie.com/embed/_U5oIVW2SUk?rel=0"
                 title="Hướng dẫn cách chơi Board Game LogisQuest"
                 loading="lazy"
@@ -734,10 +851,49 @@
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen>
               </iframe>
+              <button type="button" class="mx-video-cover mx-only" id="mxVideoCoverBtn" aria-label="Phát video hướng dẫn chơi LogisQuest">
+                <img src="https://i.ytimg.com/vi/_U5oIVW2SUk/hqdefault.jpg" alt="Thumbnail Video Hướng dẫn chơi LogisQuest" class="mx-video-cover-img" loading="eager">
+                <span class="mx-video-cover-scrim" aria-hidden="true"></span>
+                <span class="mx-video-play-toy" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                    <polygon points="7 4 21 12 7 20 7 4"></polygon>
+                  </svg>
+                </span>
+                <span class="mx-video-cover-pill">▶ Xem video thực chiến (3 phút)</span>
+              </button>
             </div>
             <!-- 3D Lifelike Nautical Frame Overlay -->
             <img src="assets/video-frame-3d.png" alt="LogisQuest 3D Nautical Video Frame" class="video-frame__3d-overlay" aria-hidden="true" />
           </div>
+
+          <div class="mx-guide-steps mx-only" aria-label="Tóm tắt 3 bước nhập cuộc">
+            <div class="mx-guide-step">
+              <span class="mx-step-num">01</span>
+              <div class="mx-step-copy">
+                <strong>Thiết lập cảng</strong>
+                <span>Nhận kho &amp; hợp đồng đầu trận</span>
+              </div>
+            </div>
+            <div class="mx-guide-step">
+              <span class="mx-step-num">02</span>
+              <div class="mx-step-copy">
+                <strong>Điều phối &amp; Đấu trí</strong>
+                <span>Xếp hàng lên tàu &amp; tung thẻ chiến thuật</span>
+              </div>
+            </div>
+            <div class="mx-guide-step">
+              <span class="mx-step-num">03</span>
+              <div class="mx-step-copy">
+                <strong>Cập bến tính điểm</strong>
+                <span>Chinh phục cảng Incoterms 2020</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="javascript:void(0)" class="mx-guide-rulebook-btn mx-only" data-nav="gameplay">
+            <span>Đọc sổ tay luật chơi chi tiết</span>
+            <span aria-hidden="true">→</span>
+          </a>
 
         </div>
       </section>
@@ -747,9 +903,17 @@
         <div class="home-cta-banner-full">
           <!-- Background image layer -->
           <div class="home-cta-bg-layer">
-            <img src="assets/anh-nen-giao-thuong.png" alt="LogisQuest Trận Giao Thương Đã Mở" class="home-cta-bg-img"
-              loading="eager">
+            <picture class="home-cta-bg-picture" aria-hidden="true">
+              <source media="(max-width: 700px)" srcset="assets/home-mobile-v2/cta.webp">
+              <img src="assets/anh-nen-giao-thuong.png" alt="" class="home-cta-bg-img" loading="eager">
+            </picture>
             <div class="home-cta-overlay-gradient"></div>
+            <div class="mx-buy-stage-pedestal mx-only" aria-hidden="true"></div>
+            <img src="assets/ảnh tàu 3d_góc 3 phần 4.png" alt="" class="mx-buy-prop mx-buy-prop--ship mx-only" aria-hidden="true">
+            <img src="assets/ảnh cont 3d xếp chồng.png" alt="" class="mx-buy-prop mx-buy-prop--cont mx-only" aria-hidden="true">
+            <img src="assets/hero-card.png" alt="" class="mx-buy-prop mx-buy-prop--card mx-only" aria-hidden="true">
+            <img src="assets/product-box-3d.png" alt="Hộp board game LogisQuest" class="home-cta-mobile-product"
+              loading="eager">
           </div>
 
           <!-- Content container -->
@@ -773,6 +937,7 @@
                 Sở hữu ngay bộ board game chiến thuật LogisQuest phiên bản giới hạn để cùng gia đình, bạn bè và đồng
                 nghiệp chinh phục đại dương thương mại quốc tế.
               </p>
+              <p class="home-cta-price mx-only">Giá chỉ <strong>340.000₫</strong></p>
 
               <!-- 4. Action Buttons -->
               <div class="home-cta-action-btns">
@@ -811,7 +976,7 @@
                     </svg>
                   </div>
                   <div class="cta-feature-text">
-                    <span class="cta-feature-title">HÀNG CHÍNH HÃNG</span>
+                    <span class="cta-feature-title" data-mobile-short="100% Chính Hãng">HÀNG CHÍNH HÃNG</span>
                     <span class="cta-feature-sub">100% chính hãng</span>
                   </div>
                 </div>
@@ -830,7 +995,7 @@
                     </svg>
                   </div>
                   <div class="cta-feature-text">
-                    <span class="cta-feature-title">PHIÊN BẢN GIỚI HẠN</span>
+                    <span class="cta-feature-title" data-mobile-short="Bản Giới Hạn">PHIÊN BẢN GIỚI HẠN</span>
                     <span class="cta-feature-sub">Số lượng có hạn</span>
                   </div>
                 </div>
@@ -848,7 +1013,7 @@
                     </svg>
                   </div>
                   <div class="cta-feature-text">
-                    <span class="cta-feature-title">HỖ TRỢ 24/7</span>
+                    <span class="cta-feature-title" data-mobile-short="Hỗ Trợ 24/7">HỖ TRỢ 24/7</span>
                     <span class="cta-feature-sub">Tư vấn tận tình</span>
                   </div>
                 </div>
@@ -903,7 +1068,7 @@
 
         <section class="lqa-pillars lqa-section" aria-labelledby="aboutPillarsTitle">
           <div class="lqa-wrap">
-            <header class="lqa-section-head"><p class="lqa-eyebrow">BA TRỤ CỘT CHIẾN LƯỢC</p><h2 id="aboutPillarsTitle">Nền tảng tạo nên<br>LogisQuest</h2><p>LogisQuest không chỉ là một trò chơi, mà còn là cầu nối<br class="lqa-desktop-break"> giữa kiến thức, kỹ năng và thế giới thực.</p></header>
+            <header class="lqa-section-head"><p class="lqa-eyebrow">BA TRỤ CỘT CHIẾN LƯỢC</p><h2 id="aboutPillarsTitle">Nền tảng tạo nên <br>LogisQuest</h2><p>LogisQuest không chỉ là một trò chơi, mà còn là cầu nối<br class="lqa-desktop-break"> giữa kiến thức, kỹ năng và thế giới thực.</p></header>
             <div class="lqa-pillar-grid"><article class="lqa-pillar"><span class="lqa-pillar-number" aria-hidden="true">01</span><div class="lqa-crop" style="aspect-ratio:340/225"><img src="assets/about/reference-20260927/reference-pillars.png" alt="" loading="lazy" width="1774" height="887" style="width:521.7647058823529%;left:-61.76470588235294%;top:-182.22222222222223%"></div><h3>Kiến thức thực tế</h3><p>Dựa trên các tình huống thật trong ngành logistics, đặc biệt là việc áp dụng các quy tắc Incoterms.</p></article>
 <article class="lqa-pillar"><span class="lqa-pillar-number" aria-hidden="true">02</span><div class="lqa-crop" style="aspect-ratio:340/225"><img src="assets/about/reference-20260927/reference-pillars.png" alt="" loading="lazy" width="1774" height="887" style="width:521.7647058823529%;left:-233.82352941176472%;top:-182.22222222222223%"></div><h3>Tư duy chiến lược</h3><p>Cân nhắc nguồn lực, quản trị rủi ro, tối ưu lộ trình và đưa ra quyết định hiệu quả.</p></article>
 <article class="lqa-pillar"><span class="lqa-pillar-number" aria-hidden="true">03</span><div class="lqa-crop" style="aspect-ratio:340/225"><img src="assets/about/reference-20260927/reference-pillars.png" alt="" loading="lazy" width="1774" height="887" style="width:521.7647058823529%;left:-389.70588235294116%;top:-182.22222222222223%"></div><h3>Kỹ năng tương lai</h3><p>Làm việc nhóm, ra quyết định và thích ứng linh hoạt trong một môi trường năng động, toàn cầu.</p></article></div>
@@ -994,12 +1159,16 @@
 
             <!-- Controls Overlay (Indicators & Hints) -->
             <div class="editorial-slider-controls">
-              <div class="slider-progress-dots">
-                <span class="dot active" data-index="0"></span>
-                <span class="dot" data-index="1"></span>
-                <span class="dot" data-index="2"></span>
-                <span class="dot" data-index="3"></span>
-                <span class="dot" data-index="4"></span>
+              <div class="team-nav-capsule-row">
+                <button type="button" class="team-nav-arrow team-nav-prev" aria-label="Thành viên trước">‹</button>
+                <div class="slider-progress-dots">
+                  <span class="dot active" data-index="0"></span>
+                  <span class="dot" data-index="1"></span>
+                  <span class="dot" data-index="2"></span>
+                  <span class="dot" data-index="3"></span>
+                  <span class="dot" data-index="4"></span>
+                </div>
+                <button type="button" class="team-nav-arrow team-nav-next" aria-label="Thành viên tiếp theo">›</button>
               </div>
               <div class="slider-hint">
                 <span class="hint-text">CLICK BẤM BẤT KỲ HOẶC CUỘN ĐỂ XEM THÀNH VIÊN TIẾP THEO</span>
@@ -1720,6 +1889,9 @@
 
     <!-- ── TẦNG 1: GAME HERO SECTION ── -->
     <div class="bg-footer-hero">
+      <picture class="bg-footer-hero-mobile-art" aria-hidden="true">
+        <img src="assets/home-mobile-v2/footer.webp" alt="" loading="lazy">
+      </picture>
       <div class="bg-footer-hero-container">
 
         <!-- Cột trái: Logo & Mô tả Game -->
@@ -1912,6 +2084,14 @@
                 </svg>
               </a>
 
+              <a class="social-link social-link--tiktok mx-only" href="https://www.tiktok.com/" aria-label="TikTok"
+                data-label="TikTok" target="_blank" rel="noopener noreferrer">
+                <svg class="social-link__logo social-link__logo--tiktok" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1Z" />
+                </svg>
+              </a>
+
               <a class="social-link social-link--youtube" href="https://www.youtube.com/" aria-label="Youtube"
                 data-label="Youtube" target="_blank" rel="noopener noreferrer">
                 <svg class="social-link__logo social-link__logo--youtube" viewBox="0 0 24 24" aria-hidden="true">
@@ -1929,7 +2109,7 @@
     <!-- ── TẦNG 3: COPYRIGHT STRIP ── -->
     <div class="bg-footer-copyright">
       <svg class="bg-copyright-wave-svg" viewBox="0 0 1400 45" preserveAspectRatio="none">
-        <path d="M0 22 C 350 40, 700 5, 1050 35, 1400 22" stroke="rgba(255,255,255,0.4)" stroke-width="2.5"
+        <path d="M0 22 C350 40 700 5 1050 35 S1300 28 1400 22" stroke="rgba(255,255,255,0.4)" stroke-width="2.5"
           stroke-dasharray="10 12" fill="none" />
       </svg>
 
@@ -2056,8 +2236,11 @@
   </aside>
 
   <!-- JavaScript Link -->
+  <script src="assets/pretext.js"></script>
+  <script src="mobile-pretext.js"></script>
   <script src="delivery-button.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=20261031f"></script>
+  <script src="mobile-redesign.js?v=20261031b"></script>
 </body>
 
 </html>
