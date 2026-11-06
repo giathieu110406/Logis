@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&subset=vietnamese&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&subset=vietnamese&display=swap"
     rel="stylesheet">
 
   <!-- GSAP & ScrollTrigger Animation Engine -->
@@ -23,10 +23,10 @@
   <!-- CSS Link -->
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="shortcut icon" type="image/png" href="assets/logo.png">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261106k">
   <link rel="stylesheet" href="assets/about/about-reference.css">
-  <link rel="stylesheet" href="mobile-home.css?v=20261031d">
-  <link rel="stylesheet" href="mobile-redesign.css?v=20261031h">
+  <link rel="stylesheet" href="mobile-home.css?v=20261105c">
+  <link rel="stylesheet" href="mobile-redesign.css?v=20261105d">
 </head>
 
 <body>
@@ -1419,58 +1419,10 @@
               <span class="gp-cta-arrow" aria-hidden="true">&gt;</span>
             </a>
           </div>
+        </div>
 
-          <!-- ── QUICK STATS (GLASSMORPHISM PANEL) ── -->
-          <div class="gp-stats-bar">
-            <div class="gp-stat">
-              <svg class="gp-stat-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-              </svg>
-              <div class="gp-stat-text">
-                <strong>2 – 4</strong>
-                <span>Người chơi</span>
-              </div>
-            </div>
-            <div class="gp-stat">
-              <svg class="gp-stat-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12,6 12,12 16,14" />
-              </svg>
-              <div class="gp-stat-text">
-                <strong>45 – 60 phút</strong>
-                <span>Thời lượng / ván</span>
-              </div>
-            </div>
-            <div class="gp-stat">
-              <svg class="gp-stat-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-              <div class="gp-stat-text">
-                <strong>12+</strong>
-                <span>Độ tuổi</span>
-              </div>
-            </div>
-            <div class="gp-stat gp-stat-goal">
-              <svg class="gp-stat-icon gp-goal-icon" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-                <path d="M4 22h16" />
-                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
-                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
-                <path d="M18 2H6v7a6 6 0 0 0 12 0V2z" />
-              </svg>
-              <div class="gp-stat-text">
-                <strong>Mục tiêu</strong>
-                <span>Tích lũy nhiều điểm uy tín nhất sau 6 vòng chơi.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- ── ONBOARDING STEPPER (4 BƯỚC HÀNH TRÌNH CHUẨN BẢN GỐC) ── -->
+        <!-- ── STICKY ONBOARDING STEPPER (4 BƯỚC HÀNH TRÌNH TỰ ĐỘNG TRƯỢT THEO MÀN HÌNH) ── -->
+        <div class="gp-stepper-sticky-wrap" id="gpStepperStickyWrap">
           <div class="gp-stepper" role="tablist" aria-label="Các bước hành trình Cách Chơi">
             <button class="gp-step-pill active" data-step="1" data-target="#gpSetup">
               <span class="gp-step-badge">1</span>
@@ -1515,6 +1467,10 @@
               <!-- Cột Trái: Ảnh bàn cờ 3D & Hộp cờ -->
               <div class="gp-setup-col-media">
                 <div class="gp-setup-media-backdrop">
+                  <span class="gp-setup-stage-tag">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                    Sa bàn 3D thực tế
+                  </span>
                   <img src="assets/gameplay-board-cutout.png" alt="Minh họa bàn cờ và bộ cờ LogisQuest hoàn chỉnh" class="gp-setup-board-img" loading="lazy">
                 </div>
               </div>
@@ -2228,7 +2184,7 @@
 
       <!-- Thoi trượt: Con tàu container nhìn từ trên xuống (Top-down view) phóng to -->
       <div class="nautical-ship-thumb" id="nauticalShipThumb" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
-        <img src="assets/ship-topdown.png" alt="Tàu Container" class="nautical-ship-icon">
+        <img src="assets/ship-topdown.png?v=20261105c" alt="Tàu Container" class="nautical-ship-icon">
       </div>
     </div>
   </aside>
@@ -2236,9 +2192,9 @@
   <!-- JavaScript Link -->
   <script src="assets/pretext.js"></script>
   <script src="mobile-pretext.js"></script>
-  <script src="delivery-button.js"></script>
-  <script src="app.js?v=20261031f"></script>
-  <script src="mobile-redesign.js?v=20261031b"></script>
+  <script src="delivery-button.js?v=20261105c"></script>
+  <script src="app.js?v=20261106b"></script>
+  <script src="mobile-redesign.js?v=20261105c"></script>
 </body>
 
 </html>

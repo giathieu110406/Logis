@@ -117,20 +117,9 @@
     border-bottom-width: 1px !important;
   }
 
-  /* 2. Quick Stats Bar */
+  /* 2. Quick Stats Bar - Loại bỏ hoàn toàn */
   .gp-stats-bar {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 18px auto 14px !important;
-    padding: 12px 14px !important;
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 10px !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    border: 2px solid #BAE6FD !important;
-    border-radius: 20px !important;
-    box-shadow: 0 8px 24px rgba(2, 132, 199, 0.12) !important;
-    box-sizing: border-box !important;
+    display: none !important;
   }
 
   .gp-stat {
@@ -171,50 +160,60 @@
     color: #F59E0B !important;
   }
 
-  /* 3. Onboarding Stepper (4 Pills) */
+  /* 3. Onboarding Stepper (Sticky Maritime Pill Dock on Mobile) */
   .gp-stepper {
+    position: sticky !important;
+    top: 60px !important;
+    z-index: 40 !important;
     width: 100% !important;
     max-width: 100% !important;
-    margin: 8px auto 0 !important;
+    margin: 12px auto 16px !important;
     display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 8px !important;
-    padding: 2px !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 6px !important;
+    padding: 6px !important;
     box-sizing: border-box !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border: 1.5px solid #BAE6FD !important;
+    border-radius: 18px !important;
+    box-shadow: 0 8px 24px rgba(2, 44, 92, 0.12) !important;
   }
 
   .gp-stepper .gp-step-line { display: none !important; }
 
   .gp-step-pill {
-    padding: 9px 12px !important;
-    min-height: 40px !important;
-    border-radius: 9999px !important;
-    background: #FFFFFF !important;
-    border: 1.5px solid #BAE6FD !important;
-    display: inline-flex !important;
+    padding: 8px 4px !important;
+    min-height: 46px !important;
+    border-radius: 12px !important;
+    background: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+    display: flex !important;
+    flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 8px !important;
+    gap: 3px !important;
     cursor: pointer !important;
-    box-shadow: 0 3px 8px rgba(2, 132, 199, 0.08) !important;
-    transition: all 0.15s ease !important;
+    box-shadow: none !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
   .gp-step-pill:active {
-    transform: scale(0.97) !important;
+    transform: scale(0.95) !important;
   }
   .gp-step-pill.active {
     background: #0284C7 !important;
     border-color: #0284C7 !important;
-    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.28) !important;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35) !important;
   }
 
   .gp-step-badge {
-    width: 22px !important;
-    height: 22px !important;
+    width: 20px !important;
+    height: 20px !important;
     border-radius: 50% !important;
     background: #E0F2FE !important;
     color: #0284C7 !important;
-    font-size: 0.72rem !important;
+    font-size: 0.7rem !important;
     font-weight: 900 !important;
     display: flex !important;
     align-items: center !important;
@@ -226,9 +225,11 @@
   }
 
   .gp-step-text {
-    font-size: 0.76rem !important;
+    font-size: 0.65rem !important;
     font-weight: 800 !important;
-    color: #0B2B5C !important;
+    color: #64748B !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
   }
   .gp-step-pill.active .gp-step-text {
     color: #FFFFFF !important;
@@ -347,34 +348,40 @@
   #gpSetup .gp-setup-col-steps {
     display: flex !important;
     flex-direction: column !important;
-    gap: 10px !important;
+    gap: 12px !important;
     width: 100% !important;
+    position: relative !important;
   }
 
   #gpSetup .gp-setup-step-item {
-    min-height: 0 !important;
+    min-height: 48px !important;
     padding: 12px 14px !important;
     gap: 12px !important;
-    border-radius: 16px !important;
+    border-radius: 18px !important;
     border: 1.5px solid #E0F2FE !important;
     background: #FFFFFF !important;
-    box-shadow: 0 4px 12px rgba(2, 44, 92, 0.05) !important;
+    box-shadow: 0 4px 14px rgba(2, 44, 92, 0.05) !important;
     display: flex !important;
     align-items: center !important;
+    transition: transform 0.18s ease, box-shadow 0.18s ease !important;
+  }
+  #gpSetup .gp-setup-step-item:active {
+    transform: scale(0.98) !important;
   }
 
   #gpSetup .gp-setup-step-num {
-    width: 32px !important;
-    height: 32px !important;
-    min-width: 32px !important;
-    font-size: 0.92rem !important;
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    font-size: 0.95rem !important;
     font-weight: 900 !important;
     border-radius: 10px !important;
-    background: #E0F2FE !important;
-    color: #0284C7 !important;
+    background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%) !important;
+    color: #FFFFFF !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    box-shadow: 0 3px 8px rgba(2, 132, 199, 0.25) !important;
   }
 
   #gpSetup .gp-step-icon {
@@ -425,42 +432,40 @@
   }
 
   #gpActions .gp-action-tabs-list {
-    display: flex !important;
-    flex-direction: row !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 6px !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    padding: 2px 2px 6px !important;
-    scrollbar-width: none !important;
+    padding: 4px !important;
+    background: #F1F5F9 !important;
+    border-radius: 16px !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
-  #gpActions .gp-action-tabs-list::-webkit-scrollbar { display: none !important; }
 
   #gpActions .gp-action-item-tab {
-    flex: 1 1 0 !important;
-    min-width: 105px !important;
-    min-height: 42px !important;
-    padding: 8px 10px !important;
-    border-radius: 9999px !important;
-    border: 1.5px solid #BAE6FD !important;
-    background: #F0F9FF !important;
+    flex: none !important;
+    min-width: 0 !important;
+    min-height: 46px !important;
+    padding: 8px 4px !important;
+    border-radius: 12px !important;
+    border: none !important;
+    background: transparent !important;
     display: flex !important;
+    flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 6px !important;
+    gap: 3px !important;
     cursor: pointer !important;
-    transition: all 0.18s ease !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
     box-sizing: border-box !important;
   }
   #gpActions .gp-action-item-tab:active {
-    transform: scale(0.97) !important;
+    transform: scale(0.96) !important;
   }
   #gpActions .gp-action-item-tab.active {
-    background: linear-gradient(180deg, #FF7A00 0%, #FF5500 100%) !important;
-    border-color: #EA580C !important;
+    background: #0284C7 !important;
     color: #FFFFFF !important;
-    box-shadow: 0 4px 14px rgba(255, 85, 0, 0.32) !important;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35) !important;
   }
 
   #gpActions .gp-act-pill-num {
@@ -600,31 +605,33 @@
 
   .gp-flow-timeline {
     display: flex !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    gap: 12px !important;
-    padding: 8px 2px 12px !important;
-    scrollbar-width: none !important;
+    flex-direction: column !important;
+    overflow-x: visible !important;
+    scroll-snap-type: none !important;
+    gap: 14px !important;
+    padding: 6px 0 !important;
     box-sizing: border-box !important;
   }
   .gp-flow-timeline::-webkit-scrollbar { display: none !important; }
   .gp-flow-timeline > .gp-journey-track { display: none !important; }
+  .gp-flow-dots { display: none !important; }
 
   .gp-timeline-step-card {
-    flex: 0 0 86% !important;
-    min-width: 0 !important;
+    width: 100% !important;
+    flex: none !important;
+    min-height: 0 !important;
     border-radius: 20px !important;
-    border: 2px solid #E0F2FE !important;
+    border: 1.5px solid #E0F2FE !important;
     background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%) !important;
-    padding: 18px 14px !important;
-    box-shadow: 0 4px 14px rgba(2, 44, 92, 0.06) !important;
-    scroll-snap-align: center !important;
+    padding: 16px 14px !important;
+    box-shadow: 0 4px 14px rgba(2, 44, 92, 0.05) !important;
     display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    position: relative !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    text-align: left !important;
     box-sizing: border-box !important;
+    position: relative !important;
   }
   .gp-timeline-step-card.gp-step-highlight {
     border-color: #BAE6FD !important;
@@ -632,44 +639,46 @@
   }
 
   .gp-timeline-step-card .gp-step-node {
-    position: absolute !important;
-    top: 12px !important;
-    left: 12px !important;
-    width: 26px !important;
-    height: 26px !important;
-    border-radius: 50% !important;
-    font-size: 0.8rem !important;
+    position: static !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    border-radius: 10px !important;
+    font-size: 0.9rem !important;
     font-weight: 900 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    flex-shrink: 0 !important;
   }
   .gp-node-orange { background: #FF7A00 !important; color: #FFFFFF !important; }
   .gp-node-blue { background: #0284C7 !important; color: #FFFFFF !important; }
 
   .gp-flow-step-icon-wrap {
-    width: 56px !important;
-    height: 56px !important;
-    border-radius: 16px !important;
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    border-radius: 12px !important;
     background: #FFFFFF !important;
     border: 1.5px solid #BAE6FD !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 4px 0 10px !important;
-    box-shadow: 0 3px 8px rgba(2, 132, 199, 0.12) !important;
+    margin: 0 !important;
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.1) !important;
+    flex-shrink: 0 !important;
   }
 
   .gp-flow-step-title {
-    font-size: 1rem !important;
+    font-size: 0.96rem !important;
     font-weight: 800 !important;
     color: #0A3871 !important;
-    margin: 0 0 4px 0 !important;
+    margin: 0 0 3px 0 !important;
   }
 
   .gp-flow-step-desc {
-    font-size: 0.78rem !important;
-    line-height: 1.4 !important;
+    font-size: 0.8rem !important;
+    line-height: 1.42 !important;
     color: #475569 !important;
     margin: 0 !important;
   }

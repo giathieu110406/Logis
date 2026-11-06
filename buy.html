@@ -20,6 +20,7 @@
   <link rel="shortcut icon" type="image/png" href="assets/logo.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="mobile-redesign.css?v=20261031i">
+  <link rel="stylesheet" href="buy.css">
 </head>
 <body class="buy-page-body">
 
@@ -162,6 +163,7 @@
               <div class="buy-badge-freeship">
                 <span class="pulse-fire">🔥</span> FREESHIP &amp; GIẢM 60K
               </div>
+              <span class="buy-gallery-counter" id="galleryCounter" aria-hidden="true">1 / 5</span>
               <div class="buy-img-glass-wrap">
                 <img src="assets/product-box-3d.png" alt="Board Game LogisQuest" id="mainProductImg" class="buy-featured-img">
               </div>
@@ -236,13 +238,11 @@
 
             <!-- Accordions (Product Specs & Components) -->
             <div class="buy-accordions">
-              <div class="buy-acc-item">
-                <button class="buy-acc-header accordion-header" data-target="accProductInfo">
+              <details class="buy-acc-item" open><summary class="buy-acc-header">
                   <span class="acc-icon-ship">⚓</span>
                   <span>Thông số quy cách sản phẩm</span>
                   <span class="acc-icon">▾</span>
-                </button>
-                <div class="buy-acc-content accordion-content" id="accProductInfo">
+                </summary><div class="buy-acc-content">
                   <ul class="buy-spec-list">
                     <li><span class="spec-key">Kích thước hộp:</span> 28 x 20 x 7 cm (Hộp cứng cao cấp dập nổi, chống va đập)</li>
                     <li><span class="spec-key">Chất liệu thẻ bài:</span> Giấy C350 cao cấp cán màng mờ mướt tay, chống ẩm và trầy xước</li>
@@ -250,16 +250,13 @@
                     <li><span class="spec-key">Số người chơi:</span> 2 – 4 người (Thời lượng mỗi ván: 45 – 60 phút)</li>
                     <li><span class="spec-key">Độ tuổi phù hợp:</span> 12+ (Phù hợp sinh viên, nhóm bạn trẻ, gia đình và workshop đào tạo)</li>
                   </ul>
-                </div>
-              </div>
+                </div></details>
 
-              <div class="buy-acc-item">
-                <button class="buy-acc-header accordion-header" data-target="accComponents">
+              <details class="buy-acc-item"><summary class="buy-acc-header">
                   <span class="acc-icon-ship">🎲</span>
                   <span>Trọn bộ thành phần trong hộp game</span>
                   <span class="acc-icon">▾</span>
-                </button>
-                <div class="buy-acc-content accordion-content" id="accComponents">
+                </summary><div class="buy-acc-content">
                   <ul class="buy-spec-list">
                     <li>1 Bàn cờ Cảng biển chính &amp; Thang điểm uy tín thương mại</li>
                     <li>11 Thẻ Cảng Incoterms kích thước lớn (EXW, FCA, FAS, FOB, CFR, CIF, CPT, CIP, DAP, DPU, DDP)</li>
@@ -271,8 +268,7 @@
                     <li>21 Thẻ Vòng điều phối phương tiện xuất bến</li>
                     <li>1 Sách Hướng dẫn luật chơi in màu chi tiết + Sổ tay tính điểm</li>
                   </ul>
-                </div>
-              </div>
+                </div></details>
             </div>
 
             <!-- Quantity Stepper -->
@@ -447,38 +443,26 @@
           <div class="buy-section-underline"></div>
         </div>
         <div class="buy-faq-list">
-          <div class="buy-faq-item">
-            <button class="buy-faq-header accordion-header" data-target="faq1">
+          <details class="buy-faq-item" open><summary class="buy-faq-header">
               <span class="faq-q-icon">Q</span><span>Sản phẩm có đảm bảo chất lượng chính hãng không?</span><span class="acc-icon">▾</span>
-            </button>
-            <div class="buy-faq-content accordion-content" id="faq1">
+            </summary><div class="buy-faq-content">
               <p>Tất cả sản phẩm LogisQuest đều được sản xuất và phân phối chính thức từ đội ngũ sáng tạo tại Việt Nam. Thẻ bài in trên giấy C350 cao cấp cán màng mờ, hộp game bọc màng co và đóng gói 2 lớp bóng khí chống va đập 100% trước khi xuất kho.</p>
-            </div>
-          </div>
-          <div class="buy-faq-item">
-            <button class="buy-faq-header accordion-header" data-target="faq2">
+            </div></details>
+          <details class="buy-faq-item"><summary class="buy-faq-header">
               <span class="faq-q-icon">Q</span><span>Thời gian giao hàng là bao lâu?</span><span class="acc-icon">▾</span>
-            </button>
-            <div class="buy-faq-content accordion-content" id="faq2">
+            </summary><div class="buy-faq-content">
               <p>Đơn hàng nội thành Hà Nội và TP. Hồ Chí Minh sẽ nhận được sau 1 – 2 ngày làm việc. Các tỉnh thành khác trên toàn quốc nhận hàng từ 2 – 4 ngày làm việc. Hỗ trợ giao hỏa tốc theo yêu cầu.</p>
-            </div>
-          </div>
-          <div class="buy-faq-item">
-            <button class="buy-faq-header accordion-header" data-target="faq3">
+            </div></details>
+          <details class="buy-faq-item"><summary class="buy-faq-header">
               <span class="faq-q-icon">Q</span><span>Chính sách đổi trả và bảo hành như thế nào?</span><span class="acc-icon">▾</span>
-            </button>
-            <div class="buy-faq-content accordion-content" id="faq3">
+            </summary><div class="buy-faq-content">
               <p>LogisQuest hỗ trợ chính sách <strong>1 đổi 1 hoàn toàn miễn phí trong vòng 7 ngày</strong> nếu sản phẩm có lỗi từ nhà sản xuất (thiếu linh kiện, rách mép) hoặc bị móp méo, hư hại do quá trình vận chuyển.</p>
-            </div>
-          </div>
-          <div class="buy-faq-item">
-            <button class="buy-faq-header accordion-header" data-target="faq4">
+            </div></details>
+          <details class="buy-faq-item"><summary class="buy-faq-header">
               <span class="faq-q-icon">Q</span><span>Người chưa biết gì về Logistics hay Incoterms có chơi được không?</span><span class="acc-icon">▾</span>
-            </button>
-            <div class="buy-faq-content accordion-content" id="faq4">
+            </summary><div class="buy-faq-content">
               <p>Hoàn toàn chơi được và rất dễ nghiền! LogisQuest được thiết kế theo cơ chế trực quan: người mới chỉ mất 5 phút xem video hoặc đọc sách hướng dẫn minh họa là có thể làm quen ngay, vừa chơi vừa tiếp thu kiến thức một cách tự nhiên.</p>
-            </div>
-          </div>
+            </div></details>
         </div>
       </div>
     </section>
@@ -653,12 +637,11 @@
   </footer>
 
   <!-- CHECKOUT MODAL -->
-  <div class="modal-overlay" id="checkoutModal">
-    <div class="modal-content checkout-modal-card">
+  <div class="modal-overlay" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+    <div class="modal-content checkout-modal-card" id="checkoutSheet"><span class="sheet-handle" id="sheetHandle" aria-hidden="true"></span>
       <button class="modal-close" id="checkoutClose" aria-label="Đóng">&times;</button>
       <div class="checkout-modal-header">
-        <div class="checkout-modal-icon">🚢</div>
-        <h2 class="modal-title-blue">XÁC NHẬN ĐẶT HÀNG</h2>
+        <h2 class="modal-title-blue" id="checkoutTitle">XÁC NHẬN ĐẶT HÀNG</h2>
         <p class="modal-sub-text">Nhập thông tin giao hàng để hoàn tất đơn hàng Board Game LogisQuest</p>
       </div>
       <form id="checkoutForm" class="checkout-form">
@@ -674,20 +657,7 @@
           <label for="custAddress">Địa chỉ nhận hàng chi tiết *</label>
           <textarea id="custAddress" required rows="2" placeholder="Số nhà, Tên đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành phố"></textarea>
         </div>
-        <div class="form-row-grid">
-          <div class="form-group">
-            <label for="custPayment">Phương thức thanh toán</label>
-            <select id="custPayment">
-              <option value="cod">Thanh toán khi nhận hàng (COD)</option>
-              <option value="bank">Chuyển khoản Ngân hàng (Mã QR)</option>
-              <option value="momo">Ví MoMo</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="voucherCode">Mã giảm giá</label>
-            <input type="text" id="voucherCode" value="SHIP15" placeholder="Nhập mã voucher">
-          </div>
-        </div>
+        <div class="form-group"><label for="custNote">Ghi chú</label><textarea id="custNote" rows="2" placeholder="Tuỳ chọn"></textarea></div>
         <div class="checkout-summary-box">
           <div class="summary-line"><span>Sản phẩm:</span><span>Board Game LogisQuest x <strong id="summaryQty">1</strong></span></div>
           <div class="summary-line"><span>Tạm tính:</span><span id="summarySubtotal">340.000 ₫</span></div>
@@ -697,7 +667,6 @@
         <button type="submit" class="btn btn-primary btn-submit-order">HOÀN TẤT ĐẶT HÀNG</button>
       </form>
       <div class="checkout-success-msg" id="checkoutSuccessMsg" style="display:none;">
-        <div class="success-icon">🎉</div>
         <h3>ĐẶT HÀNG THÀNH CÔNG!</h3>
         <p>Cảm ơn bạn đã lựa chọn <strong>Board Game LogisQuest</strong>. Nhân viên chăm sóc khách hàng sẽ liên hệ qua số điện thoại để xác nhận và điều phối giao hàng tới bạn trong thời gian sớm nhất!</p>
         <button class="btn btn-secondary" id="btnCloseSuccess">Đóng</button>

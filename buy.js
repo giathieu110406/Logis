@@ -196,15 +196,22 @@
   /* ============================================================
      5. CHECKOUT MODAL — open / close / submit
      ============================================================ */
+  var lastFocus = null;
   function openModal() {
     if (!checkoutModal) return;
+    lastFocus = document.activeElement;
     checkoutModal.classList.add('active');
+    var firstField = checkoutModal.querySelector('input, textarea');
+    if (firstField) setTimeout(function () { firstField.focus(); }, 60);
     document.body.style.overflow = 'hidden';
   }
 
   function closeModal() {
     if (!checkoutModal) return;
     checkoutModal.classList.remove('active');
+    var sheetEl = document.getElementById('checkoutSheet');
+    if (sheetEl) sheetEl.style.transform = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
     document.body.style.overflow = '';
   }
 
@@ -403,32 +410,7 @@
   /* ============================================================
      10. ACCORDIONS (Product Info & FAQ)
      ============================================================ */
-  var accordions = document.querySelectorAll('.accordion-header, .buy-acc-header, .buy-faq-header');
-  accordions.forEach(function (header) {
-    header.addEventListener('click', function (e) {
-      e.preventDefault();
-      var targetId = header.getAttribute('data-target');
-      var content  = document.getElementById(targetId);
-      var isOpen   = header.classList.contains('open');
-
-      if (isOpen) {
-        header.classList.remove('open');
-        if (content) content.classList.remove('open');
-      } else {
-        header.classList.add('open');
-        if (content) content.classList.add('open');
-      }
-    });
-  });
-
-  // Auto-open first FAQ
-  var firstFaq = document.querySelector('.buy-faq-header');
-  if (firstFaq) {
-    firstFaq.classList.add('open');
-    var firstFaqContent = document.getElementById('faq1');
-    if (firstFaqContent) firstFaqContent.classList.add('open');
-  }
-
+  // Accordions are native <details>/<summary>; first spec and FAQ items carry `open` in the markup.
   /* ============================================================
      11. VOUCHER COPY TO CLIPBOARD
      ============================================================ */
@@ -552,6 +534,68 @@
     });
   });
 
+  /* ============================================================
+     15. PDP: gallery counter + swipe, checkout focus trap + swipe-to-close
+     ============================================================ */
+  (function () {
+    var counter = document.getElementById('galleryCounter');
+    var thumbs = Array.prototype.slice.call(thumbBtns);
+    function currentIndex() {
+      for (var i = 0; i < thumbs.length; i++) if (thumbs[i].classList.contains('active')) return i;
+      return 0;
+    }
+    function syncCounter() { if (counter) counter.textContent = (currentIndex() + 1) + ' / ' + thumbs.length; }
+    thumbs.forEach(function (b) { b.addEventListener('click', function () { setTimeout(syncCounter, 0); }); });
+    syncCounter();
+
+    if (imgFrame && thumbs.length > 1) {
+      var sx = 0, sy = 0;
+      imgFrame.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+      imgFrame.addEventListener('touchend', function (e) {
+        var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+        if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+        thumbs[(currentIndex() + (dx < 0 ? 1 : -1) + thumbs.length) % thumbs.length].click();
+      }, { passive: true });
+    }
+
+    if (checkoutModal) {
+      checkoutModal.addEventListener('keydown', function (e) {
+        if (e.key !== 'Tab') return;
+        var f = Array.prototype.filter.call(
+          checkoutModal.querySelectorAll('button, input, textarea, select, a[href]'),
+          function (x) { return x.offsetParent !== null; }
+        );
+        if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    }
+
+    var sheet = document.getElementById('checkoutSheet');
+    var handle = document.getElementById('sheetHandle');
+    if (sheet && handle && checkoutClose) {
+      var startY = null, dragY = 0;
+      handle.addEventListener('pointerdown', function (e) {
+        startY = e.clientY; dragY = 0;
+        sheet.style.transition = 'none';
+        handle.setPointerCapture(e.pointerId);
+      });
+      handle.addEventListener('pointermove', function (e) {
+        if (startY === null) return;
+        dragY = Math.max(0, e.clientY - startY);
+        sheet.style.transform = 'translateY(' + dragY + 'px)';
+      });
+      var endDrag = function () {
+        if (startY === null) return;
+        startY = null;
+        sheet.style.transition = '';
+        if (dragY > 80) checkoutClose.click(); else sheet.style.transform = '';
+      };
+      handle.addEventListener('pointerup', endDrag);
+      handle.addEventListener('pointercancel', endDrag);
+    }
+  })();
   /* ============================================================
      INIT — run initial state
      ============================================================ */

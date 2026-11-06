@@ -1419,6 +1419,7 @@ function initGameplayAnimations() {
 // GAMEPLAY ONBOARDING STEPPER INTERACTION (SMOOTH SCROLL & OBSERVER)
 function initGameplayStepper() {
   const stepperPills = document.querySelectorAll('.gp-step-pill');
+  const stepperWrap = document.getElementById('gpStepperStickyWrap');
   if (!stepperPills.length) return;
 
   stepperPills.forEach(pill => {
@@ -1433,8 +1434,8 @@ function initGameplayStepper() {
       stepperPills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
 
-      const headerOffset = document.querySelector('.main-header')?.offsetHeight || 70;
-      const topPos = targetEl.getBoundingClientRect().top + window.scrollY - headerOffset - 24;
+      const stepperOffset = stepperWrap?.offsetHeight || 50;
+      const topPos = targetEl.getBoundingClientRect().top + window.scrollY - 10 - stepperOffset - 15;
 
       if (typeof lenis !== 'undefined' && lenis) {
         lenis.scrollTo(topPos, { duration: 1.2 });
@@ -1444,7 +1445,7 @@ function initGameplayStepper() {
     });
   });
 
-  // IntersectionObserver tự động update active stepper pill theo tiến trình cuộn
+  // Scroll spy tự động cập nhật active stepper pill mượt mà khi cuộn qua các khối
   const stepSections = [
     { id: '#gpSetup', step: '1' },
     { id: '#gpActions', step: '2' },
@@ -1452,33 +1453,67 @@ function initGameplayStepper() {
     { id: '#gpIncoterms', step: '4' }
   ];
 
-  if (typeof IntersectionObserver !== 'undefined') {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const matching = stepSections.find(s => entry.target.matches(s.id));
-          if (matching) {
-            stepperPills.forEach(p => {
-              if (p.getAttribute('data-step') === matching.step) {
-                p.classList.add('active');
-              } else {
-                p.classList.remove('active');
-              }
-            });
-          }
+  let lastStepperScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+  function syncStepperWithScroll() {
+    const gameplayView = document.getElementById('gameplayView');
+    if (gameplayView && gameplayView.style.display === 'none') return;
+
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const stepperOffset = stepperWrap?.offsetHeight || 50;
+    const triggerY = 10 + stepperOffset + 80;
+
+    // 1. Cập nhật active indicator cho pill
+    let activeStep = '1';
+    for (let i = 0; i < stepSections.length; i++) {
+      const el = document.querySelector(stepSections[i].id);
+      if (el) {
+        const top = el.getBoundingClientRect().top;
+        if (top <= triggerY) {
+          activeStep = stepSections[i].step;
         }
-      });
-    }, {
-      root: null,
-      rootMargin: '-20% 0px -50% 0px',
-      threshold: 0.1
+      }
+    }
+
+    stepperPills.forEach(p => {
+      const step = p.getAttribute('data-step');
+      if (step === activeStep) {
+        if (!p.classList.contains('active')) {
+          p.classList.add('active');
+        }
+      } else {
+        p.classList.remove('active');
+      }
     });
 
-    stepSections.forEach(s => {
-      const el = document.querySelector(s.id);
-      if (el) observer.observe(el);
-    });
+    // 2. Logic hiện/ẩn Stepper theo hướng cuộn:
+    // - Trong vùng Hero (đỉnh trang): Luôn hiện stepper ở vị trí ban đầu
+    // - Khi cuộn xuống các khối (Scroll DOWN): Hiện bám sát trần (top: 10px)
+    // - Khi cuộn ngược lên (Scroll UP): Ẩn đi để không che nội dung phía trên
+    if (stepperWrap) {
+      const heroEl = document.querySelector('#gameplay .gp-hero');
+      const heroBottom = heroEl ? (heroEl.offsetTop + heroEl.offsetHeight) : 600;
+      const isPastHero = currentScroll > (heroBottom - 140);
+
+      if (!isPastHero) {
+        stepperWrap.classList.remove('stepper-hidden-up');
+      } else {
+        const scrollDelta = currentScroll - lastStepperScrollTop;
+        if (scrollDelta > 3) {
+          // Cuộn xuống -> Hiện
+          stepperWrap.classList.remove('stepper-hidden-up');
+        } else if (scrollDelta < -3) {
+          // Cuộn lên -> Ẩn
+          stepperWrap.classList.add('stepper-hidden-up');
+        }
+      }
+    }
+
+    lastStepperScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   }
+
+  window.addEventListener('scroll', syncStepperWithScroll, { passive: true });
+  syncStepperWithScroll();
 
   initGameplayActionTabs();
 }
@@ -1781,18 +1816,39 @@ function setupShelfHorizontalScroll(shelfEl, shelf, shelfCards) {
 
   const dots = dotsBar.querySelectorAll('.shelf-dot');
 
-  // 4. Đồng bộ chấm active khi cuộn ngang
-  const updateActiveDot = () => {
+  // 4. Đồng bộ chấm active & trạng thái hiển thị nút điều hướng
+  const updateNavState = () => {
+    const padLeft = parseFloat(window.getComputedStyle(track).paddingLeft) || 0;
+    const isAtStart = track.scrollLeft <= padLeft + 6;
     const maxScroll = track.scrollWidth - track.clientWidth;
+    const isAtEnd = maxScroll <= 5 || track.scrollLeft >= maxScroll - 6;
+
+    if (prevBtn) {
+      if (isAtStart) {
+        prevBtn.classList.add('is-hidden');
+      } else {
+        prevBtn.classList.remove('is-hidden');
+      }
+    }
+    if (nextBtn) {
+      if (isAtEnd) {
+        nextBtn.classList.add('is-hidden');
+      } else {
+        nextBtn.classList.remove('is-hidden');
+      }
+    }
     if (maxScroll <= 5) return;
-    const progress = Math.min(1, Math.max(0, track.scrollLeft / maxScroll));
+    const progressRange = Math.max(1, maxScroll - padLeft);
+    const progress = Math.min(1, Math.max(0, (track.scrollLeft - padLeft) / progressRange));
     const activeIdx = Math.min(totalDots - 1, Math.round(progress * (totalDots - 1)));
     dots.forEach((dot, idx) => {
       dot.classList.toggle('active', idx === activeIdx);
     });
   };
 
-  track.addEventListener('scroll', updateActiveDot, { passive: true });
+  track.addEventListener('scroll', updateNavState, { passive: true });
+  window.addEventListener('resize', updateNavState, { passive: true });
+  setTimeout(updateNavState, 60);
 
   // 5. Nút bấm mũi tên điều khiển cuộn ngang (smooth scroll)
   if (prevBtn) {
@@ -1866,7 +1922,7 @@ function renderCards() {
           </div>
           <div class="shelf-right-stage">
             <div class="shelf-cards-track-wrapper">
-              <button class="shelf-arrow-nav arrow-prev" aria-label="Cuộn thẻ sang trái">
+              <button class="shelf-arrow-nav arrow-prev is-hidden" aria-label="Cuộn thẻ sang trái">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
@@ -2991,8 +3047,8 @@ function initNauticalScrollRail() {
       }
 
       progress.style.height = `${progressPercent}%`;
-      const inset = thumb.offsetHeight / 2;
-      thumb.style.top = `${inset + progressRatio * Math.max(0, track.clientHeight - 2 * inset)}px`;
+      const maxTop = Math.max(0, track.clientHeight - thumb.offsetHeight);
+      thumb.style.top = `${progressRatio * maxTop}px`;
       thumb.setAttribute('aria-valuenow', Math.round(progressPercent));
       rafPending = false;
     });
@@ -3010,8 +3066,8 @@ function initNauticalScrollRail() {
     if (e.target.closest('.nautical-ship-thumb')) return;
     updateTrackRect();
     const clickY = e.clientY - trackRect.top;
-    const inset = thumb.offsetHeight / 2;
-    const ratio = Math.min(Math.max((clickY - inset) / Math.max(1, trackRect.height - 2 * inset), 0), 1);
+    const maxTop = Math.max(1, trackRect.height - thumb.offsetHeight);
+    const ratio = Math.min(Math.max((clickY - thumb.offsetHeight / 2) / maxTop, 0), 1);
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     const targetScroll = ratio * scrollHeight;
 
@@ -3024,7 +3080,7 @@ function initNauticalScrollRail() {
   // Handle dragging the topdown ship with live window scroll sync
   function startDrag(e) {
     const rect = thumb.getBoundingClientRect();
-    grabOffset = (e.clientY ?? e.touches?.[0]?.clientY ?? 0) - (rect.top + rect.height / 2);
+    grabOffset = (e.clientY ?? e.touches?.[0]?.clientY ?? 0) - rect.top;
     isDragging = true;
     thumb.classList.add('is-dragging');
     document.body.style.userSelect = 'none';
@@ -3035,14 +3091,13 @@ function initNauticalScrollRail() {
   function onDragMove(e) {
     if (!isDragging || !trackRect) return;
     const clientY = e.clientY ?? e.touches?.[0]?.clientY ?? 0;
-    const inset = thumb.offsetHeight / 2;
-    const travel = Math.max(0, trackRect.height - 2 * inset);
-    const relativeY = clientY - grabOffset - trackRect.top - inset;
-    const ratio = Math.min(Math.max(relativeY / Math.max(1, travel), 0), 1);
+    const maxTop = Math.max(1, trackRect.height - thumb.offsetHeight);
+    const relativeY = clientY - grabOffset - trackRect.top;
+    const ratio = Math.min(Math.max(relativeY / maxTop, 0), 1);
     const percent = ratio * 100;
 
     progress.style.height = `${percent}%`;
-    thumb.style.top = `${inset + ratio * travel}px`;
+    thumb.style.top = `${ratio * maxTop}px`;
     thumb.setAttribute('aria-valuenow', Math.round(percent));
 
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;

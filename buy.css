@@ -1,0 +1,226 @@
+/* ==========================================================================
+   LogisQuest — Buy page (PDP) redesign layer.
+   Loaded AFTER styles.css and mobile-redesign.css. Desktop/iPad: 2-column hero
+   + right-side checkout drawer. Mobile (<768px): bottom-sheet checkout.
+   Design source: designs/buy-redesign (canvas) + designs/logisquest-ds.
+   ========================================================================== */
+
+:root {
+  --pdp-cream: #FFFDF7;
+  --pdp-sky-50: #F0F9FF;
+  --pdp-sky-200: #BAE6FD;
+  --pdp-sky-600: #0284C7;
+  --pdp-sky-700: #0369A1;
+  --pdp-sun: #FF6B00;
+  --pdp-sun-edge: #9A3412;
+  --pdp-ink: #0F172A;
+  --pdp-ink-soft: #475569;
+}
+
+/* ---------- Typography ---------- */
+.buy-product-title,
+.buy-section-title { text-wrap: balance; }
+.review-text,
+.buy-desc-text p,
+.buy-faq-content p { text-wrap: pretty; }
+
+/* ---------- Hero grid: 7fr / 5fr with sticky gallery (desktop) ---------- */
+@media (min-width: 1025px) {
+  .buy-hero-grid { grid-template-columns: 7fr 5fr; gap: 48px; }
+  .buy-gallery-col { position: sticky; top: 96px; align-self: start; }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .buy-hero-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+
+/* ---------- Gallery counter + mobile thumb scroller ---------- */
+.buy-gallery-counter {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 3;
+  background: rgba(15, 23, 42, 0.78);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 7px 12px;
+  border-radius: 999px;
+  pointer-events: none;
+}
+@media (max-width: 767px) {
+  .buy-thumb-row {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 10px;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .buy-thumb-row::-webkit-scrollbar { display: none; }
+  .buy-thumb-btn { flex: 0 0 72px; height: 72px; scroll-snap-align: start; }
+}
+
+/* ---------- Accordions: native <details>/<summary> ---------- */
+details.buy-acc-item,
+details.buy-faq-item {
+  background: #fff;
+  border: 1px solid var(--pdp-sky-200);
+  border-radius: 20px;
+  overflow: hidden;
+}
+summary.buy-acc-header,
+summary.buy-faq-header {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 20px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+summary.buy-acc-header::-webkit-details-marker,
+summary.buy-faq-header::-webkit-details-marker { display: none; }
+summary.buy-acc-header:focus-visible,
+summary.buy-faq-header:focus-visible {
+  outline: 3px solid var(--pdp-sky-600);
+  outline-offset: -3px;
+}
+details[open] > summary .acc-icon { transform: rotate(180deg); }
+details > .buy-acc-content,
+details > .buy-faq-content {
+  max-height: none;
+  overflow: visible;
+}
+
+/* ---------- Checkout: right Side Drawer (>=768px) / Bottom Sheet (<768px) ---------- */
+#checkoutModal.modal-overlay {
+  align-items: stretch;
+  justify-content: flex-end;
+  padding: 0;
+  z-index: 10000;
+  background: rgba(15, 23, 42, 0.45);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s;
+}
+#checkoutModal.modal-overlay.active { visibility: visible; }
+
+#checkoutModal #checkoutSheet {
+  width: min(440px, 100%);
+  max-width: 440px;
+  height: 100%;
+  max-height: none;
+  box-sizing: border-box;
+  padding: 32px 28px 28px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 0 !important;
+  border-radius: 28px 0 0 28px !important;
+  background: var(--pdp-cream) !important;
+  box-shadow: 0 16px 40px rgba(2, 132, 199, 0.22) !important;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.2, 0, 0, 1);
+}
+#checkoutModal.active #checkoutSheet { transform: translateX(0); }
+
+#checkoutSheet .sheet-handle { display: none; }
+#checkoutSheet .modal-close {
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--pdp-sky-200);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--pdp-ink);
+  font-size: 22px;
+  line-height: 1;
+}
+#checkoutSheet .checkout-modal-header {
+  text-align: left;
+  padding: 0 56px 16px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--pdp-sky-200);
+}
+#checkoutSheet .modal-title-blue {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 32px;
+  line-height: 1.1;
+  color: var(--pdp-ink) !important;
+  text-wrap: balance;
+}
+#checkoutSheet .modal-sub-text { color: var(--pdp-ink-soft) !important; }
+#checkoutSheet .form-group label { color: var(--pdp-ink) !important; font-weight: 700; }
+#checkoutSheet input,
+#checkoutSheet textarea {
+  min-height: 48px;
+  box-sizing: border-box;
+  border: 1.5px solid var(--pdp-sky-200);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: 400 15px 'Plus Jakarta Sans', sans-serif;
+  background: #fff;
+}
+#checkoutSheet input:focus-visible,
+#checkoutSheet textarea:focus-visible {
+  outline: 3px solid rgba(2, 132, 199, 0.35);
+  border-color: var(--pdp-sky-600);
+}
+#checkoutSheet .checkout-summary-box {
+  background: #fff !important;
+  border: 1px solid var(--pdp-sky-200) !important;
+  border-radius: 20px;
+}
+#checkoutSheet .btn-submit-order {
+  width: 100%;
+  min-height: 56px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--pdp-sun);
+  color: var(--pdp-ink);
+  font-weight: 800;
+  box-shadow: 0 6px 0 var(--pdp-sun-edge);
+}
+#checkoutSheet .btn-submit-order:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--pdp-sun-edge); }
+
+@media (max-width: 767px) {
+  #checkoutModal.modal-overlay { align-items: flex-end; justify-content: center; }
+  #checkoutModal #checkoutSheet {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    max-height: 92vh;
+    max-height: 92dvh;
+    padding: 4px 20px calc(24px + env(safe-area-inset-bottom));
+    border-radius: 28px 28px 0 0 !important;
+    transform: translateY(100%);
+  }
+  #checkoutModal.active #checkoutSheet { transform: translateY(0); }
+  #checkoutSheet .sheet-handle {
+    display: block;
+    box-sizing: content-box;
+    width: 44px;
+    height: 5px;
+    margin: 0 auto 4px;
+    padding: 12px 40px;
+    background: var(--pdp-sky-200);
+    background-clip: content-box;
+    border-radius: 999px;
+    touch-action: none;
+    cursor: grab;
+  }
+  #checkoutSheet .modal-close { top: 22px; right: 16px; }
+}
+
+/* ---------- Sticky quick-buy dock: safe-area ---------- */
+.buy-floating-dock .dock-container {
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #checkoutModal.modal-overlay,
+  #checkoutModal #checkoutSheet { transition: none; }
+}
