@@ -224,3 +224,47 @@ details > .buy-faq-content {
   #checkoutModal.modal-overlay,
   #checkoutModal #checkoutSheet { transition: none; }
 }
+
+/* ---------- Mobile: beat the legacy centred-modal rules in mobile-redesign.css ---------- */
+@media (max-width: 767px) {
+  #checkoutModal.modal-overlay {
+    padding: 0 !important;
+    align-items: flex-end !important;
+  }
+  #checkoutModal #checkoutSheet {
+    width: 100% !important;
+    max-width: none !important;
+    max-height: 92vh !important;
+    max-height: 92dvh !important;
+    padding: 4px 20px calc(24px + env(safe-area-inset-bottom)) !important;
+    border: 0 !important;
+    border-radius: 28px 28px 0 0 !important;
+    background: var(--pdp-cream) !important;
+    box-shadow: 0 -16px 40px rgba(2, 132, 199, 0.22) !important;
+  }
+  #checkoutSheet #checkoutClose {
+    position: absolute !important;
+    top: 22px !important;
+    right: 16px !important;
+    float: none !important;
+    margin: 0 !important;
+    width: 44px !important;
+    height: 44px !important;
+  }
+  #checkoutSheet .checkout-modal-header {
+    text-align: left !important;
+    padding: 0 56px 16px 0 !important;
+  }
+  #checkoutSheet .modal-title-blue {
+    font-size: 28px !important;
+    letter-spacing: 0 !important;
+    text-align: left !important;
+  }
+}
+@media (min-width: 768px) {
+  #checkoutSheet .modal-title-blue { letter-spacing: 0 !important; text-align: left !important; }
+}
+
+/* ---------- Sticky gallery needs non-scrolling ancestors ---------- */
+.buy-product-hero { overflow: clip; }
+body.buy-page-body { overflow-x: clip; overflow-y: visible; }
